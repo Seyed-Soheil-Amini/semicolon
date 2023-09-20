@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ReactTags__tags {
+  display    : inline-flex;
+  flex-wrap  : wrap;
+  width      : fit-content;
+  align-items: center;
+  margin-top : 0.25rem;
+}
+
+.ReactTags__tagInput {
+  display    : inline-block;
+  width      : auto;
+  margin-left: 0.5rem;
+
+}
+
+.ReactTags__selected .ReactTags__tag{
+  background-color: #020617;
+  color: #f1f5f9;
+  border-style:hidden;
+  border-radius: 1.5mm;
+  border-width: 5px;
+  padding-top: 2mm;
+  padding-bottom: 2mm;
+  padding-left: 1.5mm;
+  padding-right:1.5mm;
+  margin-right: 1.5mm;
+}
