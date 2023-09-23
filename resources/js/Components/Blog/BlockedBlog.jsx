@@ -30,7 +30,8 @@ const BlockedBlog = (props) => {
             {!isLoading ? (
                 <>
                     <ToastContainer position="top-center" />
-                    {blogs.every((blog) => blog.status === "block") && !isEmpty(blogs) ? (
+                    {!isEmpty(blogs) &&
+                    blogs.some((blog) => blog.status === "block") ? (
                         <>
                             <div className="bg-gray-950 h-full mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
                                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
