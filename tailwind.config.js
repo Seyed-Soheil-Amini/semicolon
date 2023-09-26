@@ -34,6 +34,16 @@ export default {
                 "6/7": "85.7142857%",
                 "6.5/7": "94%",
             },
+            keyframes: {
+                snake: {
+                    "0%": { transform: "translateX(0)" },
+                    "50%": { transform: "translateX(15px)" },
+                    "100%": { transform: "translateX(0)" },
+                },
+            },
+            animation: {
+                snake: "snake 2s linear infinite",
+            },
         },
         safelist: [
             "animate-[fade-in_1s_ease-in-out]",

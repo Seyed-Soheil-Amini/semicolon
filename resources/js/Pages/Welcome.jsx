@@ -6,9 +6,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             {/* Basic */}
 
+            <HeaderLayouts auth={auth} />
             <div className="hero_area">
                 {/* header section strats */}
-                <HeaderLayouts auth={auth} />
                 {/* end header section */}
                 {/* slider section */}
                 <section className="slider_section position-relative">

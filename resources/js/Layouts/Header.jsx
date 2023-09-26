@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Link, Head, usePage } from "@inertiajs/react";
+import { FaUserCircle } from "react-icons/fa";
 
 const HeaderLayouts = ({ auth }) => {
     const { url, component } = usePage();
@@ -76,7 +77,6 @@ const HeaderLayouts = ({ auth }) => {
                                             url === "/" && "active"
                                         }`}
                                         href="/"
-                                        activeClassName="active"
                                     >
                                         Home{" "}
                                         <span className="sr-only">
@@ -90,7 +90,6 @@ const HeaderLayouts = ({ auth }) => {
                                             url === "/about" && "active"
                                         }`}
                                         href="/about"
-                                        activeClassName="active"
                                     >
                                         About
                                     </Link>
@@ -101,7 +100,6 @@ const HeaderLayouts = ({ auth }) => {
                                             url === "/blog" && "active"
                                         }`}
                                         href="/"
-                                        activeClassName="active"
                                     >
                                         Blog
                                     </Link>
@@ -112,7 +110,6 @@ const HeaderLayouts = ({ auth }) => {
                                             url === "/contactus" && "active"
                                         }`}
                                         href="/"
-                                        activeClassName="active"
                                     >
                                         Contact us
                                     </Link>
@@ -129,9 +126,10 @@ const HeaderLayouts = ({ auth }) => {
                             {auth.user ? (
                                 <Link
                                     href={route("dashboard")}
-                                    className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                    className="flex justify-content-end font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                                 >
-                                    Dashboard
+                                    <FaUserCircle className="text-2xl" />
+                                    {/* Dashboard */}
                                 </Link>
                             ) : (
                                 <>
