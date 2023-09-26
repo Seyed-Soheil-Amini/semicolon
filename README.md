@@ -68,3 +68,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 # Semicolon
 
 This is a official website for semicolon team.
+Semicolon scientific team was founded by computer students of Yazd University on June 22, 1401. 
+This organization was formed for big goals and implementation of practical ideas in the field of technology in the form of web and application. 
