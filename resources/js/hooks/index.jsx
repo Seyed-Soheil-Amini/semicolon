@@ -1,5 +1,14 @@
+import { isEmpty } from "lodash";
 import * as api from "../api";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+
+import {
+    useQuery,
+    useMutation,
+    useQueryClient,
+    useInfiniteQuery,
+} from "react-query";
+
+import qs from "qs";
 
 const useAllBlogs = (id) => {
     return useQuery("blogs", () => api.getAllBlogsOfUser(id), {
@@ -93,6 +102,40 @@ const useBlockBlogs = () => {
     });
 };
 
+const useRandomBlogs = (filter) => {
+    const queryClient = useQueryClient();
+    var blogs = Object;
+    var queryKey = "";
+    switch (filter) {
+        case "oldest":
+            blogs = queryClient.getQueryData("oldestBlogs");
+            queryKey = "oldestBlogs";
+            break;
+        case "popular":
+            blogs = queryClient.getQueryData("popularBlogs");
+            queryKey = "popularBlogs";
+            break;
+        case "newest":
+            blogs = queryClient.getQueryData("newestBlogs");
+            queryKey = "newestBlogs";
+            break;
+        default:
+            blogs = queryClient.getQueryData("randomBlogs");
+            queryKey = "randomBlogs";
+            break;
+    }
+    return useInfiniteQuery({
+        queryKey: [queryKey],
+        queryFn: (pageParam) => api.getRandomBlogs(pageParam, filter),
+        getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
+        refetchOnReconnect: true,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        retryOnMount: false,
+        keepPreviousData: true,
+    });
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -105,4 +148,5 @@ export {
     useGetPendingBlogs,
     useVerifyBlogs,
     useBlockBlogs,
+    useRandomBlogs,
 };

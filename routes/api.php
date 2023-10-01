@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('blogs/', 'App\Http\Controllers\BlogController@index');
+Route::get('/randomBlogs/{filter}', 'App\Http\Controllers\BlogController@indexRandomBlogs');
 
 Route::prefix('/categories')->middleware(['auth:sanctum'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('/', 'CategoryController@index');

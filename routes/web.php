@@ -32,6 +32,13 @@ Route::get('/about', function () {
     ]);
 });
 
+Route::get('/blog', function () {
+    return Inertia::render('Blog', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register')
+    ]);
+});
+
 Route::prefix('/user')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');

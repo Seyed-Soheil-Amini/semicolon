@@ -49,7 +49,7 @@ const HeaderLayouts = ({ auth }) => {
 
                 <title>Semicolon</title>
             </Head>
-            <header className="bg-gray-950 d-flex justify-content-between header_section fixed-top w-100 h-14">
+            <header className="bg-gray-950 d-flex justify-content-between header_section fixed-top w-100 h-14 shadow-lg">
                 <div className="container pt-0">
                     <nav className="navbar navbar-expand-lg custom_nav-container pt-0">
                         <div className="w-25">
@@ -99,7 +99,7 @@ const HeaderLayouts = ({ auth }) => {
                                         className={`nav-link ${
                                             url === "/blog" && "active"
                                         }`}
-                                        href="/"
+                                        href="/blog"
                                     >
                                         Blog
                                     </Link>
@@ -129,7 +129,6 @@ const HeaderLayouts = ({ auth }) => {
                                     className="flex justify-content-end font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                                 >
                                     <FaUserCircle className="text-2xl" />
-                                    {/* Dashboard */}
                                 </Link>
                             ) : (
                                 <>

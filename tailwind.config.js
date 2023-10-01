@@ -44,6 +44,9 @@ export default {
             animation: {
                 snake: "snake 2s linear infinite",
             },
+            boxShadow: {
+                "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.5)",
+            },
         },
         safelist: [
             "animate-[fade-in_1s_ease-in-out]",

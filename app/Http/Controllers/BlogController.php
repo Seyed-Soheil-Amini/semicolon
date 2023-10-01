@@ -6,8 +6,8 @@ use App\Enums\BlogStatusEnum;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use \Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -256,5 +256,41 @@ class BlogController extends Controller
             return response()->json(['status' => 200, 'data' => 'Blogs are blocked successfully']);
         } else
             return response()->json(['status' => 400, 'data' => 'There is not any blogs'], 400);
+    }
+
+    public function indexRandomBlogs(Request $request, $filter)
+    {
+        switch ($filter) {
+            case 'popular':
+                $blogs = Blog::query()
+                    ->orderBy('like', 'desc')
+                    ->orderBy('view', 'desc')
+                    ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'user_id', 'category_id')
+                    ->with('category', 'user')
+                    ->cursorPaginate(4);
+                break;
+            case 'newest':
+                $blogs = Blog::query()
+                    ->orderBy('created_at', 'desc')
+                    ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'user_id', 'category_id')
+                    ->with('category', 'user')
+                    ->cursorPaginate(4);
+                break;
+            case 'oldest':
+                $blogs = Blog::query()
+                    ->orderBy('created_at', 'asc')
+                    ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'user_id', 'category_id')
+                    ->with('category', 'user')
+                    ->cursorPaginate(4);
+                break;
+            default:
+                $blogs = Blog::query()
+                    ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'updated_at', 'user_id', 'category_id')
+                    ->with('category', 'user')
+                    ->orderBy('updated_at', 'desc')
+                    ->cursorPaginate(4);
+                break;
+        }
+        return response()->json(['status' => 200, 'data' => $blogs]);
     }
 }

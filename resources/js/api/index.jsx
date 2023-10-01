@@ -99,6 +99,12 @@ const blockBlogs = async (ids) => {
     return data.data;
 };
 
+const getRandomBlogs = async ({ pageParam = 0 }, filter) => {
+    const apiUrl = `/randomBlogs/${filter}?cursor=${pageParam}`;
+    const { data } = await client.get(apiUrl);
+    return data.data;
+};
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -111,4 +117,5 @@ export {
     getPendingBlogs,
     verifyBlogs,
     blockBlogs,
+    getRandomBlogs,
 };
