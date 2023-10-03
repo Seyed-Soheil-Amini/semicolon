@@ -24,7 +24,6 @@ export default function Blogs({ auth }) {
     }, [currentComponent]);
 
     function handleCreateNewBlogWhenEmpty() {
-        // alert("test");
         setcurrentComponent("create");
     }
 

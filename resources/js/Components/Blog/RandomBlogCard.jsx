@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
+import BlogLink from "../BlogLink";
 import { isEmpty } from "lodash";
 import TextTruncate from "react-text-truncate";
-import { FaEye, FaHeart, FaTags, FaUserEdit } from "react-icons/fa";
+import { FaEye, FaHeart, FaTags, FaUserCircle } from "react-icons/fa";
 
 const RandomBlogCard = ({ blog }) => {
     return (
-        <div className="w-full h-100 rounded-lg border-b-2 border-stone-500 border-solid relative shadow-3xl cursor-pointer">
+        <BlogLink
+            className="w-full h-100 rounded-lg border-b-2 border-stone-500 border-solid relative shadow-3xl cursor-pointer"
+            href={route('showBlog',blog.id)}
+        >
             <div className="relative overflow-hidden w-full rounded-md bg-gray-200 lg:aspect-none h-60">
                 <img
                     src={`${location.origin}/storage/${blog.image}`}
@@ -26,13 +30,13 @@ const RandomBlogCard = ({ blog }) => {
             </div>
             <div className="mt-3 row justify-between">
                 <div className="flex-row px-6 w-full h-full">
-                    <h3 className="text-md text-gray-200 font-bold">
+                    <h3 className="text-md text-gray-200 font-bold text-left">
                         {blog.title}
                     </h3>
                     {!isEmpty(blog.user) && (
                         <div className="flex items-center font-mono text-lg text-neutral-400">
-                            <FaUserEdit
-                                className={`mr-2 ${
+                            <FaUserCircle
+                                className={`mr-2 text-3xl ${
                                     blog.user.isAdmin == 1 && "text-amber-500"
                                 }`}
                             />
@@ -60,7 +64,7 @@ const RandomBlogCard = ({ blog }) => {
                     <b className="text-gray-400">{blog.like}</b>
                 </div>
             </div>
-        </div>
+        </BlogLink>
     );
 };
 

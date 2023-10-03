@@ -7,10 +7,11 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use \Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Inertia\Inertia;
 
 class BlogController extends Controller
 {
@@ -29,6 +30,16 @@ class BlogController extends Controller
                 'message' => "No Records Found"
             ], 404);
         }
+    }
+
+    public function get(Request $request, $id)
+    {
+        $blog = Blog::with('category', 'user')->findOrFail($id);
+        return Inertia::render('BlogPage', [
+            'blog' => $blog,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register')
+        ]);
     }
     public function create(Request $request)
     {
@@ -284,12 +295,31 @@ class BlogController extends Controller
                     ->cursorPaginate(4);
                 break;
             default:
+                // $randomNumber = rand(1, 4);
+                // switch ($randomNumber) {
+                //     case 1:
+                //         $column = 'body';
+                //         $type = 'asc';
+                //         break;
+                //     case 2:
+                //         $column = 'view';
+                //         $type = 'desc';
+                //         break;
+                //     case 3:
+                //         $column = 'title';
+                //         $type = 'asc';
+                //         break;
+                //     default:
+                //         $column = 'updated_at';
+                //         $type = 'asc';
+                //         break;
+                // }
                 $blogs = Blog::query()
+                    ->orderBy('view', 'desc')
+                    ->inRandomOrder()
                     ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'updated_at', 'user_id', 'category_id')
                     ->with('category', 'user')
-                    ->orderBy('updated_at', 'desc')
                     ->cursorPaginate(4);
-                break;
         }
         return response()->json(['status' => 200, 'data' => $blogs]);
     }

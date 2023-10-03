@@ -53,7 +53,7 @@ const HeaderLayouts = ({ auth }) => {
                 <div className="container pt-0">
                     <nav className="navbar navbar-expand-lg custom_nav-container pt-0">
                         <div className="w-25">
-                            <a className="navbar-brand mr-5" href="index.html">
+                            <a className="navbar-brand mr-5" href="/">
                                 <img src="images/Layer_2.svg" alt="" />
                                 <span>Semicolon</span>
                             </a>

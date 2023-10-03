@@ -39,6 +39,8 @@ Route::get('/blog', function () {
     ]);
 });
 
+Route::get('/blog/{id}', 'App\Http\Controllers\BlogController@get')->name('showBlog');
+
 Route::prefix('/user')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');

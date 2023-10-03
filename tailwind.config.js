@@ -47,6 +47,9 @@ export default {
             boxShadow: {
                 "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.5)",
             },
+            gridTemplateRows: {
+                "[auto,auto,1fr]": "auto auto 1fr",
+            },
         },
         safelist: [
             "animate-[fade-in_1s_ease-in-out]",
@@ -54,5 +57,5 @@ export default {
         ],
     },
 
-    plugins: [forms],
+    plugins: [forms, require("@tailwindcss/aspect-ratio")],
 };
