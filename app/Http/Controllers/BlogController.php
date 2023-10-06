@@ -295,25 +295,6 @@ class BlogController extends Controller
                     ->cursorPaginate(4);
                 break;
             default:
-                // $randomNumber = rand(1, 4);
-                // switch ($randomNumber) {
-                //     case 1:
-                //         $column = 'body';
-                //         $type = 'asc';
-                //         break;
-                //     case 2:
-                //         $column = 'view';
-                //         $type = 'desc';
-                //         break;
-                //     case 3:
-                //         $column = 'title';
-                //         $type = 'asc';
-                //         break;
-                //     default:
-                //         $column = 'updated_at';
-                //         $type = 'asc';
-                //         break;
-                // }
                 $blogs = Blog::query()
                     ->orderBy('view', 'desc')
                     ->inRandomOrder()
@@ -322,5 +303,61 @@ class BlogController extends Controller
                     ->cursorPaginate(4);
         }
         return response()->json(['status' => 200, 'data' => $blogs]);
+    }
+
+    public function addViewer(Request $request, $id)
+    {
+        $blog = Blog::find($id);
+        if (is_null($blog)) {
+            return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
+        }
+        $ipAddress = $request->ip();
+        $currentTime = now();
+        if (is_null($blog->viewers)) {
+            $blog->viewers = [];
+        } elseif (is_string($blog->viewers)) {
+            $blog->viewers = [$blog->viewers];
+        }
+        $viewer = ['ip' => $ipAddress, 'time' => $currentTime];
+        $existingViewer = collect($blog->viewers)->first(function ($value) use ($ipAddress) {
+            return $value['ip'] === $ipAddress;
+        });
+        if (is_null($existingViewer)) {
+            $preViewres = $blog->viewers;
+            array_push($preViewres, $viewer);
+            $blog->viewers = $preViewres;
+            $blog->increment('view');
+            $blog->save();
+        }
+        return response()->json(['status' => 200, 'data' => $blog->view], 200);
+    }
+
+    public function toggleLike(Request $request, $id)
+    {
+        $blog = Blog::find($id);
+        if (is_null($blog)) {
+            return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
+        }
+        $ipAddress = $request->ip();
+        if (is_null($blog->likkers)) {
+            $blog->likkers = [];
+        } elseif (is_string($blog->likkers)) {
+            $blog->likkers = [$blog->likkers];
+        }
+        $likker = $ipAddress;
+        $likkers = collect($blog->likkers);
+        $existingLikkerIndex = $likkers->search($ipAddress);
+        if ($existingLikkerIndex !== false) {
+            $likkers->forget($existingLikkerIndex);
+            $blog->likkers = $likkers;
+            $blog->decrement('like');
+        } else {
+            $preLikkers = $blog->likkers;
+            array_push($preLikkers, $likker);
+            $blog->likkers = $preLikkers;
+            $blog->increment('like');
+        }
+        $blog->save();
+        return response()->json(['status' => 200, 'data' => $blog->likkers], 200);
     }
 }

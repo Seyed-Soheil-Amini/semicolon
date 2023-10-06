@@ -105,6 +105,19 @@ const getRandomBlogs = async ({ pageParam = 0 }, filter) => {
     return data.data;
 };
 
+const addView = async (ip, blogId) => {
+    const apiUrl = `/blog/view/${blogId}`;
+    const { data } = await client.get(apiUrl);
+    return data.data;
+};
+
+const toggleLike = async (blogId)=>{
+    const apiUrl = `blog/like/${blogId}`;
+    const {data} = await client.get(apiUrl);
+    console.log(data.data);
+    return data.data;
+}
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -118,4 +131,6 @@ export {
     verifyBlogs,
     blockBlogs,
     getRandomBlogs,
+    addView,
+    toggleLike,
 };

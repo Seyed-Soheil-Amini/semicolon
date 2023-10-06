@@ -7,7 +7,9 @@ import RandomBlogCard from "@/Components/Blog/RandomBlogCard";
 import LoadingSkeleton from "@/Components/LoadingSkeleton";
 
 const Blog = ({ auth }) => {
-    const [filter, setFilter] = useState("all");
+    const [filter, setFilter] = useState(() => {
+        return JSON.parse(localStorage.getItem("filter")) || "all";
+    });
 
     const {
         data: blogs,
@@ -18,6 +20,7 @@ const Blog = ({ auth }) => {
     } = useRandomBlogs(filter);
 
     const handleFilterChange = (newFilter) => {
+        localStorage.setItem("filter", JSON.stringify(newFilter));
         setFilter(newFilter);
     };
 

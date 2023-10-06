@@ -19,7 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('blogs/', 'App\Http\Controllers\BlogController@index');
-Route::get('/randomBlogs/{filter}', 'App\Http\Controllers\BlogController@indexRandomBlogs');
+Route::get('/randomBlogs/{filter}', 'App\Http\Controllers\BlogController@indexRandomBlogs')->middleware(['checkSession']);
+Route::get('/blog/view/{id}', 'App\Http\Controllers\BlogController@addViewer')->middleware(['checkSession']);
+Route::get('/blog/like/{id}', 'App\Http\Controllers\BlogController@toggleLike')->middleware(['checkSession']);
 
 Route::prefix('/categories')->middleware(['auth:sanctum'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('/', 'CategoryController@index');

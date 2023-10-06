@@ -7,8 +7,6 @@ import {
     useInfiniteQuery,
 } from "react-query";
 
-import qs from "qs";
-
 const useAllBlogs = (id) => {
     return useQuery("blogs", () => api.getAllBlogsOfUser(id), {
         refetchInterval: 10 * 60000,
@@ -128,12 +126,20 @@ const useRandomBlogs = (filter) => {
         queryFn: (pageParam) => api.getRandomBlogs(pageParam, filter),
         getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
         refetchOnReconnect: true,
-        refetchOnMount: false,
+        refetchOnMount: true,
         refetchOnWindowFocus: false,
         retryOnMount: false,
         keepPreviousData: true,
     });
 };
+
+const useAddView = (ip, blogId) => {
+    return api.addView(ip, blogId);
+};
+
+const useToggleLike = (blogId)=>{
+    return api.toggleLike(blogId);
+}
 
 export {
     useAllBlogs,
@@ -148,4 +154,6 @@ export {
     useVerifyBlogs,
     useBlockBlogs,
     useRandomBlogs,
+    useAddView,
+    useToggleLike,
 };

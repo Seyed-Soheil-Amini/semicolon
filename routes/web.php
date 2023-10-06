@@ -37,7 +37,7 @@ Route::get('/blog', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register')
     ]);
-});
+})->name('allBlogs');
 
 Route::get('/blog/{id}', 'App\Http\Controllers\BlogController@get')->name('showBlog');
 

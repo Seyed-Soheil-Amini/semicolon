@@ -26,7 +26,29 @@ class Blog extends Model
         'viewers',
     ];
 
-    protected $casts = ['labels' => 'array', 'status' => BlogStatusEnum::class];
+    protected $casts = [
+        'labels' => 'array',
+        'viewers' => 'array',
+        'likkers' => 'array',
+        'status' => BlogStatusEnum::class
+    ];
+
+    public function __get($key)
+    {
+        if ($key == 'viewers') {
+            return json_decode($this->attributes['viewers'], true);
+        }
+        return parent::__get($key);
+    }
+
+    public function __set($key, $value)
+    {
+        if ($key == 'viewers') {
+            $this->attributes['viewers'] = json_encode($value);
+        } else {
+            parent::__set($key, $value);
+        }
+    }
 
     public function user(): BelongsTo
     {
