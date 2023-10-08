@@ -114,7 +114,6 @@ const addView = async (ip, blogId) => {
 const toggleLike = async (blogId)=>{
     const apiUrl = `blog/like/${blogId}`;
     const {data} = await client.get(apiUrl);
-    console.log(data.data);
     return data.data;
 }
 

@@ -8,13 +8,13 @@ const RandomBlogCard = ({ blog }) => {
     return (
         <BlogLink
             className="w-full h-100 rounded-lg border-b-2 border-stone-500 border-solid relative shadow-3xl cursor-pointer"
-            href={route('showBlog',blog.id)}
+            href={route("showBlog", blog.id)}
         >
-            <div className="relative overflow-hidden w-full rounded-md bg-gray-200 lg:aspect-none h-60">
+            <div className="relative overflow-hidden w-full rounded-md bg-gray-200 h-60">
                 <img
                     src={`${location.origin}/storage/${blog.image}`}
                     alt="Blog Image"
-                    className="object-center lg:h-full lg:w-full"
+                    className="object-center h-100 w-100"
                 />
                 {!isEmpty(blog.category) && (
                     <div className="absolute top-0 left-0 m-2 bg-gray-300 rounded px-3 py-1 text-sm font-semibold text-gray-700">
@@ -57,11 +57,11 @@ const RandomBlogCard = ({ blog }) => {
             <div className="flex justify-between w-1/2 px-3 py-2 mb-2">
                 <div className="flex items-center">
                     <FaEye className="mx-1 text-lg text-gray-300" />
-                    <b className="text-gray-400">{blog.view}</b>
+                    <b className="text-gray-400 text-sm">{blog.view}</b>
                 </div>
                 <div className="flex items-center">
-                    <FaHeart className="mx-1 text-lg text-red-500" />
-                    <b className="text-gray-400">{blog.like}</b>
+                    <FaHeart className="mx-1 text-lg text-red-500 animate-pulse" />
+                    <b className="text-gray-400 text-sm">{blog.like}</b>
                 </div>
             </div>
         </BlogLink>

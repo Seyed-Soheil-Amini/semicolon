@@ -10,9 +10,13 @@ const BlogPage = ({ blog }) => {
     );
     const [likes, setLikes] = useState(blog.like);
     const handleClickLike = () => {
-        setLikes(isLiked ? likes - 1 : likes + 1);
-        useToggleLike(blog.id);
-        setIsLiked(!isLiked);
+        try {
+            useToggleLike(blog.id);
+            setLikes(isLiked ? likes - 1 : likes + 1);
+            setIsLiked(!isLiked);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     useEffect(() => {
@@ -61,17 +65,17 @@ const BlogPage = ({ blog }) => {
                             />
                             <div className="flex justify-between w-1/2 h-1/7 px-3 py-3">
                                 <div className="flex items-center">
-                                    <FaEye className="mx-1 text-lg text-gray-300" />
+                                    <FaEye className="mx-1 text-2xl text-gray-300" />
                                     <b className="text-gray-400">{blog.view}</b>
                                 </div>
                                 <button
-                                    className="flex items-center"
+                                    className="flex items-center p-2"
                                     onClick={handleClickLike}
                                 >
                                     {isLiked ? (
-                                        <FaHeart className="mx-1 text-lg text-red-500" />
+                                        <FaHeart className="mx-1 text-2xl text-red-500 animate-ping-once" />
                                     ) : (
-                                        <FaRegHeart className="mx-1 text-lg text-red-500" />
+                                        <FaRegHeart className="mx-1 text-2xl text-red-500" />
                                     )}{" "}
                                     <b className="text-gray-400">{likes}</b>
                                 </button>

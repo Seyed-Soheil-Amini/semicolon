@@ -15,10 +15,13 @@ class CheckSessionMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->hasCookie('laravel_session') || empty($request->cookie('laravel_session'))) {
+        if (!$request->hasSession()) {
             return response('Not Acceptable.', 406);
+        } else {
+            if (session()->getId() == '') {
+                return response('Access is locked!', 423);
+            }
         }
-
         return $next($request);
     }
 }

@@ -40,9 +40,13 @@ export default {
                     "50%": { transform: "translateX(15px)" },
                     "100%": { transform: "translateX(0)" },
                 },
+                "ping-once": {
+                    "75%, 100%": { transform: "scale(2)", opacity: 0 },
+                },
             },
             animation: {
                 snake: "snake 2s linear infinite",
+                'ping-once': 'ping-once 1s cubic-bezier(0, 0, 0.2, 1)',
             },
             boxShadow: {
                 "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.5)",
