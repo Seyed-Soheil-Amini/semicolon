@@ -109,7 +109,7 @@ const HeaderLayouts = ({ auth }) => {
                                         className={`nav-link ${
                                             url === "/contactus" && "active"
                                         }`}
-                                        href="/"
+                                        href="/contactus"
                                     >
                                         Contact us
                                     </Link>

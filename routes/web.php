@@ -39,6 +39,13 @@ Route::get('/blog', function () {
     ]);
 })->name('allBlogs');
 
+Route::get('/contactus', function () {
+    return Inertia::render('ContactUs', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register')
+    ]);
+})->name('contactus');
+
 Route::get('/blog/{id}', 'App\Http\Controllers\BlogController@get')->name('showBlog');
 
 Route::prefix('/user')->group(function () {
@@ -51,6 +58,9 @@ Route::prefix('/user')->group(function () {
     Route::get('/verification', function () {
         return Inertia::render('Verification');
     })->middleware(['auth', 'verified', 'admin'])->name('verification');
+    Route::get('/usersmanagment', function () {
+        return Inertia::render('UserManagment');
+    })->middleware(['auth', 'verified', 'admin'])->name('userManagment');
 });
 
 Route::middleware('auth')->group(function () {

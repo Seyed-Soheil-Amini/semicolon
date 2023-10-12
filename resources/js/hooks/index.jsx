@@ -137,9 +137,37 @@ const useAddView = (ip, blogId) => {
     return api.addView(ip, blogId);
 };
 
-const useToggleLike = (blogId)=>{
+const useToggleLike = (blogId) => {
     return api.toggleLike(blogId);
-}
+};
+
+const useGetUserActivity = (userId) => {
+    return useQuery("userActivity", () => api.getUserActivity(userId), {
+        refetchInterval: 5 * 60000,
+        refetchOnWindowFocus: false,
+        refetchOnMount: true,
+        retryOnMount: false,
+    });
+};
+
+const useGetUsers = () => {
+    return useQuery("users", () => api.getUsersForAdmin(), {
+        refetchInterval: 5 * 60000,
+        refetchOnWindowFocus: false,
+        refetchOnMount: true,
+        retryOnMount: false,
+    });
+};
+
+const useDeleteUsers = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (usersId) => api.deleteUsers(usersId),
+        onSuccess: () => {
+            queryClient.refetchQueries("users");
+        },
+    });
+};
 
 export {
     useAllBlogs,
@@ -156,4 +184,7 @@ export {
     useRandomBlogs,
     useAddView,
     useToggleLike,
+    useGetUserActivity,
+    useGetUsers,
+    useDeleteUsers,
 };

@@ -11,10 +11,6 @@ const VerificationCard = (props) => {
         setPreview(false);
     };
 
-    useEffect(() => {
-        console.log(preview);
-    }, [preview]);
-
     return (
         <div
             className={`flex container-fluid border-b-2 my-4 ${

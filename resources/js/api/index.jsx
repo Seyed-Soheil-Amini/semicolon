@@ -111,11 +111,32 @@ const addView = async (ip, blogId) => {
     return data.data;
 };
 
-const toggleLike = async (blogId)=>{
+const toggleLike = async (blogId) => {
     const apiUrl = `blog/like/${blogId}`;
-    const {data} = await client.get(apiUrl);
+    const { data } = await client.get(apiUrl);
     return data.data;
-}
+};
+
+const getUserActivity = async (userId) => {
+    const apiUrl = `user/activity/${userId}`;
+    const { data } = await client.get(apiUrl);
+    return data.data;
+};
+
+const getUsersForAdmin = async () => {
+    const apiUrl = `admin/users`;
+    const { data } = await client.get(apiUrl);
+    return data.data;
+};
+
+const deleteUsers = async (ids) => {
+    const apiUrl = `admin/delete/user`;
+    const dataUsers = new FormData();
+    dataUsers.append("usersId", JSON.stringify(ids));
+    dataUsers.append("_method", "DELETE");
+    const { data } = await client.post(apiUrl, dataUsers);
+    return data.data;
+};
 
 export {
     getAllBlogsOfUser,
@@ -132,4 +153,7 @@ export {
     getRandomBlogs,
     addView,
     toggleLike,
+    getUserActivity,
+    getUsersForAdmin,
+    deleteUsers,
 };

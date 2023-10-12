@@ -42,5 +42,13 @@ Route::prefix('/blogs')->middleware(['auth:sanctum'])->namespace('App\Http\Contr
     });
 });
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::prefix('/user')->middleware(['auth:sanctum'])->namespace('App\Http\Controllers')->group(function () {
+    Route::get('/activity/{id}', 'UserController@getShortActivityInfo');
+});
+
+Route::prefix('/admin')->middleware(['auth:sanctum', 'admin'])->namespace('App\Http\Controllers')->group(function () {
+    Route::get('/users', 'UserController@indexUsersForAdmin');
+    Route::delete('/delete/user', 'UserController@deleteUser');
+});
+
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');

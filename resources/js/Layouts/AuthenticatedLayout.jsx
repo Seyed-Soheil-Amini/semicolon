@@ -37,12 +37,22 @@ export default function Authenticated({ user, header, children }) {
                                     Blogs
                                 </NavLink>
                                 {user.isAdmin === 1 && (
-                                    <NavLink
-                                        href={route("verification")}
-                                        active={route().current("verification")}
-                                    >
-                                        Verification
-                                    </NavLink>
+                                    <>
+                                        <NavLink
+                                            href={route("verification")}
+                                            active={route().current(
+                                                "verification"
+                                            )}
+                                        >
+                                            Verification
+                                        </NavLink>
+                                        <NavLink
+                                            href={route("userManagment")}
+                                            active={route().current("userManagment")}
+                                        >
+                                            User Management
+                                        </NavLink>
+                                    </>
                                 )}
                             </div>
                         </div>
