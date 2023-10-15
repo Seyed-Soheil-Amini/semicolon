@@ -115,14 +115,14 @@ const HeaderLayouts = ({ auth }) => {
                                     </Link>
                                 </li>
                             </ul>
-                            <form className="form-inline">
+                            {/* <form className="form-inline flex">
                                 <button
-                                    className="btn  my-2 my-sm-0 nav_search-btn"
+                                    className="flex btn my-auto nav_search-btn"
                                     type="submit"
                                 />
-                            </form>
+                            </form> */}
                         </div>
-                        <div className="w-25 sm:right-0 p-3 text-right">
+                        <div className="flex justify-end w-25 right-0 text-right">
                             {auth.user ? (
                                 <Link
                                     href={route("dashboard")}

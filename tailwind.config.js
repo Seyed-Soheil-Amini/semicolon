@@ -61,5 +61,5 @@ export default {
         ],
     },
 
-    plugins: [forms, require("@tailwindcss/aspect-ratio")],
+    plugins: [forms, require("@tailwindcss/aspect-ratio"),require("daisyui")],
 };

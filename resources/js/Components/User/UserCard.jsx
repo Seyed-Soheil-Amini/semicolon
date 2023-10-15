@@ -2,7 +2,7 @@ import { isEmpty } from "lodash";
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 
-const UserCard = ({ user, self, onSelect }) => {
+const UserCard = ({ user, self, onSelect, selected }) => {
     return (
         <tr
             className={`border-b border-gray-700 rounded-lg ${
@@ -19,6 +19,7 @@ const UserCard = ({ user, self, onSelect }) => {
                         } focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600`}
                         onChange={() => onSelect(user.id)}
                         disabled={self}
+                        checked={selected}
                     />
                     <label htmlFor={`${user.id}`} className="sr-only">
                         checkbox

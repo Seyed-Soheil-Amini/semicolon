@@ -1,22 +1,25 @@
 import { useDeleteUsers, useGetUsers } from "@/hooks";
 import { Head } from "@inertiajs/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import UserCard from "@/Components/User/UserCard";
 import UserSkeletonLoading from "@/Components/UserSkeletonLoading";
 import { isEmpty } from "lodash";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
-
+import Fuse from "fuse.js";
 
 const UserManagment = ({ auth }) => {
     const { data: users, isLoading, isFetching } = useGetUsers();
     const { data: deletedMessage, mutateAsync: deleteUsers } = useDeleteUsers();
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [searchUser, setSearchUser] = useState();
 
-    useEffect(() => {
-        console.log(selectedUsers);
-    }, [selectedUsers]);
+    const optionsFuseAlogrithm = {
+        keys: ["name"],
+        threshold: 0.3,
+    };
+    const fuse = new Fuse(users, optionsFuseAlogrithm);
 
     function handleCheckboxChange(userId) {
         if (selectedUsers.includes(userId)) {
@@ -25,6 +28,10 @@ const UserManagment = ({ auth }) => {
             setSelectedUsers([...selectedUsers, userId]);
         }
     }
+
+    const handleSearchUserChange = (event) => {
+        setSearchUser(event.target.value);
+    };
 
     const handleDeleteUsers = () => {
         try {
@@ -51,6 +58,17 @@ const UserManagment = ({ auth }) => {
             );
         } catch (error) {
             console.log(error);
+        }
+    };
+
+    const handleSelectAllUsers = (event) => {
+        if (!event.target.checked) setSelectedUsers([]);
+        else {
+            setSelectedUsers(
+                users
+                    .filter((user) => user.isAdmin === 0)
+                    .map((user) => user.id)
+            );
         }
     };
 
@@ -87,7 +105,8 @@ const UserManagment = ({ auth }) => {
                                     type="text"
                                     id="table-search"
                                     className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Search for users"
+                                    placeholder="Search for users based on name"
+                                    onChange={handleSearchUserChange}
                                 />
                             </div>
                             {!isEmpty(selectedUsers) && (
@@ -110,7 +129,8 @@ const UserManagment = ({ auth }) => {
                                             <input
                                                 id="checkbox-all-search"
                                                 type="checkbox"
-                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                onChange={handleSelectAllUsers}
                                             />
                                             <label
                                                 htmlFor="checkbox-all-search"
@@ -159,13 +179,30 @@ const UserManagment = ({ auth }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map((user) => (
-                                    <UserCard
-                                        user={user}
-                                        onSelect={handleCheckboxChange}
-                                        self={user.id === auth.user.id}
-                                    />
-                                ))}
+                                {isEmpty(searchUser)
+                                    ? users.map((user) => (
+                                          <UserCard
+                                              user={user}
+                                              onSelect={handleCheckboxChange}
+                                              self={user.id === auth.user.id}
+                                              selected={selectedUsers.includes(user.id)}
+                                          />
+                                      ))
+                                    : fuse
+                                          .search(searchUser)
+                                          .map((res) => (
+                                              <UserCard
+                                                  user={res.item}
+                                                  onSelect={
+                                                      handleCheckboxChange
+                                                  }
+                                                  self={
+                                                      res.item.id ===
+                                                      auth.user.id
+                                                  }
+                                                  selected={selectedUsers.includes(res.item.id)}
+                                              />
+                                          ))}
                             </tbody>
                         </table>
                     </>

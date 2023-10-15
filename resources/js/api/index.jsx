@@ -138,6 +138,24 @@ const deleteUsers = async (ids) => {
     return data.data;
 };
 
+const updateUser = async (user) => {
+    const apiUrl = `user/update`;
+    const dataUser = new FormData();
+    dataUser.append("name", user.name);
+    dataUser.append("email", user.email);
+    dataUser.append("jobTitle", user.jobTitle);
+    dataUser.append("about", user.about);
+    typeof user.image === "object" && dataUser.append("image", user.image);
+    dataUser.append("_method", "PATCH");
+    const { data } = await client.post(apiUrl, dataUser, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json, */*",
+        },
+    });
+    return data.data;
+};
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -156,4 +174,5 @@ export {
     getUserActivity,
     getUsersForAdmin,
     deleteUsers,
+    updateUser,
 };

@@ -169,6 +169,10 @@ const useDeleteUsers = () => {
     });
 };
 
+const useUpdateUser = (user) => {
+    return api.updateUser(user);
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -187,4 +191,5 @@ export {
     useGetUserActivity,
     useGetUsers,
     useDeleteUsers,
+    useUpdateUser,
 };

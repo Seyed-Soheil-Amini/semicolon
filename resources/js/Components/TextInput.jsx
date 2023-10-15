@@ -1,5 +1,11 @@
 import { forwardRef, useEffect, useRef } from "react";
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import {
+    FaUser,
+    FaEnvelope,
+    FaLock,
+    FaUserGraduate,
+    FaParagraph,
+} from "react-icons/fa";
 
 export default forwardRef(function TextInput(
     { type = "text", className = "", isFocused = false, ...props },
@@ -24,6 +30,20 @@ export default forwardRef(function TextInput(
     } else if (props.id === "email") {
         icon = (
             <FaEnvelope
+                className="w-5 h-5 absolute text-gray-400 ml-3 pointer-events-none"
+                aria-hidden="true"
+            />
+        );
+    } else if (props.id === "jobTitle") {
+        icon = (
+            <FaUserGraduate
+                className="w-5 h-5 absolute text-gray-400 ml-3 pointer-events-none"
+                aria-hidden="true"
+            />
+        );
+    } else if (props.id === "about") {
+        icon = (
+            <FaParagraph
                 className="w-5 h-5 absolute text-gray-400 ml-3 pointer-events-none"
                 aria-hidden="true"
             />

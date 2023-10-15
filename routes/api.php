@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::prefix('/blogs')->middleware(['auth:sanctum'])->namespace('App\Http\Contr
 
 Route::prefix('/user')->middleware(['auth:sanctum'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('/activity/{id}', 'UserController@getShortActivityInfo');
+    Route::patch('/update', [ProfileController::class, 'update'])->name('user.update');
 });
 
 Route::prefix('/admin')->middleware(['auth:sanctum', 'admin'])->namespace('App\Http\Controllers')->group(function () {

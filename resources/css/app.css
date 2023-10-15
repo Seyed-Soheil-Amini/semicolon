@@ -29,3 +29,8 @@
   padding-right:1.5mm;
   margin-right: 1.5mm;
 }
+
+.mask-circle {
+  -webkit-mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.5) 50%);
+  mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.5) 50%);
+}
