@@ -156,6 +156,18 @@ const updateUser = async (user) => {
     return data.data;
 };
 
+const createMessage = async (message) => {
+    const apiUrl = `message/store`;
+    const { data } = await client.post(apiUrl, message);
+    return data.data;
+};
+
+const getMessages = async ({ pageParam = 0 }) => {
+    const apiUrl = `/message/index/?cursor=${pageParam}`;
+    const { data } = await client.get(apiUrl);
+    return data.data;
+};
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -175,4 +187,6 @@ export {
     getUsersForAdmin,
     deleteUsers,
     updateUser,
+    createMessage,
+    getMessages,
 };

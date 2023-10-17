@@ -32,7 +32,7 @@ const VerificationCard = (props) => {
                     <h1 className="px-2 items-center mx-2 text-2xl mt-3 font-weight-bold font-bold">
                         {props.blog.title}
                     </h1>
-                    <h4 className="px-3 items-center mx-2 text-sm mt-4 text-gray-400">
+                    <h4 className="px-3 items-center mx-2 text-md mt-4 text-gray-400">
                         Author: {props.blog.user.name}
                     </h4>
                     <div className="px-2 flex items-center mx-2 mt-3">

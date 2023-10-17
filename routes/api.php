@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,11 @@ Route::prefix('/user')->middleware(['auth:sanctum'])->namespace('App\Http\Contro
 Route::prefix('/admin')->middleware(['auth:sanctum', 'admin'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('/users', 'UserController@indexUsersForAdmin');
     Route::delete('/delete/user', 'UserController@deleteUser');
+});
+
+Route::prefix('/message')->middleware(['checkSession'])->group(function (){
+    Route::post('/store',[MessageController::class,'create']);
+    Route::get('/index',[MessageController::class,'indexMessages'])->middleware(['auth:sanctum','admin']);
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');

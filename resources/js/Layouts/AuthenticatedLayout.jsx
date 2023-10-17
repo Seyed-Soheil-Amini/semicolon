@@ -48,9 +48,19 @@ export default function Authenticated({ user, header, children }) {
                                         </NavLink>
                                         <NavLink
                                             href={route("userManagment")}
-                                            active={route().current("userManagment")}
+                                            active={route().current(
+                                                "userManagment"
+                                            )}
                                         >
                                             User Management
+                                        </NavLink>
+                                        <NavLink
+                                            href={route("messageBox")}
+                                            active={route().current(
+                                                "messageBox"
+                                            )}
+                                        >
+                                            Message Box
                                         </NavLink>
                                     </>
                                 )}

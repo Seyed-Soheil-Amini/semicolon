@@ -4,11 +4,11 @@ import TextInput from "@/Components/TextInput";
 import { Link, usePage } from "@inertiajs/react";
 import { useDropzone } from "react-dropzone";
 import { isEmpty } from "lodash";
-import "react-toastify/dist/ReactToastify.min.css";
-import { ToastContainer, toast } from "react-toastify";
 import { useUpdateUser } from "@/hooks";
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -91,7 +91,7 @@ export default function UpdateProfileInformation({
             <img
                 className="flex mx-auto my-auto h-full object-cover rounded-md mask-circle"
                 src={`${location.origin}/storage/${data.image}`}
-                alt="Selected image preview"
+                alt="User image preview"
             />
         );
     } else {

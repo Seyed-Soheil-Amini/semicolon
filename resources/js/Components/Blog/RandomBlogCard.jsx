@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BlogLink from "../BlogLink";
 import { isEmpty } from "lodash";
 import TextTruncate from "react-text-truncate";
@@ -35,12 +35,28 @@ const RandomBlogCard = ({ blog }) => {
                     </h3>
                     {!isEmpty(blog.user) && (
                         <div className="flex items-center font-mono text-lg text-neutral-400">
-                            <FaUserCircle
-                                className={`mr-2 text-3xl ${
-                                    blog.user.isAdmin == 1 && "text-amber-500"
-                                }`}
-                            />
-                            {blog.user.name}
+                            {isEmpty(blog.user.image) ? (
+                                <FaUserCircle
+                                    className={`mr-2 text-3xl ${
+                                        blog.user.isAdmin == 1 &&
+                                        "text-amber-500"
+                                    }`}
+                                />
+                            ) : (
+                                <img
+                                    src={`${location.origin}/storage/${blog.user.image}`}
+                                    className="rounded-full h-10 w-10 mr-2 "
+                                />
+                            )}
+                            <a
+                                href={route("showUser", blog.user.id)}
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                target={"_blank"}
+                                as={"a"}
+                            >
+                                {blog.user.name}
+                            </a>
                         </div>
                     )}
                     <p className="flex mt-1 text-sm text-gray-400 py-1">

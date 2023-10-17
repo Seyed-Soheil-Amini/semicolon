@@ -47,6 +47,7 @@ Route::get('/contactus', function () {
 })->name('contactus');
 
 Route::get('/blog/{id}', 'App\Http\Controllers\BlogController@get')->name('showBlog');
+Route::get('/user/page/{id}','App\Http\Controllers\UserController@get')->name('showUser');
 
 Route::prefix('/user')->group(function () {
     Route::get('/dashboard', function () {
@@ -61,6 +62,9 @@ Route::prefix('/user')->group(function () {
     Route::get('/usersmanagment', function () {
         return Inertia::render('UserManagment');
     })->middleware(['auth', 'verified', 'admin'])->name('userManagment');
+    Route::get('/messagebox', function () {
+        return Inertia::render('MessageBox');
+    })->middleware(['auth', 'verified', 'admin'])->name('messageBox');
 });
 
 Route::middleware(['auth'])->group(function () {

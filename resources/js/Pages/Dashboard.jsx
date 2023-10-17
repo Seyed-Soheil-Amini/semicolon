@@ -1,6 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useGetUserActivity } from "@/hooks";
 import { Head } from "@inertiajs/react";
+import { isEmpty } from "lodash";
 
 export default function Dashboard({ auth }) {
     const {
@@ -23,7 +24,7 @@ export default function Dashboard({ auth }) {
                 <div className="mx-auto max-w-7xl px-6 lg:px-8 py-10">
                     <div class="px-4 sm:px-0">
                         <h3 class="font-semibold leading-7 text-gray-300 text-2xl">
-                            Applicant Information
+                            User Information
                         </h3>
                     </div>
                     <div class="mt-6 border-t border-gray-500">
@@ -52,26 +53,14 @@ export default function Dashboard({ auth }) {
                                     {auth.user.email}
                                 </dd>
                             </div>
-                            {/* <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <dt class="text-sm font-medium leading-6 text-gray-900">
-                                    Salary expectation
-                                </dt>
-                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    $120,000
-                                </dd>
-                            </div> */}
                             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt class="text-md leading-6 text-gray-400 font-serif">
                                     About
                                 </dt>
                                 <dd class="mt-1 text-sm leading-6 text-blue-500 sm:col-span-2 sm:mt-0">
-                                    Fugiat ipsum ipsum deserunt culpa aute sint
-                                    do nostrud anim incididunt cillum culpa
-                                    consequat. Excepteur qui ipsum aliquip
-                                    consequat sint. Sit id mollit nulla mollit
-                                    nostrud in ea officia proident. Irure
-                                    nostrud pariatur mollit ad adipisicing
-                                    reprehenderit deserunt qui eu.
+                                    {isEmpty(auth.user.about)
+                                        ? "_-_"
+                                        : auth.user.about}{" "}
                                 </dd>
                             </div>
                         </dl>

@@ -28,18 +28,34 @@ const UserCard = ({ user, self, onSelect, selected }) => {
             </td>
             <td className="px-6 py-4">
                 {!isEmpty(user.image) ? (
-                    <img src="" alt="User Image" class="h-8 w-8 rounded-full" />
+                    <img
+                        src={`${location.origin}/storage/${user.image}`}
+                        alt="User Image"
+                        class="h-8 w-8 rounded-full"
+                    />
                 ) : (
                     <FaUserCircle className="text-3xl text-gray-300" />
                 )}
             </td>
             <th
                 scope="row"
-                className={`px-6 py-4 font-semibold whitespace-nowrap ${
-                    user.isAdmin ? "text-blue-500" : "text-gray-100"
-                }`}
+                className={`px-6 py-4 font-semibold whitespace-nowrap`}
             >
-                {user.name}
+                <a
+                    href={route("showUser", user.id)}
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    target={"_blank"}
+                    as={"a"}
+                >
+                    <h2
+                        className={`hover:text-blue-500 ${
+                            user.isAdmin ? "text-yellow-500" : "text-gray-200"
+                        }`}
+                    >
+                        {user.name}
+                    </h2>
+                </a>
             </th>
             <td className="px-6 py-4">{user.job_title}</td>
             <td className="px-6 py-4">{user.email}</td>

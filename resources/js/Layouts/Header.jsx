@@ -2,6 +2,7 @@ import React from "react";
 
 import { Link, Head, usePage } from "@inertiajs/react";
 import { FaUserCircle } from "react-icons/fa";
+import { isEmpty } from "lodash";
 
 const HeaderLayouts = ({ auth }) => {
     const { url, component } = usePage();
@@ -128,7 +129,19 @@ const HeaderLayouts = ({ auth }) => {
                                     href={route("dashboard")}
                                     className="flex justify-content-end font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                                 >
-                                    <FaUserCircle className="text-2xl" />
+                                    {isEmpty(auth.user.image) ? (
+                                        <FaUserCircle
+                                            className={`mr-2 text-3xl ${
+                                                auth.user.isAdmin == 1 &&
+                                                "text-amber-500"
+                                            }`}
+                                        />
+                                    ) : (
+                                        <img
+                                            src={`${location.origin}/storage/${auth.user.image}`}
+                                            className="rounded-full h-10 w-10 mr-2 "
+                                        />
+                                    )}
                                 </Link>
                             ) : (
                                 <>

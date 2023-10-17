@@ -173,6 +173,25 @@ const useUpdateUser = (user) => {
     return api.updateUser(user);
 };
 
+const useStoreMessage = (message) => {
+    return api.createMessage(message);
+};
+
+const useGetMessages = () => {
+    const queryClient = useQueryClient();
+    return useInfiniteQuery({
+        queryKey: ["messages"],
+        queryFn: (pageParam) => api.getMessages(pageParam),
+        getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
+        refetchOnWindowFocus: false,
+        retryOnMount: false,
+        keepPreviousData: true,
+        refetchInterval: 10 * 60000,
+    });
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -192,4 +211,6 @@ export {
     useGetUsers,
     useDeleteUsers,
     useUpdateUser,
+    useStoreMessage,
+    useGetMessages,
 };

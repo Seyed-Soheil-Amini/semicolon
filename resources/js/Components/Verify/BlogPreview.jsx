@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "react-modal";
 import {
     FaEye,
-    FaHandPointUp,
     FaHeart,
     FaTags,
     FaUserEdit,
@@ -23,7 +22,7 @@ const BlogPreview = (props) => {
                             {!isEmpty(props.blog.image) ? (
                                 <>
                                     <img
-                                        className="flex mx-auto my-auto h-full w-full rounded"
+                                        className="flex mx-auto my-auto h-full w-full rounded-md"
                                         src={`${location.origin}/storage/${props.blog.image}`}
                                         alt="Selected image preview"
                                     />
@@ -35,7 +34,7 @@ const BlogPreview = (props) => {
                             )}
                         </div>
                         <div className="flex-row w-1/3 mx-2 my-10">
-                            <div className="flex text-3xl font-bold my-2">
+                            <div className="flex text-3xl font-bold my-2 text-gray-500">
                                 <h2 className="w-2/4">{props.blog.title}</h2>
                             </div>
                             <div className="flex">
@@ -46,13 +45,24 @@ const BlogPreview = (props) => {
                             </div>
                             <div className="flex my-2 items-center">
                                 <FaUserEdit className="mx-1 text-2xl" />:{" "}
-                                <h2 className="font-italic text-gray-700">
-                                    {props.blog.user.name}
+                                <h2 className="text-gray-700 hover:text-blue-500">
+                                    <a
+                                        href={route(
+                                            "showUser",
+                                            props.blog.user.id
+                                        )}
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        target={"_blank"}
+                                        as={"a"}
+                                    >
+                                        {props.blog.user.name}
+                                    </a>
                                 </h2>
                             </div>
                             <div className="flex my-2 items-center">
                                 {!isEmpty(props.blog.labels) && (
-                                    <div className="px-4 pt-1 pb-1 h-2/7">
+                                    <div className=" pt-1 pb-1 h-2/7">
                                         <h2 className="py-1 mb-1">Labels :</h2>
                                         {props.blog.labels.map((label) => {
                                             return (
@@ -66,7 +76,7 @@ const BlogPreview = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-between w-1/4 px-3">
+                    <div className="flex justify-between w-1/4 px-3 text-gray-500">
                         <div className="flex items-center">
                             <FaEye className="mx-1 text-2xl" />
                             <b>{props.blog.view}</b>
@@ -76,7 +86,7 @@ const BlogPreview = (props) => {
                             <b>{props.blog.like}</b>
                         </div>
                     </div>
-                    <div className="my-3 h-2.5/7">
+                    <div className="my-3 h-2.5/7 text-gray-500">
                         <p className="h-full w-full px-2 py-2">
                             {props.blog.body}
                         </p>

@@ -86,12 +86,19 @@ const BlogPage = ({ blog }) => {
                                 <strong>{blog.title}</strong>
                             </h1>
                             <div className="flex items-center font-mono text-lg text-neutral-400">
-                                <FaUserCircle
-                                    className={`mr-2 text-5xl ${
-                                        blog.user.isAdmin == 1 &&
-                                        "text-amber-500"
-                                    }`}
-                                />
+                                {isEmpty(blog.user.image) ? (
+                                    <FaUserCircle
+                                        className={`mr-2 text-5xl ${
+                                            blog.user.isAdmin == 1 &&
+                                            "text-amber-500"
+                                        }`}
+                                    />
+                                ) : (
+                                    <img
+                                        src={`${location.origin}/storage/${blog.user.image}`}
+                                        className="rounded-full h-10 w-10 mr-2 "
+                                    />
+                                )}
                                 <h2 className=" text-2xl">
                                     <u>{blog.user.name}</u>
                                 </h2>

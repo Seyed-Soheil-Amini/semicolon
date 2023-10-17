@@ -8,9 +8,18 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
+
+    public function get(Request $request, $id){
+        $user = User::findOrFail($id);
+        return Inertia::render('User', [
+            'user' => $user,
+        ]);
+    }
+
     public function getShortActivityInfo(Request $request, $id)
     {
         $user = User::withCount('blogs')->find($id);
@@ -60,4 +69,5 @@ class UserController extends Controller
         }
         return response()->json(['status' => 200, 'data' => 'Users have been successfully deleted.']);
     }
+
 }

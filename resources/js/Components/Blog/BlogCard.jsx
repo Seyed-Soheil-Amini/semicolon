@@ -32,13 +32,7 @@ const BlogCard = (props) => {
                     </h3>
                     <p className="flex mt-1 text-sm text-gray-400 py-1">
                         <TextTruncate
-                            line={
-                                !isEmpty(props.blog.labels)
-                                    ? props.blog.labels.length >= 2
-                                        ? 4
-                                        : 6
-                                    : 8
-                            }
+                            line={!isEmpty(props.blog.labels) ? 4 : 8}
                             element="span"
                             truncateText="..."
                             text={props.blog.body}
