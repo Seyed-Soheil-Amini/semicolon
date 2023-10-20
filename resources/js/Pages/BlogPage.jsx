@@ -99,8 +99,16 @@ const BlogPage = ({ blog }) => {
                                         className="rounded-full h-10 w-10 mr-2 "
                                     />
                                 )}
-                                <h2 className=" text-2xl">
-                                    <u>{blog.user.name}</u>
+                                <h2 className="text-2xl hover:text-blue-500">
+                                    <a
+                                        href={route("showUser", blog.user.id)}
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        target={"_blank"}
+                                        as={"a"}
+                                    >
+                                        {blog.user.name}
+                                    </a>
                                 </h2>
                             </div>
                             {!isEmpty(blog.category) && (

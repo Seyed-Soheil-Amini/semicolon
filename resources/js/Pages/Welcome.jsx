@@ -1,4 +1,5 @@
 import HeaderLayouts from "@/Layouts/Header";
+import FooterLayout from "@/Layouts/Footer";
 import { Link, Head } from "@inertiajs/react";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
@@ -36,12 +37,12 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                                         is at your service.
                                                     </p>
                                                     <div className="btn-box">
-                                                        <a
-                                                            href=""
+                                                        <Link
+                                                            href="/contactus"
                                                             className="btn-1"
                                                         >
                                                             Contact Us
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>
@@ -76,7 +77,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     organization is currently a start-up
                                     company.
                                 </p>
-                                <a href="">Get Started</a>
+                                <Link href="/about">Read More</Link>
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -366,7 +367,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         <h2>Contact Us</h2>
                     </div>
                     <div className="box">
-                        <a href="" className="img-box">
+                        <Link href="/contactus" className="img-box">
                             <img
                                 src="images/location.png"
                                 alt=""
@@ -377,8 +378,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 alt=""
                                 className="img-2"
                             />
-                        </a>
-                        <a href="" className="img-box">
+                        </Link>
+                        <Link href="contactus" className="img-box">
                             <img
                                 src="images/call.png"
                                 alt=""
@@ -389,8 +390,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 alt=""
                                 className="img-2"
                             />
-                        </a>
-                        <a href="" className="img-box">
+                        </Link>
+                        <Link href="contactus" className="img-box">
                             <img
                                 src="images/envelope.png"
                                 alt=""
@@ -401,15 +402,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 alt=""
                                 className="img-2"
                             />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>
             {/* end info section */}
             {/* footer section */}
-            <section className="container-fluid footer_section">
-                <p>Copyright © 2019 All Rights Reserved By Semicolon.</p>
-            </section>
+            <FooterLayout />
             {/* footer section */}
         </>
     );

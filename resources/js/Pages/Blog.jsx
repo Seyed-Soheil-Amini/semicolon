@@ -5,6 +5,7 @@ import { useRandomBlogs } from "@/hooks";
 import { isEmpty } from "lodash";
 import RandomBlogCard from "@/Components/Blog/RandomBlogCard";
 import LoadingSkeleton from "@/Components/LoadingSkeleton";
+import FooterLayout from "@/Layouts/Footer";
 
 const Blog = ({ auth }) => {
     const [filter, setFilter] = useState(() => {
@@ -134,6 +135,7 @@ const Blog = ({ auth }) => {
                     </div>
                 )}
             </div>
+            <FooterLayout />
         </>
     );
 };

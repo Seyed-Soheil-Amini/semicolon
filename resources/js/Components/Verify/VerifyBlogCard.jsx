@@ -3,6 +3,7 @@ import { FaEye } from "react-icons/fa";
 import TextTruncate from "react-text-truncate";
 import BlogPreview from "./BlogPreview";
 import { FaTags } from "react-icons/fa";
+import { isEmpty } from "lodash";
 
 const VerificationCard = (props) => {
     const [preview, setPreview] = useState(false);
@@ -23,7 +24,11 @@ const VerificationCard = (props) => {
             <div className="flex flex-col md:flex-row p-3">
                 <div className="h-40 w-full md:w-1/7 my-2 bg-emerald-500">
                     <img
-                        src={`${location.origin}/storage/${props.blog.image}`}
+                        src={`${
+                            isEmpty(props.blog.image)
+                                ? "/images/altBlogImage.jpg"
+                                : location.origin
+                        }/storage/${props.blog.image}`}
                         alt="Blog Image"
                         className="justify-start object-center lg:h-full lg:w-full"
                     />

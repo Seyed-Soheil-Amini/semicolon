@@ -22,6 +22,7 @@ const getBlockedBlogsOfUser = async (id) => {
 };
 
 const createBlog = async (blog) => {
+    console.log(blog);
     const apiUrl = "/blogs/";
     const categoryId = blog.category.value;
     const requestData = {
@@ -168,6 +169,15 @@ const getMessages = async ({ pageParam = 0 }) => {
     return data.data;
 };
 
+const deleteMessages = async (ids) => {
+    const apiUrl = "/message/delete";
+    const mesIds = new FormData();
+    mesIds.append("messageIds", JSON.stringify(ids));
+    mesIds.append("_method", "DELETE");
+    const { data } = await client.post(apiUrl, mesIds);
+    return data.data;
+};
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -189,4 +199,5 @@ export {
     updateUser,
     createMessage,
     getMessages,
+    deleteMessages,
 };

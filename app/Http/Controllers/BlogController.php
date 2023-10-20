@@ -248,6 +248,7 @@ class BlogController extends Controller
             foreach ($blogIds as $blogId) {
                 $blog = Blog::findOrFail($blogId);
                 $blog->status = BlogStatusEnum::publish();
+                $blog->published_at = Carbon::now()->format('Y-m-d H:i:s');
                 $blog->save();
             }
             return response()->json(['status' => 200, 'data' => 'Blogs are verified successfully']);
@@ -278,6 +279,8 @@ class BlogController extends Controller
                     ->orderBy('view', 'desc')
                     ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'user_id', 'category_id')
                     ->with('category', 'user')
+                    ->where('status', '=', BlogStatusEnum::publish())
+                    ->where('published_at', '!=', null)
                     ->cursorPaginate(4);
                 break;
             case 'newest':
@@ -285,6 +288,8 @@ class BlogController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'user_id', 'category_id')
                     ->with('category', 'user')
+                    ->where('status', '=', BlogStatusEnum::publish())
+                    ->where('published_at', '!=', null)
                     ->cursorPaginate(4);
                 break;
             case 'oldest':
@@ -292,6 +297,8 @@ class BlogController extends Controller
                     ->orderBy('created_at', 'asc')
                     ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'user_id', 'category_id')
                     ->with('category', 'user')
+                    ->where('status', '=', BlogStatusEnum::publish())
+                    ->where('published_at', '!=', null)
                     ->cursorPaginate(4);
                 break;
             default:
@@ -300,6 +307,8 @@ class BlogController extends Controller
                     ->inRandomOrder()
                     ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'updated_at', 'user_id', 'category_id')
                     ->with('category', 'user')
+                    ->where('status', '=', BlogStatusEnum::publish())
+                    ->where('published_at', '!=', null)
                     ->cursorPaginate(4);
         }
         return response()->json(['status' => 200, 'data' => $blogs]);

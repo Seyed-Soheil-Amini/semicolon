@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import HeaderLayouts from "@/Layouts/Header";
 import { FaVoicemail } from "react-icons/fa/index.esm";
 import { FaMailBulk, FaUsers } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useStoreMessage } from "@/hooks";
+import { useForm } from "react-hook-form";
+import FooterLayout from "@/Layouts/Footer";
 
 const ContactUs = ({ auth }) => {
     const [message, setMessage] = useState({
@@ -13,10 +15,6 @@ const ContactUs = ({ auth }) => {
         subject: "",
         body: "",
     });
-
-    useEffect(() => {
-        console.log(message);
-    }, [message]);
 
     const handleChangeMessage = (event) => {
         const { name, value } = event;
@@ -28,8 +26,13 @@ const ContactUs = ({ auth }) => {
         });
     };
 
-    async function handleSubmit(event) {
-        event.preventDefault();
+    const {
+        register,
+        formState: { errors },
+        handleSubmit: submit,
+    } = useForm();
+
+    function handleSubmit(event) {
         toast.promise(
             async () => await Promise.resolve(useStoreMessage(message)),
             {
@@ -104,7 +107,10 @@ const ContactUs = ({ auth }) => {
                                 about a beta feature? Need details about our
                                 Business plan? Let us know.
                             </p>
-                            <form className="space-y-8" onSubmit={handleSubmit}>
+                            <form
+                                className="space-y-8"
+                                onSubmit={submit(handleSubmit)}
+                            >
                                 <div>
                                     <label
                                         htmlFor="senderName"
@@ -119,6 +125,13 @@ const ContactUs = ({ auth }) => {
                                         placeholder="first and last name"
                                         value={message.senderName}
                                         required
+                                        {...register("senderName", {
+                                            required: true,
+                                            maxLength: 60,
+                                        })}
+                                        aria-invalid={
+                                            errors.senderName ? "true" : "false"
+                                        }
                                         onChange={(event) =>
                                             handleChangeMessage({
                                                 name: "senderName",
@@ -126,6 +139,23 @@ const ContactUs = ({ auth }) => {
                                             })
                                         }
                                     />
+                                    {errors.title?.type === "required" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Name is required
+                                        </p>
+                                    )}
+                                    {errors.title?.type === "maxLength" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Length of name is more than
+                                            standard limit(60 characters)
+                                        </p>
+                                    )}
                                 </div>
                                 <div>
                                     <label
@@ -141,6 +171,15 @@ const ContactUs = ({ auth }) => {
                                         placeholder="name@gmail.com"
                                         value={message.email}
                                         required
+                                        {...register("email", {
+                                            required: true,
+                                            maxLength: 120,
+                                            pattern:
+                                                /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        })}
+                                        aria-invalid={
+                                            errors.email ? "true" : "false"
+                                        }
                                         onChange={(event) =>
                                             handleChangeMessage({
                                                 name: "email",
@@ -148,6 +187,31 @@ const ContactUs = ({ auth }) => {
                                             })
                                         }
                                     />
+                                    {errors.email?.type === "required" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Email is required
+                                        </p>
+                                    )}
+                                    {errors.email?.type === "maxLength" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Length of email is more than
+                                            standard limit(120 characters)
+                                        </p>
+                                    )}
+                                    {errors.email?.type === "pattern" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Please enter a valid email address
+                                        </p>
+                                    )}
                                 </div>
                                 <div>
                                     <label
@@ -163,6 +227,13 @@ const ContactUs = ({ auth }) => {
                                         placeholder="Let us know how we can help you"
                                         value={message.subject}
                                         required
+                                        {...register("subject", {
+                                            required: true,
+                                            maxLength: 200,
+                                        })}
+                                        aria-invalid={
+                                            errors.subject ? "true" : "false"
+                                        }
                                         onChange={(event) =>
                                             handleChangeMessage({
                                                 name: "subject",
@@ -170,6 +241,23 @@ const ContactUs = ({ auth }) => {
                                             })
                                         }
                                     />
+                                    {errors.subject?.type === "required" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Subject is required
+                                        </p>
+                                    )}
+                                    {errors.subject?.type === "maxLength" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Length of subject is more than
+                                            standard limit(200 characters)
+                                        </p>
+                                    )}
                                 </div>
                                 <div className="sm:col-span-2">
                                     <label
@@ -185,6 +273,15 @@ const ContactUs = ({ auth }) => {
                                         placeholder="Leave a comment..."
                                         defaultValue={""}
                                         value={message.body}
+                                        required
+                                        {...register("body", {
+                                            required: true,
+                                            maxLength: 16000,
+                                            minLength: 100,
+                                        })}
+                                        aria-invalid={
+                                            errors.body ? "true" : "false"
+                                        }
                                         onChange={(event) =>
                                             handleChangeMessage({
                                                 name: "body",
@@ -192,6 +289,32 @@ const ContactUs = ({ auth }) => {
                                             })
                                         }
                                     />
+                                    {errors.body?.type === "required" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Message is required
+                                        </p>
+                                    )}
+                                    {errors.body?.type === "maxLength" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Length of message is more than
+                                            standard limit(16000 characters)
+                                        </p>
+                                    )}
+                                    {errors.body?.type === "minLength" && (
+                                        <p
+                                            role="alert"
+                                            className="text-red-400"
+                                        >
+                                            * Length of message is less than
+                                            standard limit(100 characters)
+                                        </p>
+                                    )}
                                 </div>
                                 <button
                                     type="submit"
@@ -204,6 +327,7 @@ const ContactUs = ({ auth }) => {
                     </section>
                 </div>
             </div>
+            <FooterLayout />
         </>
     );
 };

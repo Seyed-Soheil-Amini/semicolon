@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextTruncate from "react-text-truncate";
 import DangerButton from "../DangerButton";
 import { isEmpty } from "lodash";
@@ -9,9 +9,13 @@ const BlogCard = (props) => {
         <div className="rounded border-2 border-gray-400 relative h-100">
             <div className="relative overflow-hidden w-full rounded-md bg-gray-200 lg:aspect-none h-60">
                 <img
-                    src={`${location.origin}/storage/${props.blog.image}`}
+                    src={`${
+                        isEmpty(props.blog.image)
+                            ? "/images/altBlogImage.jpg"
+                            : location.origin
+                    }/storage/${props.blog.image}`}
                     alt="Blog Image"
-                    className="object-center lg:h-full lg:w-full"
+                    className="object-cover lg:h-full lg:w-full"
                 />
                 {!isEmpty(props.blog.category) && (
                     <div className="absolute top-0 left-0 m-2 bg-gray-300 rounded px-3 py-1 text-sm font-semibold text-gray-700">

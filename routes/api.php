@@ -57,6 +57,7 @@ Route::prefix('/admin')->middleware(['auth:sanctum', 'admin'])->namespace('App\H
 Route::prefix('/message')->middleware(['checkSession'])->group(function (){
     Route::post('/store',[MessageController::class,'create']);
     Route::get('/index',[MessageController::class,'indexMessages'])->middleware(['auth:sanctum','admin']);
+    Route::delete('/delete',[MessageController::class,'delete'])->middleware(['auth:sanctum','admin']);
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');

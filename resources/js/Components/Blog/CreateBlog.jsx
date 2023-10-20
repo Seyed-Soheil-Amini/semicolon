@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import { WithContext as ReactTags } from "react-tag-input";
 import { useCreateBlog, useGetCategories } from "@/hooks";
+import { useForm } from "react-hook-form";
 
 const CreateBlog = () => {
     const [blog, setBlog] = useState(() => {
@@ -33,6 +34,12 @@ const CreateBlog = () => {
         error,
     } = useCreateBlog();
 
+    const {
+        register,
+        formState: { errors },
+        handleSubmit: submit,
+    } = useForm();
+
     const Keys = {
         TAB: 9,
         SPACE: 32,
@@ -55,33 +62,37 @@ const CreateBlog = () => {
         });
     };
 
-    async function handleSubmit(event) {
-        event.preventDefault();
-        await storeBlog(blog);
-    }
-
-    useEffect(() => {
-        if (isSuccess) {
-            toast.dismiss();
-            toast.success("Your Blog Was Created Successfully!");
-            setBlog({
-                title: "",
-                category: null,
-                body: "",
-                imageBaseCode: "",
-                image: {},
-                labels: [],
+    function handleSubmit(event) {
+        try {
+            toast.promise(async () => await Promise.resolve(storeBlog(blog)), {
+                pending: "Storing...",
+                success: {
+                    render() {
+                        setBlog({
+                            title: "",
+                            category: null,
+                            body: "",
+                            imageBaseCode: "",
+                            image: {},
+                            labels: [],
+                        });
+                        return "Your Blog Was Stored Successfully!";
+                    },
+                },
+                error: {
+                    render({ data }) {
+                        if (data.response && data.response.status === 400) {
+                            return "Blog not found";
+                        } else {
+                            return "Unfortunately, there is a problem in the process of storing the blog.";
+                        }
+                    },
+                },
             });
-        } else if (isError) {
-            toast.dismiss();
-            toast.error(
-                `Unfortunately, there is a problem in the process of creating the blog.\n
-                ${error}`
-            );
-        } else if (isLoading) {
-            toast.loading("Creating...");
+        } catch (error) {
+            console.log(error);
         }
-    }, [isLoading, isError, isSuccess]);
+    }
 
     const onDrop = (acceptedFiles) => {
         const file = acceptedFiles[0];
@@ -119,7 +130,7 @@ const CreateBlog = () => {
     return (
         <div className="">
             <ToastContainer position="top-center" />
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <form onSubmit={submit(handleSubmit)} encType="multipart/form-data">
                 <div
                     className="flex mx-5 mb-4"
                     data-te-animation-init
@@ -140,6 +151,11 @@ const CreateBlog = () => {
                             type="text"
                             placeholder="Enter title"
                             value={blog.title}
+                            {...register("title", {
+                                required: true,
+                                maxLength: 80,
+                            })}
+                            aria-invalid={errors.title ? "true" : "false"}
                             onChange={(event) =>
                                 handleChange({
                                     name: "title",
@@ -147,6 +163,17 @@ const CreateBlog = () => {
                                 })
                             }
                         />
+                        {errors.title?.type === "required" && (
+                            <p role="alert" className="text-red-500">
+                                * Title is required
+                            </p>
+                        )}
+                        {errors.title?.type === "maxLength" && (
+                            <p role="alert" className="text-red-500">
+                                * Length of title is more than standard
+                                limit(16000 characters)
+                            </p>
+                        )}
                     </div>
                     <div className="ml-6 w-1/4">
                         <label
@@ -184,6 +211,12 @@ const CreateBlog = () => {
                         id="context"
                         placeholder="Enter context"
                         value={blog.body}
+                        {...register("body", {
+                            required: true,
+                            maxLength: 16000,
+                            minLength: 80,
+                        })}
+                        aria-invalid={errors.body ? "true" : "false"}
                         onChange={(event) =>
                             handleChange({
                                 name: "body",
@@ -191,6 +224,23 @@ const CreateBlog = () => {
                             })
                         }
                     />
+                    {errors.body?.type === "required" && (
+                        <p role="alert" className="text-red-500">
+                            * Context is required
+                        </p>
+                    )}
+                    {errors.body?.type === "maxLength" && (
+                        <p role="alert" className="text-red-500">
+                            * Length of context is more than standard
+                            limit(16000 characters)
+                        </p>
+                    )}
+                    {errors.body?.type === "minLength" && (
+                        <p role="alert" className="text-red-500">
+                            * Length of context is less than standard limit(min
+                            80 characters)
+                        </p>
+                    )}
                 </div>
                 <div className="mb-3 mx-5">
                     <label

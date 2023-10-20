@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash";
 import * as api from "../api";
 
 import {
@@ -30,7 +31,8 @@ const useCreateBlog = () => {
         mutationFn: (blog) => api.createBlog(blog),
         onSuccess: (data) => {
             const blogs = queryClient.getQueryData("blogs");
-            queryClient.setQueryData("blogs", [...blogs, data.data]);
+            if (isEmpty(blogs)) queryClient.refetchQueries("blogs");
+            else queryClient.setQueryData("blogs", [...blogs, data.data]);
         },
     });
 };
@@ -178,7 +180,6 @@ const useStoreMessage = (message) => {
 };
 
 const useGetMessages = () => {
-    const queryClient = useQueryClient();
     return useInfiniteQuery({
         queryKey: ["messages"],
         queryFn: (pageParam) => api.getMessages(pageParam),
@@ -189,6 +190,16 @@ const useGetMessages = () => {
         retryOnMount: false,
         keepPreviousData: true,
         refetchInterval: 10 * 60000,
+    });
+};
+
+const useDeleteMessages = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (ids) => api.deleteMessages(ids),
+        onSuccess: () => {
+            queryClient.refetchQueries("messages");
+        },
     });
 };
 
@@ -213,4 +224,5 @@ export {
     useUpdateUser,
     useStoreMessage,
     useGetMessages,
+    useDeleteMessages,
 };

@@ -12,7 +12,11 @@ const RandomBlogCard = ({ blog }) => {
         >
             <div className="relative overflow-hidden w-full rounded-md bg-gray-200 h-60">
                 <img
-                    src={`${location.origin}/storage/${blog.image}`}
+                    src={`${
+                        isEmpty(blog.image)
+                            ? "/images/altBlogImage.jpg"
+                            : location.origin
+                    }/storage/${blog.image}`}
                     alt="Blog Image"
                     className="object-center h-100 w-100"
                 />

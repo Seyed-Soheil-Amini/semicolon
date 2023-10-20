@@ -1,6 +1,6 @@
 import { useDeleteUsers, useGetUsers } from "@/hooks";
 import { Head } from "@inertiajs/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import UserCard from "@/Components/User/UserCard";
 import UserSkeletonLoading from "@/Components/UserSkeletonLoading";
@@ -185,7 +185,9 @@ const UserManagment = ({ auth }) => {
                                               user={user}
                                               onSelect={handleCheckboxChange}
                                               self={user.id === auth.user.id}
-                                              selected={selectedUsers.includes(user.id)}
+                                              selected={selectedUsers.includes(
+                                                  user.id
+                                              )}
                                           />
                                       ))
                                     : fuse
@@ -200,7 +202,9 @@ const UserManagment = ({ auth }) => {
                                                       res.item.id ===
                                                       auth.user.id
                                                   }
-                                                  selected={selectedUsers.includes(res.item.id)}
+                                                  selected={selectedUsers.includes(
+                                                      res.item.id
+                                                  )}
                                               />
                                           ))}
                             </tbody>

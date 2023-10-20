@@ -15,8 +15,14 @@ class UserController extends Controller
 
     public function get(Request $request, $id){
         $user = User::findOrFail($id);
+        $favoriteCategory = $user->blogs()
+        ->select('category_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('category_id')
+        ->orderByDesc('count')
+        ->first();
         return Inertia::render('User', [
             'user' => $user,
+            'favoriteCategory' => is_null($favoriteCategory) ? ['name' => null] : Category::find($favoriteCategory->category_id),
         ]);
     }
 

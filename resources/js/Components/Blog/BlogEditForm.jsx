@@ -179,7 +179,6 @@ const BlogEditForm = (props) => {
             </Transition>
             <Modal
                 isOpen={props.isOpen}
-                // onRequestClose={props.onClose}
                 className=" overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-1 w-400 max-w-full"
             >
                 <form

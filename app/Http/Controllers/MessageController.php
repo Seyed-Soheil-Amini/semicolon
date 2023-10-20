@@ -42,6 +42,18 @@ class MessageController extends Controller
         }
     }
 
+    public function delete(Request $request){
+        $messageIds = json_decode($request->messageIds);
+        if (!is_null($messageIds)) {
+            foreach ($messageIds as $Id) {
+                $message = Message::findOrFail($Id);
+                $message->delete();
+            }
+            return response()->json(['status' => 200, 'data' => 'Messages are deleted successfully']);
+        } else
+            return response()->json(['status' => 400, 'data' => 'There is not any message'], 400);
+    }
+
     public function indexMessages(Request $request){
         $messages = Message::query()
         ->orderBy('created_at', 'desc')

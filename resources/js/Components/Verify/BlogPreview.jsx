@@ -1,11 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
-import {
-    FaEye,
-    FaHeart,
-    FaTags,
-    FaUserEdit,
-} from "react-icons/fa";
+import { FaEye, FaHeart, FaTags, FaUserEdit } from "react-icons/fa";
 import { isEmpty } from "lodash";
 
 const BlogPreview = (props) => {
@@ -19,7 +14,7 @@ const BlogPreview = (props) => {
                 <div className="max-h-80vh h-6.5/7 flex-md-row">
                     <div className="flex justify-content-around mb-0 mx-auto h-4/7">
                         <div className="flex h-6/7 w-2/3 mb-3 border-gray-300 rounded mx-auto my-auto text-center text-white">
-                            {!isEmpty(props.blog.image) ? (
+                            {/* {!isEmpty(props.blog.image) ? (
                                 <>
                                     <img
                                         className="flex mx-auto my-auto h-full w-full rounded-md"
@@ -31,7 +26,16 @@ const BlogPreview = (props) => {
                                 <p className="mx-auto my-auto text-black">
                                     Image place
                                 </p>
-                            )}
+                            )} */}
+                            <img
+                                src={`${
+                                    isEmpty(props.blog.image)
+                                        ? "/images/altBlogImage.jpg"
+                                        : location.origin
+                                }/storage/${props.blog.image}`}
+                                alt="Blog Image"
+                                className="flex mx-auto my-auto h-full w-full rounded-md"
+                            />
                         </div>
                         <div className="flex-row w-1/3 mx-2 my-10">
                             <div className="flex text-3xl font-bold my-2 text-gray-500">

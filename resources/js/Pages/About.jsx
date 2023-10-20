@@ -1,4 +1,5 @@
 import HeaderLayouts from "@/Layouts/Header";
+import FooterLayout from "@/Layouts/Footer";
 import React from "react";
 
 const About = ({ auth }) => {
@@ -228,6 +229,7 @@ const About = ({ auth }) => {
                     </div>
                 </div>
             </div>
+            <FooterLayout />
         </>
     );
 };
