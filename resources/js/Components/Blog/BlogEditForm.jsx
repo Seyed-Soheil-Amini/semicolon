@@ -8,6 +8,7 @@ import { useDropzone } from "react-dropzone";
 import { Dialog, Transition } from "@headlessui/react";
 import { WithContext as ReactTags } from "react-tag-input";
 import { useUpdateBlog, useGetCategories } from "@/hooks";
+import { useForm } from "react-hook-form";
 
 const BlogEditForm = (props) => {
     const [blog, setBlog] = useState({
@@ -25,6 +26,13 @@ const BlogEditForm = (props) => {
 
     const { data: updatedBlog, mutateAsync: updateBlog } = useUpdateBlog();
     const { data: categories } = useGetCategories();
+
+
+    const {
+        register,
+        formState: { errors },
+        handleSubmit: submit,
+    } = useForm();
 
     const [disabledDropZone, setDisabledDropZone] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -55,11 +63,10 @@ const BlogEditForm = (props) => {
         disabled: disabledDropZone,
     });
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    function handleSubmit(event) {
         setLoading(true);
         try {
-            await Promise.resolve(updateBlog(blog)).then((response) => {
+            Promise.resolve(updateBlog(blog)).then((response) => {
                 setShowPopup({
                     isShow: true,
                     message: "Blog Was Updated Successfully.",
@@ -78,7 +85,7 @@ const BlogEditForm = (props) => {
         } finally {
             setLoading(false);
         }
-    };
+    }
 
     const handleChange = (event) => {
         const { name, value } = event;
@@ -182,7 +189,7 @@ const BlogEditForm = (props) => {
                 className=" overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-1 w-400 max-w-full"
             >
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={submit(handleSubmit)}
                     encType="multipart/form-data"
                     className="flex-md-row h-full w-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-1 w-400 max-w-full"
                 >
@@ -241,7 +248,7 @@ const BlogEditForm = (props) => {
                                 )}
                             </div>
                         </div>
-                        <div className="flex w-full">
+                        <div className="flex w-full text-gray-600">
                             <div className="mb-1 w-2/4">
                                 <label
                                     htmlFor="title"
@@ -255,6 +262,14 @@ const BlogEditForm = (props) => {
                                     className="form-input w-full"
                                     value={blog.title}
                                     name="title"
+                                    required
+                                    {...register("title", {
+                                        required: true,
+                                        maxLength: 80,
+                                    })}
+                                    aria-invalid={
+                                        errors.title ? "true" : "false"
+                                    }
                                     onChange={(event) =>
                                         handleChange({
                                             name: "title",
@@ -262,6 +277,17 @@ const BlogEditForm = (props) => {
                                         })
                                     }
                                 />
+                                {errors.title?.type === "required" && (
+                                    <p role="alert" className="text-red-500">
+                                        * Title is required
+                                    </p>
+                                )}
+                                {errors.title?.type === "maxLength" && (
+                                    <p role="alert" className="text-red-500">
+                                        * Length of title is more than standard
+                                        limit(16000 characters)
+                                    </p>
+                                )}
                             </div>
                             <div className="ml-6 w-2/4">
                                 <label
@@ -285,7 +311,7 @@ const BlogEditForm = (props) => {
                                 />
                             </div>
                         </div>
-                        <div className="mb-1 h-2/7">
+                        <div className="mb-1 h-2/7 text-gray-600">
                             <label
                                 htmlFor="content"
                                 className="block text-gray-500 text-md font-bold mb-1"
@@ -297,6 +323,13 @@ const BlogEditForm = (props) => {
                                 className="form-textarea h-full w-full"
                                 value={blog.body}
                                 name="body"
+                                required
+                                {...register("body", {
+                                    required: true,
+                                    maxLength: 16000,
+                                    minLength: 80,
+                                })}
+                                aria-invalid={errors.body ? "true" : "false"}
                                 onChange={(event) =>
                                     handleChange({
                                         name: "body",
@@ -304,7 +337,23 @@ const BlogEditForm = (props) => {
                                     })
                                 }
                             />
-
+                            {errors.body?.type === "required" && (
+                                <p role="alert" className="text-red-500">
+                                    * Context is required
+                                </p>
+                            )}
+                            {errors.body?.type === "maxLength" && (
+                                <p role="alert" className="text-red-500">
+                                    * Length of context is more than standard
+                                    limit(16000 characters)
+                                </p>
+                            )}
+                            {errors.body?.type === "minLength" && (
+                                <p role="alert" className="text-red-500">
+                                    * Length of context is less than standard
+                                    limit(min 80 characters)
+                                </p>
+                            )}
                             <div className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 <ReactTags
                                     tags={blog.labels}
@@ -336,7 +385,6 @@ const BlogEditForm = (props) => {
                                     /5
                                 </div>
                             </div>
-
                             <div className="flex justify-end mt-2">
                                 <button
                                     disabled={loading}

@@ -130,7 +130,7 @@ const Verification = ({ auth }) => {
             <Head title="Verification" />
             <ToastContainer position="top-center" />
             {!isLoading ? (
-                <div className="container-fluid flex">
+                <div className="container-fluid flex min-h-screen">
                     {!isEmpty(blogs) && !isEmpty(checkedItems) ? (
                         <>
                             <div className="text-gray-200 grid grid-cols-1 gap-4 my-4 px-3 py-5 rounded w-6.5/7 mx-auto">
