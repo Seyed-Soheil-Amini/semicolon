@@ -13,7 +13,7 @@ const HeaderLayouts = ({ auth }) => {
                 {/* Site Metas */}
                 <meta name="keywords" content="" />
                 <meta name="description" content="" />
-                <meta name="author" content="" />
+                <meta name="author" content="Seyed Soheil Amini" />
 
                 <meta charSet="utf-8" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -70,7 +70,7 @@ const HeaderLayouts = ({ auth }) => {
                                 <span className="navbar-toggler-icon" />
                             </button>
                         </div>
-                        <div className="w-50 mx-auto nav nav-item d-flex flex-column flex-lg-row align-items-center">
+                        <div className="w-50 mx-auto nav nav-item d-flex flex-col flex-lg-row align-items-center">
                             <ul className="navbar-nav">
                                 <li className="nav-item active">
                                     <Link

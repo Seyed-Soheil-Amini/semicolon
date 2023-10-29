@@ -65,6 +65,9 @@ Route::prefix('/user')->group(function () {
     Route::get('/messagebox', function () {
         return Inertia::render('MessageBox');
     })->middleware(['auth', 'verified', 'admin'])->name('messageBox');
+    Route::get('/services', function () {
+        return Inertia::render('Services');
+    })->middleware(['auth', 'verified'])->name('services');
 });
 
 Route::middleware(['auth'])->group(function () {

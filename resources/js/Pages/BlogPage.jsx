@@ -6,7 +6,7 @@ import { useAddView, useToggleLike } from "@/hooks";
 const BlogPage = ({ blog }) => {
     const [ipAddress, setAddress] = useState(window.location.hostname);
     const [isLiked, setIsLiked] = useState(
-        !isEmpty(blog.likkers) ? blog.likkers.includes(ipAddress) : false
+        !isEmpty(blog.likes) ? blog.likes.some((like)=>like.ip_address == ipAddress) : false
     );
     const [likes, setLikes] = useState(blog.like);
     const handleClickLike = () => {
@@ -101,7 +101,10 @@ const BlogPage = ({ blog }) => {
                                 )}
                                 <h2 className="text-2xl hover:text-blue-500">
                                     <a
-                                        href={route("showUser", blog.user.id)}
+                                        href={route(
+                                            "showUser",
+                                            btoa(blog.user.id)
+                                        )}
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}
                                         target={"_blank"}

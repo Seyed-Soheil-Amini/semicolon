@@ -53,7 +53,7 @@ const RandomBlogCard = ({ blog }) => {
                                 />
                             )}
                             <a
-                                href={route("showUser", blog.user.id)}
+                                href={route("showUser", btoa(blog.user.id))}
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
                                 target={"_blank"}

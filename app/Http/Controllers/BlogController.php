@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Enums\BlogStatusEnum;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Like;
 use App\Models\User;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +36,7 @@ class BlogController extends Controller
 
     public function get(Request $request, $id)
     {
-        $blog = Blog::with('category', 'user')->findOrFail($id);
+        $blog = Blog::with('category', 'user','likes')->findOrFail($id);
         return Inertia::render('BlogPage', [
             'blog' => $blog,
             'canLogin' => Route::has('login'),
@@ -72,9 +74,7 @@ class BlogController extends Controller
                 'user_id' => $userId,
                 'status' => BlogStatusEnum::pending(),
                 'like' => 0,
-                'likkers' => null,
                 'view' => 0,
-                'viewers' => null,
             ]);
             if ($blog) {
                 $categoryId = $request->input('categoryId');
@@ -276,12 +276,11 @@ class BlogController extends Controller
             case 'popular':
                 $blogs = Blog::query()
                     ->orderBy('like', 'desc')
-                    ->orderBy('view', 'desc')
                     ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'user_id', 'category_id')
                     ->with('category', 'user')
                     ->where('status', '=', BlogStatusEnum::publish())
                     ->where('published_at', '!=', null)
-                    ->cursorPaginate(4);
+                    ->cursorPaginate(12);
                 break;
             case 'newest':
                 $blogs = Blog::query()
@@ -290,7 +289,7 @@ class BlogController extends Controller
                     ->with('category', 'user')
                     ->where('status', '=', BlogStatusEnum::publish())
                     ->where('published_at', '!=', null)
-                    ->cursorPaginate(4);
+                    ->cursorPaginate(12);
                 break;
             case 'oldest':
                 $blogs = Blog::query()
@@ -299,74 +298,92 @@ class BlogController extends Controller
                     ->with('category', 'user')
                     ->where('status', '=', BlogStatusEnum::publish())
                     ->where('published_at', '!=', null)
-                    ->cursorPaginate(4);
+                    ->cursorPaginate(12);
                 break;
             default:
                 $blogs = Blog::query()
                     ->orderBy('view', 'desc')
-                    ->inRandomOrder()
                     ->select('id', 'title', 'body', 'image', 'like', 'view', 'created_at', 'updated_at', 'user_id', 'category_id')
                     ->with('category', 'user')
                     ->where('status', '=', BlogStatusEnum::publish())
                     ->where('published_at', '!=', null)
-                    ->cursorPaginate(4);
+                    ->cursorPaginate(12);
+                break;
         }
         return response()->json(['status' => 200, 'data' => $blogs]);
     }
 
     public function addViewer(Request $request, $id)
     {
-        $blog = Blog::find($id);
+        $blog = Blog::with('views')->find($id);
         if (is_null($blog)) {
             return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
         }
         $ipAddress = $request->ip();
         $currentTime = now();
-        if (is_null($blog->viewers)) {
-            $blog->viewers = [];
-        } elseif (is_string($blog->viewers)) {
-            $blog->viewers = [$blog->viewers];
-        }
-        $viewer = ['ip' => $ipAddress, 'time' => $currentTime];
-        $existingViewer = collect($blog->viewers)->first(function ($value) use ($ipAddress) {
-            return $value['ip'] === $ipAddress;
-        });
-        if (is_null($existingViewer)) {
-            $preViewres = $blog->viewers;
-            array_push($preViewres, $viewer);
-            $blog->viewers = $preViewres;
+        if (is_null($blog->views)) {
+            $view = new View();
+            $view->blog_id = $blog->id;
+            $view->ip_address = $ipAddress;
+            $view->view_time = $currentTime;
+            $view->save();
             $blog->increment('view');
             $blog->save();
+        }else{
+            $existingViewer = collect($blog->views)->first(function ($value) use ($ipAddress) {
+                return $value['ip_address'] === $ipAddress;
+            });
+            if(is_null($existingViewer)){
+                $view = new View();
+                $view->blog_id = $blog->id;
+                $view->ip_address = $ipAddress;
+                $view->view_time = $currentTime;
+                $view->save();
+                $blog->increment('view');
+                $blog->save();
+            }else{
+                $lastViewTime = Carbon::parse($existingViewer->view_time);
+                $daysSinceLastView = $lastViewTime->diffInDays(Carbon::now());
+                if ($daysSinceLastView >= 1) {
+                    $existingViewer->view_time = Carbon::now();
+                    $existingViewer->save();
+                    $blog->increment('view');
+                    $blog->save();
+                }
+            }            
         }
         return response()->json(['status' => 200, 'data' => $blog->view], 200);
     }
 
     public function toggleLike(Request $request, $id)
     {
-        $blog = Blog::find($id);
+        $blog = Blog::with('likes')->find($id);
         if (is_null($blog)) {
             return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
         }
         $ipAddress = $request->ip();
-        if (is_null($blog->likkers)) {
-            $blog->likkers = [];
-        } elseif (is_string($blog->likkers)) {
-            $blog->likkers = [$blog->likkers];
-        }
-        $likker = $ipAddress;
-        $likkers = collect($blog->likkers);
-        $existingLikkerIndex = $likkers->search($ipAddress);
-        if ($existingLikkerIndex !== false) {
-            $likkers->forget($existingLikkerIndex);
-            $blog->likkers = $likkers;
-            $blog->decrement('like');
-        } else {
-            $preLikkers = $blog->likkers;
-            array_push($preLikkers, $likker);
-            $blog->likkers = $preLikkers;
+        if(is_null($blog->likes)){
+            $like = new Like();
+            $like->blog_id = $blog->id;
+            $like->ip_address = $ipAddress;
+            $like->save();
             $blog->increment('like');
+        }else{
+            $existingLikker = collect($blog->likes)->first(function ($value) use ($ipAddress) {
+                return $value['ip_address'] === $ipAddress;
+            });
+            if(is_null($existingLikker)){
+                $like = new Like();
+                $like->blog_id = $blog->id;
+                $like->ip_address = $ipAddress;
+                $like->save();
+                $blog->increment('like');
+            }else{
+                $existingLikker->delete();
+                $blog->decrement('like');
+            }
         }
         $blog->save();
-        return response()->json(['status' => 200, 'data' => $blog->likkers], 200);
+        return response()->json(['status' => 200, 'data' => $blog->like], 200);
     }
 }

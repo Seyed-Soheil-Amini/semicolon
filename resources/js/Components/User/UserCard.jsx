@@ -42,7 +42,7 @@ const UserCard = ({ user, self, onSelect, selected }) => {
                 className={`px-6 py-4 font-semibold whitespace-nowrap`}
             >
                 <a
-                    href={route("showUser", user.id)}
+                    href={route("showUser", btoa(user.id))}
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
                     target={"_blank"}

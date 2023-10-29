@@ -6,6 +6,29 @@ const User = ({ user, favoriteCategory }) => {
     return (
         <>
             <Head>
+                {/* Site Metas */}
+                <meta name="keywords" content={user.job_title} />
+                <meta name="description" content={user.about} />
+                <meta name="author" content={user.name} />
+
+                <meta charSet="utf-8" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                {/* Mobile Metas */}
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+                />
+                <link
+                    rel="icon"
+                    type="image/jpg"
+                    href="/images/semicolon.jpg"
+                />
+
+                {/* font wesome stylesheet */}
+                <link
+                    rel="stylesheet"
+                    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+                />
                 <title>{user.name}</title>
             </Head>
             <div className="max-w-6xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">

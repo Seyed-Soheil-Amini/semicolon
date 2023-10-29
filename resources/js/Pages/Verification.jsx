@@ -133,7 +133,7 @@ const Verification = ({ auth }) => {
                 <div className="container-fluid flex min-h-screen">
                     {!isEmpty(blogs) && !isEmpty(checkedItems) ? (
                         <>
-                            <div className="text-gray-200 grid grid-cols-1 gap-4 my-4 px-3 py-5 rounded w-6.5/7 mx-auto">
+                            <div className="text-gray-200 grid grid-cols-1 gap-4 my-4 px-3 py-5 rounded w-6.5/7 mx-auto h-1/5">
                                 {!checkedItems.every(
                                     (el) => el.checked === false
                                 ) && (

@@ -36,6 +36,16 @@ export default function Authenticated({ user, header, children }) {
                                 >
                                     Blogs
                                 </NavLink>
+                                {user.isAdmin === 0 && (
+                                    <>
+                                        <NavLink
+                                            href={route("services")}
+                                            active={route().current("services")}
+                                        >
+                                            Services
+                                        </NavLink>
+                                    </>
+                                )}
                                 {user.isAdmin === 1 && (
                                     <>
                                         <NavLink

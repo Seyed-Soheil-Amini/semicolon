@@ -14,6 +14,7 @@ class UserController extends Controller
 {
 
     public function get(Request $request, $id){
+        $id = base64_decode($id);
         $user = User::findOrFail($id);
         $favoriteCategory = $user->blogs()
         ->select('category_id', DB::raw('COUNT(*) as count'))

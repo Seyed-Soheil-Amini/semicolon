@@ -58,8 +58,8 @@ export default function Dashboard({ auth }) {
                                     About
                                 </dt>
                                 <dd class="mt-1 text-sm leading-6 text-blue-500 sm:col-span-2 sm:mt-0">
-                                    {isEmpty(auth.user.about)
-                                        ? "_-_"
+                                    {auth.user.about == "null"
+                                        ? "Author of Semicolon Weblog"
                                         : auth.user.about}{" "}
                                 </dd>
                             </div>

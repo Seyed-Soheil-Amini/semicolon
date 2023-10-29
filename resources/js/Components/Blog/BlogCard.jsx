@@ -2,7 +2,7 @@ import React from "react";
 import TextTruncate from "react-text-truncate";
 import DangerButton from "../DangerButton";
 import { isEmpty } from "lodash";
-import { FaTags } from "react-icons/fa";
+import { FaPen, FaTags, FaTrashAlt } from "react-icons/fa";
 
 const BlogCard = (props) => {
     return (
@@ -40,7 +40,7 @@ const BlogCard = (props) => {
                             element="span"
                             truncateText="..."
                             text={props.blog.body}
-                            textTruncateChild={<a>Read more</a>}
+                            // textTruncateChild={<a>Read more</a>}
                         />
                     </p>
                     {!isEmpty(props.blog.labels) && (
@@ -61,18 +61,19 @@ const BlogCard = (props) => {
                                 <div className="flex justify-between">
                                     <button
                                         type="button"
-                                        className="rounded py-1 px-5 bg-orange-500 w-25 hover:bg-orange-400 text-white"
+                                        className="text-orange-600 hover:text-white border border-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900 w-1/4"
                                         onClick={() => handleEditClick()}
                                     >
-                                        EDIT
+                                        <FaPen className="mx-auto" />
                                     </button>
-                                    <DangerButton
+                                    <button
+                                        className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-1/4"
                                         onClick={() =>
                                             props.onClickDelete(props.blog.id)
                                         }
                                     >
-                                        Delete
-                                    </DangerButton>
+                                        <FaTrashAlt className="mx-auto" />
+                                    </button>
                                 </div>
                             );
                         } else if (props.parent === "publish") {
@@ -80,7 +81,7 @@ const BlogCard = (props) => {
                                 <div className="flex justify-center">
                                     <button
                                         type="button"
-                                        className="rounded py-1 px-5 bg-blue-500 w-25 hover:bg-blue-400 text-white"
+                                        className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                                         onClick={() =>
                                             props.onTogglePublish(props.blog.id)
                                         }
