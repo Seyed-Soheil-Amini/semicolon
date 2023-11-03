@@ -1,21 +1,20 @@
 import React from "react";
 import TextTruncate from "react-text-truncate";
-import DangerButton from "../DangerButton";
 import { isEmpty } from "lodash";
 import { FaPen, FaTags, FaTrashAlt } from "react-icons/fa";
 
 const BlogCard = (props) => {
     return (
-        <div className="rounded border-2 border-gray-400 relative h-100">
+        <div className="flex flex-col rounded border-2 border-gray-400 relative h-100">
             <div className="relative overflow-hidden w-full rounded-md bg-gray-200 lg:aspect-none h-60">
                 <img
                     src={`${
                         isEmpty(props.blog.image)
                             ? "/images/altBlogImage.jpg"
-                            : location.origin
-                    }/storage/${props.blog.image}`}
+                            : `${location.origin}/storage/${props.blog.image}`
+                    }`}
                     alt="Blog Image"
-                    className="object-cover lg:h-full lg:w-full"
+                    className="object-center lg:h-full lg:w-full"
                 />
                 {!isEmpty(props.blog.category) && (
                     <div className="absolute top-0 left-0 m-2 bg-gray-300 rounded px-3 py-1 text-sm font-semibold text-gray-700">
@@ -29,7 +28,7 @@ const BlogCard = (props) => {
                     </div>
                 )}
             </div>
-            <div className="mt-3 row justify-between h-60">
+            <div className="flex-grow mt-3 row justify-between h-60">
                 <div className="flex-row px-6 w-full h-full">
                     <h3 className="text-md text-gray-200 font-bold">
                         {props.blog.title}
@@ -95,13 +94,14 @@ const BlogCard = (props) => {
                         } else {
                             return (
                                 <div className="flex justify-center">
-                                    <DangerButton
+                                    <button
+                                        className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-1/4"
                                         onClick={() =>
                                             props.onClickDelete(props.blog.id)
                                         }
                                     >
-                                        Delete
-                                    </DangerButton>
+                                        <FaTrashAlt className="mx-auto" />
+                                    </button>
                                 </div>
                             );
                         }

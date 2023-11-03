@@ -52,6 +52,13 @@ class ProfileController extends Controller
                 Storage::delete($oldImagePath);
             }
             $user->image = $path;
+        }else if(!$request->has('image') && !$request->has('noChangeImage')){
+            if(!is_null($user->image)){
+                $oldImage = $user->image;
+                $oldImagePath = '/public/' . $oldImage;
+                Storage::delete($oldImagePath);
+                $user->image = null;
+            }
         }
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;

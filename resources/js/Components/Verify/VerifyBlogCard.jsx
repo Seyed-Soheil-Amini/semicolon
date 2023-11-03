@@ -27,8 +27,8 @@ const VerificationCard = (props) => {
                         src={`${
                             isEmpty(props.blog.image)
                                 ? "/images/altBlogImage.jpg"
-                                : location.origin
-                        }/storage/${props.blog.image}`}
+                                : `${location.origin}/storage/${props.blog.image}`
+                        }`}
                         alt="Blog Image"
                         className="justify-start object-center lg:h-full lg:w-full"
                     />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import Select from "react-select";
 import "tailwindcss/tailwind.css";
@@ -7,6 +7,8 @@ import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { Dialog, Transition } from "@headlessui/react";
 import { WithContext as ReactTags } from "react-tag-input";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
 import { useUpdateBlog, useGetCategories } from "@/hooks";
 import { useForm } from "react-hook-form";
 
@@ -23,10 +25,12 @@ const BlogEditForm = (props) => {
         imageBaseCode: "",
         labels: !isEmpty(props.blog.labels) ? props.blog.labels : [],
     });
-
+    useEffect(() => {
+        console.log(blog);
+    }, [blog]);
     const { data: updatedBlog, mutateAsync: updateBlog } = useUpdateBlog();
     const { data: categories } = useGetCategories();
-
+    const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB
 
     const {
         register,
@@ -34,7 +38,7 @@ const BlogEditForm = (props) => {
         handleSubmit: submit,
     } = useForm();
 
-    const [disabledDropZone, setDisabledDropZone] = useState(true);
+    const [disabledDropZone, setDisabledDropZone] = useState(!isEmpty(blog.image));
     const [loading, setLoading] = useState(false);
     const [showPopup, setShowPopup] = useState({
         isShow: false,
@@ -46,19 +50,25 @@ const BlogEditForm = (props) => {
     const onDrop = (acceptedFiles) => {
         const file = acceptedFiles[0];
         const reader = new FileReader();
-
         reader.onload = () => {
             handleChange({ name: "imageBaseCode", value: reader.result });
             handleChange({ name: "image", value: file });
             setDisabledDropZone(!disabledDropZone);
         };
         if (file) {
+            if (file.size > MAX_IMAGE_SIZE) {
+                toast.info(`Image size exceeds the limit (Max size 2MB)`);
+                return;
+            }
+            if (!file.type.startsWith("image/")) {
+                toast.info("Only image files are allowed");
+                return;
+            }
             reader.readAsDataURL(file);
         }
     };
 
     const { getRootProps, getInputProps } = useDropzone({
-        accept: "image/*",
         onDrop,
         disabled: disabledDropZone,
     });
@@ -132,6 +142,7 @@ const BlogEditForm = (props) => {
 
     return (
         <>
+            <ToastContainer position="top-center" />
             <Transition show={showPopup.isShow} as={React.Fragment}>
                 <Dialog
                     open={showPopup.isShow}
@@ -327,7 +338,7 @@ const BlogEditForm = (props) => {
                                 {...register("body", {
                                     required: true,
                                     maxLength: 16000,
-                                    minLength: 80,
+                                    minLength: 120,
                                 })}
                                 aria-invalid={errors.body ? "true" : "false"}
                                 onChange={(event) =>

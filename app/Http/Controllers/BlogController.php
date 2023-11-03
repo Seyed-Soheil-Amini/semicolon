@@ -9,6 +9,7 @@ use App\Models\Like;
 use App\Models\User;
 use App\Models\View;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use \Illuminate\Support\Facades\Validator;
@@ -36,6 +37,7 @@ class BlogController extends Controller
 
     public function get(Request $request, $id)
     {
+        $id = base64_decode($id);
         $blog = Blog::with('category', 'user','likes')->findOrFail($id);
         return Inertia::render('BlogPage', [
             'blog' => $blog,
@@ -43,12 +45,13 @@ class BlogController extends Controller
             'canRegister' => Route::has('register')
         ]);
     }
+    
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'body' => 'string|max:1500',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,bmp,gif,svg,webp',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,bmp,gif,svg,webp|max:2048',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -64,7 +67,7 @@ class BlogController extends Controller
                 $imageName = $image->getClientOriginalName();
                 $path = $request->file('image')->storeAs($destinationPath, $imageName);
                 $path = substr($path, 7);
-            }
+            }            
             $blog = Blog::create([
                 'title' => $request->title,
                 'body' => $request->body,
@@ -108,7 +111,7 @@ class BlogController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'body' => 'string|max:500',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,bmp,gif,svg,webp',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,bmp,gif,svg,webp|max:2048',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -130,6 +133,12 @@ class BlogController extends Controller
                 $path = $request->file('image')->storeAs($destinationPath, $imageName);
                 $path = substr($path, 7);
                 $blog->image = $path;
+            }else if(!$request->has('image') && !$request->has('noChangeImage')){
+                if(!is_null($blog->image)){
+                    $oldImage = '/public/' . $blog->image;
+                    Storage::delete($oldImage);
+                    $blog->image = null;
+                }
             }
             $categoryId = $request->categoryId;
             if (!is_null($categoryId)) {

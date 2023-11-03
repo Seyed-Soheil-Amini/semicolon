@@ -31,8 +31,8 @@ const BlogPreview = (props) => {
                                 src={`${
                                     isEmpty(props.blog.image)
                                         ? "/images/altBlogImage.jpg"
-                                        : location.origin
-                                }/storage/${props.blog.image}`}
+                                        : `${location.origin}/storage/${props.blog.image}`
+                                }`}
                                 alt="Blog Image"
                                 className="flex mx-auto my-auto h-full w-full rounded-md"
                             />

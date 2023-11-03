@@ -24,6 +24,8 @@ const CreateBlog = () => {
             : lastEdited;
     });
 
+    const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB
+
     const { data: categories } = useGetCategories();
     const {
         data,
@@ -104,6 +106,14 @@ const CreateBlog = () => {
         };
 
         if (file) {
+            if (file.size > MAX_IMAGE_SIZE) {
+                toast.info(`Image size exceeds the limit (Max size 2MB)`);
+                return;
+            }
+            if (!file.type.startsWith("image/")) {
+                toast.info("Only image files are allowed");
+                return;
+            }
             reader.readAsDataURL(file);
         }
     };
@@ -188,6 +198,7 @@ const CreateBlog = () => {
                             value={blog.category}
                             name="category"
                             options={categories}
+                            required
                             onChange={(event) =>
                                 handleChange({
                                     name: "category",
@@ -214,7 +225,7 @@ const CreateBlog = () => {
                         {...register("body", {
                             required: true,
                             maxLength: 16000,
-                            minLength: 80,
+                            minLength: 120,
                         })}
                         aria-invalid={errors.body ? "true" : "false"}
                         onChange={(event) =>
@@ -293,7 +304,8 @@ const CreateBlog = () => {
                         ) : (
                             <p className="mx-auto my-auto">
                                 Drag and drop an image here, or click to select
-                                a file
+                                a file <br />
+                                Maximum file size is 2 MB
                             </p>
                         )}
                     </div>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isEmpty } from "lodash";
 const client = axios.create({
     baseURL: `${location.origin}/api`,
 });
@@ -47,7 +48,13 @@ const updateBlog = async (blog) => {
     dataBlogs.append("title", blog.title);
     dataBlogs.append("body", blog.body);
     dataBlogs.append("labels", JSON.stringify(blog.labels));
-    typeof blog.image === "object" && dataBlogs.append("image", blog.image);
+    if (!isEmpty(blog.imageBaseCode)) {
+        typeof blog.image === "object" && dataBlogs.append("image", blog.image);
+    } else {
+        if (!isEmpty(blog.image)) {
+            dataBlogs.append("noChangeImage", true);
+        }
+    }
     dataBlogs.append("_method", "PUT");
     dataBlogs.append("categoryId", categoryId);
     const { data } = await client.post(apiUrl, dataBlogs, {
@@ -146,7 +153,11 @@ const updateUser = async (user) => {
     dataUser.append("email", user.email);
     dataUser.append("jobTitle", user.jobTitle);
     dataUser.append("about", user.about);
-    typeof user.image === "object" && dataUser.append("image", user.image);
+    if (!isEmpty(user.imageBaseCode))
+        typeof user.image === "object" && dataUser.append("image", user.image);
+    else {
+        if (!isEmpty(user.image)) dataUser.append("noChangeImage", true);
+    }
     dataUser.append("_method", "PATCH");
     const { data } = await client.post(apiUrl, dataUser, {
         headers: {

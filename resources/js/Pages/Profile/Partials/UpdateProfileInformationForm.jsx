@@ -9,6 +9,7 @@ import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
+import DangerButton from "@/Components/DangerButton";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -25,7 +26,7 @@ export default function UpdateProfileInformation({
         image: user.image,
         imageBaseCode: "",
     });
-
+    const MAX_IMAGE_USER_SIZE = 2 * 1024 * 1024;
     const handleChange = (event) => {
         const { name, value } = event;
         setData((prevData) => {
@@ -70,6 +71,14 @@ export default function UpdateProfileInformation({
         };
 
         if (file) {
+            if (file.size > MAX_IMAGE_USER_SIZE) {
+                toast.info(`Image size exceeds the limit (Max size 2MB)`);
+                return;
+            }
+            if (!file.type.startsWith("image/")) {
+                toast.info("Only image files are allowed");
+                return;
+            }
             reader.readAsDataURL(file);
         }
     };
@@ -104,7 +113,6 @@ export default function UpdateProfileInformation({
             </div>
         );
     }
-
     return (
         <>
             <ToastContainer position="top-center" />
@@ -119,7 +127,6 @@ export default function UpdateProfileInformation({
                         address.
                     </p>
                 </header>
-
                 <form
                     onSubmit={submit}
                     className="mt-6 space-y-6"
@@ -142,13 +149,9 @@ export default function UpdateProfileInformation({
                             isFocused
                             autoComplete="name"
                         />
-
-                        {/* <InputError className="mt-2" message={errors.name} /> */}
                     </div>
-
                     <div>
                         <InputLabel htmlFor="email" value="Email" />
-
                         <TextInput
                             id="email"
                             type="email"
@@ -163,13 +166,9 @@ export default function UpdateProfileInformation({
                             required
                             autoComplete="username"
                         />
-
-                        {/* <InputError className="mt-2" message={errors.email} /> */}
                     </div>
-
                     <div>
                         <InputLabel htmlFor="joTitle" value="Job Title" />
-
                         <TextInput
                             id="jobTitle"
                             className="mt-1 block w-full"
@@ -181,13 +180,7 @@ export default function UpdateProfileInformation({
                                 })
                             }
                         />
-
-                        {/* <InputError
-                            className="mt-2"
-                            message={errors.jobTitle}
-                        /> */}
                     </div>
-
                     <div>
                         <InputLabel htmlFor="about" value="About" />
                         <div className="font-sans relative flex items-center focus-within:text-gray-600">
@@ -205,9 +198,7 @@ export default function UpdateProfileInformation({
                                 }
                             />
                         </div>
-                        {/* <InputError className="mt-2" message={errors.about} /> */}
                     </div>
-
                     <div className="col-span-full">
                         <InputLabel htmlFor="image" value="Icon Photo" />
                         <div
@@ -239,7 +230,6 @@ export default function UpdateProfileInformation({
                             </div>
                         </div>
                     </div>
-
                     {mustVerifyEmail && user.email_verified_at === null && (
                         <div>
                             <p className="text-sm mt-2 text-gray-800 dark:text-gray-200">
@@ -263,11 +253,26 @@ export default function UpdateProfileInformation({
                             )}
                         </div>
                     )}
-
-                    <div className="flex items-center gap-4">
+                    <div className="flex justify-start items-center gap-4">
                         <PrimaryButton disabled={processing}>
                             Save
                         </PrimaryButton>
+                        {!isEmpty(data.image) && (
+                            <div>
+                                <DangerButton
+                                    className="align-content-center"
+                                    onClick={() =>
+                                        setData({
+                                            ...data,
+                                            image: null,
+                                            imageBaseCode: "",
+                                        })
+                                    }
+                                >
+                                    Remove
+                                </DangerButton>
+                            </div>
+                        )}
                     </div>
                 </form>
             </section>

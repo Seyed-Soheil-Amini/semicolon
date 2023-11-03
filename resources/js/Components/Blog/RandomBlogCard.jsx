@@ -8,15 +8,15 @@ const RandomBlogCard = ({ blog }) => {
     return (
         <BlogLink
             className="w-full h-100 rounded-lg border-b-2 border-stone-500 border-solid relative shadow-3xl cursor-pointer"
-            href={route("showBlog", blog.id)}
+            href={route("showBlog", btoa(blog.id))}
         >
             <div className="relative overflow-hidden w-full rounded-md bg-gray-200 h-60">
                 <img
                     src={`${
                         isEmpty(blog.image)
                             ? "/images/altBlogImage.jpg"
-                            : location.origin
-                    }/storage/${blog.image}`}
+                            : `${location.origin}/storage/${blog.image}`
+                    }`}
                     alt="Blog Image"
                     className="object-center h-100 w-100"
                 />

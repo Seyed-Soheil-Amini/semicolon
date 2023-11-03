@@ -6,7 +6,9 @@ import { useAddView, useToggleLike } from "@/hooks";
 const BlogPage = ({ blog }) => {
     const [ipAddress, setAddress] = useState(window.location.hostname);
     const [isLiked, setIsLiked] = useState(
-        !isEmpty(blog.likes) ? blog.likes.some((like)=>like.ip_address == ipAddress) : false
+        !isEmpty(blog.likes)
+            ? blog.likes.some((like) => like.ip_address == ipAddress)
+            : false
     );
     const [likes, setLikes] = useState(blog.like);
     const handleClickLike = () => {
@@ -59,7 +61,11 @@ const BlogPage = ({ blog }) => {
                             style={{ height: "92vh" }}
                         >
                             <img
-                                src={`${location.origin}/storage/${blog.image}`}
+                                src={`${
+                                    isEmpty(blog.image)
+                                        ? "/images/altBlogImage.jpg"
+                                        : `${location.origin}/storage/${blog.image}`
+                                }`}
                                 alt="Blog Image"
                                 className="shadow-inner shadow-3xl h-6/7 w-full rounded-lg"
                             />
