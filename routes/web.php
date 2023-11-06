@@ -70,7 +70,7 @@ Route::prefix('/user')->group(function () {
     })->middleware(['auth', 'verified'])->name('services');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
