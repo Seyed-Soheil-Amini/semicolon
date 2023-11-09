@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-mbstring": "*",
         "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.8",
         "inertiajs/inertia-laravel": "^0.6.10",
@@ -17,6 +18,7 @@
         "spatie/laravel-enum": "^3.0",
         "symfony/http-client": "^6.3",
         "symfony/mailgun-mailer": "^6.3",
+        "symfony/polyfill-mbstring": "^1.28",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
