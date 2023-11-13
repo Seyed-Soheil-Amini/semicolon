@@ -1,1 +1,0 @@
-import{j as o}from"./app-23e59b41.js";function t(e){const r={borderRadius:"50%"};return o.jsx(o.Fragment,{children:o.jsx("img",{style:r,className:"border-logo w-40 h-32 mx-auto my-auto border-emerald-500",src:"/images/semicolon.jpg",alt:""})})}export{t as A};

@@ -67,7 +67,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <p>
                                     Semicolon scientific team was founded by
                                     computer students of Yazd University on June
-                                    22, 1401. This organization was formed for
+                                    22, 2022. This organization was formed for
                                     big goals and implementation of practical
                                     ideas in the field of technology in the form
                                     of web and application. This group is
