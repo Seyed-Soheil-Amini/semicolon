@@ -15,15 +15,15 @@ export default function Dashboard({ auth }) {
             <Head title="Dashboard" />
             <div className="py-10">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 dark:text-gray-100">
+                    <div className="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="text-sm md:text-base p-6 text-gray-100">
                             Welcome Dear {auth.user.name} :)
                         </div>
                     </div>
                 </div>
                 <div className="mx-auto max-w-7xl px-6 lg:px-8 py-10">
                     <div class="px-4 sm:px-0">
-                        <h3 class="font-semibold leading-7 text-gray-300 text-2xl">
+                        <h3 class="text-base md:text-xl font-semibold leading-7 text-gray-300 text-2xl">
                             User Information
                         </h3>
                     </div>

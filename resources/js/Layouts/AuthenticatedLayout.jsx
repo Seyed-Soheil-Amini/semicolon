@@ -22,7 +22,6 @@ export default function Authenticated({ user, header, children }) {
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </Link>
                             </div>
-
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink
                                     href={route("dashboard")}
@@ -36,7 +35,7 @@ export default function Authenticated({ user, header, children }) {
                                 >
                                     Blogs
                                 </NavLink>
-                                {user.isAdmin === 0 && (
+                                {user.isAdmin == 0 && (
                                     <>
                                         <NavLink
                                             href={route("services")}
@@ -46,7 +45,7 @@ export default function Authenticated({ user, header, children }) {
                                         </NavLink>
                                     </>
                                 )}
-                                {user.isAdmin === 1 && (
+                                {user.isAdmin == 1 && (
                                     <>
                                         <NavLink
                                             href={route("verification")}
@@ -76,7 +75,6 @@ export default function Authenticated({ user, header, children }) {
                                 )}
                             </div>
                         </div>
-
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
                             <div className="ml-3 relative">
                                 <Dropdown>
@@ -172,15 +170,51 @@ export default function Authenticated({ user, header, children }) {
                         " sm:hidden"
                     }
                 >
-                    <div className="pt-2 pb-3 space-y-1">
+                    <div className="pt-8 pb-3 space-y-1">
                         <ResponsiveNavLink
                             href={route("dashboard")}
                             active={route().current("dashboard")}
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("blogs")}
+                            active={route().current("blogs")}
+                        >
+                            Blogs
+                        </ResponsiveNavLink>
+                        {user.isAdmin == 0 && (
+                            <ResponsiveNavLink
+                                href={route("services")}
+                                active={route().current("services")}
+                            >
+                                Services
+                            </ResponsiveNavLink>
+                        )}
+                        {user.isAdmin == 1 && (
+                            <>
+                                {" "}
+                                <ResponsiveNavLink
+                                    href={route("verification")}
+                                    active={route().current("verification")}
+                                >
+                                    Verification
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route("userManagment")}
+                                    active={route().current("userManagment")}
+                                >
+                                    User Management
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route("messageBox")}
+                                    active={route().current("messageBox")}
+                                >
+                                    Message Box
+                                </ResponsiveNavLink>
+                            </>
+                        )}
                     </div>
-
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800 dark:text-gray-200">

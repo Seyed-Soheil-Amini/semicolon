@@ -1,15 +1,13 @@
 import HeaderLayouts from "@/Layouts/Header";
 import FooterLayout from "@/Layouts/Footer";
 import { Link, Head } from "@inertiajs/react";
+import { Carousel, Container, Button } from "react-bootstrap";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
-            {/* Basic */}
-
             <HeaderLayouts auth={auth} />
             <div className="hero_area">
-                {/* slider section */}
                 <section className="slider_section position-relative">
                     <div
                         id="carouselExampleIndicators"
@@ -21,9 +19,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <div className="container">
                                     <div className="row">
                                         <div className="col-md-7">
-                                            <div className="detail-box">
+                                            <div className="detail-box mt-5 md:mt-3 lg:mt-0">
                                                 <div>
-                                                    <h1>
+                                                    <h1 className="text-base md:text-3xl lg:text-5xl">
                                                         Welcome To <br />
                                                         <span>
                                                             Semicolon official
@@ -39,7 +37,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                                     <div className="btn-box">
                                                         <Link
                                                             href="/contactus"
-                                                            className="btn-1"
+                                                            className="text-xs md:text-base lg:text-xl"
                                                         >
                                                             Contact Us
                                                         </Link>
@@ -53,18 +51,18 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         </div>
                     </div>
                 </section>
-                {/* end slider section */}
             </div>
-            {/* about section */}
             <section className="about_section layout_padding">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-md-6">
+                    <div className="flex flex-col md:flex-row">
+                        <div className="md:w-1/2 md:pr-8">
                             <div className="detail-box">
                                 <div className="heading_container">
-                                    <h2>About Us</h2>
+                                    <h2 className="text-base md:text-xl lg:text-3xl">
+                                        About Us
+                                    </h2>
                                 </div>
-                                <p>
+                                <p className="text-sm md:text-base">
                                     Semicolon scientific team was founded by
                                     computer students of Yazd University on June
                                     22, 2022. This organization was formed for
@@ -77,13 +75,18 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     organization is currently a start-up
                                     company.
                                 </p>
-                                <Link href="/about">Read More</Link>
+                                <Link
+                                    href="/about"
+                                    className="text-sm md:text-base"
+                                >
+                                    Read More
+                                </Link>
                             </div>
                         </div>
-                        <div className="col-md-6">
-                            <div className="flex img-box">
+                        <div className="md:w-1/2">
+                            <div className="flex justify-center items-center">
                                 <img
-                                    className="w-50 float-right"
+                                    className="pt-3 w-1/3 md:w-full"
                                     src="images/team_logo.png"
                                     alt=""
                                 />
@@ -92,74 +95,72 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </div>
                 </div>
             </section>
-            {/* end about section */}
             <div className="body_bg layout_padding">
-                {/* service section */}
-                <section className="service_section ">
+                <section className="service_section">
                     <div className="container">
                         <div className="heading_container">
-                            <h2>Areas of Work and Development</h2>
+                            <h2 className="text-2xl lg:text-3xl">
+                                Areas of Work and Development
+                            </h2>
                         </div>
                     </div>
                     <div className="container">
-                        <div className="row">
-                            <div className="col-md-6">
+                        <div className="flex flex-wrap">
+                            <div className="w-full md:w-1/2 p-4">
                                 <div className="box">
                                     <div className="img-box">
                                         <img
-                                            className="w-25"
+                                            className="w-1/4 md:w-1/2"
                                             src="images/development.png"
-                                            alt=""
+                                            alt="image developer"
                                         />
                                     </div>
-                                    <h4>Software Development</h4>
-                                    <p>
+                                    <h4 className="text-lg md:text-2xl">
+                                        Software Development
+                                    </h4>
+                                    <p className="text-sm md:text-base">
                                         Our team is developing practical and
                                         idea-oriented software, these software
                                         are often in the form of web apps. You
                                         can submit your orders in this field to
                                         our specialists.
                                     </p>
-                                    {/* <a href="">
-                  Read More
-               </a> */}
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                                <div className="box align-items-end align-items-md-start text-right text-md-left">
+                            <div className="w-full md:w-1/2 p-4">
+                                <div className="box text-right md:text-left">
                                     <div className="img-box">
                                         <img
-                                            className="w-25"
+                                            className="w-1/4 md:w-1/2"
                                             src="images/unity.png"
-                                            alt=""
+                                            alt="image game engine"
                                         />
                                     </div>
-                                    <h4>Game Development</h4>
-                                    <p>
+                                    <h4 className="text-lg md:text-2xl">
+                                        Game Development
+                                    </h4>
+                                    <p className="text-sm md:text-base">
                                         We produce 2D and 3D indie games using
                                         the Unity engine. We are currently
                                         developing mobile games on the Android
                                         platform and are preparing the
                                         infrastructure for system production.
                                     </p>
-                                    {/* <a href="">
-                  Read More
-               </a> */}
                                 </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-6">
+                            <div className="w-full md:w-1/2 p-4">
                                 <div className="box">
                                     <div className="img-box">
                                         <img
-                                            className="w-25"
+                                            className="w-1/4 md:w-1/2"
                                             src="images/server.png"
                                             alt=""
                                         />
                                     </div>
-                                    <h4>Server Management</h4>
-                                    <p>
+                                    <h4 className="text-lg md:text-2xl">
+                                        Server Management
+                                    </h4>
+                                    <p className="text-sm md:text-base">
                                         Our team has the experience of working
                                         with Linux as one of the main operating
                                         systems used for the server, as well as
@@ -169,22 +170,21 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         or application is designed. It is run
                                         and managed on the server.
                                     </p>
-                                    {/* <a href="">
-                  Read More
-               </a> */}
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                                <div className="box align-items-end align-items-md-start text-right text-md-left">
+                            <div className="w-full md:w-1/2 p-4">
+                                <div className="box text-right md:text-left">
                                     <div className="img-box">
                                         <img
-                                            className="w-25"
+                                            className="w-1/4 md:w-1/2"
                                             src="images/ai.png"
                                             alt=""
                                         />
                                     </div>
-                                    <h4>Artificial Intelligence</h4>
-                                    <p>
+                                    <h4 className="text-lg md:text-2xl">
+                                        Artificial Intelligence
+                                    </h4>
+                                    <p className="text-sm md:text-base">
                                         Our artificial intelligence expert team
                                         has the ability to carry out artificial
                                         intelligence projects, especially
@@ -194,15 +194,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         with us in the field of writing articles
                                         and research.
                                     </p>
-                                    {/* <a href="">
-                  Read More
-               </a> */}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                {/* end service section */}
                 <hr
                     className="mx-auto my-4"
                     style={{
@@ -213,164 +209,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         color: "darkred",
                     }}
                 />
-                {/* contact section */}
-                {/* <section class="contact_section">
-   <div class="container">
-      <div class="heading_container">
-         <h2>
-            Let's Get In Touch!
-         </h2>
-      </div>
-   </div>
-   <div class="container contact_bg layout_padding2-top">
-      <div class="row">
-         <div class="col-md-6">
-            <div class="contact_form ">
-               <form action="">
-                  <input type="text" placeholder="Name ">
-                  <input type="email" placeholder="Email">
-                  <input type="text" placeholder="Message" class="message_input">
-                  <button>
-                     Send
-                  </button>
-               </form>
-            </div>
-         </div>
-         <div class="col-md-6">
-            <div class="img-box">
-               <img src="{{ asset('images/contact-img.jpg') }}" alt="">
-            </div>
-         </div>
-      </div>
-   </div>
-</section> */}
-                {/* end contact section */}
-                {/* client section */}
-                {/* 
-<section class="client_section layout_padding-top">
-   <div class="d-flex justify-content-center">
-      <div class="heading_container">
-         <h2>
-            Testimonial
-         </h2>
-      </div>
-   </div>
-   <div class="container layout_padding2">
-      <div id="carouselExample2Indicators" class="carousel slide" data-ride="carousel">
-         <ol class="carousel-indicators">
-            <li data-target="#carouselExample2Indicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExample2Indicators" data-slide-to="1"></li>
-            <li data-target="#carouselExample2Indicators" data-slide-to="2"></li>
-         </ol>
-         <div class="carousel-inner">
-            <div class="carousel-item ">
-               <div class="client_container">
-                  <div class="client-id">
-                     <div class="img-box">
-                        <img src="{{ asset('images/client.jpg') }}" alt="">
-                     </div>
-                     <div class="client_name">
-                        <div>
-                           <h3>
-                              Johndue
-                           </h3>
-                           <p>
-                              Farm & CO
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="client_detail">
-                     <div class="client_text">
-                        <blockquote>
-                           <p>
-                              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                              aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                           </p>
-                        </blockquote>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="carousel-item active">
-               <div class="client_container">
-                  <div class="client-id">
-                     <div class="img-box">
-                        <img src="{{ asset('images/client.jpg') }}" alt="">
-                     </div>
-                     <div class="client_name">
-                        <div>
-                           <h3>
-                              Johndue
-                           </h3>
-                           <p>
-                              Farm & CO
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="client_detail">
-                     <div class="client_text">
-                        <blockquote>
-                           <p>
-                              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                              aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                           </p>
-                        </blockquote>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="carousel-item ">
-               <div class="client_container">
-                  <div class="client-id">
-                     <div class="img-box">
-                        <img src="{{ asset('images/client.jpg') }}" alt="">
-                     </div>
-                     <div class="client_name">
-                        <div>
-                           <h3>
-                              Johndue
-                           </h3>
-                           <p>
-                              Farm & CO
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="client_detail">
-                     <div class="client_text">
-                        <blockquote>
-                           <p>
-                              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                              aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                           </p>
-                        </blockquote>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-
-   </div>
-</section> */}
-                {/* end client section */}
-            </div>
-            {/* info section */}
+            </div>{" "}
             <section className="info_section layout_padding">
                 <div className="footer_contact">
                     <div className="heading_container">
-                        <h2>Contact Us</h2>
+                        <h2 className="text-base md:text-2xl lg:text-3xl">Contact Us</h2>
                     </div>
                     <div className="box">
                         <Link href="/contactus" className="img-box">
                             <img
                                 src="images/location.png"
-                                alt=""
+                                alt="location"
                                 className="img-1"
                             />
                             <img
@@ -387,14 +236,14 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             />
                             <img
                                 src="images/call-o.png"
-                                alt=""
+                                alt="call"
                                 className="img-2"
                             />
                         </Link>
                         <Link href="contactus" className="img-box">
                             <img
                                 src="images/envelope.png"
-                                alt=""
+                                alt="envelope"
                                 className="img-1"
                             />
                             <img

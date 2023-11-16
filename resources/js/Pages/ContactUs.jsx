@@ -57,13 +57,13 @@ const ContactUs = ({ auth }) => {
         <>
             <HeaderLayouts auth={auth} />
             <ToastContainer position="top-center" />
-            <div className="py-24 sm:py-32 bg-gray-800">
+            <div className="py-24 sm:py-32 bg-gray-900">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto text-center">
-                        <h2 className="text-3xl font-bold tracking-tight text-gray-200 sm:text-4xl">
+                        <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-gray-200">
                             Contact Us
                         </h2>
-                        <p className="mt-2 text-lg leading-8 text-gray-300">
+                        <p className="mt-2 text-md md:text-xl leading-8 text-gray-300">
                             You can choose the way to communicate with us.
                         </p>
                     </div>
@@ -102,7 +102,7 @@ const ContactUs = ({ auth }) => {
                     </div>
                     <section className="">
                         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-                            <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
+                            <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 text-sm md:text-xl">
                                 Got a technical issue? Want to send feedback
                                 about a beta feature? Need details about our
                                 Business plan? Let us know.
@@ -142,7 +142,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.title?.type === "required" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Name is required
                                         </p>
@@ -150,7 +150,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.title?.type === "maxLength" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Length of name is more than
                                             standard limit(60 characters)
@@ -190,7 +190,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.email?.type === "required" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Email is required
                                         </p>
@@ -198,7 +198,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.email?.type === "maxLength" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Length of email is more than
                                             standard limit(120 characters)
@@ -207,7 +207,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.email?.type === "pattern" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Please enter a valid email address
                                         </p>
@@ -244,7 +244,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.subject?.type === "required" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Subject is required
                                         </p>
@@ -252,7 +252,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.subject?.type === "maxLength" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Length of subject is more than
                                             standard limit(200 characters)
@@ -292,7 +292,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.body?.type === "required" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Message is required
                                         </p>
@@ -300,7 +300,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.body?.type === "maxLength" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Length of message is more than
                                             standard limit(16000 characters)
@@ -309,7 +309,7 @@ const ContactUs = ({ auth }) => {
                                     {errors.body?.type === "minLength" && (
                                         <p
                                             role="alert"
-                                            className="text-red-400"
+                                            className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Length of message is less than
                                             standard limit(100 characters)
@@ -318,7 +318,7 @@ const ContactUs = ({ auth }) => {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-orange-600 sm:w-fit hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-primary-300"
+                                    className="py-3 px-3 md:px-5 text-xs md:text-sm font-medium text-center text-white rounded-lg bg-orange-600 sm:w-fit hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-primary-300"
                                 >
                                     Send message
                                 </button>

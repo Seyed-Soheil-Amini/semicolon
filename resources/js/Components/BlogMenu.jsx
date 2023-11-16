@@ -1,4 +1,3 @@
-import react from "react";
 import BlogMenuItem from "./BlogMenuItem";
 
 const BlogSideBar = (props) => {
@@ -13,25 +12,25 @@ const BlogSideBar = (props) => {
                         onClickItem={props.onChangeComponent}
                         itemName="Add Blog"
                         icon="add"
-                        activeItem={props.currentCmp === 'create'}
+                        activeItem={props.currentCmp === "create"}
                     />
                     <BlogMenuItem
                         onClickItem={props.onChangeComponent}
                         itemName="All Blogs"
                         icon="edit"
-                        activeItem={props.currentCmp === 'edit'}
+                        activeItem={props.currentCmp === "edit"}
                     />
                     <BlogMenuItem
                         onClickItem={props.onChangeComponent}
                         itemName="Publishing Blogs"
                         icon="pub"
-                        activeItem={props.currentCmp === 'published'}
+                        activeItem={props.currentCmp === "published"}
                     />
                     <BlogMenuItem
                         onClickItem={props.onChangeComponent}
                         itemName="Blocked Blogs"
                         icon="ban"
-                        activeItem={props.currentCmp === 'blocked'}
+                        activeItem={props.currentCmp === "blocked"}
                     />
                 </ul>
             </div>
@@ -40,8 +39,6 @@ const BlogSideBar = (props) => {
             </div>
         </div>
     );
-
-
 };
 
 export default BlogSideBar;

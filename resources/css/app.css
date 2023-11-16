@@ -34,3 +34,23 @@
   -webkit-mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.5) 50%);
   mask-image        : radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.5) 50%);
 }
+
+.form-wrapper {
+  height     : 100vh;
+  display    : flex;
+  align-items: center;
+}
+
+.form-wrapper .container {
+  max-width: 600px;
+}
+
+.form-wrapper form {
+  border-radius: 10px;
+  box-shadow   : 0 0 5px 0 hsl(0, 0%, 74%);
+  padding      : 20px;
+}
+
+.form-wrapper .form-floating>.form-control {
+  height: 55px;
+}

@@ -2,6 +2,7 @@ import React from "react";
 
 import { Link, Head, usePage } from "@inertiajs/react";
 import { FaUserCircle } from "react-icons/fa";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { isEmpty } from "lodash";
 
 const HeaderLayouts = ({ auth }) => {
@@ -50,80 +51,59 @@ const HeaderLayouts = ({ auth }) => {
 
                 <title>Semicolon</title>
             </Head>
-            <header className="bg-gray-950 d-flex justify-content-between header_section fixed-top w-100 h-14 shadow-lg">
-                <div className="container pt-0">
-                    <nav className="navbar navbar-expand-lg custom_nav-container pt-0">
-                        <div className="w-25">
-                            <a className="navbar-brand mr-5" href="/">
-                                <img src="images/Layer_2.svg" alt="" />
-                                <span>Semicolon</span>
-                            </a>
-                            <button
-                                className="navbar-toggler"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent"
-                                aria-expanded="false"
-                                aria-label="Toggle navigation"
+            <Navbar
+                variant="dark"
+                expand="lg"
+                fixed="top"
+                style={{ background: "#030712" }}
+            >
+                <Container>
+                    <Navbar.Brand href="/" style={{ width: "20%" }}>
+                        <img
+                            alt=""
+                            src="images/Layer_2.svg"
+                            className="d-inline-block align-top rounded-circle"
+                            style={{ width: "20%" }}
+                        />{" "}
+                        Semicolon
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Link
+                                className={`nav-link px-3 ${
+                                    url === "/" && "active"
+                                }`}
+                                href="/"
                             >
-                                <span className="navbar-toggler-icon" />
-                            </button>
-                        </div>
-                        <div className="w-50 mx-auto nav nav-item d-flex flex-col flex-lg-row align-items-center">
-                            <ul className="navbar-nav">
-                                <li className="nav-item active">
-                                    <Link
-                                        className={`nav-link ${
-                                            url === "/" && "active"
-                                        }`}
-                                        href="/"
-                                    >
-                                        Home{" "}
-                                        <span className="sr-only">
-                                            (current)
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link
-                                        className={`nav-link ${
-                                            url === "/about" && "active"
-                                        }`}
-                                        href="/about"
-                                    >
-                                        About
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link
-                                        className={`nav-link ${
-                                            url === "/blog" && "active"
-                                        }`}
-                                        href="/blog"
-                                    >
-                                        Blog
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link
-                                        className={`nav-link ${
-                                            url === "/contactus" && "active"
-                                        }`}
-                                        href="/contactus"
-                                    >
-                                        Contact us
-                                    </Link>
-                                </li>
-                            </ul>
-                            {/* <form className="form-inline flex">
-                                <button
-                                    className="flex btn my-auto nav_search-btn"
-                                    type="submit"
-                                />
-                            </form> */}
-                        </div>
-                        <div className="flex justify-end w-25 right-0 text-right">
+                                HOME <span className="sr-only">(current)</span>
+                            </Link>
+                            <Link
+                                className={`nav-link px-3 ${
+                                    url === "/about" && "active"
+                                }`}
+                                href="/about"
+                            >
+                                ABOUT
+                            </Link>
+                            <Link
+                                className={`nav-link px-3 ${
+                                    url === "/blog" && "active"
+                                }`}
+                                href="/blog"
+                            >
+                                BLOG
+                            </Link>
+                            <Link
+                                className={`nav-link px-3 ${
+                                    url === "/contactus" && "active"
+                                }`}
+                                href="/contactus"
+                            >
+                                CONTACT US
+                            </Link>
+                        </Nav>
+                        <Nav>
                             {auth.user ? (
                                 <Link
                                     href={route("dashboard")}
@@ -147,22 +127,22 @@ const HeaderLayouts = ({ auth }) => {
                                 <>
                                     <Link
                                         href={route("register")}
-                                        className="mr-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                        className="lg:py-2 lg:px-2 rounded-circle mr-3 font-semibold text-gray-400 hover:text-white lg:bg-white lg:text-gray-950 lg:hover:bg-gray-950"
                                     >
                                         Register
                                     </Link>
                                     <Link
                                         href={route("login")}
-                                        className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                        className="lg:py-2 mr-1 font-semibold text-gray-400 hover:text-white "
                                     >
                                         login
                                     </Link>
                                 </>
                             )}
-                        </div>
-                    </nav>
-                </div>
-            </header>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>{" "}
         </>
     );
 };
