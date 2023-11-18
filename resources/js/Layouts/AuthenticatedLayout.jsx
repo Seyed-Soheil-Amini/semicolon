@@ -13,7 +13,7 @@ export default function Authenticated({ user, header, children }) {
 
     return (
         <div className="bg-gray-100 dark:bg-gray-950">
-            <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+            <nav className="bg-gray-800 border-b border-gray-100 border-gray-700 w-full">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">

@@ -1,8 +1,54 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; 
 
-.ReactTags__tags {
+@media screen and (max-width:700px) {
+  .ReactTags__tag {
+    display       : inline-flex;
+    flex-direction: row;
+  }
+
+  .ReactTags__tagInput {
+    display      : block;
+    flex-grow    : 1;
+  }
+}
+
+.ReactTags {
+  display    : block;
+  flex-wrap  : wrap;
+  align-items: center;
+}
+
+.ReactTags__tag {
+  background   : #020617;
+  color        : #fff;
+  border-radius: 3px;
+  margin       : 2px;
+  padding      : 5px 8px;
+}
+
+.ReactTags__tagInput {
+  display      : inline-block;
+  padding      : 5px 8px;
+  font-size    : 14px;
+  border       : 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.ReactTags__suggestions {
+  list-style: none;
+  padding   : 0;
+  margin    : 0;
+}
+
+.ReactTags__suggestion {
+  padding: 8px;
+  cursor : pointer;
+}
+
+
+/* .ReactTags__tags {
   display    : inline-flex;
   flex-wrap  : wrap;
   width      : fit-content;
@@ -17,7 +63,7 @@
 
 }
 
-.ReactTags__selected .ReactTags__tag {
+ .ReactTags__selected .ReactTags__tag {
   background-color: #020617;
   color           : #f1f5f9;
   border-style    : hidden;
@@ -28,7 +74,7 @@
   padding-left    : 1.5mm;
   padding-right   : 1.5mm;
   margin-right    : 1.5mm;
-}
+} */
 
 .mask-circle {
   -webkit-mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.5) 50%);

@@ -140,15 +140,19 @@ const CreateBlog = () => {
     return (
         <div className="">
             <ToastContainer position="top-center" />
-            <form onSubmit={submit(handleSubmit)} encType="multipart/form-data">
+            <form
+                onSubmit={submit(handleSubmit)}
+                encType="multipart/form-data"
+                className=""
+            >
                 <div
-                    className="flex mx-5 mb-4"
+                    className="flex-row md:flex mx-5 mb-4"
                     data-te-animation-init
                     data-te-animation-start="onHover"
                     data-te-animation-reset="true"
                     data-te-animation="[fade-in_1s_ease-in-out]"
                 >
-                    <div className="w-3/4">
+                    <div className="w-6.5/7 md:w-3/4">
                         <label
                             className="block text-gray-400 text-lg font-bold mb-1"
                             htmlFor="title"
@@ -185,7 +189,7 @@ const CreateBlog = () => {
                             </p>
                         )}
                     </div>
-                    <div className="ml-6 w-1/4">
+                    <div className="w-6.5/7 md:ml-6 md:w-1/4">
                         <label
                             className="block text-gray-400 text-lg font-bold mb-1"
                             htmlFor="category"
@@ -208,7 +212,7 @@ const CreateBlog = () => {
                         />
                     </div>
                 </div>
-                <div className="mx-5 mb-4">
+                <div className="mx-5 mb-4 w-5/6 md:w-auto">
                     <label
                         className="block text-gray-400 text-lg font-bold mb-1"
                         htmlFor="context"
@@ -253,14 +257,14 @@ const CreateBlog = () => {
                         </p>
                     )}
                 </div>
-                <div className="mb-3 mx-5">
+                <div className="mb-3 mx-5 w-5/6 md:w-auto">
                     <label
                         className="text-gray-400 text-lg font-bold mb-1"
                         htmlFor="labels"
                     >
                         Labels
                     </label>
-                    <div className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <ReactTags
                             tags={blog.labels}
                             suggestions={[]}
@@ -276,7 +280,7 @@ const CreateBlog = () => {
                             }}
                         />
                         <div
-                            className="my-auto float-right"
+                            className="my-auto float-right text-xs md:text-base"
                             style={{ width: "fit-content" }}
                         >
                             {blog.labels.length}/5
@@ -291,7 +295,7 @@ const CreateBlog = () => {
                         Image File
                     </label>
                     <div
-                        className="flex items-center w-1/2 h-80 mb-3 border-dashed border-2 border-gray-300 rounded mx-auto text-center text-white"
+                        className="flex items-center w-3/4 md:w-1/2 h-80 mb-3 border-dashed border-2 border-gray-300 rounded mx-auto text-center text-white"
                         {...getRootProps()}
                     >
                         <input type="file" name="image" {...getInputProps()} />
@@ -302,7 +306,7 @@ const CreateBlog = () => {
                                 alt="Selected image preview"
                             />
                         ) : (
-                            <p className="mx-auto my-auto">
+                            <p className="mx-auto my-auto text-sm md:text-base">
                                 Drag and drop an image here, or click to select
                                 a file <br />
                                 Maximum file size is 2 MB

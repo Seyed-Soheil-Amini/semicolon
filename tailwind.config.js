@@ -46,7 +46,7 @@ export default {
             },
             animation: {
                 snake: "snake 2s linear infinite",
-                'ping-once': 'ping-once 1s cubic-bezier(0, 0, 0.2, 1)',
+                "ping-once": "ping-once 1s cubic-bezier(0, 0, 0.2, 1)",
             },
             boxShadow: {
                 "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.5)",
@@ -61,5 +61,10 @@ export default {
         ],
     },
 
-    plugins: [forms, require("@tailwindcss/aspect-ratio"),require("daisyui")],
+    plugins: [
+        forms,
+        require("@tailwindcss/aspect-ratio"),
+        require("daisyui"),
+        require("tailwindcss-animated"),
+    ],
 };
