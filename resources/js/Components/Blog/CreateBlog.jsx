@@ -178,12 +178,12 @@ const CreateBlog = () => {
                             }
                         />
                         {errors.title?.type === "required" && (
-                            <p role="alert" className="text-red-500">
+                            <p role="alert" className="text-red-500 text-xs md:text-base">
                                 * Title is required
                             </p>
                         )}
                         {errors.title?.type === "maxLength" && (
-                            <p role="alert" className="text-red-500">
+                            <p role="alert" className="text-red-500 text-xs md:text-base">
                                 * Length of title is more than standard
                                 limit(16000 characters)
                             </p>
@@ -240,18 +240,18 @@ const CreateBlog = () => {
                         }
                     />
                     {errors.body?.type === "required" && (
-                        <p role="alert" className="text-red-500">
+                        <p role="alert" className="text-red-500 text-xs md:text-base">
                             * Context is required
                         </p>
                     )}
                     {errors.body?.type === "maxLength" && (
-                        <p role="alert" className="text-red-500">
+                        <p role="alert" className="text-red-500 text-xs md:text-base">
                             * Length of context is more than standard
                             limit(16000 characters)
                         </p>
                     )}
                     {errors.body?.type === "minLength" && (
-                        <p role="alert" className="text-red-500">
+                        <p role="alert" className="text-red-500 text-xs md:text-base">
                             * Length of context is less than standard limit(min
                             80 characters)
                         </p>

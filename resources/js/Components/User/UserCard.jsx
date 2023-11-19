@@ -9,7 +9,7 @@ const UserCard = ({ user, self, onSelect, selected }) => {
                 self && "bg-gray-900"
             }`}
         >
-            <td className="w-4 p-4">
+            <td className="w-4 p-2 md:p-4">
                 <div className="flex items-center">
                     <input
                         id={`${user.id}`}
@@ -26,20 +26,20 @@ const UserCard = ({ user, self, onSelect, selected }) => {
                     </label>
                 </div>
             </td>
-            <td className="px-6 py-4">
+            <td className="px-6 py-4 md:px-4 md:py-2">
                 {!isEmpty(user.image) ? (
                     <img
                         src={`${location.origin}/storage/${user.image}`}
                         alt="User Image"
-                        class="h-8 w-8 rounded-full"
+                        className="h-8 w-8 md:h-12 md:w-12 rounded-full"
                     />
                 ) : (
-                    <FaUserCircle className="text-3xl text-gray-300" />
+                    <FaUserCircle className="text-3xl md:text-4xl text-gray-300" />
                 )}
             </td>
             <th
                 scope="row"
-                className={`px-6 py-4 font-semibold whitespace-nowrap`}
+                className="px-2 py-3 md:px-4 md:py-6 font-semibold whitespace-nowrap"
             >
                 <a
                     href={route("showUser", btoa(user.id))}
@@ -51,16 +51,24 @@ const UserCard = ({ user, self, onSelect, selected }) => {
                     <h2
                         className={`hover:text-blue-500 ${
                             user.isAdmin ? "text-yellow-500" : "text-gray-200"
-                        }`}
+                        } text-sm md:text-base`}
                     >
                         {user.name}
                     </h2>
                 </a>
             </th>
-            <td className="px-6 py-4">{user.job_title}</td>
-            <td className="px-6 py-4">{user.email}</td>
-            <td className="px-6 py-4">{user.last_blog_time}</td>
-            <td className="px-6 py-4 font-medium">{user.blog_count}</td>
+            <td className="px-3 py-1.5 md:px-6 md:py-3 text-xs md:text-base">
+                {user.job_title}
+            </td>
+            <td className="px-3 py-1.5 md:px-6 md:py-3 text-xs md:text-base">
+                {user.email}
+            </td>
+            <td className="px-5 py-1.5 md:px-6 md:py-3 text-xs md:text-base">
+                {user.last_blog_time}
+            </td>
+            <td className="px-3 py-1.5 md:px-6 md:py-3 font-medium text-sm md:text-base">
+                {user.blog_count}
+            </td>
         </tr>
     );
 };

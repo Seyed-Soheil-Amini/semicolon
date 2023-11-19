@@ -11,22 +11,9 @@ const BlogPreview = (props) => {
                 isOpen={props.isOpen}
                 className="overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-0 w-400 max-w-full"
             >
-                <div className="max-h-80vh h-6.5/7 flex-md-row">
-                    <div className="flex justify-content-around mb-0 mx-auto h-4/7">
-                        <div className="flex h-6/7 w-2/3 mb-3 border-gray-300 rounded mx-auto my-auto text-center text-white">
-                            {/* {!isEmpty(props.blog.image) ? (
-                                <>
-                                    <img
-                                        className="flex mx-auto my-auto h-full w-full rounded-md"
-                                        src={`${location.origin}/storage/${props.blog.image}`}
-                                        alt="Selected image preview"
-                                    />
-                                </>
-                            ) : (
-                                <p className="mx-auto my-auto text-black">
-                                    Image place
-                                </p>
-                            )} */}
+                <div className="max-h-80vh h-6.5/7 flex-row">
+                    <div className="flex justify-content-around mb-0 mx-auto h-auto md:h-4/7 flex-col md:flex-row pt-2 md:pt-4">
+                        <div className="flex h-4/7 md:h-6/7 w-6/7 md:w-5/7 mb-1 md:mb-3 border-gray-300 rounded mx-auto my-auto text-center text-white">
                             <img
                                 src={`${
                                     isEmpty(props.blog.image)
@@ -37,17 +24,17 @@ const BlogPreview = (props) => {
                                 className="flex mx-auto my-auto h-full w-full rounded-md"
                             />
                         </div>
-                        <div className="flex-row w-1/3 mx-2 my-10">
-                            <div className="flex text-3xl font-bold my-2 text-gray-500">
+                        <div className="flex-row w-auto md:w-1/3 mx-2 my-0 md:my-10">
+                            <div className="flex font-bold my-2 text-gray-500 text-lg md:text-3xl">
                                 <h2 className="w-2/4">{props.blog.title}</h2>
                             </div>
                             <div className="flex">
-                                <div className="flex text-sm items-center px-1 py-2 rounded-md bg-gray-800 text-gray-200">
-                                    <FaTags className="mx-1" />
+                                <div className="flex text-xs md:text-sm items-center px-0.5 py-1 md:px-1 md:py-2 rounded-md bg-gray-800 text-gray-200">
+                                    <FaTags className="mx-0.5 md:mx-1 text-xs md:text-sm" />
                                     {props.blog.category.name}
                                 </div>
                             </div>
-                            <div className="flex my-2 items-center">
+                            <div className="flex my-2 items-center text-sm md:text-base font-bold">
                                 <FaUserEdit className="mx-1 text-2xl" />:{" "}
                                 <h2 className="text-gray-700 hover:text-blue-500">
                                     <a
@@ -64,40 +51,44 @@ const BlogPreview = (props) => {
                                     </a>
                                 </h2>
                             </div>
-                            <div className="flex my-2 items-center">
+                            <div class="flex my-2 items-center">
                                 {!isEmpty(props.blog.labels) && (
-                                    <div className=" pt-1 pb-1 h-2/7">
-                                        <h2 className="py-1 mb-1">Labels :</h2>
-                                        {props.blog.labels.map((label) => {
-                                            return (
-                                                <span className="inline-block mx-1 bg-gray-600 rounded-full px-3 py-1 text-sm font-semibold text-gray-100">
-                                                    #{label.name}
-                                                </span>
-                                            );
-                                        })}
+                                    <div class="pt-1 pb-1 h-auto md:h-2/7">
+                                        <h2 class="py-1 mb-1 text-gray-700">
+                                            Labels :
+                                        </h2>
+                                        <div class="flex flex-wrap">
+                                            {props.blog.labels.map((label) => {
+                                                return (
+                                                    <span class="mx-1 bg-gray-600 rounded-full px-3 py-1 text-xs md:text-sm font-semibold text-gray-100">
+                                                        #{label.name}
+                                                    </span>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
                                 )}
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-between w-1/4 px-3 text-gray-500">
+                    <div className="flex justify-between w-1/4 px-3 text-gray-500 text-sm md:text-base">
                         <div className="flex items-center">
-                            <FaEye className="mx-1 text-2xl" />
+                            <FaEye className="mx-1 text-xl md:text-2xl" />
                             <b>{props.blog.view}</b>
                         </div>
                         <div className="flex items-center">
-                            <FaHeart className="mx-1 text-2xl" />
+                            <FaHeart className="mx-1 text-xl md:text-2xl" />
                             <b>{props.blog.like}</b>
                         </div>
                     </div>
-                    <div className="my-3 h-2.5/7 text-gray-500">
+                    <div className="my-3 h-auto md:h-2.5/7 text-gray-500 text-xs md:text-lg">
                         <p className="h-full w-full px-2 py-2">
                             {props.blog.body}
                         </p>
                     </div>
-                    <div className="flex justify-end">
+                    <div className="flex justify-end mb-1 md:mb-2">
                         <button
-                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                            className="bg-red-500 hover:bg-red-700 mb-1 md:mb-2 text-white font-bold py-1.5 px-2 md:py-2 md:px-4 rounded text-sm md:text-base"
                             onClick={() => props.onClose()}
                         >
                             Close

@@ -38,14 +38,19 @@ const BlockedBlog = (props) => {
     }, [isRefetching]);
 
     return (
-        <div className="w-full h-screen">
+        <div
+            className={`w-full ${
+                isEmpty(blogs.some((blog) => blog.status === "block")) &&
+                "h-screen"
+            }`}
+        >
             {!isLoading ? (
                 <>
                     <ToastContainer position="top-center" />
                     {!isEmpty(blogs) &&
                     blogs.some((blog) => blog.status === "block") ? (
                         <>
-                            <div className="flex justify-between pb-4">
+                            <div className="flex flex-col md:flex-row justify-between pb-4">
                                 <label
                                     htmlFor="table-search"
                                     className="sr-only"
@@ -73,13 +78,13 @@ const BlockedBlog = (props) => {
                                     <input
                                         type="text"
                                         id="table-search"
-                                        className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Search for users based on name"
+                                        className="block p-2 pl-10 text-xs md:text-sm text-gray-900 border border-gray-300 rounded-lg w-full md:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Search for blogs based on name"
                                         onChange={handleSearchBlogChange}
                                     />
                                 </div>
                             </div>
-                            <div className="bg-gray-950 h-full mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
+                            <div className="bg-gray-950 h-full mx-auto max-w-2xl px-4 py-16 md:px-6 md:py-8 lg:max-w-7xl lg:px-8">
                                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                     {isEmpty(searchBlog)
                                         ? blogs.map((blog) => {
@@ -109,8 +114,8 @@ const BlockedBlog = (props) => {
                             </div>
                         </>
                     ) : (
-                        <div className="flex items-center w-3/5 mx-auto text-center h-40">
-                            <h3 className="text-gray-200 mx-auto text-4xl">
+                        <div className="flex items-center w-3/5 mx-auto">
+                            <h3 className="text-gray-200 mx-auto text-xl md:text-4xl">
                                 There are no blocked blogs.
                             </h3>
                         </div>

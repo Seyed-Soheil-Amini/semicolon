@@ -21,7 +21,7 @@ const RandomBlogCard = ({ blog }) => {
                     className="object-center h-100 w-100"
                 />
                 {!isEmpty(blog.category) && (
-                    <div className="absolute top-0 left-0 m-2 bg-gray-300 rounded px-3 py-1 text-sm font-semibold text-gray-700">
+                    <div className="absolute top-0 left-0 m-1 md:m-2 bg-gray-300 rounded px-1.5 md:px-3 py-1 text-xs md:text-sm font-semibold text-gray-700">
                         <div className="flex">
                             <FaTags
                                 className="flex text-center my-auto mr-1"
@@ -34,14 +34,14 @@ const RandomBlogCard = ({ blog }) => {
             </div>
             <div className="mt-3 row justify-between">
                 <div className="flex-row px-6 w-full h-full">
-                    <h3 className="text-md text-gray-200 font-bold text-left">
+                    <h3 className="text-base md:text-lg text-gray-200 font-bold text-left">
                         {blog.title}
                     </h3>
                     {!isEmpty(blog.user) && (
-                        <div className="flex items-center font-mono text-lg text-neutral-400">
+                        <div className="flex items-center font-mono text-sm md:text-lg text-neutral-400">
                             {isEmpty(blog.user.image) ? (
                                 <FaUserCircle
-                                    className={`mr-2 text-3xl ${
+                                    className={`mr-2 text-xl md:text-3xl ${
                                         blog.user.isAdmin == 1 &&
                                         "text-amber-500"
                                     }`}
@@ -49,7 +49,7 @@ const RandomBlogCard = ({ blog }) => {
                             ) : (
                                 <img
                                     src={`${location.origin}/storage/${blog.user.image}`}
-                                    className="rounded-full h-10 w-10 mr-2 "
+                                    className="rounded-full h-8 w-8 md:h-10 md:w-10 mr-2 "
                                 />
                             )}
                             <a
@@ -63,7 +63,7 @@ const RandomBlogCard = ({ blog }) => {
                             </a>
                         </div>
                     )}
-                    <p className="flex mt-1 text-sm text-gray-400 py-1">
+                    <p className="flex mt-1 text-xs md:text-sm text-gray-400 py-1">
                         <TextTruncate
                             line={3}
                             element="span"

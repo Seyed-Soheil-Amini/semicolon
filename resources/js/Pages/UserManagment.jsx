@@ -65,9 +65,7 @@ const UserManagment = ({ auth }) => {
         if (!event.target.checked) setSelectedUsers([]);
         else {
             setSelectedUsers(
-                users
-                    .filter((user) => user.isAdmin === 0)
-                    .map((user) => user.id)
+                users.filter((user) => user.isAdmin == 0).map((user) => user.id)
             );
         }
     };
@@ -76,14 +74,14 @@ const UserManagment = ({ auth }) => {
         <AuthenticatedLayout user={auth.user}>
             <ToastContainer position="top-center" />
             <Head title="User Manager" />
-            <div className="min-h-screen shadow-md sm:rounded-lg px-10 pt-10">
+            <div className="min-h-screen shadow-md px-5 py-5 md:px-10 md:pt-10">
                 {!isLoading ? (
                     <>
-                        <div className="flex justify-between pb-4">
+                        <div className="flex flex-col md:flex-row justify-between pb-4">
                             <label htmlFor="table-search" className="sr-only">
                                 Search
                             </label>
-                            <div className="relative mt-1">
+                            <div className="relative mt-1 mx-8">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg
                                         className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -104,8 +102,8 @@ const UserManagment = ({ auth }) => {
                                 <input
                                     type="text"
                                     id="table-search"
-                                    className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Search for users based on name"
+                                    className="block p-2 pl-10 text-xs md:text-sm text-gray-900 border border-gray-300 rounded-lg w-full md:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Search for blogs based on name"
                                     onChange={handleSearchUserChange}
                                 />
                             </div>
@@ -121,104 +119,112 @@ const UserManagment = ({ auth }) => {
                                 </div>
                             )}
                         </div>
-                        <table className="w-full text-sm text-left text-gray-400 rounded-lg">
-                            <thead className="text-md uppercase bg-gray-700 text-gray-400 rounded-lg">
-                                <tr>
-                                    <th scope="col" className="p-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                id="checkbox-all-search"
-                                                type="checkbox"
-                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                                onChange={handleSelectAllUsers}
-                                            />
-                                            <label
-                                                htmlFor="checkbox-all-search"
-                                                className="sr-only"
-                                            >
-                                                checkbox
-                                            </label>
-                                        </div>
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="px-6 py-3 underline"
-                                    >
-                                        Icon
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="px-6 py-3 underline"
-                                    >
-                                        User name
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="px-6 py-3 underline"
-                                    >
-                                        Expertise
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="px-6 py-3 underline"
-                                    >
-                                        Email
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="px-6 py-3 underline"
-                                    >
-                                        Last Blog
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="px-6 py-3 underline"
-                                    >
-                                        Blogs
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {isEmpty(searchUser)
-                                    ? users.map((user) => (
-                                          <UserCard
-                                              user={user}
-                                              onSelect={handleCheckboxChange}
-                                              self={user.id === auth.user.id}
-                                              selected={selectedUsers.includes(
-                                                  user.id
-                                              )}
-                                          />
-                                      ))
-                                    : fuse
-                                          .search(searchUser)
-                                          .map((res) => (
+                        <div class="overflow-x-auto rounded-md">
+                            <table class="w-full text-sm text-left text-gray-400 rounded-lg">
+                                <thead class="text-xs md:text-base uppercase bg-gray-700 text-gray-400 rounded-lg">
+                                    <tr>
+                                        <th scope="col" class="p-2 md:p-4">
+                                            <div class="flex items-center">
+                                                <input
+                                                    id="checkbox-all-search"
+                                                    type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                    onChange={
+                                                        handleSelectAllUsers
+                                                    }
+                                                />
+                                                <label
+                                                    for="checkbox-all-search"
+                                                    class="sr-only"
+                                                >
+                                                    checkbox
+                                                </label>
+                                            </div>
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-4 py-1.5 md:px-6 md:py-3 underline"
+                                        >
+                                            Icon
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-3 py-1.5 md:px-6 md:py-3 underline"
+                                        >
+                                            User name
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-3 py-1.5 md:px-6 md:py-3 underline"
+                                        >
+                                            Expertise
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-3 py-1.5 md:px-6 md:py-3 underline"
+                                        >
+                                            Email
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-5 py-1.5 md:px-6 md:py-3 underline"
+                                        >
+                                            Last Blog
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-3 py-1.5 md:px-6 md:py-3 underline"
+                                        >
+                                            Blogs
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {isEmpty(searchUser)
+                                        ? users.map((user) => (
                                               <UserCard
-                                                  user={res.item}
+                                                  user={user}
                                                   onSelect={
                                                       handleCheckboxChange
                                                   }
                                                   self={
-                                                      res.item.id ===
-                                                      auth.user.id
+                                                      user.id === auth.user.id
                                                   }
                                                   selected={selectedUsers.includes(
-                                                      res.item.id
+                                                      user.id
                                                   )}
                                               />
-                                          ))}
-                            </tbody>
-                        </table>
+                                          ))
+                                        : fuse
+                                              .search(searchUser)
+                                              .map((res) => (
+                                                  <UserCard
+                                                      user={res.item}
+                                                      onSelect={
+                                                          handleCheckboxChange
+                                                      }
+                                                      self={
+                                                          res.item.id ===
+                                                          auth.user.id
+                                                      }
+                                                      selected={selectedUsers.includes(
+                                                          res.item.id
+                                                      )}
+                                                  />
+                                              ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </>
                 ) : (
                     <>
-                        <div className="h-8 bg-gray-300 rounded-full dark:bg-gray-700 w-1/5 mt-5 mb-8 shadow animate-pulse" />
+                        <div className="h-8 bg-gray-300 rounded-full dark:bg-gray-700 w-full md:w-1/5 mt-5 mb-8 shadow animate-pulse" />
                         <div
                             role="status"
                             className="p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"
                         >
                             {[...Array(6)].map((_, index) => (
-                                <div key={index}>
+                                <div key={index} className="p-4 md:p-6">
                                     <UserSkeletonLoading />
                                 </div>
                             ))}

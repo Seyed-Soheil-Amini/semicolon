@@ -5,8 +5,8 @@ import { FaPen, FaTags, FaTrashAlt } from "react-icons/fa";
 
 const BlogCard = (props) => {
     return (
-        <div className="flex flex-col rounded border-2 border-gray-400 relative h-100">
-            <div className="relative overflow-hidden w-full rounded-md bg-gray-200 lg:aspect-none h-60">
+        <div className="flex flex-col rounded border-2 border-gray-400 relative h-100 w-6.5/7 md:w-auto">
+            <div className="relative overflow-hidden w-full h-1/2 rounded-md bg-gray-200">
                 <img
                     src={`${
                         isEmpty(props.blog.image)
@@ -14,10 +14,10 @@ const BlogCard = (props) => {
                             : `${location.origin}/storage/${props.blog.image}`
                     }`}
                     alt="Blog Image"
-                    className="object-center lg:h-full lg:w-full"
+                    className="object-center h-full w-full"
                 />
                 {!isEmpty(props.blog.category) && (
-                    <div className="absolute top-0 left-0 m-2 bg-gray-300 rounded px-3 py-1 text-sm font-semibold text-gray-700">
+                    <div className="absolute top-0 left-0 m-2 bg-gray-300 rounded px-3 py-1 text-sm font-semibold text-gray-700 text-xs md:text-sm">
                         <div className="flex">
                             <FaTags
                                 className="flex text-center my-auto mr-1"
@@ -30,10 +30,10 @@ const BlogCard = (props) => {
             </div>
             <div className="flex-grow mt-3 row justify-between h-60">
                 <div className="flex-row px-6 w-full h-full">
-                    <h3 className="text-md text-gray-200 font-bold">
+                    <h3 className="text-gray-200 font-bold text-sm md:text-lg">
                         {props.blog.title}
                     </h3>
-                    <p className="flex mt-1 text-sm text-gray-400 py-1">
+                    <p className="flex mt-1 text-xs md:text-sm text-gray-400 py-1">
                         <TextTruncate
                             line={!isEmpty(props.blog.labels) ? 4 : 8}
                             element="span"
@@ -46,7 +46,7 @@ const BlogCard = (props) => {
                         <div className="px-4 pt-1 pb-1 h-2/7">
                             {props.blog.labels.map((label) => {
                                 return (
-                                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs md:text-sm font-semibold text-gray-700">
                                         #{label.name}
                                     </span>
                                 );
@@ -60,13 +60,13 @@ const BlogCard = (props) => {
                                 <div className="flex justify-between">
                                     <button
                                         type="button"
-                                        className="text-orange-600 hover:text-white border border-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900 w-1/4"
+                                        className="text-orange-600 hover:text-white border border-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2.5 text-center mr-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900 w-1/4"
                                         onClick={() => handleEditClick()}
                                     >
                                         <FaPen className="mx-auto" />
                                     </button>
                                     <button
-                                        className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-1/4"
+                                        className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2.5 text-center mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-1/4"
                                         onClick={() =>
                                             props.onClickDelete(props.blog.id)
                                         }
@@ -80,7 +80,7 @@ const BlogCard = (props) => {
                                 <div className="flex justify-center">
                                     <button
                                         type="button"
-                                        className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                                        className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                                         onClick={() =>
                                             props.onTogglePublish(props.blog.id)
                                         }

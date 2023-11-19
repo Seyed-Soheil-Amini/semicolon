@@ -22,7 +22,7 @@ const VerificationCard = (props) => {
             }
         >
             <div className="flex flex-col md:flex-row p-3">
-                <div className="w-full h-full md:h-40 md:w-1/3 lg:w-1/4 my-2 bg-emerald-500">
+                <div className="w-full h-full md:h-40 md:w-1/3 lg:w-1/4 my-2">
                     <img
                         src={`${
                             isEmpty(props.blog.image)
@@ -30,25 +30,25 @@ const VerificationCard = (props) => {
                                 : `${location.origin}/storage/${props.blog.image}`
                         }`}
                         alt="Blog Image"
-                        className="w-full justify-start object-center lg:h-full lg:w-full"
+                        className="object-center h-full w-full rounded-lg"
                     />
                 </div>
-                <div className="flex flex-col mx-2 w-full md:w-1/3 lg:w-1/4 my-3">
-                    <h1 className="px-2 items-center mx-2 text-xl md:text-2xl mt-3 font-weight-bold font-bold">
+                <div className="flex flex-col mx-2 w-full md:w-1/3 lg:w-1/4 my-2">
+                    <h1 className="px-2 items-center mx-2 text-xl md:text-2xl mt-1 md:mt-3 font-weight-bold font-bold">
                         {props.blog.title}
                     </h1>
                     <h4 className="px-3 items-center mx-2 text-sm md:text-md mt-4 text-gray-400">
                         Author: {props.blog.user.name}
                     </h4>
-                    <div className="px-2 flex items-center mx-2 mt-3">
-                        <div className="flex text-sm md:text-md items-center px-1 py-2 rounded-md bg-gray-200 text-gray-800">
+                    <div className="px-2 flex items-center mx-2 mt-1 md:mt-3">
+                        <div className="flex text-sm md:text-md items-center px-1 py-1 md:py-2 rounded-md bg-gray-200 text-gray-800">
                             <FaTags className="mx-1 text-xs md:text-md" />
                             {props.blog.category.name}
                         </div>
                     </div>
                 </div>
                 <div className="w-full md:w-1/3 lg:w-1/2 my-auto">
-                    <p className="px-2 items-center mx-4 text-sm md:text-base">
+                    <p className="px-2 items-center mx-4 text-xs md:text-base">
                         <TextTruncate
                             line={5}
                             element="span"

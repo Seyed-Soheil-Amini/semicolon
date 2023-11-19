@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const MessageCard = ({ message, onSelect, selected }) => {
     const [checked, setChecked] = useState(false);
 
     return (
-        <div className="flex border border-base-300 rounded-md bg-gray-900 mb-5">
-            <div className="flex items-center px-2 custom-checkbox">
+        <div className="flex flex-row border border-base-300 rounded-md bg-gray-900 mb-2.5 md:mb-5">
+            <div className="flex items-center pl-1 md:px-2 custom-checkbox">
                 <input
                     id={`${message.id}`}
                     type="checkbox"
@@ -20,23 +20,23 @@ const MessageCard = ({ message, onSelect, selected }) => {
             <div className="collapse collapse-arrow">
                 <input type="radio" name="my-accordion-4" checked={checked} />
                 <div
-                    className="collapse-title text-xl font-medium flex justify-between"
+                    className="collapse-title text-xl font-medium flex justify-between flex-col md:flex-row"
                     onClick={() => setChecked(!checked)}
                 >
                     <div className="flex-row">
-                        <h2 className="text-md font-semibold text-gray-300">
+                        <h2 className="font-semibold text-gray-300 text-sm md:text-base">
                             {message.subject}
                         </h2>
-                        <p className="text-sm font-serif pt-1 text-gray-400">
+                        <p className="text-xs md:text-base font-serif pt-1 text-gray-400 md:pl-2">
                             {message.sender_name}
                         </p>
                     </div>
-                    <div className="my-auto text-sm font-mono">
+                    <div className="my-auto text-xs md:text-base font-mono">
                         {message.email}
                     </div>
                 </div>
                 <div className="collapse-content">
-                    <p className="text-md py-3">{message.body}</p>
+                    <p className="text-xs md:text-md py-3">{message.body}</p>
                 </div>
             </div>
         </div>

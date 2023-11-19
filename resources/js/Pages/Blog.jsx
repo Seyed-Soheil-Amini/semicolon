@@ -52,7 +52,7 @@ const Blog = ({ auth }) => {
         <>
             {" "}
             <HeaderLayouts auth={auth} />
-            <div className="bg-gray-900 pt-16 sm:pt-20">
+            <div className="container-fluid bg-gray-900 pt-16 sm:pt-20">
                 {isLoading ? (
                     <div className="h-full mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
                         <div className="flex-col mt-0 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
@@ -64,8 +64,8 @@ const Blog = ({ auth }) => {
                         </div>
                     </div>
                 ) : (
-                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                        <div className="flex justify-between pb-4">
+                    <div className="mx-auto max-w-7xl px-2 lg:px-8">
+                        <div className="flex flex-col md:flex-row justify-between pb-4">
                             <label htmlFor="table-search" className="sr-only">
                                 Search
                             </label>
@@ -90,7 +90,7 @@ const Blog = ({ auth }) => {
                                 <input
                                     type="text"
                                     id="table-search"
-                                    className="block pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    className="block pl-10 text-xs md:text-sm text-gray-900 border border-gray-300 rounded-lg w-full md:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Search for blogs based on name"
                                     onChange={handleSearchBlogChange}
                                 />
@@ -98,18 +98,18 @@ const Blog = ({ auth }) => {
                         </div>
                         <div className="mx-auto lg:mx-0">
                             <nav className="flex justify-start my-1">
-                                <ul className="flex space-x-4">
+                                <ul className="flex space-x-2 md:space-x-4">
                                     <li>
                                         <button
                                             className={`inline-block font-mono ${
                                                 filter === "all"
                                                     ? "bg-gray-200 text-gray-700"
                                                     : "bg-gray-700 text-gray-200"
-                                            } rounded-full px-3 py-1 text-md font-semibold  hover:bg-gray-200 hover:text-gray-700`}
+                                            } rounded-full px-1.5 md:px-3 py-1 text-sm md:text-base font-semibold hover:bg-gray-200 hover:text-gray-700`}
                                             onClick={() =>
                                                 handleFilterChange("all")
                                             }
-                                            disabled={filter === "all"}
+                                            disabled={filter == "all"}
                                         >
                                             All
                                         </button>
@@ -120,11 +120,11 @@ const Blog = ({ auth }) => {
                                                 filter === "popular"
                                                     ? "bg-gray-200 text-gray-700"
                                                     : "bg-gray-700 text-gray-200"
-                                            } rounded-full px-3 py-1 text-md font-semibold  hover:bg-gray-200 hover:text-gray-700`}
+                                            } rounded-full px-1.5 md:px-3 py-1 text-sm md:text-base font-semibold hover:bg-gray-200 hover:text-gray-700`}
                                             onClick={() =>
                                                 handleFilterChange("popular")
                                             }
-                                            disabled={filter === "popular"}
+                                            disabled={filter == "popular"}
                                         >
                                             Popular
                                         </button>
@@ -135,11 +135,11 @@ const Blog = ({ auth }) => {
                                                 filter === "oldest"
                                                     ? "bg-gray-200 text-gray-700"
                                                     : "bg-gray-700 text-gray-200"
-                                            } rounded-full px-3 py-1 text-md font-semibold  hover:bg-gray-200 hover:text-gray-700`}
+                                            } rounded-full px-1.5 md:px-3 py-1 text-sm md:text-base font-semibold  hover:bg-gray-200 hover:text-gray-700`}
                                             onClick={() =>
                                                 handleFilterChange("oldest")
                                             }
-                                            disabled={filter === "oldest"}
+                                            disabled={filter == "oldest"}
                                         >
                                             Oldest
                                         </button>
@@ -150,11 +150,11 @@ const Blog = ({ auth }) => {
                                                 filter === "newest"
                                                     ? "bg-gray-200 text-gray-700"
                                                     : "bg-gray-700 text-gray-200"
-                                            } rounded-full px-3 py-1 text-md font-semibold  hover:bg-gray-200 hover:text-gray-700`}
+                                            } rounded-full px-1.5 md:px-3 py-1 text-sm md:text-base font-semibold hover:bg-gray-200 hover:text-gray-700`}
                                             onClick={() =>
                                                 handleFilterChange("newest")
                                             }
-                                            disabled={filter === "newest"}
+                                            disabled={filter == "newest"}
                                         >
                                             Newest
                                         </button>
@@ -176,7 +176,7 @@ const Blog = ({ auth }) => {
                                         }
                                         className="flex-row"
                                     >
-                                        <div className="h-full mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                                        <div className="h-full mx-auto max-w-2xl px-3 py-2 sm:px-2 sm:py-5 lg:max-w-7xl lg:px-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                             {blogs.pages.map((page) =>
                                                 page.data.map((blog) => (
                                                     <RandomBlogCard
@@ -189,7 +189,7 @@ const Blog = ({ auth }) => {
                                     </InfiniteScroll>
                                 )
                             ) : (
-                                <div className="h-full mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                                <div className="h-full mx-auto max-w-2xl px-3 py-2 md:px-6 md:py-8 lg:max-w-7xl lg:px-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                     {fuse.search(searchBlog).map((res) => (
                                         <RandomBlogCard
                                             key={res.item.id}

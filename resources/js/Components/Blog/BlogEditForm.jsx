@@ -38,7 +38,9 @@ const BlogEditForm = (props) => {
         handleSubmit: submit,
     } = useForm();
 
-    const [disabledDropZone, setDisabledDropZone] = useState(!isEmpty(blog.image));
+    const [disabledDropZone, setDisabledDropZone] = useState(
+        !isEmpty(blog.image)
+    );
     const [loading, setLoading] = useState(false);
     const [showPopup, setShowPopup] = useState({
         isShow: false,
@@ -208,13 +210,13 @@ const BlogEditForm = (props) => {
                         <h2 className="text-lg font-bold mb-1">Edit Blog</h2>
                         <div className="flex-row mb-0 mx-auto h-3/7">
                             <label
-                                className="h-1/7 block text-gray-500 text-md font-bold mb-0 text-center"
+                                className="h-1/7 block text-gray-500 text-sm md:text-base font-bold mb-0 text-center"
                                 htmlFor="file"
                             >
                                 Image File
                             </label>
                             <div
-                                className="flex h-6/7 items-center w-1/2 mb-3 border-dashed border-2 border-gray-300 rounded mx-auto my-auto text-center text-white"
+                                className="flex h-6/7 items-center w-full md:w-1/2 mb-3 border-dashed border-2 border-gray-300 rounded mx-auto my-auto text-center text-white"
                                 {...getRootProps()}
                             >
                                 <input
@@ -225,7 +227,7 @@ const BlogEditForm = (props) => {
                                 {!isEmpty(blog.image) ? (
                                     <>
                                         <img
-                                            className="flex mx-auto my-auto h-full w-4/6"
+                                            className="flex mx-auto my-auto h-full w-full md:w-4/6"
                                             src={
                                                 isEmpty(blog.imageBaseCode)
                                                     ? `${location.origin}/storage/${blog.image}`
@@ -252,25 +254,25 @@ const BlogEditForm = (props) => {
                                         </div>
                                     </>
                                 ) : (
-                                    <p className="mx-auto my-auto text-black">
+                                    <p className="mx-auto my-auto text-black text-xs md:text-sm">
                                         Drag and drop an image here, or click to
                                         select a file
                                     </p>
                                 )}
                             </div>
                         </div>
-                        <div className="flex w-full text-gray-600">
-                            <div className="mb-1 w-2/4">
+                        <div className="flex-row md:flex w-full text-gray-600">
+                            <div className="mb-1 w-full md:w-2/4 mt-1">
                                 <label
                                     htmlFor="title"
-                                    className="block text-gray-500 text-md font-bold mb-1"
+                                    className="block text-gray-500 text-sm md:text-base font-bold mb-1"
                                 >
                                     Title
                                 </label>
                                 <input
                                     type="text"
                                     id="title"
-                                    className="form-input w-full"
+                                    className="form-input w-full text-xs md:text-base"
                                     value={blog.title}
                                     name="title"
                                     required
@@ -289,26 +291,32 @@ const BlogEditForm = (props) => {
                                     }
                                 />
                                 {errors.title?.type === "required" && (
-                                    <p role="alert" className="text-red-500">
+                                    <p
+                                        role="alert"
+                                        className="text-red-500 text-xs md:text-base"
+                                    >
                                         * Title is required
                                     </p>
                                 )}
                                 {errors.title?.type === "maxLength" && (
-                                    <p role="alert" className="text-red-500">
+                                    <p
+                                        role="alert"
+                                        className="text-red-500 text-xs md:text-base"
+                                    >
                                         * Length of title is more than standard
                                         limit(16000 characters)
                                     </p>
                                 )}
                             </div>
-                            <div className="ml-6 w-2/4">
+                            <div className="md:ml-6 mt-1 w-full md:w-2/4">
                                 <label
-                                    className="block text-gray-500 text-md font-bold mb-1"
+                                    className="block text-gray-500 text-sm md:text-base font-bold mb-0 md:mb-1"
                                     htmlFor="category"
                                 >
                                     Category
                                 </label>
                                 <Select
-                                    className="appearance-none border rounded bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="appearance-none border rounded bg-gray-200 text-gray-700 text-xs md:text-base leading-tight focus:outline-none focus:shadow-outline"
                                     id="category"
                                     value={blog.category}
                                     name="category"
@@ -325,13 +333,13 @@ const BlogEditForm = (props) => {
                         <div className="mb-1 h-2/7 text-gray-600">
                             <label
                                 htmlFor="content"
-                                className="block text-gray-500 text-md font-bold mb-1"
+                                className="block text-gray-500 text-sm md:text-base font-bold mb-1"
                             >
                                 Body
                             </label>
                             <textarea
                                 id="content"
-                                className="form-textarea h-full w-full"
+                                className="form-textarea h-full w-full text-xs md:text-base"
                                 value={blog.body}
                                 name="body"
                                 required
@@ -349,23 +357,32 @@ const BlogEditForm = (props) => {
                                 }
                             />
                             {errors.body?.type === "required" && (
-                                <p role="alert" className="text-red-500">
+                                <p
+                                    role="alert"
+                                    className="text-red-500 text-xs md:text-base"
+                                >
                                     * Context is required
                                 </p>
                             )}
                             {errors.body?.type === "maxLength" && (
-                                <p role="alert" className="text-red-500">
+                                <p
+                                    role="alert"
+                                    className="text-red-500 text-xs md:text-base"
+                                >
                                     * Length of context is more than standard
                                     limit(16000 characters)
                                 </p>
                             )}
                             {errors.body?.type === "minLength" && (
-                                <p role="alert" className="text-red-500">
+                                <p
+                                    role="alert"
+                                    className="text-red-500 text-xs md:text-base"
+                                >
                                     * Length of context is less than standard
                                     limit(min 80 characters)
                                 </p>
                             )}
-                            <div className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 <ReactTags
                                     tags={blog.labels}
                                     suggestions={[]}
@@ -400,13 +417,13 @@ const BlogEditForm = (props) => {
                                 <button
                                     disabled={loading}
                                     type="submit"
-                                    className="flex w-auto h-1/7 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded"
+                                    className="flex w-auto h-1/7 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-2.5 md:py-2 md:px-4 mr-2 rounded"
                                 >
                                     {loading ? "Waiting..." : "Save"}
                                 </button>
                                 <button
                                     disabled={loading}
-                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                    className="bg-red-500 hover:bg-red-700 text-white font-medium py-1.5 px-2.5 md:py-2 md:px-4 rounded"
                                     onClick={() => props.onClose()}
                                 >
                                     Cancel
