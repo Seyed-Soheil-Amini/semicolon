@@ -59,7 +59,7 @@ const ContactUs = ({ auth }) => {
             <ToastContainer position="top-center" />
             <div className="py-24 sm:py-32 bg-gray-900">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    <div className="mx-auto text-center">
+                    <div className="mx-auto text-center animate-fade-down animate-once">
                         <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-gray-200">
                             Contact Us
                         </h2>
@@ -68,7 +68,7 @@ const ContactUs = ({ auth }) => {
                         </p>
                     </div>
                     <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-                        <article className="items-center rounded-2xl border-t border-b">
+                        <article className="items-center rounded-2xl border-t border-b animate-fade-down animate-once">
                             <div className="flex-row mx-auto shadow-3xl items-center px-5 py-8">
                                 <FaMailBulk className="text-7xl text-orange-600 mx-auto" />
                                 <div className="flex-row text-gray-200 text-center mt-4">
@@ -77,7 +77,7 @@ const ContactUs = ({ auth }) => {
                                 </div>
                             </div>
                         </article>
-                        <article className="items-center rounded-2xl border-t border-b">
+                        <article className="items-center rounded-2xl border-t border-b animate-fade-down animate-once">
                             <div className="flex-row mx-auto shadow-3xl items-center px-5 py-8">
                                 <FaUsers className="text-7xl text-orange-600 mx-auto" />
                                 <div className="flex-row text-gray-200 text-center mt-4">
@@ -90,7 +90,7 @@ const ContactUs = ({ auth }) => {
                                 </div>
                             </div>
                         </article>
-                        <article className="items-center rounded-2xl border-t border-b">
+                        <article className="items-center rounded-2xl border-t border-b animate-fade-down animate-once">
                             <div className="flex-row mx-auto shadow-3xl items-center px-5 py-8">
                                 <FaVoicemail className="text-7xl text-orange-600 mx-auto" />
                                 <div className="flex-row text-gray-200 text-center mt-4">

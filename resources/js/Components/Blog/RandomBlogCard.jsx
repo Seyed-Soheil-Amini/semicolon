@@ -7,7 +7,7 @@ import { FaEye, FaHeart, FaTags, FaUserCircle } from "react-icons/fa";
 const RandomBlogCard = ({ blog }) => {
     return (
         <BlogLink
-            className="w-full h-100 rounded-lg border-b-2 border-stone-500 border-solid relative shadow-3xl cursor-pointer"
+            className="w-full h-100 rounded-lg border-b-2 border-stone-500 border-solid relative shadow-3xl cursor-pointer animate-fade-down animate-once"
             href={route("showBlog", btoa(blog.id))}
         >
             <div className="relative overflow-hidden w-full rounded-md bg-gray-200 h-60">

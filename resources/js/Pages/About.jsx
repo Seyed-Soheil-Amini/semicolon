@@ -38,14 +38,14 @@ const About = ({ auth }) => {
                 </div>
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="flex flex-col lg:flex-row max-w-7x lg:mx-0">
-                        <div className="flex flex-col lg:w-1/2">
+                        <div className="flex flex-col lg:w-1/2 animate-fade-down animate-once">
                             <h2 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-200">
                                 About Semicolon
                             </h2>
                             <p className="mt-6 text-xs md:text-lg lg:text-xl leading-8 text-gray-300 font-serif">
                                 Semicolon scientific team was founded by
                                 computer students of Yazd University on June 22,
-                                1401. This organization was formed for big goals
+                                2022. This organization was formed for big goals
                                 and implementation of practical ideas in the
                                 field of technology in the form of web and
                                 application. This group is currently one of the
@@ -65,7 +65,7 @@ const About = ({ auth }) => {
                     </div>
                     <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
                         <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
-                            <div className="flex flex-col-reverse">
+                            <div className="flex flex-col-reverse animate-flip-up animate-once">
                                 <dt className="text-base leading-7 text-gray-300">
                                     Team history years
                                 </dt>
@@ -73,7 +73,7 @@ const About = ({ auth }) => {
                                     1+
                                 </dd>
                             </div>
-                            <div className="flex flex-col-reverse">
+                            <div className="flex flex-col-reverse animate-flip-up animate-once animate-duration-[1500ms]">
                                 <dt className="text-base leading-7 text-gray-300">
                                     Hours per week
                                 </dt>
@@ -81,7 +81,7 @@ const About = ({ auth }) => {
                                     40+
                                 </dd>
                             </div>
-                            <div className="flex flex-col-reverse">
+                            <div className="flex flex-col-reverse animate-flip-up animate-once animate-duration-[2000ms]">
                                 <dt className="text-base leading-7 text-gray-300">
                                     Members of team
                                 </dt>
@@ -89,7 +89,7 @@ const About = ({ auth }) => {
                                     10+
                                 </dd>
                             </div>
-                            <div className="flex flex-col-reverse">
+                            <div className="flex flex-col-reverse animate-flip-up animate-once animate-duration-[2500ms]">
                                 <dt className="text-base leading-7 text-gray-300">
                                     Interest in work
                                 </dt>
@@ -130,20 +130,20 @@ const About = ({ auth }) => {
                     </div>
                 </div>
                 <div className="container mx-auto mt-20 pt-10">
-                    <div className="flex flex-col mt-10" id="history">
-                        <h3 className="text-gray-100 uppercase">History</h3>
+                    <div className="flex flex-col mt-10 animate-fade-right animate-once" id="history">
+                        <h3 className="text-gray-100 uppercase text-lg md:text-3xl">History</h3>
                         <div className="flex justify-start">
                             <hr className="my-2 border-gray-500 w-1/2" />
                         </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row px-3 py-10 h-1/4 text-gray-200 rounded backdrop-saturate-150 shadow-2xl backdrop-blur-md">
-                        <div className="md:order-1 order-1 flex items-center w-full sm:w-1/3 my-auto pb-3 md:pb-0">
+                    <div className="flex flex-col sm:flex-row px-3 py-10 h-1/4 text-gray-200 rounded backdrop-saturate-150 shadow-2xl backdrop-blur-md animate-fade-right animate-once">
+                        <div className="order-1 sm:order-1 flex items-center w-full sm:w-1/3 my-auto pb-3 md:pb-0">
                             <img
                                 src="images/about/history.png"
                                 className="w-1/3 mx-auto animate-snake"
                             />
                         </div>
-                        <div className="md:order-2 order-2 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
+                        <div className="order-2 sm:order-2 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
                             Semicolon scientific-student team was founded and
                             formed on June 22, 2022, this organization was
                             formed for big goals and implementation of practical
@@ -151,22 +151,22 @@ const About = ({ auth }) => {
                             and app.
                         </div>
                     </div>
-                    <div className="flex flex-col mt-20 pt-16" id="future">
-                        <h3 className="text-gray-100 uppercase">
+                    <div className="flex flex-col mt-20 pt-16 animate-fade-left animate-once" id="future">
+                        <h3 className="flex justify-content-end text-gray-100 uppercase text-lg md:text-3xl">
                             Future Vision
                         </h3>
                         <div className="flex justify-end">
                             <hr className="my-2 border-gray-300 w-1/2" />
                         </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row px-3 py-10 h-1/4 text-gray-200 rounded backdrop-saturate-150 shadow-2xl backdrop-blur-md">
-                        <div className="md:order-2 order-1 text-center w-full sm:w-1/3 pb-3 md:pb-0">
+                    <div className="flex flex-col sm:flex-row px-3 py-10 h-1/4 text-gray-200 rounded backdrop-saturate-150 shadow-2xl backdrop-blur-md animate-fade-left animate-once">
+                        <div className="md:order-2 sm:order-1 lg:order-2 text-center w-full sm:w-1/3 pb-3 md:pb-0">
                             <img
                                 src="images/about/future.png"
                                 className="w-1/3 mx-auto animate-snake"
                             />
                         </div>
-                        <div className="md:order-1 order-2 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
+                        <div className="md:order-1 sm:order-2 lg:order-1 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
                             At Semicolon, we are looking for big and practical
                             and smart goals. Our future vision is reflected in
                             the horizons of the world and the exchange and
@@ -176,12 +176,12 @@ const About = ({ auth }) => {
                         </div>
                     </div>
                     <div className="flex flex-col mt-10 pt-16" id="service">
-                        <h3 className="text-gray-100 uppercase">Services</h3>
+                        <h3 className="text-gray-100 uppercase text-lg md:text-3xl animate-fade-right animate-once">Services</h3>
                         <div className="flex justify-start">
                             <hr className="my-2 border-gray-500 w-1/2" />
                         </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row px-3 py-10 h-1/4 text-gray-200 rounded backdrop-saturate-150 shadow-2xl backdrop-blur-md">
+                    <div className="flex flex-col sm:flex-row px-3 py-10 h-1/4 text-gray-200 rounded backdrop-saturate-150 shadow-2xl backdrop-blur-md animate-fade-right animate-once">
                         <div className="md:order-1 order-1 text-center w-full sm:w-1/3 pb-3 md:pb-0">
                             <img
                                 src="images/about/service.png"
@@ -197,20 +197,22 @@ const About = ({ auth }) => {
                             these fields.
                         </div>
                     </div>
-                    <div className="flex flex-col mt-20 pt-16" id="value">
-                        <h3 className="text-gray-100 uppercase">Core Values</h3>
+                    <div className="flex flex-col mt-10 pt-8 md:mt-20 md:pt-16 animate-fade-left animate-once" id="value">
+                        <h3 className="text-gray-100 uppercase flex justify-content-end text-lg md:text-3xl">
+                            Core Values
+                        </h3>
                         <div className="flex justify-end">
                             <hr className="my-2 border-gray-300 w-1/2" />
                         </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row px-3 py-10 h-1/4 text-gray-200 rounded backdrop-saturate-150 shadow-2xl backdrop-blur-md">
-                        <div className="md:order-2 order-1 text-center w-full sm:w-1/3 pb-3 md:pb-0">
+                    <div className="flex flex-col sm:flex-row px-3 py-10 h-1/4 text-gray-200 rounded backdrop-saturate-150 shadow-2xl backdrop-blur-md animate-fade-left animate-once">
+                        <div className="md:order-2 sm:order-1 lg:order-2 text-center w-full sm:w-1/3 pb-3 md:pb-0">
                             <img
                                 src="images/about/hand.png"
                                 className="w-1/3 mx-auto animate-snake"
                             />
                         </div>
-                        <div className="md:order-1 order-2 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
+                        <div className="md:order-1 sm:order-2 lg:order-1 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
                             Our collection is to truly serve our customers by
                             empowering, listening and collaborating with other
                             stackers. Also, communicate openly and honestly both

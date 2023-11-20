@@ -20,7 +20,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     <div className="row">
                                         <div className="col-md-7">
                                             <div className="detail-box mt-5 md:mt-3 lg:mt-0">
-                                                <div>
+                                                <div className="animate-fade-down animate-once">
                                                     <h1 className="text-base md:text-3xl lg:text-5xl">
                                                         Welcome To <br />
                                                         <span>
@@ -57,12 +57,12 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="flex flex-col md:flex-row">
                         <div className="md:w-1/2 md:pr-8">
                             <div className="detail-box">
-                                <div className="heading_container">
+                                <div className="heading_container animate-fade-down animate-once">
                                     <h2 className="text-base md:text-xl lg:text-3xl">
                                         About Us
                                     </h2>
                                 </div>
-                                <p className="text-sm md:text-base">
+                                <p className="text-sm md:text-base animate-fade-down animate-once animate-duration-[1200ms]">
                                     Semicolon scientific team was founded by
                                     computer students of Yazd University on June
                                     22, 2022. This organization was formed for
@@ -77,7 +77,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </p>
                                 <Link
                                     href="/about"
-                                    className="text-sm md:text-base"
+                                    className="text-sm md:text-base animate-fade-down animate-once animate-duration-[1200ms]"
                                 >
                                     Read More
                                 </Link>
@@ -98,7 +98,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             <div className="body_bg layout_padding">
                 <section className="service_section">
                     <div className="container">
-                        <div className="heading_container">
+                        <div className="heading_container animate-fade-down animate-once">
                             <h2 className="text-2xl lg:text-3xl">
                                 Areas of Work and Development
                             </h2>
@@ -107,7 +107,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="container">
                         <div className="flex flex-wrap">
                             <div className="w-full md:w-1/2 p-4">
-                                <div className="box">
+                                <div className="box animate-fade-down animate-once animate-duration-[1200ms]">
                                     <div className="img-box">
                                         <img
                                             className="w-1/4 md:w-1/2"
@@ -128,7 +128,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </div>
                             </div>
                             <div className="w-full md:w-1/2 p-4">
-                                <div className="box text-right md:text-left">
+                                <div className="box animate-fade-down animate-once animate-duration-[1200ms] text-right md:text-left">
                                     <div className="img-box">
                                         <img
                                             className="w-1/4 md:w-1/2"
@@ -149,7 +149,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </div>
                             </div>
                             <div className="w-full md:w-1/2 p-4">
-                                <div className="box">
+                                <div className="box animate-fade-down animate-once animate-duration-[1200ms]">
                                     <div className="img-box">
                                         <img
                                             className="w-1/4 md:w-1/2"
@@ -173,7 +173,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </div>
                             </div>
                             <div className="w-full md:w-1/2 p-4">
-                                <div className="box text-right md:text-left">
+                                <div className="box animate-fade-down animate-once animate-duration-[1200ms] text-right md:text-left">
                                     <div className="img-box">
                                         <img
                                             className="w-1/4 md:w-1/2"
@@ -211,9 +211,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 />
             </div>{" "}
             <section className="info_section layout_padding">
-                <div className="footer_contact">
+                <div className="footer_contact animate-flip-up animate-once">
                     <div className="heading_container">
-                        <h2 className="text-base md:text-2xl lg:text-3xl">Contact Us</h2>
+                        <h2 className="text-base md:text-2xl lg:text-3xl">
+                            Contact Us
+                        </h2>
                     </div>
                     <div className="box">
                         <Link href="/contactus" className="img-box">

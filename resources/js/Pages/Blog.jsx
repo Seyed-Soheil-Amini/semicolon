@@ -65,7 +65,7 @@ const Blog = ({ auth }) => {
                     </div>
                 ) : (
                     <div className="mx-auto max-w-7xl px-2 lg:px-8">
-                        <div className="flex flex-col md:flex-row justify-between pb-4">
+                        <div className="flex flex-col md:flex-row justify-between pb-4 animate-fade-down animate-once">
                             <label htmlFor="table-search" className="sr-only">
                                 Search
                             </label>
@@ -97,7 +97,7 @@ const Blog = ({ auth }) => {
                             </div>
                         </div>
                         <div className="mx-auto lg:mx-0">
-                            <nav className="flex justify-start my-1">
+                            <nav className="flex justify-start my-1 animate-fade-down animate-once">
                                 <ul className="flex space-x-2 md:space-x-4">
                                     <li>
                                         <button
