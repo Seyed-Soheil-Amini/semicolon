@@ -108,10 +108,10 @@ const UserManagment = ({ auth }) => {
                                 />
                             </div>
                             {!isEmpty(selectedUsers) && (
-                                <div className="">
+                                <div className="mt-2 mx-auto md:mx-0 md:mt-0">
                                     <button
                                         type="button"
-                                        class="text-red-700 hover:text-gray-200 border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-1.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                        class="text-red-700 hover:text-gray-200 border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs md:text-sm md:px-4 px-2 py-1.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
                                         onClick={handleDeleteUsers}
                                     >
                                         Delete

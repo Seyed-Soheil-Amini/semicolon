@@ -85,7 +85,9 @@ const ContactUs = ({ auth }) => {
                                         Help and Support
                                     </h3>
                                     <p className="pt-2">
-                                        <u>get supprort</u>
+                                        <a href="#message" className="text-gray-200 hover:text-blue-600">
+                                            <u>get supprort</u>
+                                        </a>
                                     </p>
                                 </div>
                             </div>
@@ -100,7 +102,7 @@ const ContactUs = ({ auth }) => {
                             </div>
                         </article>
                     </div>
-                    <section className="">
+                    <section id="message" className="">
                         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
                             <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 text-sm md:text-xl">
                                 Got a technical issue? Want to send feedback

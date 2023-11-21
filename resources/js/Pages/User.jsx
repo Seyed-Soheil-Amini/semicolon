@@ -30,9 +30,9 @@ const User = ({ user, favoriteCategory }) => {
             <div className="max-w-6xl flex flex-col lg:flex-row items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
                 <div
                     id="profile"
-                    className="flex flex-col lg:flex-row justify-between w-full lg:w-6.5/7 rounded-lg shadow-2xl bg-white opacity-75 mx-auto h-auto lg:h-4/7"
+                    className="flex flex-col md:flex-row justify-between w-full lg:w-6.5/7 rounded-lg shadow-2xl bg-white opacity-75 mx-auto h-auto lg:h-4/7"
                 >
-                    <div className="bg-gray-300 w-4/5 lg:w-2/5 rounded-lg p-5 mx-auto my-2 ml-0 md:ml-1">
+                    <div className="bg-gray-300 w-6/7 md:w-4/5 lg:w-2/5 rounded-lg p-2.5 md:p-5 my-1 md:my-2 mx-auto md:ml-1">
                         <img
                             src={`${
                                 isEmpty(user.image)
@@ -43,7 +43,7 @@ const User = ({ user, favoriteCategory }) => {
                         />
                     </div>
                     <div className="p-4 md:p-12 w-full lg:w-3/5 text-center lg:text-left">
-                        <h1 className="text-2xl md:text-3xl font-sans pt-8 lg:pt-0 text-gray-500">
+                        <h1 className="text-2xl md:text-3xl font-sans pt-4 md:pt-0 text-gray-500">
                             <b>{user.name}</b>
                         </h1>
                         <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-orange-500 opacity-25" />

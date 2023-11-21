@@ -127,7 +127,7 @@ const HeaderLayouts = ({ auth }) => {
                                 <>
                                     <Link
                                         href={route("register")}
-                                        className="lg:py-2 lg:px-2 rounded-circle mr-3 font-semibold text-gray-400 hover:text-white lg:bg-white lg:text-gray-950 lg:hover:bg-gray-950"
+                                        className="lg:py-2 lg:px-2 rounded-full mr-3 font-semibold text-gray-400 hover:text-white lg:bg-white lg:text-gray-950 lg:hover:bg-gray-950"
                                     >
                                         Register
                                     </Link>
