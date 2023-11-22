@@ -328,7 +328,7 @@ class BlogController extends Controller
             return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
         }
         $ipAddress = $request->ip();
-        $currentTime = now();
+        $currentTime = Carbon::now();
         if (is_null($blog->views)) {
             $view = new View();
             $view->blog_id = $blog->id;

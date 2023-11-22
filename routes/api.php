@@ -30,7 +30,7 @@ Route::prefix('/categories')->middleware(['auth:sanctum'])->namespace('App\Http\
 });
 
 Route::prefix('/blogs')->middleware(['auth:sanctum'])->namespace('App\Http\Controllers')->group(function () {
-    Route::post('/', 'BlogController@create');
+    Route::post('/store', 'BlogController@create');
     Route::put('/{id}', 'BlogController@update');
     Route::delete('/{id}', 'BlogController@destroy');
     Route::get('/user/{id}', 'BlogController@indexBadeOnUser');

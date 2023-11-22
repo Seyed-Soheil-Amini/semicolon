@@ -14,7 +14,7 @@ const BlogPage = ({ blog }) => {
     const handleClickLike = () => {
         try {
             useToggleLike(blog.id);
-            setLikes(isLiked ? likes - 1 : likes + 1);
+            setLikes(isLiked ? parseInt(likes - 1) : parseInt(likes + 1));
             setIsLiked(!isLiked);
         } catch (err) {
             console.log(err);

@@ -124,7 +124,7 @@ const HeaderLayouts = ({ auth }) => {
                                     )}
                                 </Link>
                             ) : (
-                                <>
+                                <div className="ml-1 mb-1 md:ml-0 md:mb-0">
                                     <Link
                                         href={route("register")}
                                         className="lg:py-2 lg:px-2 rounded-full mr-3 font-semibold text-gray-400 hover:text-white lg:bg-white lg:text-gray-950 lg:hover:bg-gray-950"
@@ -137,7 +137,7 @@ const HeaderLayouts = ({ auth }) => {
                                     >
                                         login
                                     </Link>
-                                </>
+                                </div>
                             )}
                         </Nav>
                     </Navbar.Collapse>

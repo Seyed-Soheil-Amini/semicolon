@@ -23,7 +23,7 @@ const getBlockedBlogsOfUser = async (id) => {
 };
 
 const createBlog = async (blog) => {
-    const apiUrl = `/blogs/`;
+    const apiUrl = `/blogs/store`;
     const categoryId = blog.category.value;
     const dataBlogs = new FormData();
     dataBlogs.append("title", blog.title);
@@ -32,6 +32,7 @@ const createBlog = async (blog) => {
     if (!isEmpty(blog.imageBaseCode)) {
         typeof blog.image === "object" && dataBlogs.append("image", blog.image);
     }
+    dataBlogs.append("_method", "POST");
     dataBlogs.append("categoryId", categoryId);
     const { data } = await client.post(apiUrl, dataBlogs, {
         headers: {

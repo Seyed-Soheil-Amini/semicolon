@@ -5,8 +5,8 @@ import { FaPen, FaTags, FaTrashAlt } from "react-icons/fa";
 
 const BlogCard = (props) => {
     return (
-        <div className="flex flex-col rounded border-2 border-gray-400 relative h-100 w-6.5/7 md:w-auto">
-            <div className="relative overflow-hidden w-full h-1/2 rounded-md bg-gray-200">
+        <div className="rounded border-2 border-gray-400 relative h-100 w-6.5/7 md:w-auto">
+            <div className="relative overflow-hidden w-full rounded-md bg-gray-200 h-60">
                 <img
                     src={`${
                         isEmpty(props.blog.image)
@@ -57,16 +57,16 @@ const BlogCard = (props) => {
                     {(() => {
                         if (props.parent === "edit") {
                             return (
-                                <div className="flex justify-between">
+                                <div className="flex justify-between my-auto h-2/7 md:h-auto">
                                     <button
                                         type="button"
-                                        className="text-orange-600 hover:text-white border border-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2.5 text-center mr-2 mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900 w-1/4"
+                                        className="text-orange-600 hover:text-white border border-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2.5 text-center mr-2 mb-0 md:mb-2 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-600 dark:focus:ring-orange-900 w-1/4 h-2/3 md:h-auto"
                                         onClick={() => handleEditClick()}
                                     >
                                         <FaPen className="mx-auto" />
                                     </button>
                                     <button
-                                        className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2.5 text-center mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-1/4"
+                                        className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2.5 text-center mb-0 md:mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-1/4 h-2/3 md:h-auto"
                                         onClick={() =>
                                             props.onClickDelete(props.blog.id)
                                         }
@@ -95,7 +95,7 @@ const BlogCard = (props) => {
                             return (
                                 <div className="flex justify-center">
                                     <button
-                                        className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-1/4"
+                                        className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-0 md:mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-1/4"
                                         onClick={() =>
                                             props.onClickDelete(props.blog.id)
                                         }
