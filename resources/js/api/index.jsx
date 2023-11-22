@@ -23,21 +23,22 @@ const getBlockedBlogsOfUser = async (id) => {
 };
 
 const createBlog = async (blog) => {
-    console.log(blog);
-    const apiUrl = "/blogs/";
+    const apiUrl = `/blogs/`;
     const categoryId = blog.category.value;
-    const requestData = {
-        title: blog.title,
-        body: blog.body,
-        categoryId: categoryId,
-        labels: blog.labels,
-        image: blog.image || null,
-    };
-    const { data } = await client.post(apiUrl, requestData, {
+    const dataBlogs = new FormData();
+    dataBlogs.append("title", blog.title);
+    dataBlogs.append("body", blog.body);
+    dataBlogs.append("labels", JSON.stringify(blog.labels));
+    if (!isEmpty(blog.imageBaseCode)) {
+        typeof blog.image === "object" && dataBlogs.append("image", blog.image);
+    }
+    dataBlogs.append("categoryId", categoryId);
+    const { data } = await client.post(apiUrl, dataBlogs, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
     });
+    console.log(data);
     return data;
 };
 

@@ -9,7 +9,6 @@ use App\Models\Like;
 use App\Models\User;
 use App\Models\View;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use \Illuminate\Support\Facades\Validator;
@@ -72,7 +71,7 @@ class BlogController extends Controller
                 'title' => $request->title,
                 'body' => $request->body,
                 'image' => $path,
-                'labels' => $request->labels,
+                'labels' => json_decode($request->labels),
                 'published_at' => null,
                 'user_id' => $userId,
                 'status' => BlogStatusEnum::pending(),

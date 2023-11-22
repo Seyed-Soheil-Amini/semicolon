@@ -23,7 +23,7 @@ const UserManagment = ({ auth }) => {
 
     function handleCheckboxChange(userId) {
         if (selectedUsers.includes(userId)) {
-            setSelectedUsers(selectedUsers.filter((id) => id !== userId));
+            setSelectedUsers(selectedUsers.filter((id) => id != userId));
         } else {
             setSelectedUsers([...selectedUsers, userId]);
         }
@@ -188,7 +188,7 @@ const UserManagment = ({ auth }) => {
                                                       handleCheckboxChange
                                                   }
                                                   self={
-                                                      user.id === auth.user.id
+                                                      user.id == auth.user.id
                                                   }
                                                   selected={selectedUsers.includes(
                                                       user.id
@@ -204,7 +204,7 @@ const UserManagment = ({ auth }) => {
                                                           handleCheckboxChange
                                                       }
                                                       self={
-                                                          res.item.id ===
+                                                          res.item.id ==
                                                           auth.user.id
                                                       }
                                                       selected={selectedUsers.includes(

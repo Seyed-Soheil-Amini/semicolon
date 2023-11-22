@@ -10,7 +10,7 @@ const BlogPage = ({ blog }) => {
             ? blog.likes.some((like) => like.ip_address == ipAddress)
             : false
     );
-    const [likes, setLikes] = useState(blog.like);
+    const [likes, setLikes] = useState(parseInt(blog.like));
     const handleClickLike = () => {
         try {
             useToggleLike(blog.id);
@@ -23,7 +23,7 @@ const BlogPage = ({ blog }) => {
 
     useEffect(() => {
         const previousView = !isEmpty(blog.viewers)
-            ? blog.viewers.find((viewer) => viewer.ip === ipAddress)
+            ? blog.viewers.find((viewer) => viewer.ip == ipAddress)
             : null;
         if (isEmpty(previousView)) useAddView(ipAddress, blog.id);
     }, []);
@@ -56,9 +56,7 @@ const BlogPage = ({ blog }) => {
                 </button>
                 <div className="pt-1 px-5">
                     <div className="flex flex-col md:flex-row mt-0">
-                        <div
-                            className="flex-row px-3 w-full md:w-1/2"
-                        >
+                        <div className="flex-row px-3 w-full md:w-1/2">
                             <img
                                 src={`${
                                     isEmpty(blog.image)
@@ -71,7 +69,9 @@ const BlogPage = ({ blog }) => {
                             <div className="flex justify-between w-full md:w-1/2 h-1/7 px-3 py-3">
                                 <div className="flex items-center">
                                     <FaEye className="mx-1 text-xl md:text-2xl text-gray-300" />
-                                    <b className="text-gray-400 text-sm md:text-base">{blog.view}</b>
+                                    <b className="text-gray-400 text-sm md:text-base">
+                                        {blog.view}
+                                    </b>
                                 </div>
                                 <button
                                     className="flex items-center p-2"
@@ -82,7 +82,9 @@ const BlogPage = ({ blog }) => {
                                     ) : (
                                         <FaRegHeart className="mx-1 text-xl md:text-2xl text-red-500" />
                                     )}{" "}
-                                    <b className="text-gray-400 text-sm md:text-base">{likes}</b>
+                                    <b className="text-gray-400 text-sm md:text-base">
+                                        {likes}
+                                    </b>
                                 </button>
                             </div>
                         </div>
