@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { FaUserCircle, FaEye, FaHeart, FaRegHeart } from "react-icons/fa";
 import { isEmpty } from "lodash";
 import { useAddView, useToggleLike } from "@/hooks";
+import getBrowserFingerprint from "get-browser-fingerprint";
 
 const BlogPage = ({ blog }) => {
-    const [ipAddress, setAddress] = useState(window.location.hostname);
+    const [fingerprint, setfingerprint] = useState(getBrowserFingerprint());
     const [isLiked, setIsLiked] = useState(
         !isEmpty(blog.likes)
-            ? blog.likes.some((like) => like.ip_address == ipAddress)
+            ? blog.likes.some((like) => like.fingerprint == fingerprint)
             : false
     );
     const [likes, setLikes] = useState(parseInt(blog.like));
     const handleClickLike = () => {
         try {
-            useToggleLike(blog.id);
+            useToggleLike(blog.id,fingerprint);
             setLikes(isLiked ? parseInt(likes - 1) : parseInt(likes + 1));
             setIsLiked(!isLiked);
         } catch (err) {
@@ -23,9 +24,9 @@ const BlogPage = ({ blog }) => {
 
     useEffect(() => {
         const previousView = !isEmpty(blog.viewers)
-            ? blog.viewers.find((viewer) => viewer.ip == ipAddress)
+            ? blog.viewers.find((viewer) => viewer.ip == fingerprint)
             : null;
-        if (isEmpty(previousView)) useAddView(ipAddress, blog.id);
+        if (isEmpty(previousView)) useAddView(fingerprint, blog.id);
     }, []);
     return (
         <>
@@ -55,7 +56,7 @@ const BlogPage = ({ blog }) => {
                     {JSON.parse(localStorage.getItem("filter")) || "all"} blogs
                 </button>
                 <div className="pt-1 px-5">
-                    <div className="flex flex-col md:flex-row mt-0">
+                    <div className="flex flex-col md:flex-row mt-0 h-auto md:h-screen">
                         <div className="flex-row px-3 w-full md:w-1/2">
                             <img
                                 src={`${
@@ -64,7 +65,7 @@ const BlogPage = ({ blog }) => {
                                         : `${location.origin}/storage/${blog.image}`
                                 }`}
                                 alt="Blog Image"
-                                className="shadow-inner shadow-3xl h-4/7 md:h-6/7 w-full rounded-lg"
+                                className="shadow-inner shadow-3xl h-5/7 md:h-6/7 w-full md:w-6.5/7 rounded-lg"
                             />
                             <div className="flex justify-between w-full md:w-1/2 h-1/7 px-3 py-3">
                                 <div className="flex items-center">
@@ -88,7 +89,7 @@ const BlogPage = ({ blog }) => {
                                 </button>
                             </div>
                         </div>
-                        <div className="flex-row mt-2 md:mt-10 px-3 py-2 w-full md:w-1/2 h-auto md:h-6/7">
+                        <div className="flex-row mt-2 md:mt-10 pr-1 py-2 w-full md:w-1/2 h-auto md:h-6/7">
                             <h1 className="flex text-xl md:text-3xl font-bold tracking-tight text-gray-200 sm:text-5xl pb-2 md:pb-5">
                                 <strong>{blog.title}</strong>
                             </h1>

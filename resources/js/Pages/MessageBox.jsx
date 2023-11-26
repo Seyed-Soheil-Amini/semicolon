@@ -100,7 +100,7 @@ const MessageBox = ({ auth }) => {
     };
 
     return (
-        <div className="bg-gray-950 h-auto">
+        <div className="bg-gray-950 h-auto overflow-x-auto">
             <AuthenticatedLayout user={auth.user} />
             <ToastContainer position="top-center" />
             {isLoading ? (

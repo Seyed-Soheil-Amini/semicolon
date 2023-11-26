@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { WithContext as ReactTags } from "react-tag-input";
 import { useCreateBlog, useGetCategories } from "@/hooks";
 import { useForm } from "react-hook-form";
+import { stringify } from "qs";
 
 const CreateBlog = () => {
     const [blog, setBlog] = useState(() => {
@@ -25,7 +26,6 @@ const CreateBlog = () => {
     });
 
     const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB
-
     const { data: categories } = useGetCategories();
     const {
         data,
@@ -41,6 +41,9 @@ const CreateBlog = () => {
         formState: { errors },
         handleSubmit: submit,
     } = useForm();
+    useEffect(() => {
+        console.log(errors);
+    }, [errors]);
 
     const Keys = {
         TAB: 9,
@@ -178,12 +181,18 @@ const CreateBlog = () => {
                             }
                         />
                         {errors.title?.type === "required" && (
-                            <p role="alert" className="text-red-500 text-xs md:text-base">
+                            <p
+                                role="alert"
+                                className="text-red-500 text-xs md:text-base"
+                            >
                                 * Title is required
                             </p>
                         )}
                         {errors.title?.type === "maxLength" && (
-                            <p role="alert" className="text-red-500 text-xs md:text-base">
+                            <p
+                                role="alert"
+                                className="text-red-500 text-xs md:text-base"
+                            >
                                 * Length of title is more than standard
                                 limit(16000 characters)
                             </p>
@@ -226,10 +235,12 @@ const CreateBlog = () => {
                         id="context"
                         placeholder="Enter context"
                         value={blog.body}
+                        maxLength={16000}
+                        required
                         {...register("body", {
                             required: true,
                             maxLength: 16000,
-                            minLength: 120,
+                            minLength: 100,
                         })}
                         aria-invalid={errors.body ? "true" : "false"}
                         onChange={(event) =>
@@ -240,20 +251,29 @@ const CreateBlog = () => {
                         }
                     />
                     {errors.body?.type === "required" && (
-                        <p role="alert" className="text-red-500 text-xs md:text-base">
+                        <p
+                            role="alert"
+                            className="text-red-500 text-xs md:text-base"
+                        >
                             * Context is required
                         </p>
                     )}
                     {errors.body?.type === "maxLength" && (
-                        <p role="alert" className="text-red-500 text-xs md:text-base">
+                        <p
+                            role="alert"
+                            className="text-red-500 text-xs md:text-base"
+                        >
                             * Length of context is more than standard
                             limit(16000 characters)
                         </p>
                     )}
                     {errors.body?.type === "minLength" && (
-                        <p role="alert" className="text-red-500 text-xs md:text-base">
+                        <p
+                            role="alert"
+                            className="text-red-500 text-xs md:text-base"
+                        >
                             * Length of context is less than standard limit(min
-                            80 characters)
+                            100 characters)
                         </p>
                     )}
                 </div>

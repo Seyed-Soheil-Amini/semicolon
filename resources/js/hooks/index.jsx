@@ -135,12 +135,12 @@ const useRandomBlogs = (filter) => {
     });
 };
 
-const useAddView = (ip, blogId) => {
-    return api.addView(ip, blogId);
+const useAddView = (fp, blogId) => {
+    return api.addView(fp, blogId);
 };
 
-const useToggleLike = (blogId) => {
-    return api.toggleLike(blogId);
+const useToggleLike = (blogId,fingerprint) => {
+    return api.toggleLike(blogId,fingerprint);
 };
 
 const useGetUserActivity = (userId) => {

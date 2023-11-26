@@ -30,12 +30,12 @@ const User = ({ user, favoriteCategory }) => {
             <div className="max-w-6xl flex flex-col lg:flex-row items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
                 <div
                     id="profile"
-                    className="flex flex-col md:flex-row justify-between w-full lg:w-6.5/7 rounded-lg shadow-2xl bg-white opacity-75 mx-auto h-auto lg:h-4/7"
+                    className="flex flex-col md:flex-row justify-between w-full lg:w-6.5/7 rounded-lg shadow-2xl bg-gray-100 mx-auto h-auto lg:h-4/7"
                 >
                     <div className="bg-gray-300 w-6/7 md:w-4/5 lg:w-2/5 rounded-lg p-2.5 md:p-5 my-1 md:my-2 mx-auto md:ml-1">
                         <img
                             src={`${
-                                isEmpty(user.image)
+                                isEmpty(user.image) || user.image == "null"
                                     ? "/images/altUserImage.jpg"
                                     : `${location.origin}/storage/${user.image}`
                             }`}
@@ -55,7 +55,9 @@ const User = ({ user, favoriteCategory }) => {
                             >
                                 <path d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z" />
                             </svg>{" "}
-                            {user.job_title}
+                            {isEmpty(user.job_title) || user.job_title == "null"
+                                ? "Blogger"
+                                : user.job_title}
                         </p>
                         <div className="mt-4">
                             <h2 className="text-sm md:text-md">
@@ -72,7 +74,7 @@ const User = ({ user, favoriteCategory }) => {
                             <h2 className="text-sm md:text-md">Biography</h2>
                             <div className="mx-auto lg:mx-0 pt-1 w-4/5 border-b-2 border-orange-500 opacity-25" />
                             <p className="pt-2 text-sm font-serif text-gray-500">
-                                {isEmpty(user.about)
+                                {isEmpty(user.about) || user.about == "null"
                                     ? "Author of Semicolon Weblog"
                                     : user.about}
                             </p>

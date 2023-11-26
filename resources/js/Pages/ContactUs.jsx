@@ -279,7 +279,7 @@ const ContactUs = ({ auth }) => {
                                         {...register("body", {
                                             required: true,
                                             maxLength: 16000,
-                                            minLength: 100,
+                                            minLength: 40,
                                         })}
                                         aria-invalid={
                                             errors.body ? "true" : "false"
@@ -314,7 +314,7 @@ const ContactUs = ({ auth }) => {
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
                                             * Length of message is less than
-                                            standard limit(100 characters)
+                                            standard limit(40 characters)
                                         </p>
                                     )}
                                 </div>

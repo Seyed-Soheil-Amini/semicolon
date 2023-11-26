@@ -18,7 +18,7 @@ const UserCard = ({ user, self, onSelect, selected }) => {
                             !self && "cursor-pointer"
                         } focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600`}
                         onChange={() => onSelect(user.id)}
-                        disabled={self}
+                        disabled={self || user.isAdmin == 1}
                         checked={selected}
                     />
                     <label htmlFor={`${user.id}`} className="sr-only">
@@ -50,7 +50,9 @@ const UserCard = ({ user, self, onSelect, selected }) => {
                 >
                     <h2
                         className={`hover:text-blue-500 ${
-                            user.isAdmin ? "text-yellow-500" : "text-gray-200"
+                            user.isAdmin == 1
+                                ? "text-yellow-500"
+                                : "text-gray-200"
                         } text-sm md:text-base`}
                     >
                         {user.name}
@@ -58,7 +60,9 @@ const UserCard = ({ user, self, onSelect, selected }) => {
                 </a>
             </th>
             <td className="px-3 py-1.5 md:px-6 md:py-3 text-xs md:text-base">
-                {user.job_title}
+                {isEmpty(user.job_title) || user.job_title == "null"
+                    ? "Blogger"
+                    : user.job_title}
             </td>
             <td className="px-3 py-1.5 md:px-6 md:py-3 text-xs md:text-base">
                 {user.email}

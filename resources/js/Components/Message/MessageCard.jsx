@@ -4,7 +4,7 @@ const MessageCard = ({ message, onSelect, selected }) => {
     const [checked, setChecked] = useState(false);
 
     return (
-        <div className="flex flex-row border border-base-300 rounded-md bg-gray-900 mb-2.5 md:mb-5">
+        <div className="flex flex-row border border-base-300 rounded-md bg-gray-900 mb-2.5 md:mb-5 w-auto">
             <div className="flex items-center pl-1 md:px-2 custom-checkbox">
                 <input
                     id={`${message.id}`}
@@ -35,8 +35,10 @@ const MessageCard = ({ message, onSelect, selected }) => {
                         {message.email}
                     </div>
                 </div>
-                <div className="collapse-content">
-                    <p className="text-xs md:text-md py-3">{message.body}</p>
+                <div className="collapse-content overflow-x-auto">
+                    <p className="inline-flex text-xs md:text-md py-1 md:py-3 whitespace-pre-wrap">
+                        {message.body}
+                    </p>
                 </div>
             </div>
         </div>

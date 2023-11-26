@@ -25,9 +25,7 @@ const BlogEditForm = (props) => {
         imageBaseCode: "",
         labels: !isEmpty(props.blog.labels) ? props.blog.labels : [],
     });
-    useEffect(() => {
-        console.log(blog);
-    }, [blog]);
+
     const { data: updatedBlog, mutateAsync: updateBlog } = useUpdateBlog();
     const { data: categories } = useGetCategories();
     const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB
@@ -304,7 +302,7 @@ const BlogEditForm = (props) => {
                                         className="text-red-500 text-xs md:text-base"
                                     >
                                         * Length of title is more than standard
-                                        limit(16000 characters)
+                                        limit(80 characters)
                                     </p>
                                 )}
                             </div>
@@ -343,10 +341,11 @@ const BlogEditForm = (props) => {
                                 value={blog.body}
                                 name="body"
                                 required
+                                maxLength={16000}
                                 {...register("body", {
                                     required: true,
                                     maxLength: 16000,
-                                    minLength: 120,
+                                    minLength: 100,
                                 })}
                                 aria-invalid={errors.body ? "true" : "false"}
                                 onChange={(event) =>
@@ -379,7 +378,7 @@ const BlogEditForm = (props) => {
                                     className="text-red-500 text-xs md:text-base"
                                 >
                                     * Length of context is less than standard
-                                    limit(min 80 characters)
+                                    limit(min 100 characters)
                                 </p>
                             )}
                             <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">

@@ -115,14 +115,14 @@ const getRandomBlogs = async ({ pageParam = 0 }, filter) => {
     return data.data;
 };
 
-const addView = async (ip, blogId) => {
-    const apiUrl = `/blog/view/${blogId}`;
+const addView = async (fp, blogId) => {
+    const apiUrl = `/blog/view/${blogId}/${btoa(fp)}`;
     const { data } = await client.get(apiUrl);
     return data.data;
 };
 
-const toggleLike = async (blogId) => {
-    const apiUrl = `blog/like/${blogId}`;
+const toggleLike = async (blogId,fingerprint) => {
+    const apiUrl = `blog/like/${blogId}/${btoa(fingerprint)}`;
     const { data } = await client.get(apiUrl);
     return data.data;
 };

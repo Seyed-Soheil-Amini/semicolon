@@ -13,7 +13,7 @@ const BlogPreview = (props) => {
             >
                 <div className="max-h-80vh h-6.5/7 flex-row">
                     <div className="flex justify-content-around mb-0 mx-auto h-auto md:h-4/7 flex-col md:flex-row pt-2 md:pt-4">
-                        <div className="flex h-4/7 md:h-6/7 w-6/7 md:w-5/7 mb-1 md:mb-3 border-gray-300 rounded mx-auto my-auto text-center text-white">
+                        <div className="flex h-5/7 md:h-6/7 w-5/7 md:w-3/7 mb-1 md:mb-3 border-gray-300 rounded mx-auto my-auto text-center text-white">
                             <img
                                 src={`${
                                     isEmpty(props.blog.image)

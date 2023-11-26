@@ -49,7 +49,7 @@ class BlogController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'body' => 'string|max:1500',
+            'body' => 'string|max:16000',
             'image' => 'nullable|image|mimes:jpeg,jpg,png,bmp,gif,svg,webp|max:2048',
         ]);
         if ($validator->fails()) {
@@ -109,7 +109,7 @@ class BlogController extends Controller
         }
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'body' => 'string|max:500',
+            'body' => 'string|max:16000',
             'image' => 'nullable|image|mimes:jpeg,jpg,png,bmp,gif,svg,webp|max:2048',
         ]);
         if ($validator->fails()) {
@@ -321,30 +321,30 @@ class BlogController extends Controller
         return response()->json(['status' => 200, 'data' => $blogs]);
     }
 
-    public function addViewer(Request $request, $id)
+    public function addViewer(Request $request, $id,$fingerprint)
     {
         $blog = Blog::with('views')->find($id);
         if (is_null($blog)) {
             return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
         }
-        $ipAddress = $request->ip();
+        $clientFingerPrint = base64_decode($fingerprint);
         $currentTime = Carbon::now();
         if (is_null($blog->views)) {
             $view = new View();
             $view->blog_id = $blog->id;
-            $view->ip_address = $ipAddress;
+            $view->fingerprint = $clientFingerPrint;
             $view->view_time = $currentTime;
             $view->save();
             $blog->increment('view');
             $blog->save();
         }else{
-            $existingViewer = collect($blog->views)->first(function ($value) use ($ipAddress) {
-                return $value['ip_address'] === $ipAddress;
+            $existingViewer = collect($blog->views)->first(function ($value) use ($clientFingerPrint) {
+                return $value['fingerprint'] === $clientFingerPrint;
             });
             if(is_null($existingViewer)){
                 $view = new View();
                 $view->blog_id = $blog->id;
-                $view->ip_address = $ipAddress;
+                $view->fingerprint = $clientFingerPrint;
                 $view->view_time = $currentTime;
                 $view->save();
                 $blog->increment('view');
@@ -363,27 +363,27 @@ class BlogController extends Controller
         return response()->json(['status' => 200, 'data' => $blog->view], 200);
     }
 
-    public function toggleLike(Request $request, $id)
+    public function toggleLike(Request $request, $id,$fingerprint)
     {
         $blog = Blog::with('likes')->find($id);
         if (is_null($blog)) {
             return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
         }
-        $ipAddress = $request->ip();
+        $clientFingerPrint = base64_decode($fingerprint);
         if(is_null($blog->likes)){
             $like = new Like();
             $like->blog_id = $blog->id;
-            $like->ip_address = $ipAddress;
+            $like->fingerprint = $clientFingerPrint;
             $like->save();
             $blog->increment('like');
         }else{
-            $existingLikker = collect($blog->likes)->first(function ($value) use ($ipAddress) {
-                return $value['ip_address'] === $ipAddress;
+            $existingLikker = collect($blog->likes)->first(function ($value) use ($clientFingerPrint) {
+                return $value['fingerprint'] === $clientFingerPrint;
             });
             if(is_null($existingLikker)){
                 $like = new Like();
                 $like->blog_id = $blog->id;
-                $like->ip_address = $ipAddress;
+                $like->fingerprint = $clientFingerPrint;
                 $like->save();
                 $blog->increment('like');
             }else{
