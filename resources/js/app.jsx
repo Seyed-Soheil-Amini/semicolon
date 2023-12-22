@@ -6,6 +6,7 @@ import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import './changeLang';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -13,7 +14,7 @@ const queryClient = new QueryClient({
             refetchOnWindowFocus: false,
             refetchOnReconnect: true,
             refetchOnMount: false,
-            cacheTime: 1000 * 60 * 60 * 24 * 7, // a week
+            cacheTime: 1000 * 60 * 60 * 24 * 14, // two weeks
         },
     },
 });

@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link, Head, usePage } from "@inertiajs/react";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaLanguage } from "react-icons/fa";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { isEmpty } from "lodash";
+import i18n from "i18next";
 
 const HeaderLayouts = ({ auth }) => {
     const { url, component } = usePage();
+    const [changeLangIsOpen, setChangeLangIsOpen] = useState(false);
+    const toggleDropdown = () => {
+        setChangeLangIsOpen(!changeLangIsOpen);
+    };
 
+    const changeLanguage = (lang) => {
+        if (lang === "En") {
+            document.documentElement.dir = "ltr";
+            i18n.changeLanguage("en");
+        } else {
+            i18n.changeLanguage("fa");
+            document.documentElement.dir = "rtl";
+        }
+    };
     return (
         <>
             <Head>
@@ -15,7 +29,6 @@ const HeaderLayouts = ({ auth }) => {
                 <meta name="keywords" content="" />
                 <meta name="description" content="" />
                 <meta name="author" content="Seyed Soheil Amini" />
-
                 <meta charSet="utf-8" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 {/* Mobile Metas */}
@@ -141,6 +154,60 @@ const HeaderLayouts = ({ auth }) => {
                             )}
                         </Nav>
                     </Navbar.Collapse>
+                    <div className="relative inline-block text-left">
+                        <div>
+                            <button
+                                type="button"
+                                className="inline-flex justify-center ring-1 ring-gray-300 rounded-md ml-1 px-2 py-2 text-sm font-mono text-gray-400 border-gray-200 hover:text-gray-900 hover:bg-gray-400"
+                                id="menu-button"
+                                aria-expanded="true"
+                                aria-haspopup="true"
+                                onClick={toggleDropdown}
+                            >
+                                <FaLanguage className="text-2xl" />
+                            </button>
+                        </div>
+                        {changeLangIsOpen && (
+                            <div
+                                className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                role="menu"
+                                aria-orientation="vertical"
+                                aria-labelledby="menu-button"
+                                tabIndex={-1}
+                            >
+                                <div className="py-1" role="none">
+                                    <a
+                                        href="#"
+                                        className="flex items-center justify-center text-gray-200 block m-1 px-3 py-2 text-sm hover:bg-gray-400 rounded-md"
+                                        role="menuitem"
+                                        tabIndex={-1}
+                                        id="menu-item-0"
+                                        onClick={() => changeLanguage("En")}
+                                    >
+                                        <img
+                                            src="images/united-kingdom-flag.png"
+                                            className="rounded-circle mr-1"
+                                        />
+                                        En
+                                    </a>
+                                    <a
+                                        href="#"
+                                        className="flex items-center justify-center text-gray-200 block m-1 px-3 py-2 text-sm hover:bg-gray-400 rounded-md"
+                                        role="menuitem"
+                                        tabIndex={-1}
+                                        id="menu-item-1"
+                                        onClick={() => changeLanguage("fa")}
+                                    >
+                                        <img
+                                            src="images/iran-flag.png"
+                                            className="rounded-circle mr-1"
+                                        />
+                                        Fa
+                                    </a>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </Container>
             </Navbar>{" "}
         </>

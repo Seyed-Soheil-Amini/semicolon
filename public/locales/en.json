@@ -1,0 +1,20 @@
+{
+    "welcome-txt-tit": "Welcome to",
+    "welcome-txt-subtit": "Semicolon official blog",
+    "home-tit-subtxt": "This is the official website of Semicolon scientific team and it is at your service.",
+    "home-ctn-tit": "Contact Us",
+    "home-abt-tit": "About Us",
+    "home-abt-txt": "Semicolon scientific team was founded by computer students of Yazd University on June 22, 2022. This organization was formed for big goals and implementation of practical ideas in the field of technology in the form of web and application. This group is currently one of the active university teams in the field of software development and is currently registering ideas, this organization is currently a start-up company.",
+    "home-read-more": "Read More",
+    "home-srv-tit": "Areas of Work and Development",
+    "home-srv-s1-tit": "Software Development",
+    "home-srv-s1-txt": "Our team is developing practical and idea-oriented software, these software are often in the form of web apps. You can submit your orders in this field to our specialists.",
+    "home-srv-s2-tit": "Game Development",
+    "home-srv-s2-txt": "We produce 2D and 3D indie games using the Unity engine. We are currently developing mobile games on the Android platform and are preparing the infrastructure for system production.",
+    "home-srv-s3-tit": "Server Management",
+    "home-srv-s3-txt": "Our team has the experience of working with Linux as one of the main operating systems used for the server, as well as working with web servers such as nginx to manage the server load, which allows it to be fully loaded after the website or application is designed. It is run and managed on the server.",
+    "home-srv-s4-tit": "Artificial Intelligence",
+    "home-srv-s4-txt": "Our artificial intelligence expert team has the ability to carry out artificial intelligence projects, especially machine learning, with research and study in the fields of machine learning and data analysis. You can cooperate with us in the field of writing articles and research."
+
+    
+}

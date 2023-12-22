@@ -1,9 +1,10 @@
 import HeaderLayouts from "@/Layouts/Header";
 import FooterLayout from "@/Layouts/Footer";
-import { Link, Head } from "@inertiajs/react";
-import { Carousel, Container, Button } from "react-bootstrap";
+import { Link } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+const Welcome = ({ auth, laravelVersion, phpVersion }) => {
+    const { t } = useTranslation();
     return (
         <>
             <HeaderLayouts auth={auth} />
@@ -22,24 +23,23 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                             <div className="detail-box mt-5 md:mt-3 lg:mt-0">
                                                 <div className="animate-fade-down animate-once">
                                                     <h1 className="text-base md:text-3xl lg:text-5xl">
-                                                        Welcome To <br />
+                                                        {t("welcome-txt-tit")}{" "}
+                                                        <br />
                                                         <span>
-                                                            Semicolon official
-                                                            blog
+                                                            {t(
+                                                                `welcome-txt-subtit`
+                                                            )}
                                                         </span>
                                                     </h1>
                                                     <p>
-                                                        This is the official
-                                                        website of Semicolon
-                                                        scientific team and it
-                                                        is at your service.
+                                                        {t(`home-tit-subtxt`)}
                                                     </p>
                                                     <div className="btn-box">
                                                         <Link
                                                             href="/contactus"
                                                             className="text-xs md:text-base lg:text-xl"
                                                         >
-                                                            Contact Us
+                                                            {t(`home-ctn-tit`)}
                                                         </Link>
                                                     </div>
                                                 </div>
@@ -59,27 +59,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <div className="detail-box">
                                 <div className="heading_container animate-fade-down animate-once">
                                     <h2 className="text-base md:text-xl lg:text-3xl">
-                                        About Us
+                                        {t(`home-abt-tit`)}
                                     </h2>
                                 </div>
                                 <p className="text-sm md:text-base animate-fade-down animate-once animate-duration-[1200ms]">
-                                    Semicolon scientific team was founded by
-                                    computer students of Yazd University on June
-                                    22, 2022. This organization was formed for
-                                    big goals and implementation of practical
-                                    ideas in the field of technology in the form
-                                    of web and application. This group is
-                                    currently one of the active university teams
-                                    in the field of software development and is
-                                    currently registering ideas, this
-                                    organization is currently a start-up
-                                    company.
+                                    {t("home-abt-txt")}
                                 </p>
                                 <Link
                                     href="/about"
                                     className="text-sm md:text-base animate-fade-down animate-once animate-duration-[1200ms]"
                                 >
-                                    Read More
+                                    {t("home-read-more")}
                                 </Link>
                             </div>
                         </div>
@@ -100,7 +90,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="container">
                         <div className="heading_container animate-fade-down animate-once">
                             <h2 className="text-2xl lg:text-3xl">
-                                Areas of Work and Development
+                                {t("home-srv-tit")}
                             </h2>
                         </div>
                     </div>
@@ -116,14 +106,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         />
                                     </div>
                                     <h4 className="text-lg md:text-2xl">
-                                        Software Development
+                                        {t("home-srv-s1-tit")}
                                     </h4>
                                     <p className="text-sm md:text-base">
-                                        Our team is developing practical and
-                                        idea-oriented software, these software
-                                        are often in the form of web apps. You
-                                        can submit your orders in this field to
-                                        our specialists.
+                                        {t("homw-srv-s1-txt")}
                                     </p>
                                 </div>
                             </div>
@@ -137,14 +123,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         />
                                     </div>
                                     <h4 className="text-lg md:text-2xl">
-                                        Game Development
+                                        {t("home-srv-s2-tit")}
                                     </h4>
                                     <p className="text-sm md:text-base">
-                                        We produce 2D and 3D indie games using
-                                        the Unity engine. We are currently
-                                        developing mobile games on the Android
-                                        platform and are preparing the
-                                        infrastructure for system production.
+                                        {t("home-srv-s2-txt")}
                                     </p>
                                 </div>
                             </div>
@@ -158,17 +140,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         />
                                     </div>
                                     <h4 className="text-lg md:text-2xl">
-                                        Server Management
+                                        {t("home-srv-s3-tit")}
                                     </h4>
                                     <p className="text-sm md:text-base">
-                                        Our team has the experience of working
-                                        with Linux as one of the main operating
-                                        systems used for the server, as well as
-                                        working with web servers such as nginx
-                                        to manage the server load, which allows
-                                        it to be fully loaded after the website
-                                        or application is designed. It is run
-                                        and managed on the server.
+                                        {t("home-srv-s3-txt")}
                                     </p>
                                 </div>
                             </div>
@@ -182,17 +157,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         />
                                     </div>
                                     <h4 className="text-lg md:text-2xl">
-                                        Artificial Intelligence
+                                        {t("home-srv-s4-tit")}
                                     </h4>
                                     <p className="text-sm md:text-base">
-                                        Our artificial intelligence expert team
-                                        has the ability to carry out artificial
-                                        intelligence projects, especially
-                                        machine learning, with research and
-                                        study in the fields of machine learning
-                                        and data analysis. You can cooperate
-                                        with us in the field of writing articles
-                                        and research.
+                                        {t("home-srv-s4-txt")}
                                     </p>
                                 </div>
                             </div>
@@ -214,7 +182,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 <div className="footer_contact animate-flip-up animate-once">
                     <div className="heading_container">
                         <h2 className="text-base md:text-2xl lg:text-3xl">
-                            Contact Us
+                            {t("home-ctn-tit")}
                         </h2>
                     </div>
                     <div className="box">
@@ -263,4 +231,6 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             {/* footer section */}
         </>
     );
-}
+};
+
+export default Welcome;
