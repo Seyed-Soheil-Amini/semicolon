@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Modal from "react-modal";
 import Select from "react-select";
 import "tailwindcss/tailwind.css";
@@ -11,8 +11,10 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useUpdateBlog, useGetCategories } from "@/hooks";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 const BlogEditForm = (props) => {
+    const { t } = useTranslation();
     const [blog, setBlog] = useState({
         id: props.blog.id,
         title: props.blog.title,
@@ -188,7 +190,7 @@ const BlogEditForm = (props) => {
                                         },
                                     }}
                                 >
-                                    Close
+                                    {t("dash.blg.edt-form.cls")}
                                 </button>
                             </div>
                         </div>
@@ -205,13 +207,15 @@ const BlogEditForm = (props) => {
                     className="flex-md-row h-full w-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-1 w-400 max-w-full"
                 >
                     <div className="max-h-80vh h-6.5/7 flex-md-row">
-                        <h2 className="text-lg font-bold mb-1">Edit Blog</h2>
+                        <h2 className="text-lg font-bold mb-1">
+                            {t("dash.blg.edt-form.tit")}
+                        </h2>
                         <div className="flex-row mb-0 mx-auto h-3/7">
                             <label
                                 className="h-1/7 block text-gray-500 text-sm md:text-base font-bold mb-0 text-center"
                                 htmlFor="file"
                             >
-                                Image File
+                                {t("dash.blg.edt-form.img-fil")}
                             </label>
                             <div
                                 className="flex h-6/7 items-center w-full md:w-1/2 mb-3 border-dashed border-2 border-gray-300 rounded mx-auto my-auto text-center text-white"
@@ -253,8 +257,7 @@ const BlogEditForm = (props) => {
                                     </>
                                 ) : (
                                     <p className="mx-auto my-auto text-black text-xs md:text-sm">
-                                        Drag and drop an image here, or click to
-                                        select a file
+                                        {t("dash.blg.edt-form.sub-img")}
                                     </p>
                                 )}
                             </div>
@@ -265,7 +268,7 @@ const BlogEditForm = (props) => {
                                     htmlFor="title"
                                     className="block text-gray-500 text-sm md:text-base font-bold mb-1"
                                 >
-                                    Title
+                                    {t("dash.blg.edt-form.sub-tit")}
                                 </label>
                                 <input
                                     type="text"
@@ -293,7 +296,7 @@ const BlogEditForm = (props) => {
                                         role="alert"
                                         className="text-red-500 text-xs md:text-base"
                                     >
-                                        * Title is required
+                                        * {t("dash.blg.cush.tit.req")}
                                     </p>
                                 )}
                                 {errors.title?.type === "maxLength" && (
@@ -301,8 +304,7 @@ const BlogEditForm = (props) => {
                                         role="alert"
                                         className="text-red-500 text-xs md:text-base"
                                     >
-                                        * Length of title is more than standard
-                                        limit(80 characters)
+                                        * {t("dash.blg.cush.tit.limit")}
                                     </p>
                                 )}
                             </div>
@@ -311,7 +313,7 @@ const BlogEditForm = (props) => {
                                     className="block text-gray-500 text-sm md:text-base font-bold mb-0 md:mb-1"
                                     htmlFor="category"
                                 >
-                                    Category
+                                    {t("dash.blg.edt-form.cat")}
                                 </label>
                                 <Select
                                     className="appearance-none border rounded bg-gray-200 text-gray-700 text-xs md:text-base leading-tight focus:outline-none focus:shadow-outline"
@@ -333,7 +335,7 @@ const BlogEditForm = (props) => {
                                 htmlFor="content"
                                 className="block text-gray-500 text-sm md:text-base font-bold mb-1"
                             >
-                                Body
+                                {t("dash.blg.edt-form.bdy")}
                             </label>
                             <textarea
                                 id="content"
@@ -360,7 +362,7 @@ const BlogEditForm = (props) => {
                                     role="alert"
                                     className="text-red-500 text-xs md:text-base"
                                 >
-                                    * Context is required
+                                    * {t("dash.blg.cush.con.req")}
                                 </p>
                             )}
                             {errors.body?.type === "maxLength" && (
@@ -368,8 +370,7 @@ const BlogEditForm = (props) => {
                                     role="alert"
                                     className="text-red-500 text-xs md:text-base"
                                 >
-                                    * Length of context is more than standard
-                                    limit(16000 characters)
+                                    * {t("dash.blg.cush.con.maxl")}
                                 </p>
                             )}
                             {errors.body?.type === "minLength" && (
@@ -377,8 +378,7 @@ const BlogEditForm = (props) => {
                                     role="alert"
                                     className="text-red-500 text-xs md:text-base"
                                 >
-                                    * Length of context is less than standard
-                                    limit(min 100 characters)
+                                    * {t("dash.blg.cush.con.minl")}
                                 </p>
                             )}
                             <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
@@ -418,14 +418,16 @@ const BlogEditForm = (props) => {
                                     type="submit"
                                     className="flex w-auto h-1/7 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-2.5 md:py-2 md:px-4 mr-2 rounded"
                                 >
-                                    {loading ? "Waiting..." : "Save"}
+                                    {loading
+                                        ? t("dash.blg.edt-form.wait-btn")
+                                        : t("dash.blg.edt-form.save-btn")}
                                 </button>
                                 <button
                                     disabled={loading}
                                     className="bg-red-500 hover:bg-red-700 text-white font-medium py-1.5 px-2.5 md:py-2 md:px-4 rounded"
                                     onClick={() => props.onClose()}
                                 >
-                                    Cancel
+                                    {t("dash.blg.edt-form.cnl-btn")}
                                 </button>
                             </div>
                         </div>

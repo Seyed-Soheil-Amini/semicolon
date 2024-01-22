@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useStoreMessage } from "@/hooks";
 import { useForm } from "react-hook-form";
 import FooterLayout from "@/Layouts/Footer";
+import { useTranslation } from "react-i18next";
 
 const ContactUs = ({ auth }) => {
     const [message, setMessage] = useState({
@@ -15,6 +16,7 @@ const ContactUs = ({ auth }) => {
         subject: "",
         body: "",
     });
+    const { t } = useTranslation();
 
     const handleChangeMessage = (event) => {
         const { name, value } = event;
@@ -61,10 +63,10 @@ const ContactUs = ({ auth }) => {
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto text-center animate-fade-down animate-once">
                         <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-gray-200">
-                            Contact Us
+                            {t("cnt.head.tit")}
                         </h2>
                         <p className="mt-2 text-md md:text-xl leading-8 text-gray-300">
-                            You can choose the way to communicate with us.
+                            {t("cnt.head.txt")}
                         </p>
                     </div>
                     <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -72,8 +74,10 @@ const ContactUs = ({ auth }) => {
                             <div className="flex-row mx-auto shadow-3xl items-center px-5 py-8">
                                 <FaMailBulk className="text-7xl text-orange-600 mx-auto" />
                                 <div className="flex-row text-gray-200 text-center mt-4">
-                                    <h3 className="font-serif">Email</h3>
-                                    <p className="pt-2">semicolon@gmail.com</p>
+                                    <h3 className="font-serif">
+                                        {t("cnt.email.tit")}
+                                    </h3>
+                                    <p className="pt-2">{t("cnt.email.txt")}</p>
                                 </div>
                             </div>
                         </article>
@@ -82,11 +86,14 @@ const ContactUs = ({ auth }) => {
                                 <FaUsers className="text-7xl text-orange-600 mx-auto" />
                                 <div className="flex-row text-gray-200 text-center mt-4">
                                     <h3 className="font-serif">
-                                        Help and Support
+                                        {t("cnt.hlp.tit")}
                                     </h3>
                                     <p className="pt-2">
-                                        <a href="#message" className="text-gray-200 hover:text-blue-600">
-                                            <u>get supprort</u>
+                                        <a
+                                            href="#message"
+                                            className="text-gray-200 hover:text-blue-600"
+                                        >
+                                            <u>{t("cnt.hlp.txt")}</u>
                                         </a>
                                     </p>
                                 </div>
@@ -96,8 +103,10 @@ const ContactUs = ({ auth }) => {
                             <div className="flex-row mx-auto shadow-3xl items-center px-5 py-8">
                                 <FaVoicemail className="text-7xl text-orange-600 mx-auto" />
                                 <div className="flex-row text-gray-200 text-center mt-4">
-                                    <h3 className="font-serif">Call</h3>
-                                    <p className="pt-2">+989103845418</p>
+                                    <h3 className="font-serif">
+                                        {t("cnt.cal.tit")}
+                                    </h3>
+                                    <p className="pt-2">{t("+989103845418")}</p>
                                 </div>
                             </div>
                         </article>
@@ -105,9 +114,7 @@ const ContactUs = ({ auth }) => {
                     <section id="message" className="">
                         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
                             <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 text-sm md:text-xl">
-                                Got a technical issue? Want to send feedback
-                                about a beta feature? Need details about our
-                                Business plan? Let us know.
+                                {t("cnt.msg.head")}
                             </p>
                             <form
                                 className="space-y-8"
@@ -118,7 +125,7 @@ const ContactUs = ({ auth }) => {
                                         htmlFor="senderName"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                                     >
-                                        Your Name
+                                        {t("cnt.msg.name")}
                                     </label>
                                     <input
                                         type="text"
@@ -146,7 +153,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Name is required
+                                            * {t("cush.name.req")}
                                         </p>
                                     )}
                                     {errors.title?.type === "maxLength" && (
@@ -154,8 +161,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Length of name is more than
-                                            standard limit(60 characters)
+                                            {t("cush.name.limit")}
                                         </p>
                                     )}
                                 </div>
@@ -164,7 +170,7 @@ const ContactUs = ({ auth }) => {
                                         htmlFor="email"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                                     >
-                                        Your email
+                                        {t("cnt.msg.email")}
                                     </label>
                                     <input
                                         type="email"
@@ -194,7 +200,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Email is required
+                                            * {t("cush.email.req")}
                                         </p>
                                     )}
                                     {errors.email?.type === "maxLength" && (
@@ -202,8 +208,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Length of email is more than
-                                            standard limit(120 characters)
+                                            * {t("cush.email.limit")}
                                         </p>
                                     )}
                                     {errors.email?.type === "pattern" && (
@@ -211,7 +216,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Please enter a valid email address
+                                            * {t("cush.email.val")}
                                         </p>
                                     )}
                                 </div>
@@ -220,7 +225,7 @@ const ContactUs = ({ auth }) => {
                                         htmlFor="subject"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                                     >
-                                        Subject
+                                        {t("cnt.msg.subj")}
                                     </label>
                                     <input
                                         type="text"
@@ -248,7 +253,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Subject is required
+                                            * {t("cush.subj.req")}
                                         </p>
                                     )}
                                     {errors.subject?.type === "maxLength" && (
@@ -256,8 +261,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Length of subject is more than
-                                            standard limit(200 characters)
+                                            * {t("cush.subj.limit")}
                                         </p>
                                     )}
                                 </div>
@@ -266,7 +270,7 @@ const ContactUs = ({ auth }) => {
                                         htmlFor="body"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
                                     >
-                                        Your message
+                                        {t("cnt.msg.msg")}
                                     </label>
                                     <textarea
                                         id="body"
@@ -296,7 +300,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Message is required
+                                            * {t("cush.msg.req")}
                                         </p>
                                     )}
                                     {errors.body?.type === "maxLength" && (
@@ -304,8 +308,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Length of message is more than
-                                            standard limit(16000 characters)
+                                            * {t("cush.msg.maxl")}
                                         </p>
                                     )}
                                     {errors.body?.type === "minLength" && (
@@ -313,8 +316,7 @@ const ContactUs = ({ auth }) => {
                                             role="alert"
                                             className="text-red-400 text-sm md:text-md pt-2"
                                         >
-                                            * Length of message is less than
-                                            standard limit(40 characters)
+                                            * {t("cush.msg.minl")}
                                         </p>
                                     )}
                                 </div>
@@ -322,7 +324,7 @@ const ContactUs = ({ auth }) => {
                                     type="submit"
                                     className="py-3 px-3 md:px-5 text-xs md:text-sm font-medium text-center text-white rounded-lg bg-orange-600 sm:w-fit hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-primary-300"
                                 >
-                                    Send message
+                                    {t("cnt.msg.btn")}
                                 </button>
                             </form>
                         </div>

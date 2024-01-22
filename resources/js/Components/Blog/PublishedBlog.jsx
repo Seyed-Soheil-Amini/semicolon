@@ -7,8 +7,10 @@ import { useAllBlogs, useTogglePublish } from "@/hooks";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 const PublishedBlog = (props) => {
+    const { t } = useTranslation();
     const { data: blogs, isLoading, isRefetching } = useAllBlogs(props.user.id);
     const { data: toggled, mutateAsync: togglePublishBlog } =
         useTogglePublish();
@@ -106,7 +108,7 @@ const PublishedBlog = (props) => {
                     ) : (
                         <div className="flex items-center w-3/5 mx-auto text-center h-40">
                             <h3 className="text-gray-200 mx-auto text-xl md:text-4xl">
-                                There are no verified blogs.
+                                {t("dash.blg.pub.noblg")}
                             </h3>
                         </div>
                     )}

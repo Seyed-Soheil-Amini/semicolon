@@ -2,8 +2,10 @@ import React from "react";
 import TextTruncate from "react-text-truncate";
 import { isEmpty } from "lodash";
 import { FaPen, FaTags, FaTrashAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const BlogCard = (props) => {
+    const { t } = useTranslation();
     return (
         <div className="rounded border-2 border-gray-400 relative h-100 w-6.5/7 md:w-auto">
             <div className="relative overflow-hidden w-full rounded-md bg-gray-200 h-60">
@@ -86,8 +88,8 @@ const BlogCard = (props) => {
                                         }
                                     >
                                         {props.blog.published_at !== null
-                                            ? "UNPUBLISH"
-                                            : "PUBLISH"}
+                                            ? t("dash.blg.pub.upub-btn")
+                                            : t("dash.blg.pub.pub-btn")}
                                     </button>
                                 </div>
                             );

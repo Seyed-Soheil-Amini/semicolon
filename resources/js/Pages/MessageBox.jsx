@@ -8,8 +8,10 @@ import MesssageLoadingSkeleton from "@/Components/Message/MessageLoadingSkeleton
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 const MessageBox = ({ auth }) => {
+    const { t } = useTranslation();
     const {
         data: messages,
         fetchNextPage,
@@ -114,7 +116,9 @@ const MessageBox = ({ auth }) => {
                                 <MesssageLoadingSkeleton />
                             </div>
                         ))}
-                        <span className="sr-only">Loading...</span>
+                        <span className="sr-only">
+                            {t("dash.msg-box.lod-btn")}
+                        </span>
                     </div>
                 </>
             ) : (
@@ -151,7 +155,9 @@ const MessageBox = ({ auth }) => {
                                             type="text"
                                             id="table-search"
                                             className="block p-2 pl-10 text-xs md:text-sm text-gray-900 border border-gray-300 rounded-lg w-full md:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Search for blogs based on name"
+                                            placeholder={t(
+                                                "dash.msg-box.plc-hol-srh"
+                                            )}
                                             onChange={handleSearchMessageChange}
                                         />
                                     </div>
@@ -161,7 +167,7 @@ const MessageBox = ({ auth }) => {
                                             className="text-gray-200 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2.5 text-center ml-2"
                                             onClick={handleSelectAllMessages}
                                         >
-                                            Select All
+                                            {t("dash.msg-box.sel-btn")}
                                         </button>
                                     </div>
                                 </div>
@@ -172,14 +178,14 @@ const MessageBox = ({ auth }) => {
                                             className="flex-row text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2 text-center mr-1 mb-1 md:mr-2 md:mb-0 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                                             onClick={handleCancleSelected}
                                         >
-                                            Cancle
+                                            {t("dash.msg-box.cnl-btn")}
                                         </button>
                                         <button
                                             type="button"
                                             class="flex-row text-red-700 hover:text-gray-200 border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs md:text-sm px-2.5 py-2 md:px-5 md:py-2 text-center mr-1 mb-1 md:mr-2 mb-0 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
                                             onClick={handleDeleteMessage}
                                         >
-                                            Delete
+                                            {t("dash.msg-box.del-btn")}
                                         </button>
                                     </div>
                                 )}

@@ -8,8 +8,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 import VerificationCard from "@/Components/Verify/VerifyBlogCard";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Verification = ({ auth }) => {
+    const { t } = useTranslation();
     const {
         data: blogs,
         isLoading,
@@ -144,14 +146,14 @@ const Verification = ({ auth }) => {
                                                 class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-2 py-1 md:text-sm md:px-5 md:py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                                                 onClick={handleClickVerify}
                                             >
-                                                Verify
+                                                {t("dash.verf.vrf-btn")}
                                             </button>
                                             <button
                                                 type="button"
                                                 class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-2 py-1 md:text-sm md:px-5 md:py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
                                                 onClick={handleClickBlock}
                                             >
-                                                Block
+                                                {t("dash.verf.blk-btn")}
                                             </button>
                                         </div>
                                         <div className="flex justify-end w-6/7">
@@ -160,7 +162,7 @@ const Verification = ({ auth }) => {
                                                 class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-xs px-2 py-1 md:text-sm md:px-5 md:py-2.5 text-center mr-2 mb-2"
                                                 onClick={handleCancleClick}
                                             >
-                                                Cancle
+                                                {t("dash.verf.cnl-btn")}
                                             </button>
                                         </div>
                                     </div>
@@ -187,7 +189,7 @@ const Verification = ({ auth }) => {
                     ) : (
                         <div className="flex items-center w-3/5 mx-auto text-center h-screen">
                             <h3 className="text-gray-200 mx-auto text-4xl">
-                                There are no pending blogs.
+                                {t("dash.verf.noblg")}
                             </h3>
                         </div>
                     )}

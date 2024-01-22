@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import HeaderLayouts from "@/Layouts/Header";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRandomBlogs } from "@/hooks";
@@ -7,12 +7,13 @@ import RandomBlogCard from "@/Components/Blog/RandomBlogCard";
 import LoadingSkeleton from "@/Components/LoadingSkeleton";
 import FooterLayout from "@/Layouts/Footer";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 const Blog = ({ auth }) => {
     const [filter, setFilter] = useState(() => {
         return JSON.parse(localStorage.getItem("filter")) || "all";
     });
-
+    const { t } = useTranslation();
     const {
         data: blogs,
         fetchNextPage,
@@ -111,7 +112,7 @@ const Blog = ({ auth }) => {
                                             }
                                             disabled={filter == "all"}
                                         >
-                                            All
+                                            {t("blg.filt.all")}
                                         </button>
                                     </li>
                                     <li>
@@ -126,7 +127,7 @@ const Blog = ({ auth }) => {
                                             }
                                             disabled={filter == "popular"}
                                         >
-                                            Popular
+                                            {t("blg.filt.pop")}
                                         </button>
                                     </li>
                                     <li>
@@ -141,7 +142,7 @@ const Blog = ({ auth }) => {
                                             }
                                             disabled={filter == "oldest"}
                                         >
-                                            Oldest
+                                            {t("blg.filt.old")}
                                         </button>
                                     </li>
                                     <li>
@@ -156,7 +157,7 @@ const Blog = ({ auth }) => {
                                             }
                                             disabled={filter == "newest"}
                                         >
-                                            Newest
+                                            {t("blg.filt.new")}
                                         </button>
                                     </li>
                                 </ul>

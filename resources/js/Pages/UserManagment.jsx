@@ -8,8 +8,10 @@ import { isEmpty } from "lodash";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 const UserManagment = ({ auth }) => {
+    const { t } = useTranslation();
     const { data: users, isLoading, isFetching } = useGetUsers();
     const { data: deletedMessage, mutateAsync: deleteUsers } = useDeleteUsers();
     const [selectedUsers, setSelectedUsers] = useState([]);
@@ -114,7 +116,7 @@ const UserManagment = ({ auth }) => {
                                         class="text-red-700 hover:text-gray-200 border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs md:text-sm md:px-4 px-2 py-1.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
                                         onClick={handleDeleteUsers}
                                     >
-                                        Delete
+                                        {t("dash.usr-mang.del-btn")}
                                     </button>
                                 </div>
                             )}
@@ -145,37 +147,37 @@ const UserManagment = ({ auth }) => {
                                             scope="col"
                                             class="px-4 py-1.5 md:px-6 md:py-3 underline"
                                         >
-                                            Icon
+                                            {t("dash.usr-mang.icn")}
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-3 py-1.5 md:px-6 md:py-3 underline"
                                         >
-                                            User name
+                                            {t("dash.usr-mang.usr-name")}
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-3 py-1.5 md:px-6 md:py-3 underline"
                                         >
-                                            Expertise
+                                            {t("dash.usr-mang.exp")}
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-3 py-1.5 md:px-6 md:py-3 underline"
                                         >
-                                            Email
+                                            {t("dash.usr-mang.email")}
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-5 py-1.5 md:px-6 md:py-3 underline"
                                         >
-                                            Last Blog
+                                            {t("dash.usr-mang.lblg")}
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-3 py-1.5 md:px-6 md:py-3 underline"
                                         >
-                                            Blogs
+                                            {t("dash.usr-mang.blg")}
                                         </th>
                                     </tr>
                                 </thead>
@@ -187,9 +189,7 @@ const UserManagment = ({ auth }) => {
                                                   onSelect={
                                                       handleCheckboxChange
                                                   }
-                                                  self={
-                                                      user.id == auth.user.id
-                                                  }
+                                                  self={user.id == auth.user.id}
                                                   selected={selectedUsers.includes(
                                                       user.id
                                                   )}
@@ -228,7 +228,9 @@ const UserManagment = ({ auth }) => {
                                     <UserSkeletonLoading />
                                 </div>
                             ))}
-                            <span className="sr-only">Loading...</span>
+                            <span className="sr-only">
+                                {t("dash.usr-mang.lod-btn")}
+                            </span>
                         </div>
                     </>
                 )}

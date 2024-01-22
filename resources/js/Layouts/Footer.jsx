@@ -1,9 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const FooterLayout = () => {
+    const { t } = useTranslation();
     return (
         <section className="container-fluid footer_section text-sm md:text-lg">
-            <p>Copyright © 2022 All Rights Reserved By Semicolon.</p>
+            <p>{t("footer")}</p>
         </section>
     );
 };

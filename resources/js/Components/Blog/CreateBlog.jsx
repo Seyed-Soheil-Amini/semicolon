@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { WithContext as ReactTags } from "react-tag-input";
 import { useCreateBlog, useGetCategories } from "@/hooks";
 import { useForm } from "react-hook-form";
-import { stringify } from "qs";
+import { useTranslation } from "react-i18next";
 
 const CreateBlog = () => {
     const [blog, setBlog] = useState(() => {
@@ -24,7 +24,7 @@ const CreateBlog = () => {
               }
             : lastEdited;
     });
-
+    const { t } = useTranslation();
     const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB
     const { data: categories } = useGetCategories();
     const {
@@ -160,7 +160,7 @@ const CreateBlog = () => {
                             className="block text-gray-400 text-lg font-bold mb-1"
                             htmlFor="title"
                         >
-                            Title
+                            {t("dash.blg.tit")}
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -185,7 +185,7 @@ const CreateBlog = () => {
                                 role="alert"
                                 className="text-red-500 text-xs md:text-base"
                             >
-                                * Title is required
+                                * {t("dash.blg.cush.tit.req")}
                             </p>
                         )}
                         {errors.title?.type === "maxLength" && (
@@ -193,8 +193,7 @@ const CreateBlog = () => {
                                 role="alert"
                                 className="text-red-500 text-xs md:text-base"
                             >
-                                * Length of title is more than standard
-                                limit(16000 characters)
+                                * {t("dash.blg.cush.tit.limit")}
                             </p>
                         )}
                     </div>
@@ -203,7 +202,7 @@ const CreateBlog = () => {
                             className="block text-gray-400 text-lg font-bold mb-1"
                             htmlFor="category"
                         >
-                            Category
+                            {t("dash.blg.cat")}
                         </label>
                         <Select
                             className="appearance-none border rounded bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -226,7 +225,7 @@ const CreateBlog = () => {
                         className="block text-gray-400 text-lg font-bold mb-1"
                         htmlFor="context"
                     >
-                        Body
+                        {t("dash.blg.bdy")}
                     </label>
                     <textarea
                         className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -255,7 +254,7 @@ const CreateBlog = () => {
                             role="alert"
                             className="text-red-500 text-xs md:text-base"
                         >
-                            * Context is required
+                            * {t("dash.blg.cush.con.req")}
                         </p>
                     )}
                     {errors.body?.type === "maxLength" && (
@@ -263,8 +262,7 @@ const CreateBlog = () => {
                             role="alert"
                             className="text-red-500 text-xs md:text-base"
                         >
-                            * Length of context is more than standard
-                            limit(16000 characters)
+                            * {t("dash.blg.cush.con.maxl")}
                         </p>
                     )}
                     {errors.body?.type === "minLength" && (
@@ -272,8 +270,7 @@ const CreateBlog = () => {
                             role="alert"
                             className="text-red-500 text-xs md:text-base"
                         >
-                            * Length of context is less than standard limit(min
-                            100 characters)
+                            * {t("dash.blg.cush.con.minl")}
                         </p>
                     )}
                 </div>
@@ -282,7 +279,7 @@ const CreateBlog = () => {
                         className="text-gray-400 text-lg font-bold mb-1"
                         htmlFor="labels"
                     >
-                        Labels
+                        {t("dash.blg.lbl")}
                     </label>
                     <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <ReactTags
@@ -312,7 +309,7 @@ const CreateBlog = () => {
                         className="block text-gray-400 text-lg font-bold mb-3 text-center"
                         htmlFor="file"
                     >
-                        Image File
+                        {t("dash.blg.img")}
                     </label>
                     <div
                         className="flex items-center w-3/4 md:w-1/2 h-80 mb-3 border-dashed border-2 border-gray-300 rounded mx-auto text-center text-white"
@@ -327,9 +324,8 @@ const CreateBlog = () => {
                             />
                         ) : (
                             <p className="mx-auto my-auto text-sm md:text-base">
-                                Drag and drop an image here, or click to select
-                                a file <br />
-                                Maximum file size is 2 MB
+                                {t("dash.blg.plc")} <br />
+                                {t("dash.blg.max-size-img")}
                             </p>
                         )}
                     </div>
@@ -341,7 +337,7 @@ const CreateBlog = () => {
                                     setBlog({ ...blog, image: null })
                                 }
                             >
-                                Reset
+                                {t("dash.blg.btn")}
                             </DangerButton>
                         </div>
                     )}
@@ -351,7 +347,9 @@ const CreateBlog = () => {
                             type="submit"
                             disabled={isLoading}
                         >
-                            {isLoading ? "Saving" : "Save"}
+                            {isLoading
+                                ? t("dash.blg.saving-btn")
+                                : t("dash.blg.save-btn")}
                         </button>
                     </div>
                 </div>

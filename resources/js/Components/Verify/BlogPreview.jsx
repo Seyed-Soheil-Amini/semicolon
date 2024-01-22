@@ -2,9 +2,10 @@ import React from "react";
 import Modal from "react-modal";
 import { FaEye, FaHeart, FaTags, FaUserEdit } from "react-icons/fa";
 import { isEmpty } from "lodash";
+import { useTranslation } from "react-i18next";
 
 const BlogPreview = (props) => {
-    console.log(props);
+    const { t } = useTranslation();
     return (
         <div>
             <Modal
@@ -55,7 +56,7 @@ const BlogPreview = (props) => {
                                 {!isEmpty(props.blog.labels) && (
                                     <div class="pt-1 pb-1 h-auto md:h-2/7">
                                         <h2 class="py-1 mb-1 text-gray-700">
-                                            Labels :
+                                            {t("dash.verf.pre.lbl")}
                                         </h2>
                                         <div class="flex flex-wrap">
                                             {props.blog.labels.map((label) => {
@@ -91,7 +92,7 @@ const BlogPreview = (props) => {
                             className="bg-red-500 hover:bg-red-700 mb-1 md:mb-2 text-white font-bold py-1.5 px-2 md:py-2 md:px-4 rounded text-sm md:text-base"
                             onClick={() => props.onClose()}
                         >
-                            Close
+                            {t("dash.verf.pre.cls-btn")}
                         </button>
                     </div>
                 </div>

@@ -4,10 +4,11 @@ import TextTruncate from "react-text-truncate";
 import BlogPreview from "./BlogPreview";
 import { FaTags } from "react-icons/fa";
 import { isEmpty } from "lodash";
+import { useTranslation } from "react-i18next";
 
 const VerificationCard = (props) => {
     const [preview, setPreview] = useState(false);
-
+    const { t } = useTranslation();
     const handleClosePreview = () => {
         setPreview(false);
     };
@@ -38,7 +39,7 @@ const VerificationCard = (props) => {
                         {props.blog.title}
                     </h1>
                     <h4 className="px-3 items-center mx-2 text-sm md:text-md mt-4 text-gray-400">
-                        Author: {props.blog.user.name}
+                        {t("dash.verf.auth")} {props.blog.user.name}
                     </h4>
                     <div className="px-2 flex items-center mx-2 mt-1 md:mt-3">
                         <div className="flex text-sm md:text-md items-center px-1 py-1 md:py-2 rounded-md bg-gray-200 text-gray-800">
@@ -54,7 +55,7 @@ const VerificationCard = (props) => {
                             element="span"
                             truncateText="..."
                             text={props.blog.body}
-                            textTruncateChild={<a>Read more</a>}
+                            textTruncateChild={<a>{t("dash.verf.rd-mr")}</a>}
                         />
                     </p>
                 </div>

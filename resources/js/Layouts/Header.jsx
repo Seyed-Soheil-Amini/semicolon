@@ -5,10 +5,12 @@ import { FaUserCircle, FaLanguage } from "react-icons/fa";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { isEmpty } from "lodash";
 import i18n from "i18next";
+import { useTranslation } from "react-i18next";
 
 const HeaderLayouts = ({ auth }) => {
     const { url, component } = usePage();
     const [changeLangIsOpen, setChangeLangIsOpen] = useState(false);
+    const { t } = useTranslation();
     const toggleDropdown = () => {
         setChangeLangIsOpen(!changeLangIsOpen);
     };
@@ -89,7 +91,8 @@ const HeaderLayouts = ({ auth }) => {
                                 }`}
                                 href="/"
                             >
-                                HOME <span className="sr-only">(current)</span>
+                                {t("header.home")}{" "}
+                                <span className="sr-only">(current)</span>
                             </Link>
                             <Link
                                 className={`nav-link px-3 ${
@@ -97,7 +100,7 @@ const HeaderLayouts = ({ auth }) => {
                                 }`}
                                 href="/about"
                             >
-                                ABOUT
+                                {t("header.abt")}
                             </Link>
                             <Link
                                 className={`nav-link px-3 ${
@@ -105,7 +108,7 @@ const HeaderLayouts = ({ auth }) => {
                                 }`}
                                 href="/blog"
                             >
-                                BLOG
+                                {t("header.blg")}
                             </Link>
                             <Link
                                 className={`nav-link px-3 ${
@@ -113,7 +116,7 @@ const HeaderLayouts = ({ auth }) => {
                                 }`}
                                 href="/contactus"
                             >
-                                CONTACT US
+                                {t("header.cnt")}
                             </Link>
                         </Nav>
                         <Nav>
@@ -142,13 +145,13 @@ const HeaderLayouts = ({ auth }) => {
                                         href={route("register")}
                                         className="lg:py-2 lg:px-2 rounded-full mr-3 font-semibold text-gray-400 hover:text-white lg:bg-white lg:text-gray-950 lg:hover:bg-gray-950"
                                     >
-                                        Register
+                                        {t("header.reg")}
                                     </Link>
                                     <Link
                                         href={route("login")}
                                         className="lg:py-2 mr-1 font-semibold text-gray-400 hover:text-white "
                                     >
-                                        login
+                                        {t("header.log")}
                                     </Link>
                                 </div>
                             )}

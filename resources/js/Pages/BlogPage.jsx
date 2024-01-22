@@ -3,8 +3,11 @@ import { FaUserCircle, FaEye, FaHeart, FaRegHeart } from "react-icons/fa";
 import { isEmpty } from "lodash";
 import { useAddView, useToggleLike } from "@/hooks";
 import getBrowserFingerprint from "get-browser-fingerprint";
+import { useTranslation } from "react-i18next";
 
 const BlogPage = ({ blog }) => {
+    const { t } = useTranslation();
+
     const [fingerprint, setfingerprint] = useState(getBrowserFingerprint());
     const [isLiked, setIsLiked] = useState(
         !isEmpty(blog.likes)
@@ -14,7 +17,7 @@ const BlogPage = ({ blog }) => {
     const [likes, setLikes] = useState(parseInt(blog.like));
     const handleClickLike = () => {
         try {
-            useToggleLike(blog.id,fingerprint);
+            useToggleLike(blog.id, fingerprint);
             setLikes(isLiked ? parseInt(likes - 1) : parseInt(likes + 1));
             setIsLiked(!isLiked);
         } catch (err) {
@@ -52,8 +55,9 @@ const BlogPage = ({ blog }) => {
                         />
                     </svg>
                     <span className="sr-only">Icon description</span>
-                    Back to{" "}
-                    {JSON.parse(localStorage.getItem("filter")) || "all"} blogs
+                    {t("blg-page.bck-btn")}{" "}
+                    {JSON.parse(localStorage.getItem("filter")) || "all"}{" "}
+                    {t("blg-page.blg")}
                 </button>
                 <div className="pt-1 px-5">
                     <div className="flex flex-col md:flex-row mt-0 h-auto md:h-screen">
@@ -125,7 +129,7 @@ const BlogPage = ({ blog }) => {
                             {!isEmpty(blog.category) && (
                                 <div className="mt-2.5 md:mt-5">
                                     <h2 className="font-mono text-gray-200 text-base md:text-xl">
-                                        Category
+                                        {t("blg-page.cat")}
                                     </h2>
                                     <div className="flex border border-gray-300 rounded-lg my-1 md:my-2"></div>
                                     <div className="flex rounded px-3 py-1 text-xl md:text-3xl font-semibold text-gray-300">
@@ -138,7 +142,7 @@ const BlogPage = ({ blog }) => {
                             {!isEmpty(blog.labels) && (
                                 <div className="mt-5">
                                     <h2 className="font-mono text-gray-200 text-base md:text-xl">
-                                        Labels
+                                        {t("blg-page.lbl")}
                                     </h2>
                                     <div className="flex border border-gray-300 rounded-lg my-1 md:my-2"></div>
                                     <div className="px-4 pt-1 pb-1 h-2/7">

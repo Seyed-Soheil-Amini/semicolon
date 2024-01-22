@@ -2,7 +2,10 @@ import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { FaCoins, FaTools, FaUserGraduate } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+
 const Services = ({ auth }) => {
+    const { t } = useTranslation();
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Verification" />
@@ -12,52 +15,46 @@ const Services = ({ auth }) => {
                         <div className="lg:pr-8 lg:pt-4">
                             <div className="lg:max-w-lg">
                                 <p className="mt-2 text-3xl font-bold text-gray-300 sm:text-4xl">
-                                    Unique Work Order Experience
+                                    {t("dash.srv.tit")}
                                 </p>
                                 <p className="mt-6 text-lg leading-8 text-gray-400">
-                                    Carrying out all software projects with high
-                                    quality and in the fastest time with price
-                                    guarantee with Semicolon team
+                                    {t("dash.srv.sub-tit")}
                                 </p>
                                 <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                                     <div className="relative pl-9">
                                         <dt className="inline font-semibold text-gray-300">
                                             <FaUserGraduate className="absolute left-1 top-1 h-5 w-5 text-indigo-600" />
-                                            Expert Staff.
+                                            {t("dash.srv.tit2")}
                                         </dt>
                                         <dd className="inline-block text-gray-400">
-                                            The employees of our team have the
-                                            necessary expertise in the fields of
-                                            work for the best quality.
+                                            {t("dash.srv.sub-tit2")}
                                         </dd>
                                     </div>
                                     <div className="relative pl-9">
                                         <dt className="inline font-semibold text-gray-300">
                                             <FaTools className="absolute left-1 top-1 h-5 w-5 text-indigo-600" />
-                                            Update Tools
+                                            {t("dash.srv.tit3")}
                                         </dt>
                                         <dd className="inline-block text-gray-400">
-                                            In the process of carrying out
-                                            software projects, the best and most
-                                            up-to-date tools are used.
+                                            {t("dash.srv.sub-tit3")}
                                         </dd>
                                     </div>
                                     <div className="relative pl-9">
                                         <dt className="inline font-semibold text-gray-300">
                                             <FaCoins className="absolute left-1 top-1 h-5 w-5 text-indigo-600" />
-                                            Guaranteed Price
+                                            {t("dash.srv.tit4")}
                                         </dt>
                                         <dd className="inline-block text-gray-400">
-                                            Frequent interaction and
-                                            correspondence with the employer and
-                                            delivery of the project with a
-                                            reasonable and guaranteed price.
+                                            {t("dash.srv.sub-tit4")}{" "}
                                         </dd>
                                     </div>
                                 </dl>
                             </div>
                         </div>
-                        <img src="/images/services-soon.png" className="animate-snake"/>
+                        <img
+                            src="/images/services-soon.png"
+                            className="animate-snake"
+                        />
                     </div>
                 </div>
             </div>

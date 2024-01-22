@@ -7,8 +7,10 @@ import { isEmpty } from "lodash";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 const BlockedBlog = (props) => {
+    const { t } = useTranslation();
     const { data: blogs, isLoading, isRefetching } = useAllBlogs(props.user.id);
     const {
         data: deletedBlog,
@@ -116,7 +118,7 @@ const BlockedBlog = (props) => {
                     ) : (
                         <div className="flex items-center w-3/5 mx-auto">
                             <h3 className="text-gray-200 mx-auto text-xl md:text-4xl">
-                                There are no blocked blogs.
+                                {t("dash.blg.blc.noblg")}
                             </h3>
                         </div>
                     )}

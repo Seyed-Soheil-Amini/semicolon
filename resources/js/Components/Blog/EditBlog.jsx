@@ -9,6 +9,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import PrimaryButton from "../PrimaryButton";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 const EditBlog = (props) => {
     const { data: blogs, isLoading, isRefetching } = useAllBlogs(props.user.id);
@@ -21,6 +22,7 @@ const EditBlog = (props) => {
     } = useDeleteBlog();
     const [selectedBlog, setSelectedBlog] = useState(null);
     const [searchBlog, setSearchBlog] = useState();
+    const { t } = useTranslation();
 
     const optionsFuseAlogrithm = {
         keys: ["title"],
@@ -115,13 +117,13 @@ const EditBlog = (props) => {
                         <div className="flex w-3/5 mx-auto text-center h-screen">
                             <div className="flex-row w-full">
                                 <h3 className="text-gray-200 mx-auto text-xl md:text-4xl mt-10">
-                                    There are no blogs.
+                                    {t('dash.blg.edt.nob')}
                                 </h3>
                                 <div className="items-center mt-4">
                                     <PrimaryButton
                                         onClick={() => props.onClickCreate()}
                                     >
-                                        Create New Blog
+                                        {t('dash.blg.edt.try')}
                                     </PrimaryButton>
                                 </div>
                             </div>

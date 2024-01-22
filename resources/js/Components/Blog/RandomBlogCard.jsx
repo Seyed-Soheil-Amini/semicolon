@@ -3,8 +3,10 @@ import BlogLink from "../BlogLink";
 import { isEmpty } from "lodash";
 import TextTruncate from "react-text-truncate";
 import { FaEye, FaHeart, FaTags, FaUserCircle } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const RandomBlogCard = ({ blog }) => {
+    const { t } = useTranslation();
     return (
         <BlogLink
             className="w-full h-100 rounded-lg border-b-2 border-stone-500 border-solid relative shadow-3xl cursor-pointer animate-fade-down animate-once"
@@ -69,7 +71,7 @@ const RandomBlogCard = ({ blog }) => {
                             element="span"
                             truncateText="..."
                             text={blog.body}
-                            textTruncateChild={<a>Read more</a>}
+                            textTruncateChild={<a>{t("dash.verf.rd-mr")}</a>}
                         />
                     </p>
                 </div>

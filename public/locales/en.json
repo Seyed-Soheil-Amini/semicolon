@@ -1,4 +1,49 @@
 {
+    "header": {
+        "home": "HOME",
+        "abt": "ABOUT",
+        "blg": "BLOG",
+        "cnt": "CONTACT US",
+        "reg": "Register",
+        "log": "Login"
+    },
+    "footer": "Copyright © 2022 All Rights Reserved By Semicolon.",
+    "login": {
+        "email": "Email",
+        "pass": "Password",
+        "rem": "Remember me",
+        "forget": "Forgot your password?",
+        "btn": "Log in"
+    },
+    "register": {
+        "name": "Name",
+        "email": "Email",
+        "pass": "Password",
+        "conf": "Confirm Password",
+        "alr-reg": "Already registered?",
+        "btn": "Register"
+    },
+    "verify-email": {
+        "head": "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
+        "sub": "A new verification link has been sent to the email address you provided during registration.",
+        "btn": "Resend Verification Email",
+        "out": "Log Out"
+    },
+    "reset-pass": {
+        "email": "Email",
+        "pass": "Password",
+        "conf": "Confirm Password",
+        "btn": "Reset Password"
+    },
+    "forgot-pass": {
+        "head": "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.",
+        "btn": "Email Password Reset Link"
+    },
+    "confirm-pass": {
+        "head": "This is a secure area of the application. Please confirm your password before continuing.",
+        "email": "Email",
+        "btn": "Confirm"
+    },
     "welcome-txt-tit": "Welcome to",
     "welcome-txt-subtit": "Semicolon official blog",
     "home-tit-subtxt": "This is the official website of Semicolon scientific team and it is at your service.",
@@ -14,7 +59,222 @@
     "home-srv-s3-tit": "Server Management",
     "home-srv-s3-txt": "Our team has the experience of working with Linux as one of the main operating systems used for the server, as well as working with web servers such as nginx to manage the server load, which allows it to be fully loaded after the website or application is designed. It is run and managed on the server.",
     "home-srv-s4-tit": "Artificial Intelligence",
-    "home-srv-s4-txt": "Our artificial intelligence expert team has the ability to carry out artificial intelligence projects, especially machine learning, with research and study in the fields of machine learning and data analysis. You can cooperate with us in the field of writing articles and research."
+    "home-srv-s4-txt": "Our artificial intelligence expert team has the ability to carry out artificial intelligence projects, especially machine learning, with research and study in the fields of machine learning and data analysis. You can cooperate with us in the field of writing articles and research.",
 
-    
+    "abt": {
+        "head": {
+            "tit": "About Semicolon",
+            "txt": "Semicolon scientific team was founded by computer students of Yazd University on June 22, 2022. This organization was formed for big goals and implementation of practical ideas in the field of technology in the form of web and application. This group is currently one of the active university teams in the field of software development and is currently registering ideas, this organization is currently a start-up company."
+        },
+        "ref": {
+            "tit1": "Team history years",
+            "subr1": "History of team formation",
+            "val1": "1+",
+            "tit2": "Hours per week",
+            "subr2": "Future vision",
+            "val2": "40+",
+            "tit3": "Members of team",
+            "subr3": "Semicolon services",
+            "val3": "10+",
+            "tit4": "Interest in work",
+            "subr4": "Our core values",
+            "val4": "Unlimited"
+        },
+        "his": {
+            "tit": "History",
+            "txt": "Semicolon scientific-student team was founded and formed on June 22, 2022, this organization was formed for big goals and implementation of practical ideas in the field of technology in the form of web and app."
+        },
+        "vis": {
+            "tit": "FUTURE VISION",
+            "txt": "At Semicolon, we are looking for big and practical and smart goals. Our future vision is reflected in the horizons of the world and the exchange and management of big data. We are researching and developing different parts of the team so that we can improve the quality of our response."
+        },
+        "srv": {
+            "tit": "SERVICES",
+            "txt": "Our services include web-based software development, server and host management, analysis and design of database scenarios, game creation and data analysis using artificial intelligence algorithms. Our experts are constantly updating themselves in all these fields."
+        },
+        "crv": {
+            "tit": "CORE VALUES",
+            "txt": "Our collection is to truly serve our customers by empowering, listening and collaborating with other stackers. Also, communicate openly and honestly both inside and outside the company. Encourage transparency in others by being empathetic, trustworthy, and acting with integrity."
+        }
+    },
+    "blg": {
+        "filt": {
+            "all": "All",
+            "pop": "Popular",
+            "old": "Oldest",
+            "new": "Newest"
+        }
+    },
+    "cnt": {
+        "head": {
+            "tit": "Contact Us",
+            "txt": "You can choose the way to communicate with us."
+        },
+        "email": {
+            "tit": "Email",
+            "txt": "semicolon@gmail.com"
+        },
+        "hlp": {
+            "tit": "Help and Support",
+            "txt": "get supprort"
+        },
+        "cal": {
+            "tit": "Call",
+            "txt": "+989103845418"
+        },
+        "msg": {
+            "head": "Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.",
+            "name": "Your Name",
+            "email": "Your email",
+            "subj": "Subject",
+            "msg": "Your message",
+            "btn": "Send message"
+        },
+        "cush": {
+            "name": {
+                "limit": "Length of name is more than standard limit(60 characters)",
+                "req": "Name is required"
+            },
+            "email": {
+                "limit": "Length of email is more than standard limit(120 characters)",
+                "req": "Email is required",
+                "val": "Please enter a valid email address"
+            },
+            "subj": {
+                "limit": "Length of subject is more than standard limit(200 characters)",
+                "req": "Subject is required"
+            },
+            "msg": {
+                "req": "Message is required",
+                "maxl": "Length of message is more than standard limit(16000 characters)",
+                "minl": "Length of message is less than standard limit(40 characters)"
+            }
+        }
+    },
+    "dash": {
+        "header": {
+            "home": "Dashboard",
+            "blg": "Blogs",
+            "srv": "Services",
+            "ver": "Verification",
+            "usr": "User Management",
+            "msg": "Message Box",
+            "pro-btn": "Profile",
+            "out-btn": "Log Out"
+        },
+        "home": {
+            "welcome": "Welcome Dear",
+            "info": {
+                "head": "User Information",
+                "fname": "Full name",
+                "apl": "Application for",
+                "email": "Email address",
+                "abt": "About"
+            },
+            "sat": {
+                "avg": "Average views of blogs",
+                "fac": "Favoriate Category",
+                "npp": "Number of published posts"
+            }
+        },
+        "blg": {
+            "tit": "Title",
+            "cat": "Category",
+            "bdy": "Body",
+            "lbl": "Labels",
+            "img": "Image File",
+            "btn": "Reset",
+            "cush": {
+                "tit": {
+                    "req": "Title is required",
+                    "limit": "Length of title is more than standard limit(16000 characters)"
+                },
+                "con": {
+                    "req": "Context is required",
+                    "maxl": "Length of context is more than standard limit(16000 characters)",
+                    "minl": "Length of context is less than standard limit(min 100 characters)"
+                }
+            },
+            "plc": "Drag and drop an image here, or click to select a file",
+            "max-size-img": "Maximum file size is 2 MB",
+            "save-btn": "Save",
+            "saving-btn": "Saving",
+            "edt": {
+                "nob": "There are no blogs.",
+                "try": "Create New Blog"
+            },
+            "blc":{
+                "noblg":"There are no blocked blogs."
+            },
+            "pub":{
+                "pub-btn":"PUBLISH",
+                "upub-btn":"UNPUBLISH",
+                "noblg":"There are no verified blogs."
+            },
+            "edt-form":{
+                "cls":"Close",
+                "tit":"Edit Blog",
+                "img-fil":"Image File",
+                "sub-img":"Drag and drop an image here, or click to select a file",
+                "sub-tit":"Title",
+                "cat":"Category",
+                "bdy":"Body",
+                "wait-btn":"Waiting...",
+                "save-btn":"Save",
+                "cnl-btn":"Cancle"
+            }
+        },
+        "verf": {
+            "vrf-btn":"Verify",
+            "blk-btn":"Blcok",
+            "cnl-btn":"Cancle",
+            "noblg":"There are no pending blogs.",
+            "auth":"Author: ",
+            "rd-mr":"Read More",
+            "pre":{
+                "lbl":"Labels : ",
+                "cls-btn":"Close"
+            }
+        },
+        "usr-mang": {
+            "icn": "icon",
+            "usr-name": "user name",
+            "exp": "Expertise",
+            "email": "Email",
+            "lblg": "Last Blog",
+            "blg": "Blogs",
+            "lod-btn": "Loading...",
+            "del-btn": "Delete"
+        },
+        "msg-box": {
+            "lod-btn": "Loading...",
+            "sel-btn": "Select All",
+            "cnl-btn": "Cancle",
+            "del-btn": "Delete",
+            "plc-hol-srh": "Search for blogs based on name"
+        },
+        "srv": {
+            "tit": "Unique Work Order Experience",
+            "sub-tit": "Carrying out all software projects with high quality and in the fastest time with price guarantee with Semicolon team",
+            "tit2": "Expert Staff.",
+            "sub-tit2": "The employees of our team have the necessary expertise in the fields of work for the best quality.",
+            "tit3": "Update Tools",
+            "sub-tit3": "In the process of carrying out software projects, the best and most up-to-date tools are used.",
+            "tit4": "Guaranteed Price",
+            "sub-tit4": "Frequent interaction and correspondence with the employer and delivery of the project with a reasonable and guaranteed price."
+        }
+    },
+    "user-page": {
+        "blg": "Blogger",
+        "fav": "Favorite Category",
+        "acat": "All Category",
+        "bio": "Biography",
+        "auth": "Author of Semicolon Weblog"
+    },
+    "blg-page": {
+        "bck-btn": "Back to",
+        "blg": "blogs",
+        "cat": "Category",
+        "lbl": "Labels"
+    }
 }

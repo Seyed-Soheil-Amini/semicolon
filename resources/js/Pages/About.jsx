@@ -1,8 +1,10 @@
 import HeaderLayouts from "@/Layouts/Header";
 import FooterLayout from "@/Layouts/Footer";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const About = ({ auth }) => {
+    const { t } = useTranslation();
     return (
         <>
             <HeaderLayouts auth={auth} />
@@ -40,19 +42,10 @@ const About = ({ auth }) => {
                     <div className="flex flex-col lg:flex-row max-w-7x lg:mx-0">
                         <div className="flex flex-col lg:w-1/2 animate-fade-down animate-once">
                             <h2 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-200">
-                                About Semicolon
+                                {t("abt.head.tit")}
                             </h2>
                             <p className="mt-6 text-xs md:text-lg lg:text-xl leading-8 text-gray-300 font-serif">
-                                Semicolon scientific team was founded by
-                                computer students of Yazd University on June 22,
-                                2022. This organization was formed for big goals
-                                and implementation of practical ideas in the
-                                field of technology in the form of web and
-                                application. This group is currently one of the
-                                active university teams in the field of software
-                                development and is currently registering ideas,
-                                this organization is currently a start-up
-                                company.
+                                {t("abt.head.txt")}
                             </p>
                         </div>
                         <div className="flex items-center justify-center lg:w-1/2 mt-2">
@@ -67,34 +60,34 @@ const About = ({ auth }) => {
                         <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
                             <div className="flex flex-col-reverse animate-flip-up animate-once">
                                 <dt className="text-base leading-7 text-gray-300">
-                                    Team history years
+                                    {t("abt.ref.tit1")}
                                 </dt>
                                 <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
-                                    1+
+                                    {t("abt.ref.val1")}
                                 </dd>
                             </div>
                             <div className="flex flex-col-reverse animate-flip-up animate-once animate-duration-[1500ms]">
                                 <dt className="text-base leading-7 text-gray-300">
-                                    Hours per week
+                                    {t("abt.ref.tit2")}
                                 </dt>
                                 <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
-                                    40+
+                                    {t("abt.ref.val2")}
                                 </dd>
                             </div>
                             <div className="flex flex-col-reverse animate-flip-up animate-once animate-duration-[2000ms]">
                                 <dt className="text-base leading-7 text-gray-300">
-                                    Members of team
+                                    {t("abt.ref.tit3")}
                                 </dt>
                                 <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
-                                    10+
+                                    {t("abt.ref.val3")}
                                 </dd>
                             </div>
                             <div className="flex flex-col-reverse animate-flip-up animate-once animate-duration-[2500ms]">
                                 <dt className="text-base leading-7 text-gray-300">
-                                    Interest in work
+                                    {t("abt.ref.tit4")}
                                 </dt>
                                 <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
-                                    Unlimited
+                                    {t("abt.ref.val4")}
                                 </dd>
                             </div>
                         </dl>
@@ -103,35 +96,41 @@ const About = ({ auth }) => {
                                 href="#history"
                                 className="text-sm md:text-lg hover:text-gray-200 pt-2 md:pt-0"
                             >
-                                History of team formation{" "}
+                                {t("abt.ref.subr1")}{" "}
                                 <span aria-hidden="true">→</span>
                             </a>
                             <a
                                 href="#future"
                                 className="text-sm md:text-lg hover:text-gray-200 pt-2 md:pt-0"
                             >
-                                Future vision <span aria-hidden="true">→</span>
+                                {t("abt.ref.subr2")}{" "}
+                                <span aria-hidden="true">→</span>
                             </a>
                             <a
                                 href="#service"
                                 className="text-sm md:text-lg hover:text-gray-200 pt-2 md:pt-0"
                             >
-                                Semicolon services{" "}
+                                {t("abt.ref.subr3")}{" "}
                                 <span aria-hidden="true">→</span>
                             </a>
                             <a
                                 href="#value"
                                 className="text-sm md:text-lg hover:text-gray-200 pt-2 md:pt-0"
                             >
-                                Our core values{" "}
+                                {t("abt.ref.subr4")}{" "}
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div className="container mx-auto mt-20 pt-10">
-                    <div className="flex flex-col mt-10 animate-fade-right animate-once" id="history">
-                        <h3 className="text-gray-100 uppercase text-lg md:text-3xl">History</h3>
+                    <div
+                        className="flex flex-col mt-10 animate-fade-right animate-once"
+                        id="history"
+                    >
+                        <h3 className="text-gray-100 uppercase text-lg md:text-3xl">
+                            {t("abt.his.tit")}
+                        </h3>
                         <div className="flex justify-start">
                             <hr className="my-2 border-gray-500 w-1/2" />
                         </div>
@@ -144,16 +143,15 @@ const About = ({ auth }) => {
                             />
                         </div>
                         <div className="order-2 sm:order-2 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
-                            Semicolon scientific-student team was founded and
-                            formed on June 22, 2022, this organization was
-                            formed for big goals and implementation of practical
-                            ideas in the field of technology in the form of web
-                            and app.
+                            {t("abt.his.txt")}
                         </div>
                     </div>
-                    <div className="flex flex-col mt-20 pt-16 animate-fade-left animate-once" id="future">
+                    <div
+                        className="flex flex-col mt-20 pt-16 animate-fade-left animate-once"
+                        id="future"
+                    >
                         <h3 className="flex justify-content-end text-gray-100 uppercase text-lg md:text-3xl">
-                            Future Vision
+                            {t("abt.vis.tit")}
                         </h3>
                         <div className="flex justify-end">
                             <hr className="my-2 border-gray-300 w-1/2" />
@@ -167,16 +165,13 @@ const About = ({ auth }) => {
                             />
                         </div>
                         <div className="md:order-1 sm:order-2 lg:order-1 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
-                            At Semicolon, we are looking for big and practical
-                            and smart goals. Our future vision is reflected in
-                            the horizons of the world and the exchange and
-                            management of big data. We are researching and
-                            developing different parts of the team so that we
-                            can improve the quality of our response.
+                            {t("abt.vis.txt")}
                         </div>
                     </div>
                     <div className="flex flex-col mt-10 pt-16" id="service">
-                        <h3 className="text-gray-100 uppercase text-lg md:text-3xl animate-fade-right animate-once">Services</h3>
+                        <h3 className="text-gray-100 uppercase text-lg md:text-3xl animate-fade-right animate-once">
+                            {t("abt.srv.tit")}
+                        </h3>
                         <div className="flex justify-start">
                             <hr className="my-2 border-gray-500 w-1/2" />
                         </div>
@@ -189,17 +184,15 @@ const About = ({ auth }) => {
                             />
                         </div>
                         <div className="md:order-2 order-2 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
-                            Our services include web-based software development,
-                            server and host management, analysis and design of
-                            database scenarios, game creation and data analysis
-                            using artificial intelligence algorithms. Our
-                            experts are constantly updating themselves in all
-                            these fields.
+                            {t("abt.srv.txt")}
                         </div>
                     </div>
-                    <div className="flex flex-col mt-10 pt-8 md:mt-20 md:pt-16 animate-fade-left animate-once" id="value">
+                    <div
+                        className="flex flex-col mt-10 pt-8 md:mt-20 md:pt-16 animate-fade-left animate-once"
+                        id="value"
+                    >
                         <h3 className="text-gray-100 uppercase flex justify-content-end text-lg md:text-3xl">
-                            Core Values
+                            {t("abt.crv.tit")}
                         </h3>
                         <div className="flex justify-end">
                             <hr className="my-2 border-gray-300 w-1/2" />
@@ -213,12 +206,7 @@ const About = ({ auth }) => {
                             />
                         </div>
                         <div className="md:order-1 sm:order-2 lg:order-1 text-center my-auto items-center text-xs md:text-lg lg:text-xl font-serif w-full sm:w-2/3">
-                            Our collection is to truly serve our customers by
-                            empowering, listening and collaborating with other
-                            stackers. Also, communicate openly and honestly both
-                            inside and outside the company. Encourage
-                            transparency in others by being empathetic,
-                            trustworthy, and acting with integrity.
+                            {t("abt.crv.txt")}
                         </div>
                     </div>
                 </div>

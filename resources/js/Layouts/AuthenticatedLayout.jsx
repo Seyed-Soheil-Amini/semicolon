@@ -5,11 +5,13 @@ import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 import { useQueryClient } from "react-query";
+import { useTranslation } from "react-i18next";
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
     const queryClient = new useQueryClient();
+    const { t } = useTranslation();
 
     return (
         <div className="bg-gray-100 dark:bg-gray-950">
@@ -27,13 +29,13 @@ export default function Authenticated({ user, header, children }) {
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >
-                                    Dashboard
+                                    {t("dash.header.home")}
                                 </NavLink>
                                 <NavLink
                                     href={route("blogs")}
                                     active={route().current("blogs")}
                                 >
-                                    Blogs
+                                    {t("dash.header.blg")}
                                 </NavLink>
                                 {user.isAdmin == 0 && (
                                     <>
@@ -41,7 +43,7 @@ export default function Authenticated({ user, header, children }) {
                                             href={route("services")}
                                             active={route().current("services")}
                                         >
-                                            Services
+                                            {t("dash.header.srv")}
                                         </NavLink>
                                     </>
                                 )}
@@ -53,7 +55,7 @@ export default function Authenticated({ user, header, children }) {
                                                 "verification"
                                             )}
                                         >
-                                            Verification
+                                            {t("dash.header.ver")}
                                         </NavLink>
                                         <NavLink
                                             href={route("userManagment")}
@@ -61,7 +63,7 @@ export default function Authenticated({ user, header, children }) {
                                                 "userManagment"
                                             )}
                                         >
-                                            User Management
+                                            {t("dash.header.usr")}
                                         </NavLink>
                                         <NavLink
                                             href={route("messageBox")}
@@ -69,7 +71,7 @@ export default function Authenticated({ user, header, children }) {
                                                 "messageBox"
                                             )}
                                         >
-                                            Message Box
+                                            {t("dash.header.msg")}
                                         </NavLink>
                                     </>
                                 )}
@@ -106,7 +108,7 @@ export default function Authenticated({ user, header, children }) {
                                         <Dropdown.Link
                                             href={route("profile.edit")}
                                         >
-                                            Profile
+                                            {t("dash.header.pro-btn")}
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route("logout")}
@@ -114,7 +116,7 @@ export default function Authenticated({ user, header, children }) {
                                             as="button"
                                             onClick={() => queryClient.clear()}
                                         >
-                                            Log Out
+                                            {t("dash.header.out-btn")}
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -175,20 +177,20 @@ export default function Authenticated({ user, header, children }) {
                             href={route("dashboard")}
                             active={route().current("dashboard")}
                         >
-                            Dashboard
+                            {t("dash.header.home")}
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
                             href={route("blogs")}
                             active={route().current("blogs")}
                         >
-                            Blogs
+                            {t("dash.header.blg")}
                         </ResponsiveNavLink>
                         {user.isAdmin == 0 && (
                             <ResponsiveNavLink
                                 href={route("services")}
                                 active={route().current("services")}
                             >
-                                Services
+                                {t("dash.header.srv")}
                             </ResponsiveNavLink>
                         )}
                         {user.isAdmin == 1 && (
@@ -198,19 +200,19 @@ export default function Authenticated({ user, header, children }) {
                                     href={route("verification")}
                                     active={route().current("verification")}
                                 >
-                                    Verification
+                                    {t("dash.header.ver")}
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink
                                     href={route("userManagment")}
                                     active={route().current("userManagment")}
                                 >
-                                    User Management
+                                    {t("dash.header.usr")}
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink
                                     href={route("messageBox")}
                                     active={route().current("messageBox")}
                                 >
-                                    Message Box
+                                    {t("dash.header.msg")}
                                 </ResponsiveNavLink>
                             </>
                         )}
@@ -227,14 +229,14 @@ export default function Authenticated({ user, header, children }) {
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route("profile.edit")}>
-                                Profile
+                                {t("dash.header.pro-btn")}
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"
                                 href={route("logout")}
                                 as="button"
                             >
-                                Log Out
+                                {t("dash.header.out-btn")}
                             </ResponsiveNavLink>
                         </div>
                     </div>

@@ -1,8 +1,10 @@
 import { Head } from "@inertiajs/react";
 import { isEmpty } from "lodash";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const User = ({ user, favoriteCategory }) => {
+    const { t } = useTranslation();
     return (
         <>
             <Head>
@@ -56,26 +58,28 @@ const User = ({ user, favoriteCategory }) => {
                                 <path d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z" />
                             </svg>{" "}
                             {isEmpty(user.job_title) || user.job_title == "null"
-                                ? "Blogger"
+                                ? t("user-page.blg")
                                 : user.job_title}
                         </p>
                         <div className="mt-4">
                             <h2 className="text-sm md:text-md">
-                                Favorite Category
+                                {t("user-page.fav")}
                             </h2>
                             <div className="mx-auto lg:mx-0 pt-1 w-4/5 border-b-2 border-orange-500 opacity-25" />
                             <p className="pt-1 text-xl font-medium text-gray-500">
                                 {isEmpty(favoriteCategory)
-                                    ? "All Category"
+                                    ? t("user-page.acat")
                                     : favoriteCategory.name}
                             </p>
                         </div>
                         <div className="mt-4">
-                            <h2 className="text-sm md:text-md">Biography</h2>
+                            <h2 className="text-sm md:text-md">
+                                {t("user-page.bio")}
+                            </h2>
                             <div className="mx-auto lg:mx-0 pt-1 w-4/5 border-b-2 border-orange-500 opacity-25" />
                             <p className="pt-2 text-sm font-serif text-gray-500">
                                 {isEmpty(user.about) || user.about == "null"
-                                    ? "Author of Semicolon Weblog"
+                                    ? t("user-page.auth")
                                     : user.about}
                             </p>
                         </div>
