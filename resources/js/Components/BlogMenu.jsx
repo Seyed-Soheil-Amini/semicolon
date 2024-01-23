@@ -1,6 +1,8 @@
 import BlogMenuItem from "./BlogMenuItem";
+import { useTranslation } from "react-i18next";
 
 const BlogSideBar = (props) => {
+    const { t } = useTranslation();
     return (
         <div className="flex flex-col md:flex-row h-full md:h-full">
             <div className="bg-gray-800 text-gray-100 flex-shrink-0 w-full h-full">
@@ -28,25 +30,25 @@ const BlogSideBar = (props) => {
                 <ul className="py-2 px-1 md:py-4 md:px-2 space-y-6">
                     <BlogMenuItem
                         onClickItem={props.onChangeComponent}
-                        itemName="Add Blog"
+                        itemName={t("dash.blg.item1")}
                         icon="add"
                         activeItem={props.currentCmp === "create"}
                     />
                     <BlogMenuItem
                         onClickItem={props.onChangeComponent}
-                        itemName="All Blogs"
+                        itemName={t("dash.blg.item2")}
                         icon="edit"
                         activeItem={props.currentCmp === "edit"}
                     />
                     <BlogMenuItem
                         onClickItem={props.onChangeComponent}
-                        itemName="Publishing"
+                        itemName={t("dash.blg.item3")}
                         icon="pub"
                         activeItem={props.currentCmp === "published"}
                     />
                     <BlogMenuItem
                         onClickItem={props.onChangeComponent}
-                        itemName="Blocked"
+                        itemName={t("dash.blg.item4")}
                         icon="ban"
                         activeItem={props.currentCmp === "blocked"}
                     />

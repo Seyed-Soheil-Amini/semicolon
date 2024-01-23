@@ -125,7 +125,7 @@ export default function UpdateProfileInformation({
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        {t("dash.prof.upd.prf.txt")}
+                        {t("dash.prof.upd.prf-txt")}
                     </p>
                 </header>
                 <form

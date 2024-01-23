@@ -178,6 +178,10 @@
             }
         },
         "blg": {
+            "item1": "Add Blog",
+            "item2": "All Blogs",
+            "item3": "Publishing",
+            "item4": "Blocked",
             "tit": "Title",
             "cat": "Category",
             "bdy": "Body",
@@ -301,77 +305,77 @@
         "cat": "Category",
         "lbl": "Labels"
     },
-    "toast":{
-        "blc":{
-            "lod":"Receiveing the new data...",
-            "pnd":"Deleting...",
-            "scs":"Your Blog Was Deleted Successfully!",
-            "nfn":"Blog not found",
-            "plb":"Unfortunately, there is a problem in the process of deleting the blog."
+    "toast": {
+        "blc": {
+            "lod": "Receiveing the new data...",
+            "pnd": "Deleting...",
+            "scs": "Your Blog Was Deleted Successfully!",
+            "nfn": "Blog not found",
+            "plb": "Unfortunately, there is a problem in the process of deleting the blog."
         },
-        "edt-frm":{
-            "img-size":"Image size exceeds the limit (Max size 2MB)",
-            "img-for":"Only image files are allowed",
-            "scs":"Blog Was Updated Successfully.",
-            "err":"Blog Was Not Updated Successfully"
+        "edt-frm": {
+            "img-size": "Image size exceeds the limit (Max size 2MB)",
+            "img-for": "Only image files are allowed",
+            "scs": "Blog Was Updated Successfully.",
+            "err": "Blog Was Not Updated Successfully"
         },
-        "crt":{
-            "pnd":"Storing...",
-            "scs":"Your Blog Was Stored Successfully!",
-            "nfn":"Blog not found",
-            "plb":"Unfortunately, there is a problem in the process of storing the blog."
+        "crt": {
+            "pnd": "Storing...",
+            "scs": "Your Blog Was Stored Successfully!",
+            "nfn": "Blog not found",
+            "plb": "Unfortunately, there is a problem in the process of storing the blog."
         },
-        "edt":{
-            "lod":"Receiveing the new data...",
-            "pnf":"Deleting...",
-            "scs":"Your Blog Was Deleted Successfully!",
-            "nfn":"Blog not found",
-            "plb":"Unfortunately, there is a problem in the process of deleting the blog."
+        "edt": {
+            "lod": "Receiveing the new data...",
+            "pnf": "Deleting...",
+            "scs": "Your Blog Was Deleted Successfully!",
+            "nfn": "Blog not found",
+            "plb": "Unfortunately, there is a problem in the process of deleting the blog."
         },
-        "pub":{
-            "lod":"Receiveing the new data...",
-            "pub":"Your blog has been successfully published.",
-            "upub":"Your blog has been successfully unpublished.",
-            "pnd":"Waiting...",
-            "nfn":"Blog not found",
-            "plb":"Unfortunately, there is a problem in the process of publishing the blog."
+        "pub": {
+            "lod": "Receiveing the new data...",
+            "pub": "Your blog has been successfully published.",
+            "upub": "Your blog has been successfully unpublished.",
+            "pnd": "Waiting...",
+            "nfn": "Blog not found",
+            "plb": "Unfortunately, there is a problem in the process of publishing the blog."
         },
-        "prf":{
-            "pas":"Your password has been changed.",
-            "upd":{
-                "pnd":"Updating...",
-                "scs":"Your information has been successfully saved.",
-                "nfn":"User not found",
-                "plb":"Unfortunately, there is a problem in the process of updating your information."
+        "prf": {
+            "pas": "Your password has been changed.",
+            "upd": {
+                "pnd": "Updating...",
+                "scs": "Your information has been successfully saved.",
+                "nfn": "User not found",
+                "plb": "Unfortunately, there is a problem in the process of updating your information."
             }
         },
-        "cnt":{
-            "pnd":"Sending...",
-            "scs":"Your message has been sent successfully.",
-            "plb":"Unfortunately, there is a problem in the process of sending your information."
+        "cnt": {
+            "pnd": "Sending...",
+            "scs": "Your message has been sent successfully.",
+            "plb": "Unfortunately, there is a problem in the process of sending your information."
         },
-        "msg":{
-            "pnd":"Removing...",
-            "scs":"Messages are deleted successfully.",
-            "nfn":"Message not found",
-            "plb":"Unfortunately, there is a problem in the process of deleting the message."
+        "msg": {
+            "pnd": "Removing...",
+            "scs": "Messages are deleted successfully.",
+            "nfn": "Message not found",
+            "plb": "Unfortunately, there is a problem in the process of deleting the message."
         },
-        "usm":{
-            "pnd":"Removing...",
-            "scs":"Users are deleted successfully.",
-            "nfn":"User not found",
-            "plb":"Unfortunately, there is a problem in the process of deleting the user."
+        "usm": {
+            "pnd": "Removing...",
+            "scs": "Users are deleted successfully.",
+            "nfn": "User not found",
+            "plb": "Unfortunately, there is a problem in the process of deleting the user."
         },
-        "vrf":{
-            "lod":"Receiveing the new data...",
-            "pnd":"Verifing...",
-            "scs":"Blogs are verified successfully.",
-            "nfn":"Blog not found",
-            "plb":"Unfortunately, there is a problem in the process of publishing the blog.",
-            "pnd-b":"Blocking...",
-            "scs-b":"Blogs are blocked successfully.",
-            "nfn-b":"Blog not found",
-            "plb-b":"Unfortunately, there is a problem in the process of blocking the blog."
+        "vrf": {
+            "lod": "Receiveing the new data...",
+            "pnd": "Verifing...",
+            "scs": "Blogs are verified successfully.",
+            "nfn": "Blog not found",
+            "plb": "Unfortunately, there is a problem in the process of publishing the blog.",
+            "pnd-b": "Blocking...",
+            "scs-b": "Blogs are blocked successfully.",
+            "nfn-b": "Blog not found",
+            "plb-b": "Unfortunately, there is a problem in the process of blocking the blog."
         }
     }
 }
