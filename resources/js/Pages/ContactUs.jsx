@@ -38,7 +38,7 @@ const ContactUs = ({ auth }) => {
         toast.promise(
             async () => await Promise.resolve(useStoreMessage(message)),
             {
-                pending: "Sending...",
+                pending: t("toast.cnt.pnd"),
                 success: {
                     render() {
                         setMessage({
@@ -47,10 +47,10 @@ const ContactUs = ({ auth }) => {
                             subject: "",
                             body: "",
                         });
-                        return "Your information has been successfully saved.";
+                        return t("toast.cnt.scs");
                     },
                 },
-                error: "Unfortunately, there is a problem in the process of updating your information.",
+                error: t("toast.cnt.plb"),
             }
         );
     }

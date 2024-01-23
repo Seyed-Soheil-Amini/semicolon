@@ -262,6 +262,30 @@
             "sub-tit3": "In the process of carrying out software projects, the best and most up-to-date tools are used.",
             "tit4": "Guaranteed Price",
             "sub-tit4": "Frequent interaction and correspondence with the employer and delivery of the project with a reasonable and guaranteed price."
+        },
+        "prof": {
+            "del-usr": {
+                "tit": "Delete Account",
+                "txt": "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.",
+                "del-btn": "Delete Account",
+                "del-cus": "Are you sure you want to delete your account?",
+                "cus-txt": "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
+                "cnl-btn": "Cancle"
+            },
+            "upd-usr": {
+                "tit": "Update Password",
+                "txt": "Ensure your account is using a long, random password to stay secure.",
+                "sav-btn": "Save"
+            },
+            "upd": {
+                "plc-hol": "Drag and drop an image here, or click to select a file",
+                "prf-tit": "Profile Information",
+                "prf-txt": "Update your account's profile information and email address.",
+                "emi-vrf": "Your email address is unverified.",
+                "vrf-lnk": "Click here to re-send the verification email.",
+                "vrf-res": "A new verification link has been sent to your email address.",
+                "rmv-btn": "Remove"
+            }
         }
     },
     "user-page": {
@@ -277,28 +301,77 @@
         "cat": "Category",
         "lbl": "Labels"
     },
-    "prof": {
-        "del-usr": {
-            "tit": "Delete Account",
-            "txt": "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.",
-            "del-btn": "Delete Account",
-            "del-cus": "Are you sure you want to delete your account?",
-            "cus-txt": "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
-            "cnl-btn": "Cancle"
+    "toast":{
+        "blc":{
+            "lod":"Receiveing the new data...",
+            "pnd":"Deleting...",
+            "scs":"Your Blog Was Deleted Successfully!",
+            "nfn":"Blog not found",
+            "plb":"Unfortunately, there is a problem in the process of deleting the blog."
         },
-        "upd-usr": {
-            "tit": "Update Password",
-            "txt": "Ensure your account is using a long, random password to stay secure.",
-            "sav-btn": "Save"
+        "edt-frm":{
+            "img-size":"Image size exceeds the limit (Max size 2MB)",
+            "img-for":"Only image files are allowed",
+            "scs":"Blog Was Updated Successfully.",
+            "err":"Blog Was Not Updated Successfully"
         },
-        "upd": {
-            "plc-hol": "Drag and drop an image here, or click to select a file",
-            "prf-tit": "Profile Information",
-            "prf-txt": "Update your account's profile information and email address.",
-            "emi-vrf": "Your email address is unverified.",
-            "vrf-lnk": "Click here to re-send the verification email.",
-            "vrf-res":"A new verification link has been sent to your email address.",
-            "rmv-btn":"Remove"
+        "crt":{
+            "pnd":"Storing...",
+            "scs":"Your Blog Was Stored Successfully!",
+            "nfn":"Blog not found",
+            "plb":"Unfortunately, there is a problem in the process of storing the blog."
+        },
+        "edt":{
+            "lod":"Receiveing the new data...",
+            "pnf":"Deleting...",
+            "scs":"Your Blog Was Deleted Successfully!",
+            "nfn":"Blog not found",
+            "plb":"Unfortunately, there is a problem in the process of deleting the blog."
+        },
+        "pub":{
+            "lod":"Receiveing the new data...",
+            "pub":"Your blog has been successfully published.",
+            "upub":"Your blog has been successfully unpublished.",
+            "pnd":"Waiting...",
+            "nfn":"Blog not found",
+            "plb":"Unfortunately, there is a problem in the process of publishing the blog."
+        },
+        "prf":{
+            "pas":"Your password has been changed.",
+            "upd":{
+                "pnd":"Updating...",
+                "scs":"Your information has been successfully saved.",
+                "nfn":"User not found",
+                "plb":"Unfortunately, there is a problem in the process of updating your information."
+            }
+        },
+        "cnt":{
+            "pnd":"Sending...",
+            "scs":"Your message has been sent successfully.",
+            "plb":"Unfortunately, there is a problem in the process of sending your information."
+        },
+        "msg":{
+            "pnd":"Removing...",
+            "scs":"Messages are deleted successfully.",
+            "nfn":"Message not found",
+            "plb":"Unfortunately, there is a problem in the process of deleting the message."
+        },
+        "usm":{
+            "pnd":"Removing...",
+            "scs":"Users are deleted successfully.",
+            "nfn":"User not found",
+            "plb":"Unfortunately, there is a problem in the process of deleting the user."
+        },
+        "vrf":{
+            "lod":"Receiveing the new data...",
+            "pnd":"Verifing...",
+            "scs":"Blogs are verified successfully.",
+            "nfn":"Blog not found",
+            "plb":"Unfortunately, there is a problem in the process of publishing the blog.",
+            "pnd-b":"Blocking...",
+            "scs-b":"Blogs are blocked successfully.",
+            "nfn-b":"Blog not found",
+            "plb-b":"Unfortunately, there is a problem in the process of blocking the blog."
         }
     }
 }

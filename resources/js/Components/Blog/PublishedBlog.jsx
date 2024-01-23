@@ -19,7 +19,7 @@ const PublishedBlog = (props) => {
 
     useEffect(() => {
         isRefetching
-            ? toast.loading("Receiveing the new data...", {
+            ? toast.loading(t("toast.pub.lod"), {
                   toastId: "loading",
               })
             : toast.dismiss("loading");
@@ -138,19 +138,19 @@ const PublishedBlog = (props) => {
         const toggledPublishBlog = blogs.filter((blog) => blog.id === blogId);
         successMessage =
             toggledPublishBlog[0].published_at === null
-                ? "Your blog has been successfully published."
-                : "Your blog has been successfully unpublished.";
+                ? t("toast.pub.pub")
+                : t("toast.pub.upub");
         toast.promise(
             async () => await Promise.resolve(togglePublishBlog(blogId)),
             {
-                pending: "Waiting...",
+                pending: t("toast.pub.pnd"),
                 success: successMessage,
                 error: {
                     render({ data }) {
                         if (data.response && data.response.status === 404) {
-                            return "Blog not found";
+                            return t("toast.pub.nfn");
                         } else {
-                            return "Unfortunately, there is a problem in the process of publishing the blog.";
+                            return t("toast.pub.plb");
                         }
                     },
                 },

@@ -43,20 +43,20 @@ export default function UpdateProfileInformation({
         e.preventDefault();
         setProcessing(true);
         toast.promise(async () => await Promise.resolve(useUpdateUser(data)), {
-            pending: "Updating...",
+            pending: t("toast.prf.upd.pnd"),
             success: {
                 render({ data }) {
                     setData(data);
                     setProcessing(false);
-                    return "Your information has been successfully saved.";
+                    return t("toast.prf.upd.scs");
                 },
             },
             error: {
                 render({ data }) {
                     if (data.response && data.response.status === 404) {
-                        return "User not found";
+                        return t("toast.prf.upd.nfn");
                     } else {
-                        return "Unfortunately, there is a problem in the process of updating your information.";
+                        return t("toast.prf.upd.plb");
                     }
                 },
             },
@@ -74,11 +74,11 @@ export default function UpdateProfileInformation({
 
         if (file) {
             if (file.size > MAX_IMAGE_USER_SIZE) {
-                toast.info(`Image size exceeds the limit (Max size 2MB)`);
+                toast.info(t("toast.edt-frm.img-size"));
                 return;
             }
             if (!file.type.startsWith("image/")) {
-                toast.info("Only image files are allowed");
+                toast.info(t("toast.edt-frm.img-for"));
                 return;
             }
             reader.readAsDataURL(file);

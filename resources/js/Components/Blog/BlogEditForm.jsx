@@ -59,11 +59,11 @@ const BlogEditForm = (props) => {
         };
         if (file) {
             if (file.size > MAX_IMAGE_SIZE) {
-                toast.info(`Image size exceeds the limit (Max size 2MB)`);
+                toast.info(t("toast.edt-frm.img-size"));
                 return;
             }
             if (!file.type.startsWith("image/")) {
-                toast.info("Only image files are allowed");
+                toast.info(t("toast.edt-frm.img-for"));
                 return;
             }
             reader.readAsDataURL(file);
@@ -81,7 +81,7 @@ const BlogEditForm = (props) => {
             Promise.resolve(updateBlog(blog)).then((response) => {
                 setShowPopup({
                     isShow: true,
-                    message: "Blog Was Updated Successfully.",
+                    message: t("toast.edt-frm.scs"),
                     data: response.data.data,
                     success: true,
                 });
@@ -89,7 +89,7 @@ const BlogEditForm = (props) => {
         } catch (error) {
             setShowPopup({
                 isShow: true,
-                message: `Blog Was Not Updated Successfully.(error:${error})`,
+                message: `${t("toast.edt-frm.err")}.(error:${error})`,
                 data: null,
                 success: false,
             });

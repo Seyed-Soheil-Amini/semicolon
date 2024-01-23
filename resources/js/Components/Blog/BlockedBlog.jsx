@@ -33,7 +33,7 @@ const BlockedBlog = (props) => {
 
     useEffect(() => {
         isRefetching
-            ? toast.loading("Receiveing the new data...", {
+            ? toast.loading(t("toast.blc.lod"), {
                   toastId: "loading",
               })
             : toast.dismiss("loading");
@@ -146,14 +146,14 @@ const BlockedBlog = (props) => {
 
     function handleDeleteBlog(blogId) {
         toast.promise(async () => await Promise.resolve(deleteBlog(blogId)), {
-            pending: "Deleting...",
-            success: "Your Blog Was Deleted Successfully!",
+            pending: t("toast.blc.pnd"),
+            success: t("toast.blc.scs"),
             error: {
                 render({ data }) {
                     if (data.response && data.response.status === 404) {
-                        return "Blog not found";
+                        return t("toast.blc.nfn");
                     } else {
-                        return "Unfortunately, there is a problem in the process of deleting the blog.";
+                        return t("toast.blc.plb");
                     }
                 },
             },

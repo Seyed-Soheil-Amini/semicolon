@@ -82,15 +82,15 @@ const MessageBox = ({ auth }) => {
                     success: {
                         render() {
                             setSelectedMessages([]);
-                            return "Messages are deleted successfully.";
+                            return "toast.msg.scs";
                         },
                     },
                     error: {
                         render({ data }) {
                             if (data.response && data.response.status === 400) {
-                                return "Message not found";
+                                return t("toast.msg.nfn");
                             } else {
-                                return "Unfortunately, there is a problem in the process of deleting the message.";
+                                return t("toast.msg.plb");
                             }
                         },
                     },

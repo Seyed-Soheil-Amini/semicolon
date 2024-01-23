@@ -70,7 +70,7 @@ const CreateBlog = () => {
     function handleSubmit(event) {
         try {
             toast.promise(async () => await Promise.resolve(storeBlog(blog)), {
-                pending: "Storing...",
+                pending: t("toast.crt.pnd"),
                 success: {
                     render() {
                         setBlog({
@@ -81,15 +81,15 @@ const CreateBlog = () => {
                             image: {},
                             labels: [],
                         });
-                        return "Your Blog Was Stored Successfully!";
+                        return t("toast.crt.scs");
                     },
                 },
                 error: {
                     render({ data }) {
                         if (data.response && data.response.status === 400) {
-                            return "Blog not found";
+                            return t("toast.crt.nfn");
                         } else {
-                            return "Unfortunately, there is a problem in the process of storing the blog.";
+                            return t("toast.crt.plb");
                         }
                     },
                 },
@@ -110,11 +110,11 @@ const CreateBlog = () => {
 
         if (file) {
             if (file.size > MAX_IMAGE_SIZE) {
-                toast.info(`Image size exceeds the limit (Max size 2MB)`);
+                toast.info(t("toast.edt-frm.img-size"));
                 return;
             }
             if (!file.type.startsWith("image/")) {
-                toast.info("Only image files are allowed");
+                toast.info(t("toast.edt-frm.img-for"));
                 return;
             }
             reader.readAsDataURL(file);

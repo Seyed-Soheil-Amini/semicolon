@@ -34,7 +34,7 @@ export default function UpdatePasswordForm({ className = "" }) {
             preserveScroll: true,
             onSuccess: () => {
                 reset();
-                toast.success("Your password has been changed.");
+                toast.success(t("toast.prf.pas"));
             },
             onError: (errors) => {
                 if (errors.password) {

@@ -40,19 +40,19 @@ const UserManagment = ({ auth }) => {
             toast.promise(
                 async () => await Promise.resolve(deleteUsers(selectedUsers)),
                 {
-                    pending: "Removing...",
+                    pending: t("toast.usm.pnd"),
                     success: {
                         render() {
                             !isLoading && setSelectedUsers([]);
-                            return "Users are deleted successfully.";
+                            return t("toast.usm.scs");
                         },
                     },
                     error: {
                         render({ data }) {
                             if (data.response && data.response.status === 404) {
-                                return "User not found";
+                                return t("toast.usm.nfn");
                             } else {
-                                return "Unfortunately, there is a problem in the process of deleting the user.";
+                                return t("toast.usm.plb");
                             }
                         },
                     },

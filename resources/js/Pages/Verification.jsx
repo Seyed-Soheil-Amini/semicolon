@@ -34,7 +34,7 @@ const Verification = ({ auth }) => {
 
     useEffect(() => {
         isRefetching
-            ? toast.loading("Receiveing the new data...", {
+            ? toast.loading(t("toast.vrf.lod"), {
                   toastId: "loading",
               })
             : toast.dismiss("loading");
@@ -56,7 +56,7 @@ const Verification = ({ auth }) => {
             .map((blog) => blog.id);
         try {
             toast.promise(async () => await Promise.resolve(verify(arrayIds)), {
-                pending: "Verifing...",
+                pending: t("toast.vrf.pnd"),
                 success: {
                     render() {
                         !isLoading &&
@@ -66,15 +66,15 @@ const Verification = ({ auth }) => {
                                     checked: false,
                                 }))
                             );
-                        return "Blogs are verified successfully.";
+                        return t("toast.vrf.scs");
                     },
                 },
                 error: {
                     render({ data }) {
                         if (data.response && data.response.status === 400) {
-                            return "Blog not found";
+                            return t("toast.vrf.nfn");
                         } else {
-                            return "Unfortunately, there is a problem in the process of publishing the blog.";
+                            return t("toast.vrf.plb");
                         }
                     },
                 },
@@ -90,7 +90,7 @@ const Verification = ({ auth }) => {
             .map((blog) => blog.id);
         try {
             toast.promise(async () => await Promise.resolve(block(arrayIds)), {
-                pending: "Blocking...",
+                pending: t("toast.vrf.pnd-b"),
                 success: {
                     render() {
                         !isLoading &&
@@ -100,15 +100,15 @@ const Verification = ({ auth }) => {
                                     checked: false,
                                 }))
                             );
-                        return "Blogs are blocked successfully.";
+                        return t("toast.vrf.scs-b");
                     },
                 },
                 error: {
                     render({ data }) {
                         if (data.response && data.response.status === 400) {
-                            return "Blog not found";
+                            return t("toast.vrf.nfn-b");
                         } else {
-                            return "Unfortunately, there is a problem in the process of blocking the blog.";
+                            return t("toast.vrf.plb-b");
                         }
                     },
                 },

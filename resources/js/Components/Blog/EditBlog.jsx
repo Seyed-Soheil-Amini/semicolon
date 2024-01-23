@@ -36,7 +36,7 @@ const EditBlog = (props) => {
 
     useEffect(() => {
         isRefetching
-            ? toast.loading("Receiveing the new data...", {
+            ? toast.loading(t("toast.edt.lod"), {
                   toastId: "loading",
               })
             : toast.dismiss("loading");
@@ -117,13 +117,13 @@ const EditBlog = (props) => {
                         <div className="flex w-3/5 mx-auto text-center h-screen">
                             <div className="flex-row w-full">
                                 <h3 className="text-gray-200 mx-auto text-xl md:text-4xl mt-10">
-                                    {t('dash.blg.edt.nob')}
+                                    {t("dash.blg.edt.nob")}
                                 </h3>
                                 <div className="items-center mt-4">
                                     <PrimaryButton
                                         onClick={() => props.onClickCreate()}
                                     >
-                                        {t('dash.blg.edt.try')}
+                                        {t("dash.blg.edt.try")}
                                     </PrimaryButton>
                                 </div>
                             </div>
@@ -173,14 +173,14 @@ const EditBlog = (props) => {
 
     function handleDeleteBlog(blogId) {
         toast.promise(async () => await Promise.resolve(deleteBlog(blogId)), {
-            pending: "Deleting...",
-            success: "Your Blog Was Deleted Successfully!",
+            pending: t("toast.edt.pnd"),
+            success: t("toast.edt.scs"),
             error: {
                 render({ data }) {
                     if (data.response && data.response.status === 404) {
-                        return "Blog not found";
+                        return t("toast.edt.nfn");
                     } else {
-                        return "Unfortunately, there is a problem in the process of deleting the blog.";
+                        return t("toast.edt.plb");
                     }
                 },
             },
