@@ -203,37 +203,37 @@
                 "nob": "There are no blogs.",
                 "try": "Create New Blog"
             },
-            "blc":{
-                "noblg":"There are no blocked blogs."
+            "blc": {
+                "noblg": "There are no blocked blogs."
             },
-            "pub":{
-                "pub-btn":"PUBLISH",
-                "upub-btn":"UNPUBLISH",
-                "noblg":"There are no verified blogs."
+            "pub": {
+                "pub-btn": "PUBLISH",
+                "upub-btn": "UNPUBLISH",
+                "noblg": "There are no verified blogs."
             },
-            "edt-form":{
-                "cls":"Close",
-                "tit":"Edit Blog",
-                "img-fil":"Image File",
-                "sub-img":"Drag and drop an image here, or click to select a file",
-                "sub-tit":"Title",
-                "cat":"Category",
-                "bdy":"Body",
-                "wait-btn":"Waiting...",
-                "save-btn":"Save",
-                "cnl-btn":"Cancle"
+            "edt-form": {
+                "cls": "Close",
+                "tit": "Edit Blog",
+                "img-fil": "Image File",
+                "sub-img": "Drag and drop an image here, or click to select a file",
+                "sub-tit": "Title",
+                "cat": "Category",
+                "bdy": "Body",
+                "wait-btn": "Waiting...",
+                "save-btn": "Save",
+                "cnl-btn": "Cancle"
             }
         },
         "verf": {
-            "vrf-btn":"Verify",
-            "blk-btn":"Blcok",
-            "cnl-btn":"Cancle",
-            "noblg":"There are no pending blogs.",
-            "auth":"Author: ",
-            "rd-mr":"Read More",
-            "pre":{
-                "lbl":"Labels : ",
-                "cls-btn":"Close"
+            "vrf-btn": "Verify",
+            "blk-btn": "Blcok",
+            "cnl-btn": "Cancle",
+            "noblg": "There are no pending blogs.",
+            "auth": "Author: ",
+            "rd-mr": "Read More",
+            "pre": {
+                "lbl": "Labels : ",
+                "cls-btn": "Close"
             }
         },
         "usr-mang": {
@@ -276,5 +276,29 @@
         "blg": "blogs",
         "cat": "Category",
         "lbl": "Labels"
+    },
+    "prof": {
+        "del-usr": {
+            "tit": "Delete Account",
+            "txt": "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.",
+            "del-btn": "Delete Account",
+            "del-cus": "Are you sure you want to delete your account?",
+            "cus-txt": "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
+            "cnl-btn": "Cancle"
+        },
+        "upd-usr": {
+            "tit": "Update Password",
+            "txt": "Ensure your account is using a long, random password to stay secure.",
+            "sav-btn": "Save"
+        },
+        "upd": {
+            "plc-hol": "Drag and drop an image here, or click to select a file",
+            "prf-tit": "Profile Information",
+            "prf-txt": "Update your account's profile information and email address.",
+            "emi-vrf": "Your email address is unverified.",
+            "vrf-lnk": "Click here to re-send the verification email.",
+            "vrf-res":"A new verification link has been sent to your email address.",
+            "rmv-btn":"Remove"
+        }
     }
 }

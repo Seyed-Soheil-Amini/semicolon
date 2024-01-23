@@ -10,12 +10,14 @@ import { FaUserCircle } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import DangerButton from "@/Components/DangerButton";
+import { useTranslation } from "react-i18next";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
     className = "",
 }) {
+    const { t } = useTranslation();
     const user = usePage().props.auth.user;
     const [processing, setProcessing] = useState(false);
     const [data, setData] = useState({
@@ -108,7 +110,7 @@ export default function UpdateProfileInformation({
             <div className="flex-col mx-auto my-auto h-full">
                 <FaUserCircle className="mx-auto h-16 w-16 text-gray-300 my-auto" />
                 <p className="mx-auto my-auto pt-6">
-                    Drag and drop an image here, or click to select a file
+                    {t("dash.prof.upd.plc-hol")}
                 </p>
             </div>
         );
@@ -119,12 +121,11 @@ export default function UpdateProfileInformation({
             <section className={className}>
                 <header>
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        Profile Information
+                        {t("dash.prof.upd.prf-tit")}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        Update your account's profile information and email
-                        address.
+                        {t("dash.prof.upd.prf.txt")}
                     </p>
                 </header>
                 <form
@@ -233,29 +234,27 @@ export default function UpdateProfileInformation({
                     {mustVerifyEmail && user.email_verified_at === null && (
                         <div>
                             <p className="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                                Your email address is unverified.
+                                {t("dash.prof.upd.emi-vrf")}
                                 <Link
                                     href={route("verification.send")}
                                     method="post"
                                     as="button"
                                     className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                                 >
-                                    Click here to re-send the verification
-                                    email.
+                                    {t("dash.prof.upd.vrf-lnk")}
                                 </Link>
                             </p>
 
                             {status === "verification-link-sent" && (
                                 <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                                    A new verification link has been sent to
-                                    your email address.
+                                    {t("dash.prof.upd.vrf-res")}
                                 </div>
                             )}
                         </div>
                     )}
                     <div className="flex justify-start items-center gap-4">
                         <PrimaryButton disabled={processing}>
-                            Save
+                            {t("dash.prof.upd-usr.sav-btn")}
                         </PrimaryButton>
                         {!isEmpty(data.image) && (
                             <div>
@@ -269,7 +268,7 @@ export default function UpdateProfileInformation({
                                         })
                                     }
                                 >
-                                    Remove
+                                    {t("dash.prof.upd.rmv-btn")}
                                 </DangerButton>
                             </div>
                         )}

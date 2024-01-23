@@ -6,8 +6,10 @@ import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export default function UpdatePasswordForm({ className = "" }) {
+    const { t } = useTranslation();
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
@@ -54,12 +56,11 @@ export default function UpdatePasswordForm({ className = "" }) {
             <section className={className}>
                 <header>
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        Update Password
+                        {t("dash.prof.upd-usr.tit")}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        Ensure your account is using a long, random password to
-                        stay secure.
+                        {t("dash.prof.upd-usr.txt")}
                     </p>
                 </header>
 
@@ -134,7 +135,7 @@ export default function UpdatePasswordForm({ className = "" }) {
 
                     <div className="flex items-center gap-4">
                         <PrimaryButton disabled={processing}>
-                            Save
+                            {t("dash.prof.upd-usr.sav-btn")}
                         </PrimaryButton>
                     </div>
                 </form>
