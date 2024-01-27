@@ -9,6 +9,8 @@ import FooterLayout from "@/Layouts/Footer";
 import Fuse from "fuse.js";
 import { useTranslation } from "react-i18next";
 
+import headerBackground from "../../../public/images/blog-back.jpg";
+
 const Blog = ({ auth }) => {
     const [filter, setFilter] = useState(() => {
         return JSON.parse(localStorage.getItem("filter")) || "all";
@@ -53,6 +55,29 @@ const Blog = ({ auth }) => {
         <>
             {" "}
             <HeaderLayouts auth={auth} />
+            <div
+                className="flex justify-content-center mt-5 animate-fade-down animate-once saturate-150"
+                style={{
+                    backgroundImage: `url(${headerBackground})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    height: "100vh",
+                }}
+            >
+                <div className="flex-row mx-auto my-auto">
+                    <h1 className="text-base md:text-3xl lg:text-5xl text-white">
+                        <b>
+                            <h2 className="text-orange-600">SEMICOLON BLOGS</h2>
+                        </b>
+                    </h1>
+                    <div className="text-base md:text-lg lg:text-3xl text-white w-50">
+                        <p>
+                            You can share your interesting and useful content in
+                            different categories for others to use.
+                        </p>
+                    </div>
+                </div>
+            </div>
             <div className="container-fluid bg-gray-900 pt-16 sm:pt-20">
                 {isLoading ? (
                     <div className="h-full mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
@@ -96,6 +121,7 @@ const Blog = ({ auth }) => {
                                     onChange={handleSearchBlogChange}
                                 />
                             </div>
+                        <div className="bg-red-500 w-75">Advertisement</div>
                         </div>
                         <div className="mx-auto lg:mx-0">
                             <nav className="flex justify-start my-1 animate-fade-down animate-once">
