@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "ext-mbstring": "*",
+        "ditscheri/laravel-check-constraints": "^0.0.7",
         "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.8",
         "inertiajs/inertia-laravel": "^0.6.10",
