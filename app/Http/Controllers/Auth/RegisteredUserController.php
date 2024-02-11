@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\MailBox;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -43,7 +45,16 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'isAdmin' => 0,
         ]);
-
+        MailBox::create([
+            'user_id'=>$user->id,
+            'total'=>0,
+            'sent'=>0,
+            'receive'=>0,
+            'read'=>0,
+            'unread'=>0,
+            'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')
+        ]);
         event(new Registered($user));
 
         Auth::login($user);

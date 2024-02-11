@@ -68,6 +68,8 @@ Route::prefix('/user')->group(function () {
     Route::get('/services', function () {
         return Inertia::render('Services');
     })->middleware(['auth', 'verified'])->name('services');
+    Route::get('/orders','App\Http\Controllers\OrderController@showOrderOfUser')
+    ->middleware(['auth','verified'])->name('orders');
 });
 
 Route::middleware(['auth','verified'])->group(function () {

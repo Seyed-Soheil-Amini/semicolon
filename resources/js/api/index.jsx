@@ -39,7 +39,6 @@ const createBlog = async (blog) => {
             "Content-Type": "multipart/form-data",
         },
     });
-    console.log(data);
     return data;
 };
 
@@ -121,7 +120,7 @@ const addView = async (fp, blogId) => {
     return data.data;
 };
 
-const toggleLike = async (blogId,fingerprint) => {
+const toggleLike = async (blogId, fingerprint) => {
     const apiUrl = `blog/like/${blogId}/${btoa(fingerprint)}`;
     const { data } = await client.get(apiUrl);
     return data.data;
@@ -191,6 +190,92 @@ const deleteMessages = async (ids) => {
     return data.data;
 };
 
+const sendOrder = async (order) => {
+    const apiUrl = "/order";
+    const { data } = await client.post(apiUrl, order, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json, */*",
+        },
+    });
+    console.log(data);
+    return data.data;
+};
+
+const updateOrder = async (order, id) => {
+    const apiUrl = "/order/update";
+    const dataOrder = new FormData();
+    dataOrder.append("title", order.title);
+    dataOrder.append("description", order.description);
+    dataOrder.append("minimumPrice", order.minimumPrice);
+    dataOrder.append("maximumPrice", order.maximumPrice);
+    dataOrder.append("duration", order.duration);
+    dataOrder.append("id", id);
+    dataOrder.append("_method", "PUT");
+    const { data } = await client.post(apiUrl, dataOrder, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json, */*",
+        },
+    });
+    console.log(data);
+    return data.data;
+};
+
+const deleteOrder = async (id) => {
+    const apiUrl = "/order/remove";
+    const removeOrder = new FormData();
+    removeOrder.append("id", id);
+    removeOrder.append("_method", "DELETE");
+    const { data } = await client.post(apiUrl, removeOrder, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json, */*",
+        },
+    });
+    console.log(data);
+    return data.data;
+};
+
+const getRandomOrders = async ({ pageParam = 0 }, expertise) => {
+    const apiUrl = `/staff/orders/${expertise}?cursor=${pageParam}`;
+    const { data } = await client.get(apiUrl);
+    return data.data;
+};
+
+const createProject = async (project) => {
+    const apiUrl = "/project/";
+    const { data } = await client.post(apiUrl, project, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json, */*",
+        },
+    });
+    console.log(data);
+    return data.data;
+};
+
+const completeProject = async (id, rate) => {
+    const apiUrl = `/project/complete/${btoa(id)}/${rate}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
+const createMailbox = async () => {
+    const apiUrl = `/mailbox/`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
+const getAllOrders = async ({ pageParam = 0 }) => {
+    const apiUrl = `/order/show?cursor=${pageParam}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -213,4 +298,12 @@ export {
     createMessage,
     getMessages,
     deleteMessages,
+    sendOrder,
+    updateOrder,
+    deleteOrder,
+    getRandomOrders,
+    createProject,
+    completeProject,
+    createMailbox,
+    getAllOrders,
 };

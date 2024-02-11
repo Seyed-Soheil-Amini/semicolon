@@ -139,8 +139,8 @@ const useAddView = (fp, blogId) => {
     return api.addView(fp, blogId);
 };
 
-const useToggleLike = (blogId,fingerprint) => {
-    return api.toggleLike(blogId,fingerprint);
+const useToggleLike = (blogId, fingerprint) => {
+    return api.toggleLike(blogId, fingerprint);
 };
 
 const useGetUserActivity = (userId) => {
@@ -203,6 +203,117 @@ const useDeleteMessages = () => {
     });
 };
 
+const useSendOrder = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (order) => api.sendOrder(order),
+        onSuccess: (data) => {
+            const orders = queryClient.getQueryData("orders");
+            if (isEmpty(orders)) queryClient.refetchQueries("orders");
+            else queryClient.setQueryData("orders", [...orders, data.data]);
+        },
+    });
+};
+
+const useUpdateOrder = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (order, id) => api.updateOrder(order, id),
+        onSuccess: (data) => {
+            queryClient.refetchQueries("orders");
+        },
+    });
+};
+
+const useDeleteOrder = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => api.deleteOrder(id),
+        onSuccess: (data) => {
+            queryClient.refetchQueries("orders");
+        },
+    });
+};
+
+const useRandomOrders = (expertise) => {
+    const queryClient = useQueryClient();
+    var orders = Object;
+    var queryKey = "";
+    switch (expertise) {
+        case "soft":
+            blogs = queryClient.getQueryData("softOrders");
+            queryKey = "softOrders";
+            break;
+        case "server":
+            blogs = queryClient.getQueryData("serverOrders");
+            queryKey = "serverOrders";
+            break;
+        case "ai":
+            blogs = queryClient.getQueryData("aiOrders");
+            queryKey = "aiOrders";
+            break;
+        default:
+            blogs = queryClient.getQueryData("gaveOrders");
+            queryKey = "gaveOrders";
+            break;
+    }
+    return useInfiniteQuery({
+        queryKey: [queryKey],
+        queryFn: (pageParam) => api.getRandomOrders(pageParam, expertise),
+        getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
+        refetchOnWindowFocus: false,
+        retryOnMount: false,
+        keepPreviousData: true,
+    });
+};
+
+const useCreateProject = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (project) => api.createProject(project),
+        onSuccess: (data) => {
+            const projects = queryClient.getQueryData("projects");
+            if (isEmpty(projects)) queryClient.refetchQueries("projects");
+            else queryClient.setQueryData("projects", [...projects, data.data]);
+        },
+    });
+};
+
+const useCompleteProject = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id, rate) => api.completeProject(id, rate),
+        onSuccess: (data) => {
+            const projects = queryClient.getQueryData("projects");
+            if (isEmpty(projects)) queryClient.refetchQueries("projects");
+            else {
+                const project = projects.map((prj) => prj.id != id);
+                queryClient.setQueriesData("projects", project);
+            }
+        },
+    });
+};
+
+const useCreateMailbox = () => {
+    return api.createMailbox();
+};
+
+const useGetOrdersOfUser = () => {
+    const queryKey = "ordersOfUser";
+    return useInfiniteQuery({
+        queryKey: [queryKey],
+        queryFn: (pageParam) => api.getAllOrders(pageParam),
+        getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
+        refetchOnWindowFocus: false,
+        retryOnMount: false,
+        keepPreviousData: true,
+    });
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -225,4 +336,12 @@ export {
     useStoreMessage,
     useGetMessages,
     useDeleteMessages,
+    useSendOrder,
+    useDeleteOrder,
+    useUpdateOrder,
+    useRandomOrders,
+    useCreateProject,
+    useCompleteProject,
+    useCreateMailbox,
+    useGetOrdersOfUser,
 };

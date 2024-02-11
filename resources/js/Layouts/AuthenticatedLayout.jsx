@@ -47,6 +47,16 @@ export default function Authenticated({ user, header, children }) {
                                         </NavLink>
                                     </>
                                 )}
+                                {user.isStaff == 0 && (
+                                    <>
+                                        <NavLink
+                                            href={route("orders")}
+                                            active={route().current("orders")}
+                                        >
+                                            Orders
+                                        </NavLink>
+                                    </>
+                                )}
                                 {user.isAdmin == 1 && (
                                     <>
                                         <NavLink
@@ -191,6 +201,14 @@ export default function Authenticated({ user, header, children }) {
                                 active={route().current("services")}
                             >
                                 {t("dash.header.srv")}
+                            </ResponsiveNavLink>
+                        )}
+                        {user.isStaff == 0 && (
+                            <ResponsiveNavLink
+                                href={route("orders")}
+                                active={route().current("orders")}
+                            >
+                                Orders
                             </ResponsiveNavLink>
                         )}
                         {user.isAdmin == 1 && (
