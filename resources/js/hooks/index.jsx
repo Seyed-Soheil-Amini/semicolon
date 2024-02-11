@@ -314,6 +314,31 @@ const useGetOrdersOfUser = () => {
     });
 };
 
+const useSendPaid = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (staffId, prjTitle) => api.sendPaidMail(staffId, prjTitle),
+        onSuccess: (data) => {
+            queryClient.refetchQueries("mails");
+        },
+    });
+};
+
+const useReadMail = (id) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => api.readMail(id),
+        onSuccess: (data) => {
+            const mails = queryClient.getQueryData("mails");
+            const otherMails = mails.map((mail) => mail.id != id);
+            const readMail = mails.map((mail) => mail.id == id)[0];
+            readMail.isRead = true;
+            queryClient.removeQueries("mails");
+            queryClient.setQueriesData("mails", [...otherMails, readMail]);
+        },
+    });
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -344,4 +369,6 @@ export {
     useCompleteProject,
     useCreateMailbox,
     useGetOrdersOfUser,
+    useSendPaid,
+    useReadMail,
 };

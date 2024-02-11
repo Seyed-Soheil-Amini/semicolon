@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MailboxController;
+use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -107,6 +108,15 @@ Route::prefix('/project')->middleware(['auth:sanctum','staff'])->namespace('App\
 
 Route::prefix('/mailbox')->middleware(['auth:sanctum'])->namespace('App\Http\Controller')->group(function (){
     Route::get('/',[MailboxController::class,'create']);
+});
+
+// --------------------------------------------------------------------------------------
+
+// ---------------------------------------- MAIL ----------------------------------------
+
+Route::prefix('/mail')->middleware(['auth:sanctum'])->namespace('App\Http\Controller')->group(function (){
+    Route::post('/paid',[MailController::class,'paidMail']);
+    Route::get('/read/{id}',[MailController::class,'readMail']);
 });
 
 // --------------------------------------------------------------------------------------

@@ -276,6 +276,20 @@ const getAllOrders = async ({ pageParam = 0 }) => {
     return data.data;
 };
 
+const sendPaidMail = async (staffId, prjTitle) => {
+    const apiUrl = "/mail/paid";
+    const { data } = await client.post(apiUrl, { staffId, prjTitle });
+    console.log(data);
+    return data.data;
+};
+
+const readMail = async (id)=>{
+    const apiUrl = `/mail/read/${id}`;
+    const {data} = await client.get(apiUrl);
+    console.log(data);
+    return data;
+}
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -306,4 +320,6 @@ export {
     completeProject,
     createMailbox,
     getAllOrders,
+    sendPaidMail,
+    readMail,
 };
