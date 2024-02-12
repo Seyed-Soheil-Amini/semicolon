@@ -339,6 +339,34 @@ const useReadMail = (id) => {
     });
 };
 
+const useCheckOrderAcceptable = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => api.checkOrderAccetable(id),
+        onSuccess: (data) => {
+            queryClient.refetchQueries("orders");
+        },
+    });
+};
+
+const useGetStaffInfo = (id) => {
+    return api.getInfoOfStaff(id);
+};
+
+const usePaidPrePayment = (id) => {
+    return api.paidPrePayment(id);
+};
+
+const useRemoveProject = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => api.removeProject(id),
+        onSuccess: (data) => {
+            queryClient.refetchQueries("projects");
+        },
+    });
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -371,4 +399,8 @@ export {
     useGetOrdersOfUser,
     useSendPaid,
     useReadMail,
+    useCheckOrderAcceptable,
+    useGetStaffInfo,
+    usePaidPrePayment,
+    useRemoveProject,
 };

@@ -134,4 +134,15 @@ class OrderController extends Controller
         }
     }
 
+    public function checkIsAccept(Request $request,$id){
+        $decodedId = base64_decode($id);
+        $order = Order::find($decodedId);
+        if(is_null($order)){
+            return response()->json(['status'=>404,'data'=>'Order not found!'],404);
+        }else{
+            if($order->isAccept) return response()->json(['status'=>409,'data'=>"The order has already been accepted."],409);
+            else return response()->json(['status'=>200,'data'=>'The order is open.'],200);
+        }
+    }
+
 }

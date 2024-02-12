@@ -70,6 +70,7 @@ Route::prefix('/admin')->middleware(['auth:sanctum', 'admin'])->namespace('App\H
 
 Route::prefix('/staff')->middleware(['auth:sanctum','staff'])->namespace('App\Http\Controllers')->group(function (){
     Route::get('/orders/{expertise}','OrderController@getBasedOnCategory');
+    Route::get('/info/{id}','OrderController@getAboutStaff');
 });
 
 // --------------------------------------------------------------------------------------
@@ -91,6 +92,7 @@ Route::prefix('/order')->middleware(['auth:sanctum'])->namespace('App\Http\Contr
     Route::put('/update',[OrderController::class,'update']);
     Route::delete('/remove',[OrderController::class,'destroy']);
     Route::get('/show',[OrderController::class,'getOrdersOfUser']);
+    Route::get('/check-accept/{id}',[OrderController::class,'checkIsAccept']);
 });
 
 // -------------------------------------------------------------------------------------
@@ -99,7 +101,9 @@ Route::prefix('/order')->middleware(['auth:sanctum'])->namespace('App\Http\Contr
 
 Route::prefix('/project')->middleware(['auth:sanctum','staff'])->namespace('App\Http\Controller')->group(function (){
     Route::post('/',[ProjectController::class,'create']);
-    Route::get('/complete/{id}/{rate}');
+    Route::get('/complete/{id}/{rate}',[ProjectController::class,'completeProject']);
+    Route::get('/pre-payment/{id}',[ProjectController::class,'paidPrePayment']);
+    Route::delete('/remove/{id}');
 });
 
 // --------------------------------------------------------------------------------------

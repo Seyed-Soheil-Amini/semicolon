@@ -283,11 +283,39 @@ const sendPaidMail = async (staffId, prjTitle) => {
     return data.data;
 };
 
-const readMail = async (id)=>{
+const readMail = async (id) => {
     const apiUrl = `/mail/read/${id}`;
-    const {data} = await client.get(apiUrl);
+    const { data } = await client.get(apiUrl);
     console.log(data);
     return data;
+};
+
+const checkOrderAccetable = async (id) => {
+    const apiUrl = `/order/check-accept/${btoa(id)}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
+const getInfoOfStaff = async (id) => {
+    const apiUrl = `/staff/info/${btoa(id)}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
+const paidPrePayment = async (id) => {
+    const apiUrl = `/project/pre-payment/${btoa(id)}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
+const removeProject = async (id)=>{
+    const apiUrl = `/project/remove/${id}`;
+    const {data} = await client.delete(apiUrl);
+    console.log(data);
+    return data.data;
 }
 
 export {
@@ -322,4 +350,8 @@ export {
     getAllOrders,
     sendPaidMail,
     readMail,
+    checkOrderAccetable,
+    getInfoOfStaff,
+    paidPrePayment,
+    removeProject,
 };

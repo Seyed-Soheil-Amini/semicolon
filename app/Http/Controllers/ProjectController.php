@@ -69,6 +69,18 @@ class ProjectController extends Controller
         }
     }
 
+    public function destroy(Request $request,$id)
+    {
+        $project = Project::find($id);
+        if(is_null($project))
+        {
+            return response()->json(['status'=>404,'data'=>'Project not found!'],404);
+        }else{
+            $project->delete();
+            return response()->json(['status'=>200,'data'=>"Project was deleted successfully."],200);
+        }
+    }
+
     public function completeProject(Request $request,$id,$rate)
     {
         $decodeId = base64_decode($id);
@@ -81,6 +93,19 @@ class ProjectController extends Controller
                 $project->rate = $rate;
             $project->save();
             return response()->json(['status'=>200,'data'=>'The project was successfully completed.'],200);
+        }
+    }
+
+    public function paidPrePayment(Request $request,$id)
+    {
+        $project = Project::find(base64_decode($id));
+        if(is_null($project)){
+            return response()->json(['status'=>404,'data'=>'Project not found!'],404);
+        }else{
+            $project->isPaid = true;
+            $project->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+            $project->save();
+            return response()->json(['status'=>200,'data'=>'PrePayment of project was paid successfully.'],200);
         }
     }
 }
