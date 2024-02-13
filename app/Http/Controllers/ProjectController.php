@@ -104,8 +104,31 @@ class ProjectController extends Controller
         }else{
             $project->isPaid = true;
             $project->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+            $project->started_at = Carbon::now()->format('Y-m-d H:i:s');
+            $project->must_finished_date = Carbon::now()->addDays($project->duration)->format('Y-m-d H:i:s');
             $project->save();
             return response()->json(['status'=>200,'data'=>'PrePayment of project was paid successfully.'],200);
+        }
+    }
+
+    public function checkRemainingTime(Request $request,$id)
+    {
+        $project = Project::find(base64_decode($id));
+        if(is_null($project)){
+            return response()->json(['status'=>404,'data'=>"Project not found!"],404);
+        }else{
+            if($project->isPaid==true)
+            {
+                $nowTime = Carbon::parse(Carbon::now()->format('Y-m-d H:i:s'));
+                $mustBeFinished = Carbon::parse($project->must_finished_date);
+                if($nowTime->greaterThan($mustBeFinished)){
+                    return response()->json(['status'=>204,'data'=>"The time for the project is over."],204);
+                }
+                $remainingTime = $nowTime->diff($mustBeFinished);
+                return response()->json(['status'=>200,'data'=>$remainingTime],200);
+            }else{
+                return response()->json(['status'=>422,'data'=>"The advance payment for the project has not yet been paid."],422);
+            }
         }
     }
 }

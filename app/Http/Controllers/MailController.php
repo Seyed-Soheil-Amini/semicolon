@@ -23,6 +23,9 @@ class MailController extends Controller
                 'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')
             ]);
+            $mailbox->total +=1;
+            $mailbox->unread +=1;
+            $mailbox->save();  
             return response()->json(['status'=>200,'data'=>'Message was sent successfully.'],200);
         }
     }
@@ -34,6 +37,12 @@ class MailController extends Controller
             return response()->json(['status'=>404,'data'=>"Mail not found!"],404);
         }else{
             $mail->isRead = true;
+            $mailbox = Mailbox::find($mail->mail_box_id);
+            if(!is_null($mailbox)){
+                $mailbox->unread -=1;
+                $mailbox->read +=1;
+                $mailbox->save();
+            }
             $mail->save();
         }
         return response()->json(['status'=>200,'data'=>"Mail has been read."],200);

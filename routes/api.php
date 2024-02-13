@@ -103,7 +103,8 @@ Route::prefix('/project')->middleware(['auth:sanctum','staff'])->namespace('App\
     Route::post('/',[ProjectController::class,'create']);
     Route::get('/complete/{id}/{rate}',[ProjectController::class,'completeProject']);
     Route::get('/pre-payment/{id}',[ProjectController::class,'paidPrePayment']);
-    Route::delete('/remove/{id}');
+    Route::delete('/remove/{id}',[ProjectController::class,'destroy']);
+    Route::get('/remaining-time/{id}',[ProjectController::class,'checkRemainingTime']);
 });
 
 // --------------------------------------------------------------------------------------
@@ -112,6 +113,7 @@ Route::prefix('/project')->middleware(['auth:sanctum','staff'])->namespace('App\
 
 Route::prefix('/mailbox')->middleware(['auth:sanctum'])->namespace('App\Http\Controller')->group(function (){
     Route::get('/',[MailboxController::class,'create']);
+    Route::get('/get-mails/{id}',[MailboxController::class,'getAllMailsOfUser']);
 });
 
 // --------------------------------------------------------------------------------------

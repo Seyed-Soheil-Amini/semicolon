@@ -311,12 +311,26 @@ const paidPrePayment = async (id) => {
     return data.data;
 };
 
-const removeProject = async (id)=>{
+const removeProject = async (id) => {
     const apiUrl = `/project/remove/${id}`;
-    const {data} = await client.delete(apiUrl);
+    const { data } = await client.delete(apiUrl);
     console.log(data);
     return data.data;
-}
+};
+
+const checkRemainingTime = async (id) => {
+    const apiUrl = `/project/remaining-time/${btoa(id)}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
+const getMails = async (id) => {
+    const apiUrl = `/mailbox/get-mails/${btoa(id)}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
 
 export {
     getAllBlogsOfUser,
@@ -354,4 +368,6 @@ export {
     getInfoOfStaff,
     paidPrePayment,
     removeProject,
+    checkRemainingTime,
+    getMails,
 };

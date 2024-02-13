@@ -367,6 +367,28 @@ const useRemoveProject = () => {
     });
 };
 
+const useCheckRemainingTime = (prjId) => {
+    return useQuery({
+        queryKey: `remainingTime-${prjId}`,
+        queryFn: (id) => api.checkRemainingTime(id),
+        refetchInterval: 2 * 60000,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+    });
+};
+
+const useGetMails = () => {
+    return useQuery({
+        queryKey: "mails",
+        queryFn: (id) => api.getMails(id),
+        refetchInterval: 1 * 60000,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+    });
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -403,4 +425,6 @@ export {
     useGetStaffInfo,
     usePaidPrePayment,
     useRemoveProject,
+    useCheckRemainingTime,
+    useGetMails,
 };
