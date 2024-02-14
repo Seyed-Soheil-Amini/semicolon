@@ -13,7 +13,7 @@ class StaffController extends Controller
         $staff = User::find($decodedId);
         $isStaff = $staff->isStaff==1;
         if(is_null($staff) && $isStaff){
-            return response()->json(['status'=>404,'data'=>'Staff not found!'],404);
+            return $this->sendNotFound("Staff not found!");
         }else{
             $userData = [
                 'id'=>$staff->id,

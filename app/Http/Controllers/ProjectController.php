@@ -74,11 +74,22 @@ class ProjectController extends Controller
         $project = Project::find($id);
         if(is_null($project))
         {
-            return response()->json(['status'=>404,'data'=>'Project not found!'],404);
+            return $this->sendNotFound("Project not found!");
         }else{
+            if($project->isPaid) return response()->json(['status'=>422,'data'=>'The paid prject can not be cancled.'],422);
             $project->delete();
             return response()->json(['status'=>200,'data'=>"Project was deleted successfully."],200);
         }
+    }
+
+    public function getAll(Request $request){
+        $projects = Project::query()
+                    ->orderBy('updated_at','desc')
+                    ->select('id','title','price','category','rate')
+                    ->with('user','staff')
+                    ->where('isFinished',true)
+                    ->cursorPaginate(4);
+        return response()->json(['status'=>200,'data'=>$projects],200);
     }
 
     public function completeProject(Request $request,$id,$rate)
@@ -86,7 +97,7 @@ class ProjectController extends Controller
         $decodeId = base64_decode($id);
         $project = Project::find($decodeId);
         if(is_null($project)){
-            return response()->json(['status'=>404,'data'=>'Project not found!'],404);
+            return $this->sendNotFound("Project not found!");
         }else{
             $project->isFinished = true;
             if(is_null($rate))
@@ -100,7 +111,7 @@ class ProjectController extends Controller
     {
         $project = Project::find(base64_decode($id));
         if(is_null($project)){
-            return response()->json(['status'=>404,'data'=>'Project not found!'],404);
+            return $this->sendNotFound("Project not found!");
         }else{
             $project->isPaid = true;
             $project->updated_at = Carbon::now()->format('Y-m-d H:i:s');
@@ -115,7 +126,7 @@ class ProjectController extends Controller
     {
         $project = Project::find(base64_decode($id));
         if(is_null($project)){
-            return response()->json(['status'=>404,'data'=>"Project not found!"],404);
+            return $this->sendNotFound("Project not found!");
         }else{
             if($project->isPaid==true)
             {

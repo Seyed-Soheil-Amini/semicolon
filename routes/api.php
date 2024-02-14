@@ -28,6 +28,8 @@ Route::get('blogs/', 'App\Http\Controllers\BlogController@index');
 Route::get('/randomBlogs/{filter}', 'App\Http\Controllers\BlogController@indexRandomBlogs')->middleware(['checkSession']);
 Route::get('/blog/view/{id}/{fingerprint}', 'App\Http\Controllers\BlogController@addViewer')->middleware(['checkSession']);
 Route::get('/blog/like/{id}/{fingerprint}', 'App\Http\Controllers\BlogController@toggleLike')->middleware(['checkSession']);
+Route::get('/project/remaining-time/{id}','App\Http\Controllers\ProjectController@checkRemainingTime')->middleware(['checkSession','auth:sanctum']);
+Route::get('/project/all','App\Http\Controllers\ProjectController@getAll')->middleware(['checkSession']);
 
 // ---------------------------------------- CATEGORY -------------------------------------
 
@@ -66,11 +68,18 @@ Route::prefix('/user')->middleware(['auth:sanctum'])->namespace('App\Http\Contro
 Route::prefix('/admin')->middleware(['auth:sanctum', 'admin'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('/users', 'UserController@indexUsersForAdmin');
     Route::delete('/delete/user', 'UserController@deleteUser');
+    Route::put('/upgrade','UserController@upgradeToAdmin');
+    Route::get('/downgrade/{id}','UserController@downgradeFromAdmin');
 });
 
 Route::prefix('/staff')->middleware(['auth:sanctum','staff'])->namespace('App\Http\Controllers')->group(function (){
     Route::get('/orders/{expertise}','OrderController@getBasedOnCategory');
     Route::get('/info/{id}','OrderController@getAboutStaff');
+});
+
+Route::prefix('/superadmin')->middleware(['auth:sanctum','superadmin'])->namespace('App\Http\Controller')->group(function (){
+    Route::put('/upgrade/staff','UserController@upgradeToStaff');
+    Route::get('/downgrade/staff/{id}','UserController@downgradeFromStaff');
 });
 
 // --------------------------------------------------------------------------------------

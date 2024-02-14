@@ -33,7 +33,7 @@ class ProfileController extends Controller
         $validated = $request->validated();
         $user = $request->user();
         if(is_null($user)){
-            return response()->json(['status'=>404,'data'=>'User not found!'],404);
+            return $this->sendNotFound("User not found!");;
         }
         $user->name = $validated['name'];
         $user->email = $validated['email'];

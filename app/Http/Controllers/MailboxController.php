@@ -32,7 +32,7 @@ class MailboxController extends Controller
         $userId = base64_decode($id);
         $mailbox = Mailbox::find('user_id',$userId);
         if(is_null($mailbox)){
-            return response()->json(['status'=>404,'data'=>"User has not mailbox."],404);   
+            return $this->sendNotFound("User has not mailbox.");   
         }
         $mails = Mail::query()
                     ->orderBy('created_at', 'desc')

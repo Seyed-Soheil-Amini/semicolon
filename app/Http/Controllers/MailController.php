@@ -13,7 +13,7 @@ class MailController extends Controller
     {
         $mailbox = MailBox::find('user_id',$request->staff_id);
         if(is_null($mailbox)){
-            return response()->json(['status'=>404,'data'=>'Mailbox not found!'],404);
+            return $this->sendNotFound("Mailbox not found!");
         }else{
             Mail::create([
                 'mail_box_id'=>$mailbox->id,
@@ -34,7 +34,7 @@ class MailController extends Controller
     {
         $mail = Mail::find($id);
         if(is_null($mail)){
-            return response()->json(['status'=>404,'data'=>"Mail not found!"],404);
+            return $this->sendNotFound("Mail not found!");
         }else{
             $mail->isRead = true;
             $mailbox = Mailbox::find($mail->mail_box_id);

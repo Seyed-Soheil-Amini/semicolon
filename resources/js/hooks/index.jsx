@@ -389,6 +389,71 @@ const useGetMails = () => {
     });
 };
 
+const useUpgradeToStaff = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (ids) => api.upgradeToStaff(ids),
+        onSuccess: (data) => {
+            queryClient.refetchQueries("users");
+        },
+    });
+};
+
+const useDowngradeFromStaff = (id) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => api.downgradeFromStaff(id),
+        onSuccess: (data) => {
+            const users = queryClient.getQueryData("users");
+            const otherusers = users.map((user) => user.id != id);
+            const user = users.map((user) => user.id == id)[0];
+            user.isStaff = false;
+            queryClient.removeQueries("users");
+            queryClient.setQueriesData("users", [...otherusers, user]);
+        },
+    });
+};
+
+const useUpgradeToAdmin = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (ids) => api.upgradeToAdmin(ids),
+        onSuccess: (data) => {
+            queryClient.refetchQueries("users");
+        },
+    });
+};
+
+const useDowngradeFromAdmin = (id) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => api.downgradeFromAdmin(id),
+        onSuccess: (data) => {
+            const users = queryClient.getQueryData("users");
+            const otherusers = users.map((user) => user.id != id);
+            const user = users.map((user) => user.id == id)[0];
+            user.isAdmin = false;
+            queryClient.removeQueries("users");
+            queryClient.setQueriesData("users", [...otherusers, user]);
+        },
+    });
+};
+
+const useGetAllProject = () => {
+    const queryKey = "allProjects";
+    return useInfiniteQuery({
+        queryKey: [queryKey],
+        queryFn: (pageParam) => api.getAllProject(pageParam),
+        getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
+        refetchInterval: 10 * 60000,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
+        refetchOnWindowFocus: false,
+        retryOnMount: false,
+        keepPreviousData: true,
+    });
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -427,4 +492,9 @@ export {
     useRemoveProject,
     useCheckRemainingTime,
     useGetMails,
+    useUpgradeToStaff,
+    useDowngradeFromStaff,
+    useUpgradeToAdmin,
+    useDowngradeFromAdmin,
+    useGetAllProject,
 };

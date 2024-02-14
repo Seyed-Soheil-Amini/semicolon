@@ -17,8 +17,7 @@ use Inertia\Inertia;
 
 class BlogController extends Controller
 {
-
-    public function index()
+   public function index()
     {
         $blogs = Blog::with('category')->all();
         if ($blogs->count() > 0) {
@@ -102,10 +101,7 @@ class BlogController extends Controller
     {
         $blog = Blog::with('category')->find($id);
         if (!$blog) {
-            return response()->json([
-                'status' => 404,
-                'data' => 'blog not found'
-            ], 404);
+            return $this->sendNotFound("Blog not found!");
         }
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
@@ -182,10 +178,10 @@ class BlogController extends Controller
             if (!is_null($blogs)) {
                 return response()->json(['status' => 200, 'data' => $blogs], 200);
             } else {
-                return response()->json(['status' => 404, 'data' => 'User has not any blog.'], 404);
+                return $this->sendNotFound("User has not any blog.");
             }
         } else {
-            return response()->json(['status' => 404, 'data' => 'User not found'], 404);
+            return $this->sendNotFound("User not found!");
         }
     }
     public function indexPublishedBlogOfUser(Request $request, $id)
@@ -198,10 +194,10 @@ class BlogController extends Controller
             if (!is_null($blogs)) {
                 return response()->json(['status' => 200, 'data' => $blogs], 200);
             } else {
-                return response()->json(['status' => 404, 'data' => 'User has not any blog.'], 404);
+                return $this->sendNotFound("User has not any blog.");
             }
         } else {
-            return response()->json(['status' => 404, 'data' => 'User not found'], 404);
+            return $this->sendNotFound("User not found!");
         }
     }
 
@@ -215,10 +211,10 @@ class BlogController extends Controller
             if (!is_null($blogs)) {
                 return response()->json(['status' => 200, 'data' => $blogs], 200);
             } else {
-                return response()->json(['status' => 404, 'data' => 'User has not any blog.'], 404);
+                return $this->sendNotFound("User has not any blog.");
             }
         } else {
-            return response()->json(['status' => 404, 'data' => 'User not found'], 404);
+            return $this->sendNotFound("User not found!");
         }
     }
 
@@ -236,7 +232,7 @@ class BlogController extends Controller
             $blog->save();
             return response()->json(['status' => 200, 'data' => $message, 'blog' => $blog], 200);
         } else {
-            return response()->json(['status' => 404, 'data' => 'Blog not found'], 404);
+            return $this->sendNotFound("Blog not found!");
         }
     }
 
@@ -246,7 +242,7 @@ class BlogController extends Controller
         if (!is_null($blogs)) {
             return response()->json(['status' => 200, 'data' => $blogs], 200);
         } else
-            return response()->json(['status' => 404, 'data' => 'No blog found'], 404);
+            return $this->sendNotFound("No blog found");
     }
 
     public function verifyBlogs(Request $request)
@@ -261,7 +257,7 @@ class BlogController extends Controller
             }
             return response()->json(['status' => 200, 'data' => 'Blogs are verified successfully']);
         } else
-            return response()->json(['status' => 400, 'data' => 'There is not any blogs'], 400);
+            return $this->sendNotFound("There is not any blogs");
     }
 
     public function blockBlogs(Request $request)
@@ -275,7 +271,7 @@ class BlogController extends Controller
             }
             return response()->json(['status' => 200, 'data' => 'Blogs are blocked successfully']);
         } else
-            return response()->json(['status' => 400, 'data' => 'There is not any blogs'], 400);
+            return $this->sendNotFound("There is not any blogs");
     }
 
     public function indexRandomBlogs(Request $request, $filter)
@@ -318,14 +314,14 @@ class BlogController extends Controller
                     ->cursorPaginate(12);
                 break;
         }
-        return response()->json(['status' => 200, 'data' => $blogs]);
+        return response()->json(['status' => 200, 'data' => $blogs],200);
     }
 
     public function addViewer(Request $request, $id,$fingerprint)
     {
         $blog = Blog::with('views')->find($id);
         if (is_null($blog)) {
-            return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
+            return $this->sendNotFound("Blog not found!");
         }
         $clientFingerPrint = base64_decode($fingerprint);
         $currentTime = Carbon::now();
@@ -367,7 +363,7 @@ class BlogController extends Controller
     {
         $blog = Blog::with('likes')->find($id);
         if (is_null($blog)) {
-            return response()->json(['status' => 404, 'message' => 'Blog not found'], 404);
+            return $this->sendNotFound("Blog not found!");
         }
         $clientFingerPrint = base64_decode($fingerprint);
         if(is_null($blog->likes)){

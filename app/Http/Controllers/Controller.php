@@ -9,4 +9,8 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+    public function sendNotFound($message)
+    {
+        return response()->json(['status'=>404,'data'=>$message],404);
+    }
 }

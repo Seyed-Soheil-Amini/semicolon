@@ -51,7 +51,7 @@ class MessageController extends Controller
             }
             return response()->json(['status' => 200, 'data' => 'Messages are deleted successfully']);
         } else
-            return response()->json(['status' => 400, 'data' => 'There is not any message'], 400);
+            return $this->sendNotFound("There is not any message");
     }
 
     public function indexMessages(Request $request){

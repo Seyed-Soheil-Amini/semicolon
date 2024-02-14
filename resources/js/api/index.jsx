@@ -332,6 +332,57 @@ const getMails = async (id) => {
     return data.data;
 };
 
+const upgradeToStaff = async (ids) => {
+    const apiUrl = `/superadmin/upgrade/staff`;
+    const userIds = new FormData();
+    userIds.append("userIds", JSON.stringify(ids));
+    userIds.append("_method", "PUT");
+    const { data } = await client.post(apiUrl, userIds, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json, */*",
+        },
+    });
+    console.log(data);
+    return data.data;
+};
+
+const downgradeFromStaff = async (id) => {
+    const apiUrl = `/superadmin/downgrade/staff/${btoa(id)}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
+const upgradeToAdmin = async (ids) => {
+    const apiUrl = `/admin/upgrade`;
+    const dataForm = new FormData();
+    dataForm.append("userId", JSON.stringify(ids));
+    dataForm.append("_method", "PUT");
+    const { data } = await client.post(apiUrl, dataForm, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json, */*",
+        },
+    });
+    console.log(data);
+    return data.data;
+};
+
+const downgradeFromAdmin = async (id) => {
+    const apiUrl = `/admin/downgrade/${btoa(id)}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
+const getAllProject = async ({ pageParam = 0 }) => {
+    const apiUrl = `/project/all?curser=${pageParam}`;
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -370,4 +421,9 @@ export {
     removeProject,
     checkRemainingTime,
     getMails,
+    upgradeToStaff,
+    downgradeFromStaff,
+    upgradeToAdmin,
+    downgradeFromAdmin,
+    getAllProject,
 };
