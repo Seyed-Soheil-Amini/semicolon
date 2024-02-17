@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use \Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Staff;
+
 
 class OrderController extends Controller
 {
@@ -92,29 +94,38 @@ class OrderController extends Controller
     }
     public function showOrderOfUser(Request $request)
     {
-        $user = User::find($request->user())[0];
+        $user = User::find($request->user())->first();
         if(is_null($user)){
             return $this->sendNotFound("User not found!");;
         }
-        $orders = Order::where('user_id',$user->id)->select('id','title','category')->get();
+        $orders = Order::where('user_id',$user->id)->select('id','title','category','duration')->get();
         return Inertia::render('Orders',[
             'orders'=> $orders,
         ]);
     }
 
-    public function getBasedOnCategory(Request $request,$expertise)
+    public function getBasedOnStaff(Request $request,$expertise)
     {
         $orders = Order::query()
         ->orderBy('updated_at', 'desc')
         ->select('id','title','duration','minimumPrice','maximumPrice')
         ->where('category',$expertise)
         ->where('isAccept',false)
-        ->cursorPaginate(4);
+        ->cursorPaginate(4)
+        ->through(function ($order){
+            return [
+                'id'=>$order->id,
+                'title'=>$order->title,
+                'duration'=>$order->duration,
+                'minimumPrice'=>$order->minimumPrice,
+                'maximumPrice'=>$order->maximumPrice,
+            ];
+        });
         if(is_null($orders))
         {
             return $this->sendNotFound("There is no any orders!");
         }else{
-            return response()->json(['status'=>200,'data'=>$orders],200);
+            return Inertia::render('AllOrders',['orders'=>$orders]);
         }
     }
 

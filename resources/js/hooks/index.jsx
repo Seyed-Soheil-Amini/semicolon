@@ -241,19 +241,19 @@ const useRandomOrders = (expertise) => {
     var queryKey = "";
     switch (expertise) {
         case "soft":
-            blogs = queryClient.getQueryData("softOrders");
+            orders = queryClient.getQueryData("softOrders");
             queryKey = "softOrders";
             break;
         case "server":
-            blogs = queryClient.getQueryData("serverOrders");
+            orders = queryClient.getQueryData("serverOrders");
             queryKey = "serverOrders";
             break;
         case "ai":
-            blogs = queryClient.getQueryData("aiOrders");
+            orders = queryClient.getQueryData("aiOrders");
             queryKey = "aiOrders";
             break;
         default:
-            blogs = queryClient.getQueryData("gaveOrders");
+            orders = queryClient.getQueryData("gaveOrders");
             queryKey = "gaveOrders";
             break;
     }

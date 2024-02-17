@@ -12,7 +12,7 @@ export default function Authenticated({ user, header, children }) {
         useState(false);
     const queryClient = new useQueryClient();
     const { t } = useTranslation();
-
+    console.log(user);
     return (
         <div className="bg-gray-100 dark:bg-gray-950">
             <nav className="bg-gray-800 border-b border-gray-100 border-gray-700 w-full">
@@ -82,6 +82,21 @@ export default function Authenticated({ user, header, children }) {
                                             )}
                                         >
                                             {t("dash.header.msg")}
+                                        </NavLink>
+                                    </>
+                                )}
+                                {user.isStaff == 1 && (
+                                    <>
+                                        <NavLink
+                                            href={route(
+                                                "allorders",
+                                                user.staff.expertise
+                                            )}
+                                            active={route().current(
+                                                "allorders"
+                                            )}
+                                        >
+                                            All Orders
                                         </NavLink>
                                     </>
                                 )}
@@ -231,6 +246,16 @@ export default function Authenticated({ user, header, children }) {
                                     active={route().current("messageBox")}
                                 >
                                     {t("dash.header.msg")}
+                                </ResponsiveNavLink>
+                            </>
+                        )}
+                        {user.isStaff == 1 && (
+                            <>
+                                <ResponsiveNavLink
+                                    href={route("allorders")}
+                                    active={route().current("allorders")}
+                                >
+                                    All Orders
                                 </ResponsiveNavLink>
                             </>
                         )}

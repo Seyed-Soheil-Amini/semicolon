@@ -70,6 +70,8 @@ Route::prefix('/user')->group(function () {
     })->middleware(['auth', 'verified'])->name('services');
     Route::get('/orders','App\Http\Controllers\OrderController@showOrderOfUser')
     ->middleware(['auth','verified'])->name('orders');
+    Route::get('/staff/orders','App\Http\Controller\OrderController@getBasedOnStaff')
+    ->middleware(['auth','verified','staff'])->name('allorders');
 });
 
 Route::middleware(['auth','verified'])->group(function () {

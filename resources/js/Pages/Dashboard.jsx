@@ -10,7 +10,6 @@ export default function Dashboard({ auth }) {
         isRefetching,
     } = useGetUserActivity(auth.user.id);
     const { t } = useTranslation();
-
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard" />
