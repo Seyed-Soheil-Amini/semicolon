@@ -1,14 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { Head } from "@inertiajs/react";
+import orderImage from "../../../public/images/rules-100.png";
+import prjImage from "../../../public/images/project.png";
+import OrderCard from "@/Components/Order/OrderUserCard";
+import CreateOrder from "@/Components/Order/CreateOrder";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
+import { useGetOrdersOfUser } from "@/hooks";
+import { isEmpty } from "lodash";
+import SkeletonOrder from "@/Components/Order/SkeletonOrder";
 
-const Orders = ({ auth, orders }) => {
-    useEffect(() => {
-        console.log(orders);
-    }, []);
+const Orders = ({ auth }) => {
+    const [isOpenNew, setIsOpenNew] = useState(false);
+
+    const {
+        data: orders,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        isLoading,
+    } = useGetOrdersOfUser();
+
+    const handleCloseModal = () => {
+        setIsOpenNew(false);
+    };
+
     return (
         <>
             <AuthenticatedLayout user={auth.user}>
+                <ToastContainer position="top-center" />
                 <Head title="Orders" />
                 <div className="px-5 py-5 min-h-screen">
                     <div className="container-fluid relative overflow-x-auto shadow-md sm:rounded-lg py-5">
@@ -26,103 +48,107 @@ const Orders = ({ auth, orders }) => {
                             </p>
                         </div>
                         <ul className="space-y-4 text-gray-500 list-circle dark:text-gray-400 pb-5">
-                            <li className="flex py-6">
-                                <div className="w-2/3">
-                                    <div className="flex items-center pb-3">
-                                        <svg
-                                            class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-                                            aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                        </svg>
-                                        <b className="uppercase text-md">
-                                            Order entry rules
-                                        </b>
+                            <div className="font-semibold rounded bg-gray-800 text-blue-300 border border-blue-400 items-center justify-center">
+                                <li className="flex py-6">
+                                    <div className="w-2/3 p-5">
+                                        <div className="flex items-center pb-3">
+                                            <svg
+                                                class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                            </svg>
+                                            <b className="uppercase text-md">
+                                                Order entry rules
+                                            </b>
+                                        </div>
+                                        <ul className="ps-5 mt-2 space-y-1 list-disc list-inside">
+                                            <li className="text-sm pb-1">
+                                                The maximum and minimum amount
+                                                of the project should be between{" "}
+                                                <i>
+                                                    <b>100,000</b>
+                                                </i>{" "}
+                                                and
+                                                <i>
+                                                    <b>10,000,000</b>
+                                                </i>{" "}
+                                                Tomans.
+                                            </li>
+                                            <li className="text-sm pb-1">
+                                                The duration of the software
+                                                project should be more than{" "}
+                                                <b className="text-white">1</b>{" "}
+                                                day.
+                                            </li>
+                                            <li className="text-sm pb-1">
+                                                Your order must have a title and
+                                                it is recommended that a
+                                                complete description of the
+                                                project be given in the section.
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <ul className="ps-5 mt-2 space-y-1 list-disc list-inside">
-                                        <li className="text-sm pb-1">
-                                            The maximum and minimum amount of
-                                            the project should be between{" "}
-                                            <i>
-                                                <b>100,000</b>
-                                            </i>{" "}
-                                            and
-                                            <i>
-                                                <b>10,000,000</b>
-                                            </i>{" "}
-                                            Tomans.
-                                        </li>
-                                        <li className="text-sm pb-1">
-                                            The duration of the software project
-                                            should be more than{" "}
-                                            <b className="text-white">1</b> day.
-                                        </li>
-                                        <li className="text-sm pb-1">
-                                            Your order must have a title and it
-                                            is recommended that a complete
-                                            description of the project be given
-                                            in the section.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="mx-auto my-auto">
-                                    <img
-                                        width="100"
-                                        height="100"
-                                        src="https://img.icons8.com/ios/100/1d4ed8/rules.png"
-                                        alt="rules"
-                                        className=" animate-bounce"
-                                    />
-                                </div>
-                            </li>
-                            <li className="flex py-6">
-                                <div className="w-2/3">
-                                    <div className="flex items-center pb-3">
-                                        <svg
-                                            class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-                                            aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                        </svg>
-                                        <b className="uppercase text-md">
-                                            Conditions for starting the project
-                                        </b>
+                                    <div className="mx-auto my-auto">
+                                        <img
+                                            width="100"
+                                            height="100"
+                                            src={orderImage}
+                                            alt="rules"
+                                        />
                                     </div>
-                                    <ul className="ps-5 mt-2 space-y-1 list-disc list-inside">
-                                        <li className="text-sm pb-1">
-                                            After the project is approved by the
-                                            site specialist, you need to pay its
-                                            advance to start the project.
-                                        </li>
-                                        <li className="text-sm pb-1">
-                                            After the project is approved, you
-                                            have only 5 days to pay, otherwise
-                                            the project will be deleted.
-                                        </li>
-                                        <li className="text-sm pb-1">
-                                            The delivery of the project takes
-                                            place outside the site and in the
-                                            form of e-mail or GitHub.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="mx-auto my-auto">
-                                    <img
-                                        width="100"
-                                        height="100"
-                                        src="https://img.icons8.com/ios/100/1d4ed8/project.png"
-                                        alt="project"
-                                        className="animate-bounce"
-                                    />
-                                </div>
-                            </li>
-                            <li className="text-red-600">
+                                </li>
+                                <li className="flex py-6">
+                                    <div className="w-2/3 p-5">
+                                        <div className="flex items-center pb-3">
+                                            <svg
+                                                class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                            </svg>
+                                            <b className="uppercase text-md">
+                                                Conditions for starting the
+                                                project
+                                            </b>
+                                        </div>
+                                        <ul className="ps-5 mt-2 space-y-1 list-disc list-inside">
+                                            <li className="text-sm pb-1">
+                                                After the project is approved by
+                                                the site specialist, you need to
+                                                pay its advance to start the
+                                                project.
+                                            </li>
+                                            <li className="text-sm pb-1">
+                                                After the project is approved,
+                                                you have only 5 days to pay,
+                                                otherwise the project will be
+                                                deleted.
+                                            </li>
+                                            <li className="text-sm pb-1">
+                                                The delivery of the project
+                                                takes place outside the site and
+                                                in the form of e-mail or GitHub.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="mx-auto my-auto">
+                                        <img
+                                            width="100"
+                                            height="100"
+                                            src={prjImage}
+                                            alt="project"
+                                        />
+                                    </div>
+                                </li>
+                            </div>
+                            <li className="font-medium p-5 rounded bg-red-950 text-red-300 border border-red-400">
                                 <div className="flex items-center">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -144,126 +170,63 @@ const Orders = ({ auth, orders }) => {
                                 </ul>
                             </li>
                         </ul>
-                        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" className="px-6 py-3">
-                                        Product name
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        <div className="flex items-center">
-                                            Color
-                                            <a href="#">
-                                                <svg
-                                                    className="w-3 h-3 ms-1.5"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        <div className="flex items-center">
-                                            Category
-                                            <a href="#">
-                                                <svg
-                                                    className="w-3 h-3 ms-1.5"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        <div className="flex items-center">
-                                            Price
-                                            <a href="#">
-                                                <svg
-                                                    className="w-3 h-3 ms-1.5"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        <span className="sr-only">Edit</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th
-                                        scope="row"
-                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Apple MacBook Pro 17"
-                                    </th>
-                                    <td className="px-6 py-4">Silver</td>
-                                    <td className="px-6 py-4">Laptop</td>
-                                    <td className="px-6 py-4">$2999</td>
-                                    <td className="px-6 py-4 text-right">
-                                        <a
-                                            href="#"
-                                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >
-                                            Edit
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th
-                                        scope="row"
-                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Microsoft Surface Pro
-                                    </th>
-                                    <td className="px-6 py-4">White</td>
-                                    <td className="px-6 py-4">Laptop PC</td>
-                                    <td className="px-6 py-4">$1999</td>
-                                    <td className="px-6 py-4 text-right">
-                                        <a
-                                            href="#"
-                                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >
-                                            Edit
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr className="bg-white dark:bg-gray-800">
-                                    <th
-                                        scope="row"
-                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Magic Mouse 2
-                                    </th>
-                                    <td className="px-6 py-4">Black</td>
-                                    <td className="px-6 py-4">Accessories</td>
-                                    <td className="px-6 py-4">$99</td>
-                                    <td className="px-6 py-4 text-right">
-                                        <a
-                                            href="#"
-                                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >
-                                            Edit
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {isLoading ? (
+                            <div
+                                role="status"
+                                className="p-4 mt-5 md:mt-10 space-y-2 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700 px-20 mx-28"
+                            >
+                                {[...Array(6)].map((_, index) => (
+                                    <div key={index} className="p-1">
+                                        <SkeletonOrder />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            !isEmpty(orders) && (
+                                <InfiniteScroll
+                                    dataLength={orders.pages.length}
+                                    next={() => fetchNextPage()}
+                                    hasMore={hasNextPage}
+                                    loader={
+                                        isFetchingNextPage && <p>Loading...</p>
+                                    }
+                                    className="flex-row"
+                                >
+                                    <div className="h-full mx-auto max-w-2xl px-0 py-2 md:px-6 md:py-8 lg:max-w-7xl lg:px-20 mx-28">
+                                        {orders.pages.map((page) =>
+                                            page.data.map((order) => (
+                                                <OrderCard order={order} />
+                                            ))
+                                        )}
+                                    </div>
+                                </InfiniteScroll>
+                            )
+                        )}
+                        <div className="fixed right-4 bottom-4 drop-shadow-2xl brightness-125">
+                            <button
+                                className="w-14 h-14 bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg"
+                                onClick={() => setIsOpenNew(true)}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-8 h-8 text-gray-200"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M12 4v16m8-8H4"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                    {isOpenNew && (
+                        <CreateOrder handleClose={handleCloseModal} />
+                    )}
                 </div>
             </AuthenticatedLayout>
         </>

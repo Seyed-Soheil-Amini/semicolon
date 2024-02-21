@@ -198,7 +198,6 @@ const sendOrder = async (order) => {
             Accept: "application/json, */*",
         },
     });
-    console.log(data);
     return data.data;
 };
 
@@ -269,10 +268,9 @@ const createMailbox = async () => {
     return data.data;
 };
 
-const getAllOrders = async ({ pageParam = 0 }) => {
+const getAllOrdersOfUser = async ({ pageParam = 0 }) => {
     const apiUrl = `/order/show?cursor=${pageParam}`;
     const { data } = await client.get(apiUrl);
-    console.log(data);
     return data.data;
 };
 
@@ -412,7 +410,7 @@ export {
     createProject,
     completeProject,
     createMailbox,
-    getAllOrders,
+    getAllOrdersOfUser,
     sendPaidMail,
     readMail,
     checkOrderAccetable,

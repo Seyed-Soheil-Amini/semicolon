@@ -100,7 +100,7 @@ Route::prefix('/order')->middleware(['auth:sanctum'])->namespace('App\Http\Contr
     Route::post('/',[OrderController::class,'create']);
     Route::put('/update',[OrderController::class,'update']);
     Route::delete('/remove',[OrderController::class,'destroy']);
-    Route::get('/show',[OrderController::class,'getOrdersOfUser']);
+    Route::get('/show',[OrderController::class,'showOrderOfUser']);
     Route::get('/check-accept/{id}',[OrderController::class,'checkIsAccept']);
 });
 

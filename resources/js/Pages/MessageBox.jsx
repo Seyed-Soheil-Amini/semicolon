@@ -82,7 +82,7 @@ const MessageBox = ({ auth }) => {
                     success: {
                         render() {
                             setSelectedMessages([]);
-                            return "toast.msg.scs";
+                            return t("toast.msg.scs");
                         },
                     },
                     error: {

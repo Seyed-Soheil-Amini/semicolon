@@ -68,8 +68,9 @@ Route::prefix('/user')->group(function () {
     Route::get('/services', function () {
         return Inertia::render('Services');
     })->middleware(['auth', 'verified'])->name('services');
-    Route::get('/orders','App\Http\Controllers\OrderController@showOrderOfUser')
-    ->middleware(['auth','verified'])->name('orders');
+    Route::get('/orders',function(){
+        return Inertia::render('Orders');
+    })->middleware(['auth','verified'])->name('orders');
     Route::get('/staff/orders','App\Http\Controller\OrderController@getBasedOnStaff')
     ->middleware(['auth','verified','staff'])->name('allorders');
 });

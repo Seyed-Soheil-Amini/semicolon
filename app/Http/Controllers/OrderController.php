@@ -8,18 +8,18 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use \Illuminate\Support\Facades\Validator;
 use App\Models\User;
-use App\Models\Staff;
-
+use App\Models\Blog;
+use App\Enums\BlogStatusEnum;
 
 class OrderController extends Controller
 {
 
     public function create(Request $request){
         $validator = Validator::make($request->all(),[
-            'title'=>'required|string|max:50',
+            'title'=>'required|string|max:60',
             'description'=>'string|max:16200',
-            'minimumPrice'=>'required|decimal',
-            'maximumPrice'=>'required|decimal',
+            'minimumPrice'=>'required|numeric|between:50000,10000000',
+            'maximumPrice'=>'required|numeric|between:50000,10000000',
             'duration'=>'required|integer'
         ]);
         if ($validator->fails()) {
@@ -40,10 +40,10 @@ class OrderController extends Controller
                 'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')
             ]);
-            if($order){
-                return response()->json(['status'=>201,'data'=>"Your order sent successfully."],201);
+            if(!is_null($order)){
+                return response()->json(['status'=>200,'data'=>"Your order sent successfully."],200);
             }else{
-                return response()->json(['status'=>400,"data"=>"Your Order was not sent."],400);
+                return response()->json(['status'=>400,'data'=>"Your Order was not sent."],400);
             }
         }
     }
@@ -92,16 +92,22 @@ class OrderController extends Controller
             return response()->json(['status'=>200,'data'=>'Order was deleted successfully.'],200);
         }
     }
+
     public function showOrderOfUser(Request $request)
     {
         $user = User::find($request->user())->first();
         if(is_null($user)){
             return $this->sendNotFound("User not found!");;
         }
-        $orders = Order::where('user_id',$user->id)->select('id','title','category','duration')->get();
-        return Inertia::render('Orders',[
-            'orders'=> $orders,
-        ]);
+        $orders = Order::query()
+                    ->orderBy('id', 'desc')
+                    ->select('id', 'title', 'category', 'duration', 'maximumPrice','description','isAccept','created_at')
+                    ->where('user_id',$user->id)
+                    ->cursorPaginate(6);
+        if(is_null($orders)){
+            return response()->json(['status'=>404,'data'=>"There is no orders."],404);
+        }
+        return response()->json(['status'=>200,'data'=>$orders],200);
     }
 
     public function getBasedOnStaff(Request $request,$expertise)

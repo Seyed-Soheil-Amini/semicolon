@@ -207,10 +207,8 @@ const useSendOrder = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (order) => api.sendOrder(order),
-        onSuccess: (data) => {
-            const orders = queryClient.getQueryData("orders");
-            if (isEmpty(orders)) queryClient.refetchQueries("orders");
-            else queryClient.setQueryData("orders", [...orders, data.data]);
+        onSuccess: () => {
+            queryClient.refetchQueries("ordersOfUser");
         },
     });
 };
@@ -304,7 +302,7 @@ const useGetOrdersOfUser = () => {
     const queryKey = "ordersOfUser";
     return useInfiniteQuery({
         queryKey: [queryKey],
-        queryFn: (pageParam) => api.getAllOrders(pageParam),
+        queryFn: (pageParam) => api.getAllOrdersOfUser(pageParam),
         getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
         refetchOnReconnect: true,
         refetchOnMount: true,
