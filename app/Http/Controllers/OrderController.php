@@ -48,15 +48,15 @@ class OrderController extends Controller
         }
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
-        $order = Order::find($id);
-        if($order){
+        $order = Order::find($request->orderId);
+        if(!is_null($order)){
             $validator = Validator::make($request->all(),[
                 'title'=>'required|string|max:50',
                 'description'=>'string|max:16200',
-                'minimumPrice'=>'required|decimal',
-                'maximumPrice'=>'required|decimal',
+                'minimumPrice'=>'required|numeric|between:50000,10000000',
+                'maximumPrice'=>'required|numeric|between:50000,10000000',
                 'duration'=>'required|integer'
             ]);
             if ($validator->fails()) {
@@ -67,6 +67,7 @@ class OrderController extends Controller
             }else{
                $validatedData = $validator->validate();
                $order->title = $validatedData['title'];
+               $order->category = $request->category;
                $order->description = $validatedData['description'];
                $order->minimumPrice = $validatedData['minimumPrice'];
                $order->maximumPrice = $validatedData['maximumPrice'];
@@ -75,15 +76,15 @@ class OrderController extends Controller
             }
             $order->save();
             $order->touch();
-            return response()->json(['status'=>200,'date'=>$order],200);
+            return response()->json(['status'=>200,'date'=>'Your order was updated successfully.'],200);
         }else{
             return $this->sendNotFound("Order not found!");
         }
     }
 
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request)
     {
-        $order = Order::find($id);
+        $order = Order::find($request->orderId);
         if(is_null($order))
         {
             return $this->sendNotFound("Order not found!");
@@ -101,13 +102,23 @@ class OrderController extends Controller
         }
         $orders = Order::query()
                     ->orderBy('id', 'desc')
-                    ->select('id', 'title', 'category', 'duration', 'maximumPrice','description','isAccept','created_at')
+                    ->select('id', 'title', 'category', 'duration','minimumPrice', 'maximumPrice','description','isAccept','created_at')
                     ->where('user_id',$user->id)
-                    ->cursorPaginate(6);
+                    ->simplePaginate(4);
         if(is_null($orders)){
             return response()->json(['status'=>404,'data'=>"There is no orders."],404);
         }
         return response()->json(['status'=>200,'data'=>$orders],200);
+    }
+
+    public function orderOfUser(Request $request)
+    {
+        $user = User::find($request->user())->first();
+        if(is_null($user)){
+            return $this->sendNotFound("User not found!");
+        }
+        $countOrders = Order::query()->where('user_id',$user->id)->count();
+        return Inertia::render('Orders',['totalOrders'=>$countOrders]);
     }
 
     public function getBasedOnStaff(Request $request,$expertise)

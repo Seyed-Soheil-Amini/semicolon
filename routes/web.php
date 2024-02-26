@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,9 +69,8 @@ Route::prefix('/user')->group(function () {
     Route::get('/services', function () {
         return Inertia::render('Services');
     })->middleware(['auth', 'verified'])->name('services');
-    Route::get('/orders',function(){
-        return Inertia::render('Orders');
-    })->middleware(['auth','verified'])->name('orders');
+    Route::get('/orders',[OrderController::class,'orderOfUser'])
+    ->middleware(['auth','verified'])->name('orders');
     Route::get('/staff/orders','App\Http\Controller\OrderController@getBasedOnStaff')
     ->middleware(['auth','verified','staff'])->name('allorders');
 });

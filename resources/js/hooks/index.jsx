@@ -216,9 +216,9 @@ const useSendOrder = () => {
 const useUpdateOrder = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (order, id) => api.updateOrder(order, id),
+        mutationFn: (order) => api.updateOrder(order),
         onSuccess: (data) => {
-            queryClient.refetchQueries("orders");
+            queryClient.refetchQueries("ordersOfUser");
         },
     });
 };
@@ -227,8 +227,8 @@ const useDeleteOrder = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (id) => api.deleteOrder(id),
-        onSuccess: (data) => {
-            queryClient.refetchQueries("orders");
+        onSuccess: () => {
+            queryClient.refetchQueries("ordersOfUser");
         },
     });
 };
@@ -298,16 +298,11 @@ const useCreateMailbox = () => {
     return api.createMailbox();
 };
 
-const useGetOrdersOfUser = () => {
-    const queryKey = "ordersOfUser";
-    return useInfiniteQuery({
-        queryKey: [queryKey],
-        queryFn: (pageParam) => api.getAllOrdersOfUser(pageParam),
-        getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
-        refetchOnReconnect: true,
-        refetchOnMount: true,
-        refetchOnWindowFocus: false,
-        retryOnMount: false,
+const useGetOrdersOfUser = (pageNumber) => {
+    const queryKey = "orderOfUser";
+    return useQuery({
+        queryKey: [queryKey, pageNumber],
+        queryFn: () => api.getAllOrdersOfUser(pageNumber),
         keepPreviousData: true,
     });
 };

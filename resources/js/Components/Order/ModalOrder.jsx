@@ -4,7 +4,7 @@ import { isEmpty } from "lodash";
 import { useForm } from "react-hook-form";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
-import { useSendOrder } from "@/hooks";
+import { useSendOrder, useUpdateOrder } from "@/hooks";
 import sdImg from "../../../../public/images/ordering/software-development-100.png";
 import smImg from "../../../../public/images/ordering/server-shutdown-100.png";
 import aiImg from "../../../../public/images/ordering/artificial-intelligence-100.png";
@@ -12,18 +12,13 @@ import gdImg from "../../../../public/images/ordering/game-development-100.png";
 import clsBtn from "../../../../public/images/ordering/close-window-96.png";
 import tick from "../../../../public/images/ordering/checkmark-24.png";
 
-const CreateOrder = (props) => {
-    const [order, setOrder] = useState({
-        title: "",
-        description: "",
-        category: "",
-        minimumPrice: "",
-        maximumPrice: "",
-        duration: "",
-    });
+const ModalOrder = (props) => {
+    const [order, setOrder] = useState(props.order);
 
     const [isValidPrice, setPriceValidity] = useState(true);
+    const [isToCreate, setIsToCreate] = useState(props.state == "create");
     const { mutateAsync: sendOrder } = useSendOrder();
+    const { mutateAsync: updateOrder } = useUpdateOrder();
     const {
         register,
         watch,
@@ -32,44 +27,57 @@ const CreateOrder = (props) => {
     } = useForm();
 
     useEffect(() => {
-        const currentMinPrice = watch("minimumPrice");
-        const currentMaxPrice = watch("maximumPrice");
-        setPriceValidity(currentMaxPrice >= currentMinPrice);
-    }, [watch("minimumPrice"), watch("maximumPrice")]);
-
-    const handleSubmit = (event) => {
-        try {
-            toast.promise(async () => await Promise.resolve(sendOrder(order)), {
-                pending: "Sending your order ...",
-                success: {
-                    render() {
-                        setOrder({
-                            title: "",
-                            description: "",
-                            category: "",
-                            minimumPrice: "",
-                            maximumPrice: "",
-                            duration: "",
-                        });
-                        return "Your order has been saved successfully.";
-                    },
-                },
-                error: {
-                    render({ data }) {
-                        if (data.response && data.response.status === 400) {
-                            return "Your order was not sent.";
-                        } else
-                            return `There is a problem in saving your order|code ${data.response.status}`;
-                    },
-                },
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
+        setPriceValidity(order.maximumPrice >= order.minimumPrice);
+    }, [order.minimumPrice, order.maximumPrice]);
 
     const handleCloseWindow = () => {
         props.handleClose();
+    };
+
+    const handleSubmit = (event) => {
+        try {
+            toast.promise(
+                async () =>
+                    await Promise.resolve(
+                        isToCreate ? sendOrder(order) : updateOrder(order)
+                    ),
+                {
+                    pending: {
+                        render() {
+                            if (isToCreate) return "Sending your order ...";
+                            else return "Updating your order ...";
+                        },
+                    },
+                    success: {
+                        render() {
+                            if (isToCreate) {
+                                setOrder({
+                                    title: "",
+                                    description: "",
+                                    category: "",
+                                    minimumPrice: "",
+                                    maximumPrice: "",
+                                    duration: "",
+                                });
+                            }
+                            return "Your order has been saved successfully.";
+                        },
+                    },
+                    error: {
+                        render({ data }) {
+                            if (data.response && data.response.status === 400) {
+                                if (isToCreate)
+                                    return "Your order was not sent.";
+                                else return "Your order was not update.";
+                            } else
+                                return `There is a problem in saving your order|code ${data.response.status}`;
+                        },
+                    },
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const checkIcon = <img src={tick} className="fixed w-4 h-4" />;
@@ -282,7 +290,10 @@ const CreateOrder = (props) => {
                                             <input
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
                                                 id="default-input"
-                                                value={order.minimumPrice}
+                                                value={parseInt(
+                                                    order.minimumPrice ||
+                                                        "50000"
+                                                )}
                                                 type="text"
                                                 placeholder="e.g.150000"
                                                 required
@@ -301,7 +312,7 @@ const CreateOrder = (props) => {
                                                         } else if (
                                                             !isValidPrice
                                                         ) {
-                                                            return "The maximum price should be greater than the minimum price.";
+                                                            return "The minimum price should be less than the maximum price.";
                                                         }
                                                         return true;
                                                     },
@@ -309,8 +320,9 @@ const CreateOrder = (props) => {
                                                 onChange={(event) =>
                                                     handleChange({
                                                         name: "minimumPrice",
-                                                        value: event.target
-                                                            .value,
+                                                        value: parseInt(
+                                                            event.target.value
+                                                        ),
                                                     })
                                                 }
                                                 disabled={isEmpty(
@@ -321,7 +333,7 @@ const CreateOrder = (props) => {
                                                 "required" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * Minimum price is required.
                                                 </p>
@@ -330,7 +342,7 @@ const CreateOrder = (props) => {
                                                 "valueAsNumber" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * Price must be number
                                                     format.
@@ -340,7 +352,7 @@ const CreateOrder = (props) => {
                                                 "min" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * The minimum price should
                                                     be 50,000 Tomans.
@@ -350,7 +362,7 @@ const CreateOrder = (props) => {
                                                 "max" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * The maximum price should
                                                     be 10,000,000 Tomans.
@@ -360,7 +372,7 @@ const CreateOrder = (props) => {
                                                 "validate" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     *{" "}
                                                     {
@@ -386,7 +398,10 @@ const CreateOrder = (props) => {
                                             <input
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
                                                 id="default-input"
-                                                value={order.maximumPrice}
+                                                value={parseInt(
+                                                    order.maximumPrice ||
+                                                        "50000"
+                                                )}
                                                 type="text"
                                                 placeholder="e.g.500000"
                                                 required
@@ -413,8 +428,9 @@ const CreateOrder = (props) => {
                                                 onChange={(event) =>
                                                     handleChange({
                                                         name: "maximumPrice",
-                                                        value: event.target
-                                                            .value,
+                                                        value: parseInt(
+                                                            event.target.value
+                                                        ),
                                                     })
                                                 }
                                                 disabled={isEmpty(
@@ -425,7 +441,7 @@ const CreateOrder = (props) => {
                                                 "required" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * Maximum price is required.
                                                 </p>
@@ -434,7 +450,7 @@ const CreateOrder = (props) => {
                                                 "valueAsNumber" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * Price must be number
                                                     format.
@@ -444,7 +460,7 @@ const CreateOrder = (props) => {
                                                 "min" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * The minimum price should
                                                     be 50,000 Tomans.
@@ -454,7 +470,7 @@ const CreateOrder = (props) => {
                                                 "max" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * The maximum price should
                                                     be 10,000,000 Tomans.
@@ -464,7 +480,7 @@ const CreateOrder = (props) => {
                                                 "validate" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     *{" "}
                                                     {
@@ -521,7 +537,7 @@ const CreateOrder = (props) => {
                                                 "required" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * Duration of project is
                                                     required.
@@ -531,7 +547,7 @@ const CreateOrder = (props) => {
                                                 "valueAsNumber" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * Duration must be number
                                                     format.
@@ -541,7 +557,7 @@ const CreateOrder = (props) => {
                                                 "min" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * The minimum duration
                                                     should be 1 day.
@@ -551,7 +567,7 @@ const CreateOrder = (props) => {
                                                 "max" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * The maximum duration
                                                     should be 365 days.
@@ -561,7 +577,7 @@ const CreateOrder = (props) => {
                                                 "validate" && (
                                                 <p
                                                     role="alert"
-                                                    className="text-red-500 text-xs md:text-base"
+                                                    className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
                                                     * {errors.duration.message}
                                                 </p>
@@ -710,7 +726,7 @@ const CreateOrder = (props) => {
                                             "required" && (
                                             <p
                                                 role="alert"
-                                                className="text-red-500 text-xs md:text-base"
+                                                className="tracking-tight text-red-500 text-xs md:text-base"
                                             >
                                                 * Description is required.
                                             </p>
@@ -719,7 +735,7 @@ const CreateOrder = (props) => {
                                             "minLength" && (
                                             <p
                                                 role="alert"
-                                                className="text-red-500 text-xs md:text-base"
+                                                className="tracking-tight text-red-500 text-xs md:text-base"
                                             >
                                                 * Min length of description must
                                                 be 10 characters.
@@ -729,7 +745,7 @@ const CreateOrder = (props) => {
                                             "maxLength" && (
                                             <p
                                                 role="alert"
-                                                className="text-red-500 text-xs md:text-base"
+                                                className="tracking-tight text-red-500 text-xs md:text-base"
                                             >
                                                 * Max length of description must
                                                 be 16200 characters.
@@ -744,7 +760,7 @@ const CreateOrder = (props) => {
                             type="submit"
                             disabled={isEmpty(order.category)}
                         >
-                            Submit
+                            {isToCreate ? "Submit" : "Update"}
                         </button>
                     </div>
                 </form>
@@ -753,4 +769,4 @@ const CreateOrder = (props) => {
     );
 };
 
-export default CreateOrder;
+export default ModalOrder;

@@ -12,7 +12,6 @@ export default function Authenticated({ user, header, children }) {
         useState(false);
     const queryClient = new useQueryClient();
     const { t } = useTranslation();
-    console.log(user);
     return (
         <div className="bg-gray-100 dark:bg-gray-950">
             <nav className="bg-gray-800 border-b border-gray-100 border-gray-700 w-full">

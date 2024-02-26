@@ -1,27 +1,46 @@
 import React, { useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { Head } from "@inertiajs/react";
 import orderImage from "../../../public/images/rules-100.png";
 import prjImage from "../../../public/images/project.png";
 import OrderCard from "@/Components/Order/OrderUserCard";
-import CreateOrder from "@/Components/Order/CreateOrder";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useGetOrdersOfUser } from "@/hooks";
 import { isEmpty } from "lodash";
 import SkeletonOrder from "@/Components/Order/SkeletonOrder";
+import ModalOrder from "@/Components/Order/ModalOrder";
+import ReactPaginate from "react-paginate";
 
-const Orders = ({ auth }) => {
+const Orders = ({ auth, totalOrders }) => {
     const [isOpenNew, setIsOpenNew] = useState(false);
+    const itemsPerPage = 4;
+    const [itemOffset, setItemOffset] = useState(1);
+    const [currentOrder, setCurrentOrder] = useState([]);
+    const [pageCount, setPageCount] = useState(4);
 
     const {
         data: orders,
-        fetchNextPage,
-        hasNextPage,
-        isFetchingNextPage,
         isLoading,
-    } = useGetOrdersOfUser();
+        isFetching,
+    } = useGetOrdersOfUser(itemOffset);
+
+    useEffect(() => {
+        if (!isEmpty(orders) && !isFetching) {
+            setCurrentOrder(orders.data);
+        }
+    }, [isFetching]);
+
+    useEffect(() => {
+        if (!isEmpty(orders) && !isLoading) {
+            setCurrentOrder(orders.data);
+            setPageCount(Math.ceil(totalOrders / itemsPerPage));
+        }
+    }, [isLoading]);
+
+    const handlePageChange = (selectedItem) => {
+        setItemOffset(selectedItem.selected + 1);
+    };
 
     const handleCloseModal = () => {
         setIsOpenNew(false);
@@ -49,7 +68,7 @@ const Orders = ({ auth }) => {
                         </div>
                         <ul className="space-y-4 text-gray-500 list-circle dark:text-gray-400 pb-5">
                             <div className="font-semibold rounded bg-gray-800 text-blue-300 border border-blue-400 items-center justify-center">
-                                <li className="flex py-6">
+                                <li className="flex py-2">
                                     <div className="w-2/3 p-5">
                                         <div className="flex items-center pb-3">
                                             <svg
@@ -101,7 +120,7 @@ const Orders = ({ auth }) => {
                                         />
                                     </div>
                                 </li>
-                                <li className="flex py-6">
+                                <li className="flex py-2">
                                     <div className="w-2/3 p-5">
                                         <div className="flex items-center pb-3">
                                             <svg
@@ -170,12 +189,12 @@ const Orders = ({ auth }) => {
                                 </ul>
                             </li>
                         </ul>
-                        {isLoading ? (
+                        {isLoading || isFetching ? (
                             <div
                                 role="status"
                                 className="p-4 mt-5 md:mt-10 space-y-2 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700 px-20 mx-28"
                             >
-                                {[...Array(6)].map((_, index) => (
+                                {[...Array(4)].map((_, index) => (
                                     <div key={index} className="p-1">
                                         <SkeletonOrder />
                                     </div>
@@ -183,23 +202,26 @@ const Orders = ({ auth }) => {
                             </div>
                         ) : (
                             !isEmpty(orders) && (
-                                <InfiniteScroll
-                                    dataLength={orders.pages.length}
-                                    next={() => fetchNextPage()}
-                                    hasMore={hasNextPage}
-                                    loader={
-                                        isFetchingNextPage && <p>Loading...</p>
-                                    }
-                                    className="flex-row"
-                                >
-                                    <div className="h-full mx-auto max-w-2xl px-0 py-2 md:px-6 md:py-8 lg:max-w-7xl lg:px-20 mx-28">
-                                        {orders.pages.map((page) =>
-                                            page.data.map((order) => (
-                                                <OrderCard order={order} />
-                                            ))
-                                        )}
-                                    </div>
-                                </InfiniteScroll>
+                                <div className="h-full py-2 max-w-5xl px-12 mx-auto">
+                                    {currentOrder.map((order) => (
+                                        <OrderCard order={order} />
+                                    ))}
+                                    <ReactPaginate
+                                        breakLabel="..."
+                                        nextLabel="next >"
+                                        onPageChange={(selectedItem) => {
+                                            handlePageChange(selectedItem);
+                                        }}
+                                        pageRangeDisplayed={4}
+                                        pageCount={pageCount}
+                                        marginPagesDisplayed={2}
+                                        renderOnZeroPageCount={null}
+                                        previousLabel="< prev"
+                                        containerClassName="flex justify-between pt-4 mx-auto w-1/3"
+                                        disabledClassName="cursor-not-allowed"
+                                        activeClassName="bg-primary rounded-full px-2 text-white font-bold"
+                                    />
+                                </div>
                             )
                         )}
                         <div className="fixed right-4 bottom-4 drop-shadow-2xl brightness-125">
@@ -225,7 +247,18 @@ const Orders = ({ auth }) => {
                         </div>
                     </div>
                     {isOpenNew && (
-                        <CreateOrder handleClose={handleCloseModal} />
+                        <ModalOrder
+                            handleClose={handleCloseModal}
+                            order={{
+                                title: "",
+                                description: "",
+                                category: "",
+                                minimumPrice: "",
+                                maximumPrice: "",
+                                duration: "",
+                            }}
+                            state={"create"}
+                        />
                     )}
                 </div>
             </AuthenticatedLayout>

@@ -201,15 +201,16 @@ const sendOrder = async (order) => {
     return data.data;
 };
 
-const updateOrder = async (order, id) => {
+const updateOrder = async (order) => {
     const apiUrl = "/order/update";
     const dataOrder = new FormData();
     dataOrder.append("title", order.title);
+    dataOrder.append("category", order.category);
     dataOrder.append("description", order.description);
     dataOrder.append("minimumPrice", order.minimumPrice);
     dataOrder.append("maximumPrice", order.maximumPrice);
     dataOrder.append("duration", order.duration);
-    dataOrder.append("id", id);
+    dataOrder.append("orderId", order.id);
     dataOrder.append("_method", "PUT");
     const { data } = await client.post(apiUrl, dataOrder, {
         headers: {
@@ -217,14 +218,13 @@ const updateOrder = async (order, id) => {
             Accept: "application/json, */*",
         },
     });
-    console.log(data);
     return data.data;
 };
 
 const deleteOrder = async (id) => {
     const apiUrl = "/order/remove";
     const removeOrder = new FormData();
-    removeOrder.append("id", id);
+    removeOrder.append("orderId", id);
     removeOrder.append("_method", "DELETE");
     const { data } = await client.post(apiUrl, removeOrder, {
         headers: {
@@ -268,8 +268,8 @@ const createMailbox = async () => {
     return data.data;
 };
 
-const getAllOrdersOfUser = async ({ pageParam = 0 }) => {
-    const apiUrl = `/order/show?cursor=${pageParam}`;
+const getAllOrdersOfUser = async (pageNumber) => {
+    const apiUrl = `/order/show?page=${pageNumber}`;
     const { data } = await client.get(apiUrl);
     return data.data;
 };
