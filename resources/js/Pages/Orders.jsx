@@ -14,10 +14,11 @@ import ReactPaginate from "react-paginate";
 
 const Orders = ({ auth, totalOrders }) => {
     const [isOpenNew, setIsOpenNew] = useState(false);
+
     const itemsPerPage = 4;
     const [itemOffset, setItemOffset] = useState(1);
     const [currentOrder, setCurrentOrder] = useState([]);
-    const [pageCount, setPageCount] = useState(4);
+    const pageCount = Math.ceil(totalOrders / itemsPerPage);
 
     const {
         data: orders,
@@ -26,17 +27,10 @@ const Orders = ({ auth, totalOrders }) => {
     } = useGetOrdersOfUser(itemOffset);
 
     useEffect(() => {
-        if (!isEmpty(orders) && !isFetching) {
+        if (!isEmpty(orders) && !isFetching && !isLoading) {
             setCurrentOrder(orders.data);
         }
-    }, [isFetching]);
-
-    useEffect(() => {
-        if (!isEmpty(orders) && !isLoading) {
-            setCurrentOrder(orders.data);
-            setPageCount(Math.ceil(totalOrders / itemsPerPage));
-        }
-    }, [isLoading]);
+    }, [isFetching, isLoading]);
 
     const handlePageChange = (selectedItem) => {
         setItemOffset(selectedItem.selected + 1);
@@ -189,7 +183,7 @@ const Orders = ({ auth, totalOrders }) => {
                                 </ul>
                             </li>
                         </ul>
-                        {isLoading || isFetching ? (
+                        {isLoading ? (
                             <div
                                 role="status"
                                 className="p-4 mt-5 md:mt-10 space-y-2 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700 px-20 mx-28"
@@ -217,7 +211,9 @@ const Orders = ({ auth, totalOrders }) => {
                                         marginPagesDisplayed={2}
                                         renderOnZeroPageCount={null}
                                         previousLabel="< prev"
-                                        containerClassName="flex justify-between pt-4 mx-auto w-1/3"
+                                        containerClassName={`flex justify-between pt-4 text-gray-300 mx-auto ${
+                                            pageCount > 6 ? "w-1/2" : "w-1/3"
+                                        }`}
                                         disabledClassName="cursor-not-allowed"
                                         activeClassName="bg-primary rounded-full px-2 text-white font-bold"
                                     />
