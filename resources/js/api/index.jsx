@@ -232,13 +232,13 @@ const deleteOrder = async (id) => {
             Accept: "application/json, */*",
         },
     });
-    console.log(data);
     return data.data;
 };
 
-const getRandomOrders = async ({ pageParam = 0 }, expertise) => {
-    const apiUrl = `/staff/orders/${expertise}?cursor=${pageParam}`;
+const getAllOrdersBasedOnCategory = async (pageNumber, expertise) => {
+    const apiUrl = `/order/${expertise}?page=${pageNumber}`;
     const { data } = await client.get(apiUrl);
+    console.log(data.data);
     return data.data;
 };
 
@@ -406,7 +406,7 @@ export {
     sendOrder,
     updateOrder,
     deleteOrder,
-    getRandomOrders,
+    getAllOrdersBasedOnCategory,
     createProject,
     completeProject,
     createMailbox,

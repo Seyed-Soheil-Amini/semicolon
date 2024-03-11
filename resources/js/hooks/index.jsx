@@ -233,36 +233,11 @@ const useDeleteOrder = () => {
     });
 };
 
-const useRandomOrders = (expertise) => {
-    const queryClient = useQueryClient();
-    var orders = Object;
-    var queryKey = "";
-    switch (expertise) {
-        case "soft":
-            orders = queryClient.getQueryData("softOrders");
-            queryKey = "softOrders";
-            break;
-        case "server":
-            orders = queryClient.getQueryData("serverOrders");
-            queryKey = "serverOrders";
-            break;
-        case "ai":
-            orders = queryClient.getQueryData("aiOrders");
-            queryKey = "aiOrders";
-            break;
-        default:
-            orders = queryClient.getQueryData("gaveOrders");
-            queryKey = "gaveOrders";
-            break;
-    }
-    return useInfiniteQuery({
-        queryKey: [queryKey],
-        queryFn: (pageParam) => api.getRandomOrders(pageParam, expertise),
-        getNextPageParam: (lastPage, pages) => lastPage.next_cursor,
-        refetchOnReconnect: true,
-        refetchOnMount: true,
-        refetchOnWindowFocus: false,
-        retryOnMount: false,
+const useGetOrdersCat = (pageNumber,expertise) => {
+    const queryKey = "ordersBasedOnCategory";
+    return useQuery({
+        queryKey: [queryKey, pageNumber],
+        queryFn: () => api.getAllOrdersBasedOnCategory(pageNumber,expertise),
         keepPreviousData: true,
     });
 };
@@ -472,7 +447,7 @@ export {
     useSendOrder,
     useDeleteOrder,
     useUpdateOrder,
-    useRandomOrders,
+    useGetOrdersCat,
     useCreateProject,
     useCompleteProject,
     useCreateMailbox,

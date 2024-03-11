@@ -48,7 +48,7 @@ Route::get('/contactus', function () {
 })->name('contactus');
 
 Route::get('/blog/{id}', 'App\Http\Controllers\BlogController@get')->name('showBlog');
-Route::get('/user/page/{id}','App\Http\Controllers\UserController@get')->name('showUser');
+Route::get('/user/page/{id}', 'App\Http\Controllers\UserController@get')->name('showUser');
 
 Route::prefix('/user')->group(function () {
     Route::get('/dashboard', function () {
@@ -69,13 +69,13 @@ Route::prefix('/user')->group(function () {
     Route::get('/services', function () {
         return Inertia::render('Services');
     })->middleware(['auth', 'verified'])->name('services');
-    Route::get('/orders',[OrderController::class,'orderOfUser'])
-    ->middleware(['auth','verified'])->name('orders');
-    Route::get('/staff/orders','App\Http\Controller\OrderController@getBasedOnStaff')
-    ->middleware(['auth','verified','staff'])->name('allorders');
+    Route::get('/orders', [OrderController::class, 'orderOfUser'])
+        ->middleware(['auth', 'verified'])->name('orders');
+    Route::get('/staff/orders', [OrderController::class, 'numberOrdersBasedOnExpertise'])
+        ->middleware(['auth', 'verified', 'staff'])->name('allorders');
 });
 
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

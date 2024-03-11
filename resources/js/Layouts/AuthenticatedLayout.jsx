@@ -87,15 +87,12 @@ export default function Authenticated({ user, header, children }) {
                                 {user.isStaff == 1 && (
                                     <>
                                         <NavLink
-                                            href={route(
-                                                "allorders",
-                                                user.staff.expertise
-                                            )}
+                                            href={route("allorders")}
                                             active={route().current(
                                                 "allorders"
                                             )}
                                         >
-                                            All Orders
+                                            Accept Orders
                                         </NavLink>
                                     </>
                                 )}

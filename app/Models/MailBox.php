@@ -15,6 +15,7 @@ class MailBox extends Model
      *
      * @var array<int, string>
      */
+    protected $table =  "mailboxes";
     protected $fillable = [
         'user_id',
         'total',
@@ -26,12 +27,12 @@ class MailBox extends Model
         'updated_at'
     ];
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function mails():HasMany
+    public function mails(): HasMany
     {
         return $this->hasMany(Mail::class);
     }
