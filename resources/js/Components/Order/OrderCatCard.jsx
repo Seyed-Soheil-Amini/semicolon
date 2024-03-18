@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import TextTruncate from "react-text-truncate";
 import AcceptOrderModal from "./AcceptOrderModal";
 
-const OrderCatCard = ({order}) => {
-
-    const [isFocus,setIsFocus] = useState(false);
+const OrderCatCard = ({ order, handleSuccessToast }) => {
+    const [isFocus, setIsFocus] = useState(false);
     const [isChecking, setIsChecking] = useState(false);
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
@@ -16,14 +15,15 @@ const OrderCatCard = ({order}) => {
     };
 
     const formatPrice = (price) => {
-        return parseFloat(price).toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 0
-        }).replace('$', '');
+        return parseFloat(price)
+            .toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 0,
+            })
+            .replace("$", "");
     };
-
-    const handleCloseChecking = ()=>{
+    const handleCloseChecking = () => {
         setIsChecking(false);
     };
 
@@ -54,10 +54,10 @@ const OrderCatCard = ({order}) => {
                         </p>
                     </div>
                 </div>
-                <div>
+                <div className="">
                     <p className="flex mt-1 text-xs md:text-sm text-gray-300 py-1">
                         <TextTruncate
-                            line={2}
+                            line={1}
                             element="span"
                             truncateText="..."
                             text={order.description}
@@ -84,7 +84,7 @@ const OrderCatCard = ({order}) => {
                     <button
                         className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                         type="button"
-                        onClick={()=>setIsChecking(true)}
+                        onClick={() => setIsChecking(true)}
                     >
                         Check Detail
                     </button>
@@ -92,12 +92,13 @@ const OrderCatCard = ({order}) => {
                 {isChecking && (
                     <AcceptOrderModal
                         handleClose={handleCloseChecking}
+                        handleSuccess={() => handleSuccessToast()}
                         order={order}
                     />
                 )}
             </div>
         </li>
     );
-}
- 
+};
+
 export default OrderCatCard;

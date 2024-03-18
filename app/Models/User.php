@@ -51,6 +51,21 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function __toString()
+    {
+        $data = [
+            'name' => $this->name,
+            'email' => $this->email,
+            'isAdmin' => $this->isAdmin,
+            'isSuperAdmin' => $this->isSuperAdmin,
+            'isStaff' => $this->isStaff,
+            'image' => $this->image,
+            'job_title' => $this->job_title,
+            'about' => $this->about
+        ];
+        return json_encode($data);
+    }
+
     public function blogs()
     {
         return $this->hasMany(Blog::class);

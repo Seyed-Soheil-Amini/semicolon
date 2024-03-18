@@ -17,7 +17,7 @@ use Inertia\Inertia;
 
 class BlogController extends Controller
 {
-   public function index()
+    public function index()
     {
         $blogs = Blog::with('category')->all();
         if ($blogs->count() > 0) {
@@ -36,14 +36,14 @@ class BlogController extends Controller
     public function get(Request $request, $id)
     {
         $id = base64_decode($id);
-        $blog = Blog::with('category', 'user','likes')->findOrFail($id);
+        $blog = Blog::with('category', 'user', 'likes')->findOrFail($id);
         return Inertia::render('BlogPage', [
             'blog' => $blog,
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register')
         ]);
     }
-    
+
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -65,7 +65,7 @@ class BlogController extends Controller
                 $imageName = $image->getClientOriginalName();
                 $path = $request->file('image')->storeAs($destinationPath, $imageName);
                 $path = substr($path, 7);
-            }            
+            }
             $blog = Blog::create([
                 'title' => $request->title,
                 'body' => $request->body,
@@ -128,8 +128,8 @@ class BlogController extends Controller
                 $path = $request->file('image')->storeAs($destinationPath, $imageName);
                 $path = substr($path, 7);
                 $blog->image = $path;
-            }else if(!$request->has('image') && !$request->has('noChangeImage')){
-                if(!is_null($blog->image)){
+            } else if (!$request->has('image') && !$request->has('noChangeImage')) {
+                if (!is_null($blog->image)) {
                     $oldImage = '/public/' . $blog->image;
                     Storage::delete($oldImage);
                     $blog->image = null;
@@ -314,10 +314,10 @@ class BlogController extends Controller
                     ->cursorPaginate(12);
                 break;
         }
-        return response()->json(['status' => 200, 'data' => $blogs],200);
+        return response()->json(['status' => 200, 'data' => $blogs], 200);
     }
 
-    public function addViewer(Request $request, $id,$fingerprint)
+    public function addViewer(Request $request, $id, $fingerprint)
     {
         $blog = Blog::with('views')->find($id);
         if (is_null($blog)) {
@@ -333,11 +333,11 @@ class BlogController extends Controller
             $view->save();
             $blog->increment('view');
             $blog->save();
-        }else{
+        } else {
             $existingViewer = collect($blog->views)->first(function ($value) use ($clientFingerPrint) {
                 return $value['fingerprint'] === $clientFingerPrint;
             });
-            if(is_null($existingViewer)){
+            if (is_null($existingViewer)) {
                 $view = new View();
                 $view->blog_id = $blog->id;
                 $view->fingerprint = $clientFingerPrint;
@@ -345,7 +345,7 @@ class BlogController extends Controller
                 $view->save();
                 $blog->increment('view');
                 $blog->save();
-            }else{
+            } else {
                 $lastViewTime = Carbon::parse($existingViewer->view_time);
                 $daysSinceLastView = $lastViewTime->diffInDays(Carbon::now());
                 if ($daysSinceLastView >= 1) {
@@ -354,35 +354,35 @@ class BlogController extends Controller
                     $blog->increment('view');
                     $blog->save();
                 }
-            }            
+            }
         }
         return response()->json(['status' => 200, 'data' => $blog->view], 200);
     }
 
-    public function toggleLike(Request $request, $id,$fingerprint)
+    public function toggleLike(Request $request, $id, $fingerprint)
     {
         $blog = Blog::with('likes')->find($id);
         if (is_null($blog)) {
             return $this->sendNotFound("Blog not found!");
         }
         $clientFingerPrint = base64_decode($fingerprint);
-        if(is_null($blog->likes)){
+        if (is_null($blog->likes)) {
             $like = new Like();
             $like->blog_id = $blog->id;
             $like->fingerprint = $clientFingerPrint;
             $like->save();
             $blog->increment('like');
-        }else{
+        } else {
             $existingLikker = collect($blog->likes)->first(function ($value) use ($clientFingerPrint) {
                 return $value['fingerprint'] === $clientFingerPrint;
             });
-            if(is_null($existingLikker)){
+            if (is_null($existingLikker)) {
                 $like = new Like();
                 $like->blog_id = $blog->id;
                 $like->fingerprint = $clientFingerPrint;
                 $like->save();
                 $blog->increment('like');
-            }else{
+            } else {
                 $existingLikker->delete();
                 $blog->decrement('like');
             }
