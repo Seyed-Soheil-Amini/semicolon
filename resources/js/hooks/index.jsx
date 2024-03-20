@@ -208,7 +208,17 @@ const useSendOrder = () => {
     return useMutation({
         mutationFn: (order) => api.sendOrder(order),
         onSuccess: () => {
-            queryClient.refetchQueries("ordersOfUser");
+            queryClient
+                .getQueryCache()
+                .getAll()
+                .forEach((query) => {
+                    if (
+                        Array.isArray(query.queryKey) &&
+                        query.queryKey[0] === "orderOfUser"
+                    ) {
+                        queryClient.refetchQueries(query.queryKey);
+                    }
+                });
         },
     });
 };
@@ -217,8 +227,18 @@ const useUpdateOrder = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (order) => api.updateOrder(order),
-        onSuccess: (data) => {
-            queryClient.refetchQueries("ordersOfUser");
+        onSuccess: () => {
+            queryClient
+                .getQueryCache()
+                .getAll()
+                .forEach((query) => {
+                    if (
+                        Array.isArray(query.queryKey) &&
+                        query.queryKey[0] === "orderOfUser"
+                    ) {
+                        queryClient.refetchQueries(query.queryKey);
+                    }
+                });
         },
     });
 };
@@ -228,17 +248,29 @@ const useDeleteOrder = () => {
     return useMutation({
         mutationFn: (id) => api.deleteOrder(id),
         onSuccess: () => {
-            queryClient.refetchQueries("ordersOfUser");
+            queryClient
+                .getQueryCache()
+                .getAll()
+                .forEach((query) => {
+                    if (
+                        Array.isArray(query.queryKey) &&
+                        query.queryKey[0] === "orderOfUser"
+                    ) {
+                        queryClient.refetchQueries(query.queryKey);
+                    }
+                });
         },
     });
 };
 
-const useGetOrdersCat = (pageNumber,expertise) => {
+const useGetOrdersCat = (pageNumber, expertise) => {
     const queryKey = "ordersBasedOnCategory";
     return useQuery({
         queryKey: [queryKey, pageNumber],
-        queryFn: () => api.getAllOrdersBasedOnCategory(pageNumber,expertise),
+        queryFn: () => api.getAllOrdersBasedOnCategory(pageNumber, expertise),
         keepPreviousData: true,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
     });
 };
 
@@ -248,8 +280,16 @@ const useCreateProject = () => {
         mutationFn: (project) => api.createProject(project),
         onSuccess: (data) => {
             const projects = queryClient.getQueryData("projects");
+            const orders = queryClient.getQueryData("ordersBasedOnCategory");
             if (isEmpty(projects)) queryClient.refetchQueries("projects");
             else queryClient.setQueryData("projects", [...projects, data.data]);
+            if (isEmpty(projects))
+                queryClient.refetchQueries("ordersBasedOnCategory");
+            else
+                queryClient.setQueryData("ordersBasedOnCategory", [
+                    ...orders,
+                    data.data,
+                ]);
         },
     });
 };
@@ -279,6 +319,8 @@ const useGetOrdersOfUser = (pageNumber) => {
         queryKey: [queryKey, pageNumber],
         queryFn: () => api.getAllOrdersOfUser(pageNumber),
         keepPreviousData: true,
+        // refetchOnMount: true,
+        // refetchOnWindowFocus: true,
     });
 };
 

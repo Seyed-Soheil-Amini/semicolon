@@ -18,8 +18,8 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:60',
             'description' => 'string|max:16200',
-            'minimumPrice' => 'required|numeric|between:50000,10000000',
-            'maximumPrice' => 'required|numeric|between:50000,10000000',
+            'minimumPrice' => 'required|numeric|between:49000,10000000',
+            'maximumPrice' => 'required|numeric|between:49000,10000000',
             'duration' => 'required|integer'
         ]);
         if ($validator->fails()) {

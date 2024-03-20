@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MailBox;
 use App\Models\Mail;
+use App\Models\Order;
 use \Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Project;
@@ -48,6 +49,9 @@ class ProjectController extends Controller
                 return response()->json(['status' => 400, 'data' => 'Unfortunately, project was not created.'], 400);
             } else {
                 $mailboxId = MailBox::where('user_id', $request->user_id)->first()->id;
+                $order = Order::where('id', $request->order_id)->first();
+                $order->isAccept = true;
+                $order->save();
                 Mail::create([
                     'mail_box_id' => $mailboxId,
                     'title' => "Project Acceptance",

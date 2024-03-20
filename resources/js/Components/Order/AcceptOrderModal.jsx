@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { isEmpty } from "lodash";
 import { useForm } from "react-hook-form";
-import "react-toastify/dist/ReactToastify.min.css";
-import { ToastContainer, toast } from "react-toastify";
 import clsBtn from "../../../../public/images/ordering/close-window-96.png";
 import { useCreateProject } from "@/hooks";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
 
-const AcceptOrderModal = ({ order, handleClose, handleSuccess }) => {
+const AcceptOrderModal = ({ order, handleClose }) => {
     const {
         register,
         watch,
@@ -17,10 +16,6 @@ const AcceptOrderModal = ({ order, handleClose, handleSuccess }) => {
 
     const { data, mutateAsync: acceptOrder } = useCreateProject();
 
-    // useEffect(() => {
-    //     console.log(order);
-    // }, []);
-
     const [project, setProject] = useState({
         title: order.title,
         description: order.description,
@@ -28,6 +23,7 @@ const AcceptOrderModal = ({ order, handleClose, handleSuccess }) => {
         duration: order.duration,
         price: order.minimumPrice,
         user_id: order.user.id,
+        order_id: order.id,
     });
 
     const handleCloseWindow = () => {
@@ -70,7 +66,6 @@ const AcceptOrderModal = ({ order, handleClose, handleSuccess }) => {
     };
 
     const handleSubmit = (event) => {
-        console.log("Sent");
         try {
             toast.promise(
                 async () => await Promise.resolve(acceptOrder(project)),
@@ -78,8 +73,8 @@ const AcceptOrderModal = ({ order, handleClose, handleSuccess }) => {
                     pending: "Accepting Ordering ...",
                     success: {
                         render() {
-                            handleSuccess();
                             handleClose();
+                            return "Project was created successfully.";
                         },
                     },
                     error: {
@@ -117,11 +112,11 @@ const AcceptOrderModal = ({ order, handleClose, handleSuccess }) => {
 
     return (
         <>
+            <ToastContainer position="top-center" />
             <Modal
                 isOpen={true}
                 className="overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-900 rounded-md px-5 py-1 w-400 max-w-full"
             >
-                <ToastContainer position="top" />
                 <button className="" onClick={() => handleCloseWindow()}>
                     <img src={clsBtn} className="w-12 h-8" />
                 </button>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextTruncate from "react-text-truncate";
 import AcceptOrderModal from "./AcceptOrderModal";
 
-const OrderCatCard = ({ order, handleSuccessToast }) => {
+const OrderCatCard = ({ order }) => {
     const [isFocus, setIsFocus] = useState(false);
     const [isChecking, setIsChecking] = useState(false);
     const formatDate = (timestamp) => {
@@ -92,7 +92,6 @@ const OrderCatCard = ({ order, handleSuccessToast }) => {
                 {isChecking && (
                     <AcceptOrderModal
                         handleClose={handleCloseChecking}
-                        handleSuccess={() => handleSuccessToast()}
                         order={order}
                     />
                 )}

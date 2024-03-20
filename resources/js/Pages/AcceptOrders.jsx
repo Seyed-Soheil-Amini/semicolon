@@ -44,13 +44,10 @@ const AcceptOrder = ({ auth, totalOrders, staff }) => {
         setItemOffset(selectedItem.selected + 1);
     };
 
-    const showSuccessAccept = () => {
-        toast.success("Project was created successfully.");
-    };
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Accept Order" />
-            <ToastContainer position="top" />
+            <ToastContainer position="top-center" />
             <div className="min-h-screen overflow-hidden py-8 sm:py-10">
                 <div className="mx-auto max-w-7xl mt-10 px-6 lg:px-8">
                     <div className="mx-5 text-4xl text-center text-gray-200 border-b-2 border-gray-400 pb-8">
@@ -65,12 +62,7 @@ const AcceptOrder = ({ auth, totalOrders, staff }) => {
                             !isEmpty(orders) && (
                                 <ul className="h-full py-2 max-w-5xl mx-8 mx-auto">
                                     {currentOrder.map((order) => (
-                                        <OrderCatCard
-                                            order={order}
-                                            handleSuccessToast={
-                                                showSuccessAccept
-                                            }
-                                        />
+                                        <OrderCatCard order={order} />
                                     ))}
                                     <ReactPaginate
                                         breakLabel="..."
