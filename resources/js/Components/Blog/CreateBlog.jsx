@@ -157,13 +157,13 @@ const CreateBlog = () => {
                 >
                     <div className="w-6.5/7 md:w-3/4">
                         <label
-                            className="block text-gray-400 text-lg font-bold mb-1"
+                            className="block text-gray-200 text-lg font-bold mb-1"
                             htmlFor="title"
                         >
                             {t("dash.blg.tit")}
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
                             id="title"
                             type="text"
                             placeholder="Enter title"
@@ -199,13 +199,13 @@ const CreateBlog = () => {
                     </div>
                     <div className="w-6.5/7 md:ml-6 md:w-1/4">
                         <label
-                            className="block text-gray-400 text-lg font-bold mb-1"
+                            className="block text-gray-200 text-lg font-bold mb-1"
                             htmlFor="category"
                         >
                             {t("dash.blg.cat")}
                         </label>
                         <Select
-                            className="appearance-none border rounded bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="appearance-none border rounded bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
                             id="category"
                             value={blog.category}
                             name="category"
@@ -222,13 +222,13 @@ const CreateBlog = () => {
                 </div>
                 <div className="mx-5 mb-4 w-5/6 md:w-auto">
                     <label
-                        className="block text-gray-400 text-lg font-bold mb-1"
+                        className="block text-gray-200 text-lg font-bold mb-1"
                         htmlFor="context"
                     >
                         {t("dash.blg.bdy")}
                     </label>
                     <textarea
-                        className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
                         rows="8"
                         cols="50"
                         id="context"
@@ -276,12 +276,12 @@ const CreateBlog = () => {
                 </div>
                 <div className="mb-3 mx-5 w-5/6 md:w-auto">
                     <label
-                        className="text-gray-400 text-lg font-bold mb-1"
+                        className="text-gray-200 text-lg font-bold mb-1"
                         htmlFor="labels"
                     >
                         {t("dash.blg.lbl")}
                     </label>
-                    <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-700 text-gray-900 leading-tight focus:outline-none focus:shadow-outline">
                         <ReactTags
                             tags={blog.labels}
                             suggestions={[]}
@@ -295,6 +295,7 @@ const CreateBlog = () => {
                             inputProps={{
                                 disabled: blog.labels.length >= 5,
                             }}
+                            
                         />
                         <div
                             className="my-auto float-right text-xs md:text-base"
@@ -306,7 +307,7 @@ const CreateBlog = () => {
                 </div>
                 <div className="mb-4 mx-auto">
                     <label
-                        className="block text-gray-400 text-lg font-bold mb-3 text-center"
+                        className="block text-gray-200 text-lg font-bold mb-3 text-center"
                         htmlFor="file"
                     >
                         {t("dash.blg.img")}

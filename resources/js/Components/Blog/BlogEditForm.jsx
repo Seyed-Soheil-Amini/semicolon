@@ -199,20 +199,20 @@ const BlogEditForm = (props) => {
             </Transition>
             <Modal
                 isOpen={props.isOpen}
-                className=" overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-1 w-400 max-w-full"
+                className=" overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-900 rounded-md px-5 py-1 w-400 max-w-full"
             >
                 <form
                     onSubmit={submit(handleSubmit)}
                     encType="multipart/form-data"
-                    className="flex-md-row h-full w-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-1 w-400 max-w-full"
+                    className="flex-md-row h-full w-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-900 rounded-md px-5 py-1 w-400 max-w-full"
                 >
                     <div className="max-h-80vh h-6.5/7 flex-md-row">
-                        <h2 className="text-lg font-bold mb-1">
+                        <h2 className="text-xl text-white font-bold mb-1">
                             {t("dash.blg.edt-form.tit")}
                         </h2>
                         <div className="flex-row mb-0 mx-auto h-3/7">
                             <label
-                                className="h-1/7 block text-gray-500 text-sm md:text-base font-bold mb-0 text-center"
+                                className="h-1/7 block text-zinc-50 text-sm md:text-base font-bold mb-0 text-center"
                                 htmlFor="file"
                             >
                                 {t("dash.blg.edt-form.img-fil")}
@@ -256,7 +256,7 @@ const BlogEditForm = (props) => {
                                         </div>
                                     </>
                                 ) : (
-                                    <p className="mx-auto my-auto text-black text-xs md:text-sm">
+                                    <p className="mx-auto my-auto text-zinc-50 text-xs md:text-sm">
                                         {t("dash.blg.edt-form.sub-img")}
                                     </p>
                                 )}
@@ -266,14 +266,14 @@ const BlogEditForm = (props) => {
                             <div className="mb-1 w-full md:w-2/4 mt-1">
                                 <label
                                     htmlFor="title"
-                                    className="block text-gray-500 text-sm md:text-base font-bold mb-1"
+                                    className="block text-zinc-50 text-sm md:text-lg font-bold mb-1"
                                 >
                                     {t("dash.blg.edt-form.sub-tit")}
                                 </label>
                                 <input
                                     type="text"
                                     id="title"
-                                    className="form-input w-full text-xs md:text-base"
+                                    className="form-input w-full text-xs bg-gray-300 text-gray-900 md:text-base rounded"
                                     value={blog.title}
                                     name="title"
                                     required
@@ -310,13 +310,13 @@ const BlogEditForm = (props) => {
                             </div>
                             <div className="md:ml-6 mt-1 w-full md:w-2/4">
                                 <label
-                                    className="block text-gray-500 text-sm md:text-base font-bold mb-0 md:mb-1"
+                                    className="block text-zinc-50 text-sm md:text-lg font-bold mb-0 md:mb-1"
                                     htmlFor="category"
                                 >
                                     {t("dash.blg.edt-form.cat")}
                                 </label>
                                 <Select
-                                    className="appearance-none border rounded bg-gray-200 text-gray-700 text-xs md:text-base leading-tight focus:outline-none focus:shadow-outline"
+                                    className="appearance-none border rounded bg-gray-300 text-gray-900 text-xs md:text-base leading-tight focus:outline-none focus:shadow-outline"
                                     id="category"
                                     value={blog.category}
                                     name="category"
@@ -333,13 +333,13 @@ const BlogEditForm = (props) => {
                         <div className="mb-1 h-2/7 text-gray-600">
                             <label
                                 htmlFor="content"
-                                className="block text-gray-500 text-sm md:text-base font-bold mb-1"
+                                className="block text-zinc-50 text-sm md:text-lg font-bold mb-1"
                             >
                                 {t("dash.blg.edt-form.bdy")}
                             </label>
                             <textarea
                                 id="content"
-                                className="form-textarea h-full w-full text-xs md:text-base"
+                                className="form-textarea text-gray-900 bg-gray-300 tracking-tight h-full w-full text-xs md:text-base"
                                 value={blog.body}
                                 name="body"
                                 required
@@ -381,7 +381,7 @@ const BlogEditForm = (props) => {
                                     * {t("dash.blg.cush.con.minl")}
                                 </p>
                             )}
-                            <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-300 text-gray-900 leading-tight focus:outline-none focus:shadow-outline">
                                 <ReactTags
                                     tags={blog.labels}
                                     suggestions={[]}
@@ -416,7 +416,7 @@ const BlogEditForm = (props) => {
                                 <button
                                     disabled={loading}
                                     type="submit"
-                                    className="flex w-auto h-1/7 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-2.5 md:py-2 md:px-4 mr-2 rounded"
+                                    className="flex w-auto h-1/7 bg-orange-600 hover:bg-orange-700 text-white font-bold py-1.5 px-2.5 md:py-2 md:px-4 mr-2 rounded"
                                 >
                                     {loading
                                         ? t("dash.blg.edt-form.wait-btn")

@@ -32,30 +32,31 @@ const BlogCard = (props) => {
             </div>
             <div className="flex-grow mt-3 row justify-between h-60">
                 <div className="flex-row px-6 w-full h-full">
-                    <h3 className="text-gray-200 font-bold text-sm md:text-lg">
-                        {props.blog.title}
-                    </h3>
-                    <p className="flex mt-1 text-xs md:text-sm text-gray-400 py-1">
-                        <TextTruncate
-                            line={!isEmpty(props.blog.labels) ? 4 : 8}
-                            element="span"
-                            truncateText="..."
-                            text={props.blog.body}
-                            // textTruncateChild={<a>Read more</a>}
-                        />
-                    </p>
-                    {!isEmpty(props.blog.labels) && (
-                        <div className="px-4 pt-1 pb-1 h-2/7">
-                            {props.blog.labels.map((label) => {
-                                return (
-                                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs md:text-sm font-semibold text-gray-700">
-                                        #{label.name}
-                                    </span>
-                                );
-                            })}
-                        </div>
-                    )}
-
+                    <div className="flex-row w-full h-4/5">
+                        <h3 className="text-gray-200 font-bold text-sm md:text-lg">
+                            {props.blog.title}
+                        </h3>
+                        <p className="flex mt-1 text-xs md:text-sm text-gray-400 py-1">
+                            <TextTruncate
+                                line={!isEmpty(props.blog.labels) ? 4 : 8}
+                                element="span"
+                                truncateText="..."
+                                text={props.blog.body}
+                                // textTruncateChild={<a>Read more</a>}
+                            />
+                        </p>
+                        {!isEmpty(props.blog.labels) && (
+                            <div className="px-4 pt-1 pb-1 h-2/7">
+                                {props.blog.labels.map((label) => {
+                                    return (
+                                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs md:text-sm font-semibold text-gray-700">
+                                            #{label.name}
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
                     {(() => {
                         if (props.parent === "edit") {
                             return (

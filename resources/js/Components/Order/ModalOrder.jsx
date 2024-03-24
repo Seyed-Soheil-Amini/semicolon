@@ -92,22 +92,39 @@ const ModalOrder = (props) => {
         });
     };
 
+    const formatPrice = (price) => {
+        return parseFloat(price)
+            .toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 0,
+            })
+            .replace("$", "");
+    };
+
+    const parsePrice = (formattedPrice) => {
+        const numericPrice = parseFloat(
+            formattedPrice.replace(/[^0-9.-]+/g, "")
+        );
+        return numericPrice;
+    };
+
     return (
         <>
             <ToastContainer position="top-center" />
             <Modal
                 isOpen={true}
-                className="overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-1 w-400 max-w-full"
+                className="overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-900 rounded-md px-5 py-1 w-400 max-w-full"
             >
                 <form
                     onSubmit={submit(handleSubmit)}
                     encType="multipart/form-data"
-                    className="flex-md-row h-full w-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-md px-5 py-1 w-400 max-w-full"
+                    className="flex-md-row h-full w-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-900 rounded-md px-5 py-1 w-400 max-w-full"
                 >
                     <div className="container-fluid">
                         <div>
                             <div className="flex justify-between">
-                                <h2 className="font-serif text-xl text-gray-500 my-auto">
+                                <h2 className="font-serif text-xl text-gray-100 my-auto">
                                     <b>Category</b>
                                 </h2>
                                 <button
@@ -119,7 +136,7 @@ const ModalOrder = (props) => {
                             </div>
                             <div className="grid grid-cols-4 gap-4 mt-1">
                                 <div
-                                    className={`flex-row items-center text-center rounded-md border-2 border-gray-300 cursor-pointer ${
+                                    className={`flex-row items-center text-center rounded-md border-2 border-gray-100 cursor-pointer ${
                                         order.category == "SD"
                                             ? "opacity-100"
                                             : "opacity-50"
@@ -138,7 +155,7 @@ const ModalOrder = (props) => {
                                             className={`w-14 h-12 mx-auto`}
                                         />
                                     </div>
-                                    <div className="text-sm font-semibold text-zinc-900">
+                                    <div className="text-sm font-semibold text-zinc-200">
                                         Software Development
                                     </div>
                                 </div>
@@ -162,7 +179,7 @@ const ModalOrder = (props) => {
                                             className={`w-14 h-12 mx-auto text-zinc-900`}
                                         />
                                     </div>
-                                    <div className="text-sm font-semibold text-zinc-900">
+                                    <div className="text-sm font-semibold text-zinc-100">
                                         Game Development
                                     </div>
                                 </div>
@@ -186,7 +203,7 @@ const ModalOrder = (props) => {
                                             className={`w-14 h-12 mx-auto`}
                                         />
                                     </div>
-                                    <div className="text-sm font-semibold text-zinc-900">
+                                    <div className="text-sm font-semibold text-zinc-200">
                                         Artificial intelligence
                                     </div>
                                 </div>
@@ -211,7 +228,7 @@ const ModalOrder = (props) => {
                                         />
                                     </div>
                                     <div
-                                        className={`text-sm font-semibold text-zinc-900`}
+                                        className={`text-sm font-semibold text-zinc-200`}
                                     >
                                         Server Management
                                     </div>
@@ -226,13 +243,13 @@ const ModalOrder = (props) => {
                             }`}
                         >
                             <div>
-                                <h2 className="font-serif text-xl text-gray-500">
+                                <h2 className="font-serif text-xl text-gray-100">
                                     <b>Title</b>
                                 </h2>
                                 <div className="mt-1">
                                     <div className="mb-4">
                                         <input
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                            className="bg-gray-50 border border-gray-300 text-zinc-100 bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                             id="default-input"
                                             value={order.title}
                                             type="text"
@@ -282,20 +299,27 @@ const ModalOrder = (props) => {
                             </div>
                             <div className="grid grid-cols-3 gap-3">
                                 <div className="mb-6 relative">
-                                    <label className="font-serif text-gray-500">
+                                    <label className="font-serif text-gray-100">
                                         Minimum Price
                                     </label>
                                     <div className="flex">
                                         <div className="w-full">
                                             <input
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
+                                                className="bg-gray-50 border border-gray-300 text-gray-100 bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
                                                 id="default-input"
-                                                value={parseInt(
-                                                    order.minimumPrice ||
-                                                        "50000"
-                                                )}
+                                                value={
+                                                    isNaN(
+                                                        parseInt(
+                                                            order.minimumPrice
+                                                        )
+                                                    )
+                                                        ? formatPrice(50000)
+                                                        : formatPrice(
+                                                              order.minimumPrice
+                                                          )
+                                                }
                                                 type="text"
-                                                placeholder="e.g.150000"
+                                                placeholder="e.g.150,000"
                                                 required
                                                 {...register("minimumPrice", {
                                                     required: true,
@@ -303,16 +327,13 @@ const ModalOrder = (props) => {
                                                     min: 50000,
                                                     max: 10000000,
                                                     validate: (value) => {
-                                                        if (
-                                                            isNaN(
-                                                                parseInt(value)
-                                                            )
-                                                        ) {
-                                                            return "Please enter a valid number.";
-                                                        } else if (
-                                                            !isValidPrice
-                                                        ) {
+                                                        if (!isValidPrice) {
                                                             return "The minimum price should be less than the maximum price.";
+                                                        } else if (
+                                                            order.minimumPrice >
+                                                            10000000
+                                                        ) {
+                                                            return "The minimum price should be less than 10,000,000 Tomans.";
                                                         }
                                                         return true;
                                                     },
@@ -320,7 +341,7 @@ const ModalOrder = (props) => {
                                                 onChange={(event) =>
                                                     handleChange({
                                                         name: "minimumPrice",
-                                                        value: parseInt(
+                                                        value: parsePrice(
                                                             event.target.value
                                                         ),
                                                     })
@@ -364,8 +385,9 @@ const ModalOrder = (props) => {
                                                     role="alert"
                                                     className="tracking-tight text-red-500 text-xs md:text-base"
                                                 >
-                                                    * The maximum price should
-                                                    be 10,000,000 Tomans.
+                                                    * The minimum price should
+                                                    be less than 10,000,000
+                                                    Tomans.
                                                 </p>
                                             )}
                                             {errors.minimumPrice?.type ===
@@ -383,27 +405,34 @@ const ModalOrder = (props) => {
                                             )}
                                         </div>
                                         <div className="absolute right-0 items-center text-center bg-gray-300 p-2 block rounded-lg">
-                                            <span className="text-gray-500 text-sm font-mono">
+                                            <span className="text-gray-600 text-sm font-mono">
                                                 Toman
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mb-6 relative">
-                                    <label className="font-serif text-gray-500">
+                                    <label className="font-serif text-gray-100">
                                         Maximum Price
                                     </label>
                                     <div className="flex">
                                         <div className="w-full">
                                             <input
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
+                                                className="bg-gray-50 border border-gray-300 text-gray-100 bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
                                                 id="default-input"
-                                                value={parseInt(
-                                                    order.maximumPrice ||
-                                                        "50000"
-                                                )}
+                                                value={
+                                                    isNaN(
+                                                        parseInt(
+                                                            order.maximumPrice
+                                                        )
+                                                    )
+                                                        ? formatPrice(50000)
+                                                        : formatPrice(
+                                                              order.maximumPrice
+                                                          )
+                                                }
                                                 type="text"
-                                                placeholder="e.g.500000"
+                                                placeholder="e.g.500,000"
                                                 required
                                                 {...register("maximumPrice", {
                                                     required: true,
@@ -411,16 +440,13 @@ const ModalOrder = (props) => {
                                                     min: 50000,
                                                     max: 10000000,
                                                     validate: (value) => {
-                                                        if (
-                                                            isNaN(
-                                                                parseInt(value)
-                                                            )
-                                                        ) {
-                                                            return "Plaese enter a valid number.";
-                                                        } else if (
-                                                            !isValidPrice
-                                                        ) {
+                                                        if (!isValidPrice) {
                                                             return "The maximum price should be greater than the minimum price.";
+                                                        } else if (
+                                                            order.maximumPrice >
+                                                            10000000
+                                                        ) {
+                                                            return "The maximum price should be less than 10,000,000 Toman";
                                                         }
                                                         return true;
                                                     },
@@ -428,7 +454,7 @@ const ModalOrder = (props) => {
                                                 onChange={(event) =>
                                                     handleChange({
                                                         name: "maximumPrice",
-                                                        value: parseInt(
+                                                        value: parsePrice(
                                                             event.target.value
                                                         ),
                                                     })
@@ -491,22 +517,22 @@ const ModalOrder = (props) => {
                                             )}
                                         </div>
                                         <div className="absolute right-0 items-center text-center bg-gray-300 p-2 block rounded-lg">
-                                            <span className="text-gray-500 text-sm font-mono">
+                                            <span className="text-gray-600 text-sm font-mono">
                                                 Toman
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mb-6 relative">
-                                    <label className="font-serif text-gray-500">
+                                    <label className="font-serif text-gray-100">
                                         Duration
                                     </label>
                                     <div className="flex">
                                         <div className="w-full">
                                             <input
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                className="bg-gray-50 border border-gray-300 text-gray-100 bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                 id="price-input"
-                                                value={order.duration}
+                                                value={order.duration || 20}
                                                 type="number"
                                                 placeholder="e.g.25"
                                                 required
@@ -584,7 +610,7 @@ const ModalOrder = (props) => {
                                             )}
                                         </div>
                                         <div className="absolute right-0 flex items-center my-auto bg-gray-300 block rounded-lg p-2.5">
-                                            <span className="text-gray-500 text-sm font-mono my-auto">
+                                            <span className="text-gray-600 text-sm font-mono my-auto">
                                                 Day
                                             </span>
                                         </div>
@@ -592,118 +618,13 @@ const ModalOrder = (props) => {
                                 </div>
                             </div>
                             <div className="">
-                                <label className="text-gray-500 text-xl font-serif">
+                                <label className="text-gray-100 text-xl font-serif">
                                     <b>Decription</b>
                                 </label>
                                 <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 mt-1">
-                                    {/* <div className="flex items-center justify-between px-3 py-2 border-b">
-                                    <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse ">
-                                        <div className="flex items-center space-x-1 rtl:space-x-reverse sm:pe-4">
-                                            <button
-                                                className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100"
-                                                type="button"
-                                            >
-                                                <svg
-                                                    aria-hidden="true"
-                                                    className="w-4 h-4"
-                                                    fill="none"
-                                                    viewBox="0 0 12 20"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path
-                                                        d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6"
-                                                        stroke="currentColor"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                    />
-                                                </svg>
-                                                <span className="sr-only">
-                                                    Attach file
-                                                </span>
-                                            </button>
-                                            <button
-                                                className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100"
-                                                type="button"
-                                            >
-                                                <svg
-                                                    aria-hidden="true"
-                                                    className="w-4 h-4"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 16 20"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-                                                    <path d="M14.067 0H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.933-2ZM6.709 13.809a1 1 0 1 1-1.418 1.409l-2-2.013a1 1 0 0 1 0-1.412l2-2a1 1 0 0 1 1.414 1.414L5.412 12.5l1.297 1.309Zm6-.6-2 2.013a1 1 0 1 1-1.418-1.409l1.3-1.307-1.295-1.295a1 1 0 0 1 1.414-1.414l2 2a1 1 0 0 1-.001 1.408v.004Z" />
-                                                </svg>
-                                                <span className="sr-only">
-                                                    Format code
-                                                </span>
-                                            </button>
-                                            <button
-                                                className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100"
-                                                type="button"
-                                            >
-                                                <svg
-                                                    aria-hidden="true"
-                                                    className="w-4 h-4"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM13.5 6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm-7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm3.5 9.5A5.5 5.5 0 0 1 4.6 11h10.81A5.5 5.5 0 0 1 10 15.5Z" />
-                                                </svg>
-                                                <span className="sr-only">
-                                                    Add emoji
-                                                </span>
-                                            </button>
-                                        </div>
-                                        <div className="flex flex-wrap items-center space-x-1 rtl:space-x-reverse sm:ps-4">
-                                            <button
-                                                className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100"
-                                                type="button"
-                                            >
-                                                <svg
-                                                    aria-hidden="true"
-                                                    className="w-4 h-4"
-                                                    fill="none"
-                                                    viewBox="0 0 21 18"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path
-                                                        d="M9.5 3h9.563M9.5 9h9.563M9.5 15h9.563M1.5 13a2 2 0 1 1 3.321 1.5L1.5 17h5m-5-15 2-1v6m-2 0h4"
-                                                        stroke="currentColor"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                    />
-                                                </svg>
-                                                <span className="sr-only">
-                                                    Add list
-                                                </span>
-                                            </button>
-                                            <button
-                                                className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100"
-                                                type="button"
-                                            >
-                                                <svg
-                                                    aria-hidden="true"
-                                                    className="w-4 h-4"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path d="M18 7.5h-.423l-.452-1.09.3-.3a1.5 1.5 0 0 0 0-2.121L16.01 2.575a1.5 1.5 0 0 0-2.121 0l-.3.3-1.089-.452V2A1.5 1.5 0 0 0 11 .5H9A1.5 1.5 0 0 0 7.5 2v.423l-1.09.452-.3-.3a1.5 1.5 0 0 0-2.121 0L2.576 3.99a1.5 1.5 0 0 0 0 2.121l.3.3L2.423 7.5H2A1.5 1.5 0 0 0 .5 9v2A1.5 1.5 0 0 0 2 12.5h.423l.452 1.09-.3.3a1.5 1.5 0 0 0 0 2.121l1.415 1.413a1.5 1.5 0 0 0 2.121 0l.3-.3 1.09.452V18A1.5 1.5 0 0 0 9 19.5h2a1.5 1.5 0 0 0 1.5-1.5v-.423l1.09-.452.3.3a1.5 1.5 0 0 0 2.121 0l1.415-1.414a1.5 1.5 0 0 0 0-2.121l-.3-.3.452-1.09H18a1.5 1.5 0 0 0 1.5-1.5V9A1.5 1.5 0 0 0 18 7.5Zm-8 6a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" />
-                                                </svg>
-                                                <span className="sr-only">
-                                                    Settings
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div> */}
-                                    <div className="px-4 py-2 bg-white rounded-b-lg">
+                                    <div className="px-4 py-2 bg-zinc-700 rounded-b-lg">
                                         <textarea
-                                            className="block w-full px-0 text-sm text-gray-800 bg-white border-0 focus:ring-0"
+                                            className="block w-full px-0 text-sm text-gray-100 bg-zinc-700 border-0 focus:ring-0"
                                             id="editor"
                                             value={order.description}
                                             placeholder="Write a description..."
@@ -756,7 +677,7 @@ const ModalOrder = (props) => {
                             </div>
                         </div>
                         <button
-                            className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                            className="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                             type="submit"
                             disabled={isEmpty(order.category)}
                         >

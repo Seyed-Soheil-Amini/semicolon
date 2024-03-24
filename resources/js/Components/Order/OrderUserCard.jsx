@@ -38,18 +38,21 @@ const OrderCard = ({ order }) => {
 
     const handleDelete = () => {
         try {
-            toast.promise(Promise.resolve(deleteOrder(order.id)), {
-                pending: "Removing your order ...",
-                success: "Your order was removed successfully.",
-                error: {
-                    render({ data }) {
-                        if (data.response && data.response.status === 400) {
-                            return "Your order was not removed.";
-                        } else
-                            return `There is a problem in removing your order|code ${data.response.status}`;
+            toast.promise(
+                async () => await Promise.resolve(deleteOrder(order.id)),
+                {
+                    pending: "Removing your order ...",
+                    success: "Your order was removed successfully.",
+                    error: {
+                        render({ data }) {
+                            if (data.response && data.response.status === 400) {
+                                return "Your order was not removed.";
+                            } else
+                                return `There is a problem in removing your order|code ${data.response.status}`;
+                        },
                     },
-                },
-            });
+                }
+            );
         } catch (error) {
             console.log(error);
         }
