@@ -146,7 +146,7 @@ const CreateBlog = () => {
             <form
                 onSubmit={submit(handleSubmit)}
                 encType="multipart/form-data"
-                className=""
+                className="mt-10"
             >
                 <div
                     className="flex-row md:flex mx-5 mb-4"
@@ -157,13 +157,13 @@ const CreateBlog = () => {
                 >
                     <div className="w-6.5/7 md:w-3/4">
                         <label
-                            className="block text-gray-200 text-lg font-bold mb-1"
+                            className="block text-gray-200 text-2xl font-serif tracking-wider mb-1"
                             htmlFor="title"
                         >
                             {t("dash.blg.tit")}
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-950 text-gray-100 outline-1 leading-tight hover:bg-gray-700 focus:outline-none focus:shadow-outline focus:bg-gray-700"
                             id="title"
                             type="text"
                             placeholder="Enter title"
@@ -199,13 +199,13 @@ const CreateBlog = () => {
                     </div>
                     <div className="w-6.5/7 md:ml-6 md:w-1/4">
                         <label
-                            className="block text-gray-200 text-lg font-bold mb-1"
+                            className="block text-gray-100 text-2xl font-serif tracking-wider mb-1"
                             htmlFor="category"
                         >
                             {t("dash.blg.cat")}
                         </label>
                         <Select
-                            className="appearance-none border rounded bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+                            className="appearance-none rounded bg-gray-900 leading-tight focus:outline-none focus:shadow-outline"
                             id="category"
                             value={blog.category}
                             name="category"
@@ -217,18 +217,51 @@ const CreateBlog = () => {
                                     value: event,
                                 })
                             }
+                            styles={{
+                                control: (base) => ({
+                                    ...base,
+                                    backgroundColor: "#020617",
+                                    ":focus": {
+                                        borderColor: "#64748b",
+                                        backgroundColor: "#334155",
+                                    },
+                                    ":hover": {
+                                        borderColor: "#64748b",
+                                        backgroundColor: "#334155",
+                                    },
+                                    width: "100%",
+                                    borderColor: "#64748b",
+                                }),
+                                option: (base) => ({
+                                    ...base,
+                                    backgroundColor: "#020617",
+                                    ":focus": {
+                                        backgroundColor: "#334155",
+                                    },
+                                    ":hover": {
+                                        backgroundColor: "#334155",
+                                    },
+                                    boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.1)",
+                                    padding: "8px 12px",
+                                    width: "100%",
+                                }),
+                                singleValue: (base) => ({
+                                    ...base,
+                                    color: "white",
+                                }),
+                            }}
                         />
-                    </div>
+                    </div>{" "}
                 </div>
                 <div className="mx-5 mb-4 w-5/6 md:w-auto">
                     <label
-                        className="block text-gray-200 text-lg font-bold mb-1"
+                        className="block text-gray-200 text-2xl font-serif tracking-wider mb-1"
                         htmlFor="context"
                     >
                         {t("dash.blg.bdy")}
                     </label>
                     <textarea
-                        className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-950 text-gray-100 leading-tight outline-1 hover:bg-gray-700 focus:outline-none focus:shadow-outline focus:bg-gray-700"
                         rows="8"
                         cols="50"
                         id="context"
@@ -276,12 +309,12 @@ const CreateBlog = () => {
                 </div>
                 <div className="mb-3 mx-5 w-5/6 md:w-auto">
                     <label
-                        className="text-gray-200 text-lg font-bold mb-1"
+                        className="text-gray-200 text-2xl font-serif tracking-wider mb-1"
                         htmlFor="labels"
                     >
                         {t("dash.blg.lbl")}
                     </label>
-                    <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-700 text-gray-900 leading-tight focus:outline-none focus:shadow-outline">
+                    <div className="flex justify-between shadow appearance-none border border-gray-500 rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-950 text-gray-100 leading-tight focus:outline-none focus:shadow-outline">
                         <ReactTags
                             tags={blog.labels}
                             suggestions={[]}
@@ -295,7 +328,10 @@ const CreateBlog = () => {
                             inputProps={{
                                 disabled: blog.labels.length >= 5,
                             }}
-                            
+                            classNames={{
+                                tagInputField:
+                                    "bg-gray-950 hover:bg-gray-700 focus:bg-gray-700",
+                            }}
                         />
                         <div
                             className="my-auto float-right text-xs md:text-base"
@@ -305,9 +341,9 @@ const CreateBlog = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mb-4 mx-auto">
+                <div className="mb-4 mt-20 mx-auto">
                     <label
-                        className="block text-gray-200 text-lg font-bold mb-3 text-center"
+                        className="block text-gray-200 text-2xl font-serif tracking-wider mb-3 text-center"
                         htmlFor="file"
                     >
                         {t("dash.blg.img")}
@@ -342,9 +378,9 @@ const CreateBlog = () => {
                             </DangerButton>
                         </div>
                     )}
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center mt-10 mb-8">
                         <button
-                            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-16 rounded focus:outline-none focus:shadow-outline"
                             type="submit"
                             disabled={isLoading}
                         >

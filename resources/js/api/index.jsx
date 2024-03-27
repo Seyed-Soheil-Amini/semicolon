@@ -102,9 +102,27 @@ const verifyBlogs = async (ids) => {
     return data.data;
 };
 
+const verifyBlog = async (id) => {
+    const apiUrl = `/blogs/admin/verify`;
+    const dataBlog = new FormData();
+    dataBlog.append("blogId", id);
+    dataBlog.append("_method", "PATCH");
+    const { data } = await client.post(apiUrl, dataBlog);
+    return data.data;
+};
+
 const blockBlogs = async (ids) => {
     const apiUrl = `/blogs/admin/block`;
     const { data } = await client.post(apiUrl, { blogIds: ids });
+    return data.data;
+};
+
+const blockBlog = async (id) => {
+    const apiUrl = `/blogs/admin/block`;
+    const dataBlog = new FormData();
+    dataBlog.append("blogId", id);
+    dataBlog.append("_method", "PATCH");
+    const { data } = await client.post(apiUrl, dataBlog);
     return data.data;
 };
 
@@ -392,7 +410,9 @@ export {
     togglePublishBlog,
     getPendingBlogs,
     verifyBlogs,
+    verifyBlog,
     blockBlogs,
+    blockBlog,
     getRandomBlogs,
     addView,
     toggleLike,

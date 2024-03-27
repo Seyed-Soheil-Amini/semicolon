@@ -245,6 +245,19 @@ class BlogController extends Controller
             return $this->sendNotFound("No blog found");
     }
 
+    public function verifyBlog(Request $request)
+    {
+        $blog = Blog::findOrFail($request->blogId);
+        if (!is_null($blog)) {
+            $blog->status = BlogStatusEnum::publish();
+            $blog->published_at = Carbon::now()->format('Y-m-d H:i:s');
+            $blog->save();
+            return response()->json(['status' => 200, 'data' => 'Blog was verified successfully']);
+        } else {
+            return $this->sendNotFound("There is not any blogs");
+        }
+    }
+
     public function verifyBlogs(Request $request)
     {
         $blogIds = $request->blogIds;
@@ -258,6 +271,18 @@ class BlogController extends Controller
             return response()->json(['status' => 200, 'data' => 'Blogs are verified successfully']);
         } else
             return $this->sendNotFound("There is not any blogs");
+    }
+
+    public function blockBlog(Request $request)
+    {
+        $blog = Blog::findOrFail($request->blogId);
+        if (!is_null($blog)) {
+            $blog->status = BlogStatusEnum::block();
+            $blog->save();
+            return response()->json(['status' => 200, 'data' => 'Blog was blocked successfully']);
+        } else {
+            return $this->sendNotFound("There is not any blogs");
+        }
     }
 
     public function blockBlogs(Request $request)

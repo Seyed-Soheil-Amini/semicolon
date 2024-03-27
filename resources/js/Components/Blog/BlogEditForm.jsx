@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useUpdateBlog, useGetCategories } from "@/hooks";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import clsBtn from "../../../../public/images/ordering/close-window-100.png";
 
 const BlogEditForm = (props) => {
     const { t } = useTranslation();
@@ -199,26 +200,29 @@ const BlogEditForm = (props) => {
             </Transition>
             <Modal
                 isOpen={props.isOpen}
-                className=" overflow-auto max-h-90vh h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-900 rounded-md px-5 py-1 w-400 max-w-full"
+                className="overflow-auto h-6.5/7 w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-900 rounded-md px-5 py-1 w-400 max-w-full"
             >
+                <button className="" onClick={() => props.onClose()}>
+                    <img src={clsBtn} className="mt-4 w-8 h-8" />
+                </button>
                 <form
                     onSubmit={submit(handleSubmit)}
                     encType="multipart/form-data"
-                    className="flex-md-row h-full w-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-900 rounded-md px-5 py-1 w-400 max-w-full"
+                    className="flex-md-row w-full bg-zinc-900 rounded-md mb-5 max-w-full"
                 >
                     <div className="max-h-80vh h-6.5/7 flex-md-row">
-                        <h2 className="text-xl text-white font-bold mb-1">
+                        <h2 className="text-center text-3xl mx-auto text-white font-serif tracking-wider mb-8 border-b w-3/4">
                             {t("dash.blg.edt-form.tit")}
                         </h2>
                         <div className="flex-row mb-0 mx-auto h-3/7">
                             <label
-                                className="h-1/7 block text-zinc-50 text-sm md:text-base font-bold mb-0 text-center"
+                                className="h-1/7 block text-zinc-50 text-sm md:text-2xl font-serif tracking-wider mb-0 text-center"
                                 htmlFor="file"
                             >
                                 {t("dash.blg.edt-form.img-fil")}
                             </label>
                             <div
-                                className="flex h-6/7 items-center w-full md:w-1/2 mb-3 border-dashed border-2 border-gray-300 rounded mx-auto my-auto text-center text-white"
+                                className="flex h-6/7 items-center w-full md:w-1/2 mb-3 mt-3 border-dashed border-2 border-gray-300 rounded mx-auto my-auto text-center text-white"
                                 {...getRootProps()}
                             >
                                 <input
@@ -237,7 +241,7 @@ const BlogEditForm = (props) => {
                                             }
                                             alt="Selected image preview"
                                         />
-                                        <div className="absolute h-2/6">
+                                        <div className="absolute h-4/7">
                                             <button
                                                 className="align-content-center bg-red-600 px-3 text-2xl rounded-md"
                                                 onClick={() => {
@@ -262,18 +266,18 @@ const BlogEditForm = (props) => {
                                 )}
                             </div>
                         </div>
-                        <div className="flex-row md:flex w-full text-gray-600">
+                        <div className="flex-row md:flex w-full text-gray-600 mt-20">
                             <div className="mb-1 w-full md:w-2/4 mt-1">
                                 <label
                                     htmlFor="title"
-                                    className="block text-zinc-50 text-sm md:text-lg font-bold mb-1"
+                                    className="block text-zinc-50 text-sm md:text-2xl font-serif tracking-wider mb-3"
                                 >
                                     {t("dash.blg.edt-form.sub-tit")}
                                 </label>
                                 <input
                                     type="text"
                                     id="title"
-                                    className="form-input w-full text-xs bg-gray-300 text-gray-900 md:text-base rounded"
+                                    className="form-input w-full text-xs bg-zinc-900 hover:bg-zinc-700 focus:bg-zinc-700 outline outline-2 text-gray-100 md:text-base rounded"
                                     value={blog.title}
                                     name="title"
                                     required
@@ -310,13 +314,13 @@ const BlogEditForm = (props) => {
                             </div>
                             <div className="md:ml-6 mt-1 w-full md:w-2/4">
                                 <label
-                                    className="block text-zinc-50 text-sm md:text-lg font-bold mb-0 md:mb-1"
+                                    className="block text-zinc-50 text-sm md:text-2xl font-serif tracking-wider mb-0 md:mb-3"
                                     htmlFor="category"
                                 >
                                     {t("dash.blg.edt-form.cat")}
                                 </label>
                                 <Select
-                                    className="appearance-none border rounded bg-gray-300 text-gray-900 text-xs md:text-base leading-tight focus:outline-none focus:shadow-outline"
+                                    className="appearance-none outline outline-2 rounded bg-zinc-900 text-gray-100 text-xs md:text-base leading-tight focus:outline-none focus:shadow-outline py-0.5"
                                     id="category"
                                     value={blog.category}
                                     name="category"
@@ -327,19 +331,53 @@ const BlogEditForm = (props) => {
                                             value: event,
                                         })
                                     }
+                                    styles={{
+                                        control: (base) => ({
+                                            ...base,
+                                            backgroundColor: "#18181b",
+                                            ":focus": {
+                                                borderColor: "#64748b",
+                                                backgroundColor: "#3f3f46",
+                                            },
+                                            ":hover": {
+                                                borderColor: "#64748b",
+                                                backgroundColor: "#3f3f46",
+                                            },
+                                            width: "100%",
+                                            borderColor: "#64748b",
+                                        }),
+                                        option: (base) => ({
+                                            ...base,
+                                            backgroundColor: "#18181b",
+                                            ":focus": {
+                                                backgroundColor: "#3f3f46",
+                                            },
+                                            ":hover": {
+                                                backgroundColor: "#3f3f46",
+                                            },
+                                            boxShadow:
+                                                "0 0 0 1px rgba(0, 0, 0, 0.1)",
+                                            padding: "8px 12px",
+                                            width: "100%",
+                                        }),
+                                        singleValue: (base) => ({
+                                            ...base,
+                                            color: "white",
+                                        }),
+                                    }}
                                 />
                             </div>
                         </div>
-                        <div className="mb-1 h-2/7 text-gray-600">
+                        <div className="mb-1 h-2/7 mt-8">
                             <label
                                 htmlFor="content"
-                                className="block text-zinc-50 text-sm md:text-lg font-bold mb-1"
+                                className="block text-zinc-50 text-sm md:text-2xl font-serif tracking-wider mb-3"
                             >
                                 {t("dash.blg.edt-form.bdy")}
                             </label>
                             <textarea
                                 id="content"
-                                className="form-textarea text-gray-900 bg-gray-300 tracking-tight h-full w-full text-xs md:text-base"
+                                className="overflow-auto form-textarea text-gray-100 bg-zinc-900 hover:bg-zinc-700 focus:bg-zinc-700 tracking-tight outline outline-2 rounded-sm h-40 w-full text-xs md:text-base"
                                 value={blog.body}
                                 name="body"
                                 required
@@ -381,7 +419,13 @@ const BlogEditForm = (props) => {
                                     * {t("dash.blg.cush.con.minl")}
                                 </p>
                             )}
-                            <div className="flex justify-between shadow appearance-none border rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-gray-300 text-gray-900 leading-tight focus:outline-none focus:shadow-outline">
+                            <label
+                                htmlFor="content"
+                                className="block text-zinc-50 text-sm md:text-2xl font-serif tracking-wider mt-5 mb-3"
+                            >
+                                Labels
+                            </label>
+                            <div className="flex justify-between outline outline-2 rounded text-xs md:text-base w-full py-2 md:h-auto px-3 bg-zinc-900 text-gray-100 leading-tight focus:shadow-outline">
                                 <ReactTags
                                     tags={blog.labels}
                                     suggestions={[]}
@@ -401,6 +445,10 @@ const BlogEditForm = (props) => {
                                             !isEmpty(blog.labels) &&
                                             blog.labels.length >= 5,
                                     }}
+                                    classNames={{
+                                        tagInputField:
+                                            "bg-zinc-900 hover:bg-zinc-700 focus:bg-zinc-700",
+                                    }}
                                 />
                                 <div
                                     className="my-auto float-right"
@@ -412,11 +460,11 @@ const BlogEditForm = (props) => {
                                     /5
                                 </div>
                             </div>
-                            <div className="flex justify-end mt-2">
+                            <div className="flex mt-10">
                                 <button
                                     disabled={loading}
                                     type="submit"
-                                    className="flex w-auto h-1/7 bg-orange-600 hover:bg-orange-700 text-white font-bold py-1.5 px-2.5 md:py-2 md:px-4 mr-2 rounded"
+                                    className="flex w-auto h-1/7 bg-orange-600 hover:bg-orange-700 text-white font-bold py-1.5 px-2.5 md:py-3 md:px-10 mr-2 rounded"
                                 >
                                     {loading
                                         ? t("dash.blg.edt-form.wait-btn")
@@ -424,7 +472,7 @@ const BlogEditForm = (props) => {
                                 </button>
                                 <button
                                     disabled={loading}
-                                    className="bg-red-500 hover:bg-red-700 text-white font-medium py-1.5 px-2.5 md:py-2 md:px-4 rounded"
+                                    className="bg-red-600 hover:bg-red-700 text-white font-medium py-1.5 px-2.5 md:py-3 md:px-10 rounded"
                                     onClick={() => props.onClose()}
                                 >
                                     {t("dash.blg.edt-form.cnl-btn")}

@@ -33,7 +33,7 @@ export default function Dashboard({ auth }) {
                                 <dt class="text-md leading-6 text-gray-400 font-serif">
                                     {t("dash.home.info.fname")}
                                 </dt>
-                                <dd class="mt-1 text-sm leading-6 text-blue-500 sm:col-span-2 sm:mt-0">
+                                <dd class="mt-1 text-lg leading-6 text-blue-300 sm:col-span-2 sm:mt-0">
                                     {auth.user.name}
                                 </dd>
                             </div>
@@ -41,7 +41,7 @@ export default function Dashboard({ auth }) {
                                 <dt class="text-md leading-6 text-gray-400 font-serif">
                                     {t("dash.home.info.apl")}
                                 </dt>
-                                <dd class="mt-1 text-sm leading-6 text-blue-500 sm:col-span-2 sm:mt-0">
+                                <dd class="mt-1 text-lg leading-6 text-blue-300 sm:col-span-2 sm:mt-0">
                                     {auth.user.job_title}
                                 </dd>
                             </div>
@@ -49,7 +49,7 @@ export default function Dashboard({ auth }) {
                                 <dt class="text-md leading-6 text-gray-400 font-serif">
                                     {t("dash.home.info.email")}
                                 </dt>
-                                <dd class="mt-1 text-sm leading-6 text-blue-500 sm:col-span-2 sm:mt-0">
+                                <dd class="mt-1 text-lg leading-6 text-blue-300 sm:col-span-2 sm:mt-0">
                                     {auth.user.email}
                                 </dd>
                             </div>
@@ -57,7 +57,7 @@ export default function Dashboard({ auth }) {
                                 <dt class="text-md leading-6 text-gray-400 font-serif">
                                     {t("dash.home.info.abt")}
                                 </dt>
-                                <dd class="mt-1 text-sm leading-6 text-blue-500 sm:col-span-2 sm:mt-0">
+                                <dd class="mt-1 text-lg leading-6 text-blue-300 sm:col-span-2 sm:mt-0">
                                     {auth.user.about == "null"
                                         ? "Author of Semicolon Weblog"
                                         : auth.user.about}{" "}

@@ -42,7 +42,7 @@ const BlockedBlog = (props) => {
     return (
         <div
             className={`w-full ${
-                isEmpty(blogs.some((blog) => blog.status === "block")) &&
+                isEmpty(!isEmpty(blogs) && blogs.some((blog) => blog.status === "block")) &&
                 "h-screen"
             }`}
         >

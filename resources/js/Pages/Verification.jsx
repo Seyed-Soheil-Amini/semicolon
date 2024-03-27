@@ -136,37 +136,6 @@ const Verification = ({ auth }) => {
                     {!isEmpty(blogs) && !isEmpty(checkedItems) ? (
                         <>
                             <div className="text-gray-200 grid grid-cols-1 gap-4 my-4 px-3 py-5 rounded w-6.5/7 mx-auto h-1/5">
-                                {!checkedItems.every(
-                                    (el) => el.checked === false
-                                ) && (
-                                    <div className="flex">
-                                        <div className="flex justify-between w-1/6">
-                                            <button
-                                                type="button"
-                                                class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-2 py-1 md:text-sm md:px-5 md:py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-                                                onClick={handleClickVerify}
-                                            >
-                                                {t("dash.verf.vrf-btn")}
-                                            </button>
-                                            <button
-                                                type="button"
-                                                class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-2 py-1 md:text-sm md:px-5 md:py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-                                                onClick={handleClickBlock}
-                                            >
-                                                {t("dash.verf.blk-btn")}
-                                            </button>
-                                        </div>
-                                        <div className="flex justify-end w-6/7">
-                                            <button
-                                                type="button"
-                                                class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-xs px-2 py-1 md:text-sm md:px-5 md:py-2.5 text-center mr-2 mb-2"
-                                                onClick={handleCancleClick}
-                                            >
-                                                {t("dash.verf.cnl-btn")}
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
                                 <ul>
                                     {blogs.map((blog) => (
                                         <li>
@@ -244,6 +213,37 @@ const Verification = ({ auth }) => {
                                 </SkeletonTheme>
                             </div>
                         ))}
+                    </div>
+                </div>
+            )}
+            {!checkedItems.every((el) => el.checked === false) && (
+                <div className="fixed bottom-0 w-full bg-gray-600 shadow-md">
+                    <div className="flex justify-between px-10">
+                        <div className="flex p-3 gap-x-4">
+                            <button
+                                type="button"
+                                className="text-blue-600 tracking-wider font-bold hover:text-white bg-gray-950 outline ouline-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm md:text-base px-4 py-2 md:px-12 md:py-3 mr-3"
+                                onClick={handleClickVerify}
+                            >
+                                {t("dash.verf.vrf-btn")}
+                            </button>
+                            <button
+                                type="button"
+                                className="text-red-600 tracking-wider font-bold hover:text-white bg-gray-950 outline outline-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm md:text-base px-4 py-2 md:px-12 md:py-3 mr-3"
+                                onClick={handleClickBlock}
+                            >
+                                {t("dash.verf.blk-btn")}
+                            </button>
+                        </div>
+                        <div className="felx p-3">
+                            <button
+                                type="button"
+                                className="flex my-auto text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 rounded-lg text-sm md:text-base px-4 py-2 md:px-12 md:py-3 mr-3"
+                                onClick={handleCancleClick}
+                            >
+                                {t("dash.verf.cnl-btn")}
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

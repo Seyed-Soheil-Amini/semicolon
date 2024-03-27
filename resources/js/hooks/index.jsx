@@ -91,10 +91,30 @@ const useVerifyBlogs = () => {
     });
 };
 
+const useVerifyBlog = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => api.verifyBlog(id),
+        onSuccess: () => {
+            queryClient.refetchQueries("pendingBlogs");
+        },
+    });
+};
+
 const useBlockBlogs = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (ids) => api.blockBlogs(ids),
+        onSuccess: () => {
+            queryClient.refetchQueries("pendingBlogs");
+        },
+    });
+};
+
+const useBlockBlog = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => api.blockBlog(id),
         onSuccess: () => {
             queryClient.refetchQueries("pendingBlogs");
         },
@@ -475,7 +495,9 @@ export {
     useGetCategories,
     useGetPendingBlogs,
     useVerifyBlogs,
+    useVerifyBlog,
     useBlockBlogs,
+    useBlockBlog,
     useRandomBlogs,
     useAddView,
     useToggleLike,

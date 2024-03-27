@@ -33,7 +33,11 @@ export default function Blogs({ auth }) {
         <AuthenticatedLayout user={auth.user}>
             <Head title="Blogs" />
             <div className="container-fluid h-auto flex">
-                <div className={`${showSideBar && "w-5/6 opacity-50"} w-6.5/7 h-100 pt-6`}>
+                <div
+                    className={`${
+                        showSideBar && "w-5/6 opacity-50"
+                    } w-6.5/7 h-100 pt-6`}
+                >
                     {currentComponent === "create" && <CreateBlog />}
                     {currentComponent === "edit" && (
                         <EditBlog
@@ -78,10 +82,10 @@ export default function Blogs({ auth }) {
                         </svg>
                         <div className="flex-row space-y-4 md:space-y-8 items-center">
                             <div
-                                className={`border-1 border-gray-100 rounded-full ${
+                                className={`border-1 border-gray-100 rounded-full text-gray-200 ${
                                     currentComponent == "create"
-                                        ? "text-gray-700 bg-gray-200"
-                                        : "text-gray-200 hover:bg-gray-200 hover:text-gray-700"
+                                        ? "border-2"
+                                        : "hover:bg-gray-200 hover:text-gray-700"
                                 }`}
                             >
                                 <button
@@ -97,10 +101,10 @@ export default function Blogs({ auth }) {
                                 </button>
                             </div>
                             <div
-                                className={`border-1 border-gray-100 rounded-full ${
+                                className={`border-1 border-gray-100 rounded-full text-gray-200 ${
                                     currentComponent == "edit"
-                                        ? "text-gray-700 bg-gray-200"
-                                        : "text-gray-200 hover:bg-gray-200 hover:text-gray-700"
+                                        ? "border-2"
+                                        : "hover:bg-gray-200 hover:text-gray-700"
                                 }`}
                             >
                                 <button
@@ -114,10 +118,10 @@ export default function Blogs({ auth }) {
                                 </button>
                             </div>
                             <div
-                                className={`border-1 border-gray-100 rounded-full ${
+                                className={`border-1 border-gray-100 rounded-full text-gray-200 ${
                                     currentComponent == "published"
-                                        ? "text-gray-700 bg-gray-200"
-                                        : "text-gray-200 hover:bg-gray-200 hover:text-gray-700"
+                                        ? "border-2"
+                                        : "hover:bg-gray-200 hover:text-gray-700"
                                 }`}
                             >
                                 <button
@@ -133,10 +137,10 @@ export default function Blogs({ auth }) {
                                 </button>
                             </div>
                             <div
-                                className={`border-1 border-gray-100 rounded-full ${
+                                className={`border-1 border-gray-100 rounded-full text-gray-200 ${
                                     currentComponent == "blocked"
-                                        ? "text-gray-700 bg-gray-200"
-                                        : "text-gray-200 hover:bg-gray-200 hover:text-gray-700"
+                                        ? "border-2"
+                                        : "hover:bg-gray-200 hover:text-gray-700"
                                 }`}
                             >
                                 <button

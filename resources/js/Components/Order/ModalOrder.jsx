@@ -9,7 +9,7 @@ import sdImg from "../../../../public/images/ordering/software-development-100.p
 import smImg from "../../../../public/images/ordering/server-shutdown-100.png";
 import aiImg from "../../../../public/images/ordering/artificial-intelligence-100.png";
 import gdImg from "../../../../public/images/ordering/game-development-100.png";
-import clsBtn from "../../../../public/images/ordering/close-window-96.png";
+import clsBtn from "../../../../public/images/ordering/close-window-100.png";
 import tick from "../../../../public/images/ordering/checkmark-24.png";
 
 const ModalOrder = (props) => {
@@ -123,16 +123,19 @@ const ModalOrder = (props) => {
                 >
                     <div className="container-fluid">
                         <div>
+                            <button
+                                className=""
+                                onClick={() => handleCloseWindow()}
+                            >
+                                <img src={clsBtn} className="w-8 h-8 mt-4" />
+                            </button>
+                            <div className="font-serif text-3xl text-center text-gray-100 tracking-wider border-b border-gray-100 mx-auto mb-8 w-3/4">
+                                Project Ordering
+                            </div>
                             <div className="flex justify-between">
-                                <h2 className="font-serif text-xl text-gray-100 my-auto">
-                                    <b>Category</b>
+                                <h2 className="font-serif text-2xl tracking-wider text-gray-100 my-auto">
+                                    Category
                                 </h2>
-                                <button
-                                    className=""
-                                    onClick={() => handleCloseWindow()}
-                                >
-                                    <img src={clsBtn} className="w-12 h-8" />
-                                </button>
                             </div>
                             <div className="grid grid-cols-4 gap-4 mt-1">
                                 <div
@@ -243,13 +246,13 @@ const ModalOrder = (props) => {
                             }`}
                         >
                             <div>
-                                <h2 className="font-serif text-xl text-gray-100">
-                                    <b>Title</b>
+                                <h2 className="font-serif text-2xl tracking-wider text-gray-100">
+                                    Title
                                 </h2>
                                 <div className="mt-1">
                                     <div className="mb-4">
                                         <input
-                                            className="bg-gray-50 border border-gray-300 text-zinc-100 bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                            className="bg-gray-50 border border-gray-300 text-zinc-100 bg-zinc-900 text-sm rounded-lg hover:bg-zinc-700 focus:bg-zinc-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                             id="default-input"
                                             value={order.title}
                                             type="text"
@@ -299,13 +302,13 @@ const ModalOrder = (props) => {
                             </div>
                             <div className="grid grid-cols-3 gap-3">
                                 <div className="mb-6 relative">
-                                    <label className="font-serif text-gray-100">
+                                    <label className="font-serif text-2xl tracking-wider text-gray-100">
                                         Minimum Price
                                     </label>
                                     <div className="flex">
                                         <div className="w-full">
                                             <input
-                                                className="bg-gray-50 border border-gray-300 text-gray-100 bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
+                                                className="border border-gray-300 text-gray-100 bg-zinc-900 hover:bg-zinc-700 focus:bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
                                                 id="default-input"
                                                 value={
                                                     isNaN(
@@ -412,13 +415,13 @@ const ModalOrder = (props) => {
                                     </div>
                                 </div>
                                 <div className="mb-6 relative">
-                                    <label className="font-serif text-gray-100">
+                                    <label className="font-serif text-2xl tracking-wider text-gray-100">
                                         Maximum Price
                                     </label>
                                     <div className="flex">
                                         <div className="w-full">
                                             <input
-                                                className="bg-gray-50 border border-gray-300 text-gray-100 bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
+                                                className="border border-gray-300 text-gray-100 bg-zinc-900 hover:bg-zinc-700 focus:bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
                                                 id="default-input"
                                                 value={
                                                     isNaN(
@@ -524,13 +527,13 @@ const ModalOrder = (props) => {
                                     </div>
                                 </div>
                                 <div className="mb-6 relative">
-                                    <label className="font-serif text-gray-100">
+                                    <label className="font-serif text-2xl tracking-wider text-gray-100">
                                         Duration
                                     </label>
                                     <div className="flex">
                                         <div className="w-full">
                                             <input
-                                                className="bg-gray-50 border border-gray-300 text-gray-100 bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                className="border border-gray-300 text-gray-100 bg-zinc-900 hover:bg-zinc-700 focus:bg-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                 id="price-input"
                                                 value={order.duration || 20}
                                                 type="number"
@@ -618,71 +621,71 @@ const ModalOrder = (props) => {
                                 </div>
                             </div>
                             <div className="">
-                                <label className="text-gray-100 text-xl font-serif">
-                                    <b>Decription</b>
+                                <label className="text-gray-100 text-2xl tracking-wider font-serif">
+                                    Decription
                                 </label>
-                                <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 mt-1">
-                                    <div className="px-4 py-2 bg-zinc-700 rounded-b-lg">
-                                        <textarea
-                                            className="block w-full px-0 text-sm text-gray-100 bg-zinc-700 border-0 focus:ring-0"
-                                            id="editor"
-                                            value={order.description}
-                                            placeholder="Write a description..."
-                                            required
-                                            rows="8"
-                                            {...register("description", {
-                                                required: true,
-                                                min: 20,
-                                                max: 16200,
-                                            })}
-                                            onChange={(event) =>
-                                                handleChange({
-                                                    name: "description",
-                                                    value: event.target.value,
-                                                })
-                                            }
-                                            disabled={isEmpty(order.category)}
-                                        />
-                                        {errors.description?.type ===
-                                            "required" && (
-                                            <p
-                                                role="alert"
-                                                className="tracking-tight text-red-500 text-xs md:text-base"
-                                            >
-                                                * Description is required.
-                                            </p>
-                                        )}
-                                        {errors.description?.type ===
-                                            "minLength" && (
-                                            <p
-                                                role="alert"
-                                                className="tracking-tight text-red-500 text-xs md:text-base"
-                                            >
-                                                * Min length of description must
-                                                be 10 characters.
-                                            </p>
-                                        )}
-                                        {errors.description?.type ===
-                                            "maxLength" && (
-                                            <p
-                                                role="alert"
-                                                className="tracking-tight text-red-500 text-xs md:text-base"
-                                            >
-                                                * Max length of description must
-                                                be 16200 characters.
-                                            </p>
-                                        )}
-                                    </div>
+                                <div className="w-full mb-4 border border-gray-200 rounded-lg mt-1">
+                                    <textarea
+                                        className="block w-full px-2 py-2 text-sm text-gray-100 bg-zinc-900 hover:bg-zinc-700 focus:bg-zinc-700 border-0 focus:ring-0"
+                                        id="editor"
+                                        value={order.description}
+                                        placeholder="Write a description..."
+                                        required
+                                        rows="8"
+                                        {...register("description", {
+                                            required: true,
+                                            min: 20,
+                                            max: 16200,
+                                        })}
+                                        onChange={(event) =>
+                                            handleChange({
+                                                name: "description",
+                                                value: event.target.value,
+                                            })
+                                        }
+                                        disabled={isEmpty(order.category)}
+                                    />
+                                    {errors.description?.type ===
+                                        "required" && (
+                                        <p
+                                            role="alert"
+                                            className="tracking-tight text-red-500 text-xs md:text-base"
+                                        >
+                                            * Description is required.
+                                        </p>
+                                    )}
+                                    {errors.description?.type ===
+                                        "minLength" && (
+                                        <p
+                                            role="alert"
+                                            className="tracking-tight text-red-500 text-xs md:text-base"
+                                        >
+                                            * Min length of description must be
+                                            10 characters.
+                                        </p>
+                                    )}
+                                    {errors.description?.type ===
+                                        "maxLength" && (
+                                        <p
+                                            role="alert"
+                                            className="tracking-tight text-red-500 text-xs md:text-base"
+                                        >
+                                            * Max length of description must be
+                                            16200 characters.
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         </div>
-                        <button
-                            className="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                            type="submit"
-                            disabled={isEmpty(order.category)}
-                        >
-                            {isToCreate ? "Submit" : "Update"}
-                        </button>
+                        <div className="flex mx-auto justify-center w-1/4">
+                            <button
+                                className="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mt-8 mb-8 w-full"
+                                type="submit"
+                                disabled={isEmpty(order.category)}
+                            >
+                                {isToCreate ? "Submit" : "Update"}
+                            </button>
+                        </div>
                     </div>
                 </form>
             </Modal>

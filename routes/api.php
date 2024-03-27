@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\MailboxController;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
@@ -53,6 +54,8 @@ Route::prefix('/blogs')->middleware(['auth:sanctum'])->namespace('App\Http\Contr
         Route::get('/verification', 'BlogController@indexPendingBlogs');
         Route::post('/verify', 'BlogController@verifyBlogs');
         Route::post('/block', 'BlogController@blockBlogs');
+        Route::patch('/verify', [BlogController::class, 'verifyBlog']);
+        Route::patch('/block', [BlogController::class, 'blockBlog']);
     });
 });
 
