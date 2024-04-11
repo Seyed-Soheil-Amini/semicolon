@@ -4,8 +4,44 @@ import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
+import Notification from "@/Components/Notification/Notification";
 import { useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
+import notifIcon from "../../../public/images/Notification.png";
+import { Popover, Transition } from "@headlessui/react";
+import { PhoneIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
+import {
+    ArrowPathIcon,
+    ChartPieIcon,
+    CursorArrowRaysIcon,
+    FingerPrintIcon,
+    SquaresPlusIcon,
+} from "@heroicons/react/24/outline";
+
+const solutions = [
+    {
+        name: "Analytics",
+        description: "Get a better understanding of your traffic",
+        href: "#",
+        icon: ChartPieIcon,
+    },
+    {
+        name: "Engagement",
+        description: "Speak directly to your customers",
+        href: "#",
+        icon: CursorArrowRaysIcon,
+    },
+    {
+        name: "Security",
+        description: "Your customers' data will be safe and secure",
+        href: "#",
+        icon: FingerPrintIcon,
+    },
+];
+const callsToAction = [
+    { name: "Watch demo", href: "#", icon: PlayCircleIcon },
+    { name: "Contact sales", href: "#", icon: PhoneIcon },
+];
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -96,16 +132,41 @@ export default function Authenticated({ user, header, children }) {
                                         </NavLink>
                                     </>
                                 )}
+                                <>
+                                    <NavLink
+                                        href={route("allorders")}
+                                        active={route().current("allorders")}
+                                    >
+                                        Mailbox
+                                    </NavLink>
+                                </>
                             </div>
                         </div>
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
+                            <Popover className="relative">
+                                <Popover.Button className="flex justify-center items-center gap-x-1 focus:border-0 focus:outline focus:outline-0">
+                                    <img src={notifIcon} className="w-7 h-7" />{" "}
+                                </Popover.Button>
+                                <Transition
+                                    enter="transition ease-out duration-200"
+                                    enterFrom="opacity-0 translate-y-1"
+                                    enterTo="opacity-100 translate-y-0"
+                                    leave="transition ease-in duration-150"
+                                    leaveFrom="opacity-100 translate-y-0"
+                                    leaveTo="opacity-0 translate-y-1"
+                                >
+                                    <Popover.Panel className="absolute bg-zinc-950 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-3">
+                                        <Notification />
+                                    </Popover.Panel>
+                                </Transition>
+                            </Popover>
                             <div className="ml-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-semibold rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
 
@@ -124,7 +185,6 @@ export default function Authenticated({ user, header, children }) {
                                             </button>
                                         </span>
                                     </Dropdown.Trigger>
-
                                     <Dropdown.Content>
                                         <Dropdown.Link
                                             href={route("profile.edit")}
@@ -265,7 +325,6 @@ export default function Authenticated({ user, header, children }) {
                                 {user.email}
                             </div>
                         </div>
-
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route("profile.edit")}>
                                 {t("dash.header.pro-btn")}
@@ -281,7 +340,6 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
             </nav>
-
             {header && (
                 <header className="bg-white dark:bg-gray-800 shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">

@@ -90,5 +90,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(MailBox::class);
     }
 
+    public function mails(): HasMany
+    {
+        return $this->hasMany(Mail::class, 'sender_name', 'name');
+    }
+
     use HasApiTokens;
 }

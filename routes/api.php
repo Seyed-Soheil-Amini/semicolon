@@ -136,6 +136,7 @@ Route::prefix('/mailbox')->middleware(['auth:sanctum'])->namespace('App\Http\Con
 Route::prefix('/mail')->middleware(['auth:sanctum'])->namespace('App\Http\Controller')->group(function () {
     Route::post('/paid', [MailController::class, 'paidMail']);
     Route::get('/read/{id}', [MailController::class, 'readMail']);
+    Route::get('/system', [MailController::class, 'showSystemMails']);
 });
 
 // --------------------------------------------------------------------------------------

@@ -52,6 +52,11 @@ class ProjectController extends Controller
                 $order = Order::where('id', $request->order_id)->first();
                 $order->isAccept = true;
                 $order->save();
+                $notifData = array(
+                    'projectName' => $project->title,
+                    'projectId' => $project->id,
+                    'status' => 1,
+                );
                 Mail::create([
                     'mail_box_id' => $mailboxId,
                     'title' => "Project Acceptance",
@@ -61,6 +66,7 @@ class ProjectController extends Controller
                         $project->title,
                         $staff->name
                     ),
+                    'data' => $notifData,
                     'isRead' => false,
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

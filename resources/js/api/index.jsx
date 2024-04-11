@@ -399,6 +399,13 @@ const getAllProject = async ({ pageParam = 0 }) => {
     return data.data;
 };
 
+const getSystemNotification = async () => {
+    const apiUrl = "/mail/system";
+    const { data } = await client.get(apiUrl);
+    console.log(data);
+    return data.data;
+};
+
 export {
     getAllBlogsOfUser,
     getVerifiedBlogsOfUser,
@@ -444,4 +451,5 @@ export {
     upgradeToAdmin,
     downgradeFromAdmin,
     getAllProject,
+    getSystemNotification,
 };

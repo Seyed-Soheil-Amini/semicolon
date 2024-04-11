@@ -484,6 +484,17 @@ const useGetAllProject = () => {
     });
 };
 
+const useGetSystemNotification = () => {
+    return useQuery({
+        queryKey: "notifications",
+        queryFn: () => api.getSystemNotification(),
+        refetchInterval: 5 * 60000,
+        refetchOnMount: false,
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+    });
+};
+
 export {
     useAllBlogs,
     useVerifiedBlogs,
@@ -529,4 +540,5 @@ export {
     useUpgradeToAdmin,
     useDowngradeFromAdmin,
     useGetAllProject,
+    useGetSystemNotification,
 };
